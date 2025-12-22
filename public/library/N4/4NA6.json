@@ -1,0 +1,20 @@
+{
+    "title":"Puissance de relatif",
+    "description":"Donner l'écriture décimale d'une puissance, attention aux parenthèses !",
+    "type":"latex",
+    "ID":"4NA6",
+    "dest":["4NA", "3NA"],
+    "options":[{
+        "name":"Nombres positifs",
+        "vars":{"a":"0_10","p":"2_${:a<6||:a==10?3:2}","calc":"${:a+'^'+:p}"}
+    },{
+        "name":"Nombres négatifs",
+        "vars":{"b":"-10_-1","z":"0_1","a":"${:z?:b:'('+:b+')'}",
+        "p":"2_${(-:b<6||-:b==10)?3:2}",
+        "calc":"${(:z?'-('+(-:b)+')':'('+:b+')')+'^'+:p}"}
+    }
+    ],
+    "question": "${:a}^${:p}=?",
+    "answer":":question|2=\\color{red}{${math.calc(:calc, true)}}", 
+    "value":"${math.calc(:calc, true)}"
+}

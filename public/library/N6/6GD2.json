@@ -1,0 +1,94 @@
+{
+    "title":"Reconnaitre des droites parallèles ou perpendiculaires",
+    "ID":"6GD2",
+    "dest":["6GD","8GD", "7GD"],
+    "type":"text",
+    "repeat":5,
+    "keys": [
+        "o",
+        "n",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_"
+    ],
+    "description":"visuellement, savoir identifier le parallélisme ou la perpendicularité",
+    "options":[
+        {
+            "name":"Parallèles",
+            "vars":{
+                "par":[true,false],
+                "xA":-3,
+                "yA":"-3_3",
+                "dangle1":"-9_8${:par?'_^0,-9':''}",
+                "angle1":"${:dangle1*10}",
+                "xB":"${:xA+Math.cos(:angle1/180*Math.PI)}",
+                "yB":"${:yA+Math.sin(:angle1/180*Math.PI)}",
+                "xC":"0_3",
+                "yC":"-3_3",
+                "dangle2":"${:par?:dangle1:'-9_9_^'+:dangle1}",
+                "angle2":"${:dangle2*10}",
+                "xD":"${:xC+Math.cos(:angle2/180*Math.PI)}",
+                "yD":"${:yC+Math.sin(:angle2/180*Math.PI)}"
+            },
+            "question":"Les droites semblent-elles parallèles ?",
+            "answer":"${:par?'oui, les droites semblent parallèles':'non, les droites ne semblent pas parallèles'}",
+            "value":["${:par?'oui':'non'}","${:par?'o':'n'}"]
+        },{
+            "name":"Perpendiculaire",
+            "vars":{
+                "perp":[true,false],
+                "xA":-4,
+                "yA":"-4_4",
+                "dangle1":"-9_8${:perp?'_^0,-9':''}",
+                "angle1":"${:dangle1*10}",
+                "xB":"${:xA+Math.cos(:angle1/180*Math.PI)}",
+                "yB":"${:yA+Math.sin(:angle1/180*Math.PI)}",
+                "xC":"2_4",                
+                "yC":"-4_4",
+                "dangle2":"${:perp?:dangle1+9:'-9_8_^'+(:dangle1+9)+','+(:dangle1-9)}",
+                "angle2":"${:dangle2*10}",
+                "xD":"${:xC+Math.cos(:angle2/180*Math.PI)}",
+                "yD":"${:yC+Math.sin(:angle2/180*Math.PI)}"
+            },
+            "question":"Les droites semblent-elles perpendiculaires ?",
+            "answer":"${:perp?'oui, les droites semblent perpendiculaires':'non, les droites ne semblent pas perpendiculaires'}",
+            "value":["${:perp?'oui':'non'}","${:perp?'o':'n'}"]
+        },{
+            "name":"Relation entre les droites",
+            "vars":{
+                "relation":["par","per","sec"],
+                "xA":-4,
+                "yA":"-4_4",
+                "dangle1":"-9_8${['par','per'].includes(:relation)?'_^0,-9':''}",
+                "angle1":"${:dangle1*10}",
+                "xB":"${:xA+Math.cos(:angle1/180*Math.PI)}",
+                "yB":"${:yA+Math.sin(:angle1/180*Math.PI)}",
+                "xC":"0_3",
+                "yC":"-3_3",
+                "dangle2":"${:relation=='par'?:dangle1::relation=='per'?:dangle1+9:'-9_9_^'+(:dangle1+9)+','+(:dangle1-9)}",
+                "angle2":"${:dangle2*10}",
+                "xD":"${:xC+Math.cos(:angle2/180*Math.PI)}",
+                "yD":"${:yC+Math.sin(:angle2/180*Math.PI)}"
+            },
+            "question":"Les droites semblent-elles parallèles, perpendiculaires ou sécantes non perpendiculaires",
+            "answer":"Les droites semblent ${:relation=='par'?'parallèles'::relation=='per'?'perpendiculaires':'sécantes non perpendiculaires'}",
+            "value":"${:relation=='par'?'parallèles'::relation=='per'?'perpendiculaires':'sécantes non perpendiculaires'}"
+        }
+    ],
+    "figure":{
+        "type":"graph",
+        "axis":false,
+        "boundingbox":[-10,5,10,-5],
+        "content":[
+            ["point",["${:xA}","${:yA}"],{"name":"A","visible":false}],
+            ["point",["${:xB}","${:yB}"],{"name":"B","visible":false}],
+            ["line",["A","B"]],
+            ["point",["${:xC}","${:yC}"],{"name":"C","visible":false}],
+            ["point",["${:xD}","${:yD}"],{"name":"D","visible":false}],
+            ["line",["C","D"],{"color":"red"}]
+        ]
+    }
+}

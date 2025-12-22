@@ -1,0 +1,83 @@
+{
+    "ID":"6MC4",
+    "dest":["6MC","7MC"],
+    "title":"Conversions d’unités à partir d’entiers",
+    "type":"latex",
+    "consts":{"units":["k","h","da","","d","c","m"]},
+    "options":[
+        {
+            "name":"De l’unité principale aux sous unités",
+            "vars":{
+                "unit1":"m",
+                "iu2":"4_6",
+                "unit2":"${:units[:iu2]}",
+                "p":"1_3",
+                "n":"${Math.pow(10,:p-1)}_${Math.pow(10,:p)}",
+                "coef":"${Math.pow(10,:iu2-3)}"
+            }
+        },{
+            "name":"De l’unité principale à ses multiples",
+            "vars":{
+                "unit1":"m",
+                "iu2":"0_2",
+                "unit2":"${:units[:iu2]}",
+                "p":"1_4",
+                "n":"${Math.pow(10,:p-1)}_${Math.pow(10,:p)}",
+                "coef":"${Math.pow(10,-3+:iu2)}"
+            }
+        },{
+            "name":"Des sous unités à l’unité principale",
+            "vars":{
+                "unit2":"m",
+                "iu2":"4_6",
+                "unit1":"${:units[:iu2]}",
+                "p":"1_4",
+                "n":"${Math.pow(10,:p-1)}_${Math.pow(10,:p)}",
+                "coef":"${Math.pow(10,3-:iu2)}"
+            }
+        },{
+            "name":"Des multiples à l’unité principale",
+            "vars":{
+                "unit2":"m",
+                "iu2":"0_2",
+                "unit1":"${:units[:iu2]}",
+                "p":"1_3",
+                "n":"${Math.pow(10,:p-1)}_${Math.pow(10,:p)}",
+                "coef":"${Math.pow(10,3-:iu2)}"
+            }
+        },{
+            "name":"Du kg à la tonne et au quintal",
+            "vars":{
+                "unit1":"kg",
+                "unit2":["t","q"],
+                "p":"1_4",
+                "n":"${Math.pow(10,:p-1)}_${Math.pow(10,:p)}",
+                "coef":"${:unit2=='t'?0.001:0.01}"
+            },
+            "question":"${:n}\\text{ ${:unit1}} = \\text{...}\\text{ ${:unit2}}",
+            "answer":"${:n}\\text{ ${:unit1}} = \\color{red}{${math.round(:n*:coef,3)}}\\text{ ${:unit2}}"
+        },{
+            "name":"De la tonne ou du quintal au kg",
+            "vars":{
+                "unit2":"kg",
+                "unit1":["t","q"],
+                "p":"1_3",
+                "n":"${Math.pow(10,:p-1)}_${Math.pow(10,:p)}",
+                "coef":"${:unit1=='t'?1000:100}"
+            },
+            "question":"${:n}\\text{ ${:unit1}} = \\text{...}\\text{ ${:unit2}}",
+            "answer":"${:n}\\text{ ${:unit1}} = \\color{red}{${math.round(:n*:coef,3)}}\\text{ ${:unit2}}"
+        }
+    ],
+    "question":[
+        "${:n}\\text{ ${:unit1}m} = \\text{...}\\text{ ${:unit2}m}",
+        "${:n}\\text{ ${:unit1}g} = \\text{...}\\text{ ${:unit2}g}",
+        "${:n}\\text{ ${:unit1}L} = \\text{...}\\text{ ${:unit2}L}"
+    ],
+    "answer":[
+        "${:n}\\text{ ${:unit1}m} = \\color{red}{${math.round(:n*:coef,3)}}\\text{ ${:unit2}m}",
+        "${:n}\\text{ ${:unit1}g} = \\color{red}{${math.round(:n*:coef,3)}}\\text{ ${:unit2}g}",
+        "${:n}\\text{ ${:unit1}L} = \\color{red}{${math.round(:n*:coef,3)}}\\text{ ${:unit2}L}"
+    ],
+    "value":"${math.round(:n*:coef,3)}"
+}

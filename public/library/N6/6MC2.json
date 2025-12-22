@@ -1,0 +1,80 @@
+{
+    "ID":"6MC2",
+    "title":"Conversions entre m², dm² et cm²",
+    "description":"Penser à 1 m² = 100 dm² ou que 1 cm² est cent fois plus petit que 1 dm²",
+    "type":"text",
+    "dest":["6MC"],
+    "consts":{"units":["m","dm","cm"]},
+    "options":[
+        {
+            "name":"Conversion de m² ou dm² vers sous unité, entier",
+            "vars":{
+                "c":[9,99],
+                "n":"1_${:c}",
+                "unit":"0_1",
+                "n2":"${:n*100}"
+            },
+            "question":"Combien de $$\\text{${:units[:unit+1]}}^2$$ y a-t-il dans $$${:n}\\text{ ${:units[:unit]}}^2$$ ?",
+            "answer":"$$${:n}\\text{ ${:units[:unit]}}^2=\\color{red}{${:n2}}\\text{ ${:units[:unit+1]}}^2$$",
+            "value":"${:n2}"
+        },{
+            "name":"Conversion de m² ou dm² vers sous unité, deux décimales",
+            "vars":{
+                "c":"1_9",
+                "d":"10_99",
+                "n":"${math.round((:c+10*:d)/100,2)}",
+                "unit":"0_1",
+                "n2":"${math.round(:n*100,1)}"
+            },
+            "question":"Combien de $$\\text{${:units[:unit+1]}}^2$$ y a-t-il dans $$${:n}\\text{ ${:units[:unit]}}^2$$ ?",
+            "answer":"$$${:n}\\text{ ${:units[:unit]}}^2=\\color{red}{${:n2}}\\text{ ${:units[:unit+1]}}^2$$",
+            "value":"${:n2}"
+        },{
+            "name":"Conversion de m² ou dm² vers sous unité, une décimale",
+            "vars":{
+                "c":"1_9",
+                "d":"1_9",
+                "n":"${math.round((:c+10*:d)/10,1)}",
+                "unit":"0_1",
+                "n2":"${math.round(:n*100,1)}"
+            },
+            "question":"Combien de $$\\text{${:units[:unit+1]}}^2$$ y a-t-il dans $$${:n}\\text{ ${:units[:unit]}}^2$$ ?",
+            "answer":"$$${:n}\\text{ ${:units[:unit]}}^2=\\color{red}{${:n2}}\\text{ ${:units[:unit+1]}}^2$$",
+            "value":"${:n2}"
+        },{
+            "name":"Conversion de dm² ou cm² vers unité multiple, centaines rondes",
+            "vars":{
+                "c":"1_9",
+                "n":"${:c*100}",
+                "unit":"1_2",
+                "n2":"${math.round(:n/100,2)}"
+            },
+            "question":"Combien de $$\\text{${:units[:unit-1]}}^2$$ y a-t-il dans $$${:n}\\text{ ${:units[:unit]}}^2$$ ?",
+            "answer":"$$${:n}\\text{ ${:units[:unit]}}^2=\\color{red}{${:n2}}\\text{ ${:units[:unit-1]}}^2$$",
+            "value":"${:n2}"
+        },{
+            "name":"Conversion de dm² ou cm² vers unité multiple, entier à trois chiffres",
+            "vars":{
+                "u":"1_9",
+                "d":"10_99",
+                "n":"${:u+10*:d}",
+                "unit":"1_2",
+                "n2":"${math.round(:n/100,2)}"
+            },
+            "question":"Combien de $$\\text{${:units[:unit-1]}}^2$$ y a-t-il dans $$${:n}\\text{ ${:units[:unit]}}^2$$ ?",
+            "answer":"$$${:n}\\text{ ${:units[:unit]}}^2=\\color{red}{${:n2}}\\text{ ${:units[:unit-1]}}^2$$",
+            "value":"${:n2}"
+        },{
+            "name":"Conversion de dm² ou cm² vers unité multiple, multiple de 10",
+            "vars":{
+                "d":"10_99",
+                "n":"${10*:d}",
+                "unit":"1_2",
+                "n2":"${math.round(:n/100,2)}"
+            },
+            "question":"Combien de $$\\text{${:units[:unit-1]}}^2$$ y a-t-il dans $$${:n}\\text{ ${:units[:unit]}}^2$$ ?",
+            "answer":"$$${:n}\\text{ ${:units[:unit]}}^2=\\color{red}{${:n2}}\\text{ ${:units[:unit-1]}}^2$$",
+            "value":"${:n2}"
+        }
+    ]
+}

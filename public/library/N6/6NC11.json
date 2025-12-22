@@ -1,0 +1,81 @@
+{
+    "title":"Soustraction de décimaux",
+    "ID":"6NC11",
+    "dest":["6NC","5NC","4NC","3NB"],
+    "consigne":"Calculer",
+    "speech":1,
+    "options":[{
+        "name":"Dixièmes, sans retenue",
+        "vars":{
+            "pea":"0_9",
+            "peb":"0_${:pea}",
+            "pda":"1_9",
+            "pdb":"1_${:pda}",
+            "a":"${:pea+:pda/10}",
+            "b":"${:peb+:pdb/10}",
+        "c":"${math.round(:a-:b,1)}"}
+    }, {
+        "name":"Dixièmes, avec retenue",
+        "vars":{
+            "pea":"1_9",
+            "peb":"0_${:pea}",
+            "pda":"1_8",
+            "pdb":"${:pda+1}_9",
+            "a":"${:pea+:pda/10}",
+            "b":"${:peb+:pdb/10}",
+        "c":"${math.round(:a-:b,1)}"}
+    },{
+        "name":"centièmes, sans retenue",
+        "vars":{
+            "pea":"0_9",
+            "peb":"0_${:pea}",
+            "dixa":"0_9",
+            "dixb":"0_${:dixa}",
+            "cena":"1_9",
+            "cenb":"1_${:cena}",
+            "a":"${math.round(:pea+:dixa/10+:cena/100,2)}",
+            "b":"${math.round(:peb+:dixb/10+:cenb/100,2)}",
+        "c":"${math.round(:a-:b,2)}"}
+    },{
+        "name":"centièmes, avec retenue sur les dixièmes",
+        "vars":{
+            "pea":"1_9",
+            "peb":"0_${:pea-1}",
+            "dixa":"0_8",
+            "dixb":"${:dixa+1}_9",
+            "cena":"1_9",
+            "cenb":"1_${:cena}",
+            "a":"${math.round(:pea+:dixa/10+:cena/100,2)}",
+            "b":"${math.round(:peb+:dixb/10+:cenb/100,2)}",
+        "c":"${math.round(:a-:b,2)}"}
+    },{
+        "name":"centièmes, avec retenue sur les centièmes",
+        "vars":{
+            "pea":"0_9",
+            "peb":"0_${:pea}",
+            "dixa":"1_9",
+            "dixb":"0_${:dixa-1}",
+            "cena":"1_8",
+            "cenb":"${:cena+1}_9",
+            "a":"${math.round(:pea+:dixa/10+:cena/100,2)}",
+            "b":"${math.round(:peb+:dixb/10+:cenb/100,2)}",
+        "c":"${math.round(:a-:b,2)}"}
+    },{
+        "name":"centièmes, avec deux retenues",
+        "vars":{
+            "pea":"1_9",
+            "peb":"0_${:pea-1}",
+            "dixa":"0_8",
+            "dixb":"${:dixa+1}_9",
+            "cena":"1_8",
+            "cenb":"${:cena+1}_9",
+            "a":"${math.round(:pea+:dixa/10+:cena/100,2)}",
+            "b":"${math.round(:peb+:dixb/10+:cenb/100,2)}",
+        "c":"${math.round(:a-:b,2)}"}
+    }],
+    "question": "${:a}-${:b}",
+    "answer":":question=\\color{red}{${:c}}",
+    "audio": "(${String(:a).replace('.',',')})-(${String(:b).replace('.',',')})",
+    "answerAudio": "(${String(:c).replace('.',',')})",
+    "value":"${:c}"
+}

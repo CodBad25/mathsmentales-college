@@ -1,0 +1,69 @@
+{
+    "title":"Aires et périmètres des figures usuelles en fonction d'une inconnue",
+    "type":"text",
+    "ID":"5MA1",
+    "description":"Pas encore compatible avec la saisie en ligne",
+    "textSize":"small",
+    "dest":[ "5MA", "4MA", "3MA"],
+    "options":[{
+        "name":"Périmètre en fonction de $$x$$",
+        "vars":{"a":"2_6","sor":"0_1","b":"${:sor==0?8:(:a+1)+'_11'}", "px":"0_1"},
+        "figure":{
+            "type":"graph","axis":false,"boundingbox":[0,10,15,0],
+            "content":[
+                ["point",[2,2],{"name":"A","size":0,"label":{"offset":[-6,-8]}}],
+                ["point",[2,8],{"name":"B","size":0,"label":{"offset":[-6,6]}}],
+                ["point",["${:b}",8],{"name":"C","size":0,"label":{"offset":[0,6]}}],
+                ["point",["${:b}",2],{"name":"D","size":0,"label":{"offset":[0,-8]}}],
+                ["segment",["A","B"]],
+                ["segment",["B","C"]],
+                ["segment",["C","D"]],
+                ["segment",["D","A"]],
+                ["angle",["A","B","C"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["B","C","D"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["C","D","A"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["D","A","B"],{"radius":1,"label":{"visible":false}}],
+                ["text", [0.7,5, "${:px==0?:a:'x'}"], {"visible":"${:px==1?1::sor==1?1:0}","cssClass":"${:px==0?'':'italic'}","fontSize":13}],
+                ["text", ["${:b/2+0.8}",9, "${:px==1?:a:'x'}"],{"visible":"${:px==0?1::sor==1?1:0}", "cssClass":"${:px==1?'':'italic'}","fontSize":13}],
+                ["text", ["${:b/2+1}",8,"//"],{"visible":"${:sor==1?0:1}"}],
+                ["text", [2,5,"//"],{"rotate":90,"visible":"${:sor==1?0:1}"}],
+                ["text", ["${:b/2+0.6}",2,"//"],{"visible":"${:sor==1?0:1}"}],
+                ["text", ["${:b}",5,"//"],{"rotate":90,"visible":"${:sor==1?0:1}"}]
+            ]},
+        "shortq":"Périmètre ?",
+        "question": "Exprime en fonction de $$x$$ le périmètre de cette figure.",
+        "answer":"$$p=\\color{red}{${:sor==1?'2x+'+2*:a:'4\\times x'}}$$",
+        "value":"${:sor==1?'2x+'+2*:a:'4\\times x'}"
+    },{
+        "name":"Aire en fonction de $$x$$",
+        "vars":{"a":"2_6","sor":"0_1","b":"${:sor==0?8:(:a+1)+'_11'}", "px":"0_1"},
+        "figure":{
+            "type":"graph",
+            "axis":false,"boundingbox":[0,10,15,0],
+            "content":[
+                ["point",[2,2],{"name":"A","size":0,"label":{"offset":[-6,-8]}}],
+                ["point",[2,8],{"name":"B","size":0,"label":{"offset":[-6,6]}}],
+                ["point",["${:b}",8],{"name":"C","size":0,"label":{"offset":[0,6]}}],
+                ["point",["${:b}",2],{"name":"D","size":0,"label":{"offset":[0,-8]}}],
+                ["segment",["A","B"]],
+                ["segment",["B","C"]],
+                ["segment",["C","D"]],
+                ["segment",["D","A"]],
+                ["angle",["A","B","C"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["B","C","D"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["C","D","A"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["D","A","B"],{"radius":1,"label":{"visible":false}}],
+                ["text", [0.7,5, "${:px==0?:a:'x'}"], {"visible":"${:px==1?1::sor==1?1:0}","cssClass":"${:px==0?'':'italic'}","fontSize":13}],
+                ["text", ["${:b/2+0.8}",9, "${:px==1?:a:'x'}"],{"visible":"${:px==0?1::sor==1?1:0}", "cssClass":"${:px==1?'':'italic'}","fontSize":13}],
+                ["text", ["${:b/2+1}",8,"//"],{"visible":"${:sor==1?0:1}"}],
+                ["text", [2,5,"//"],{"rotate":90,"visible":"${:sor==1?0:1}"}],
+                ["text", ["${:b/2+0.6}",2,"//"],{"visible":"${:sor==1?0:1}"}],
+                ["text", ["${:b}",5,"//"],{"rotate":90,"visible":"${:sor==1?0:1}"}]
+            ]},
+        "shortq":"Aire ?",
+        "question": "Exprime en fonction de $$x$$ l'aire de cette figure.",
+        "answer":"$$A=\\color{red}{${:sor==1?:a+'\\times x':'x\\times x'}}=${:sor==1?:a+'x':'x^2'}$$",
+        "value":"${:sor==1?:a+'x':'x^2'}"
+    }]
+    
+}

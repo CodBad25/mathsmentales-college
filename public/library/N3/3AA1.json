@@ -1,0 +1,85 @@
+{
+    "ID":"3AA1",
+    "dest":["4AA","3AA"],
+    "title":"Déterminer une image ou un antécédent par un algorithme",
+    "description":"Scratch, Calculer l'image ou antécédent d'un nombre par une fonction linéaire ou affine.",
+    "type":"text",
+    "textSize":"small",
+    "options":[
+        {
+            "name":"Image d'un nombre par une fonction linéaire",
+            "vars":{
+                "x":"-10_10", "y":"-10_10"
+            },
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "demander [Donne un nombre] et attendre",
+                    "mettre [x v] à (réponse)",
+                    "mettre [x v] à ([${:y}] * (x))",
+                    "dire (x)"
+                ]
+            },
+            "question": "Si on répond <b>${:x}</b> à la question, que va dire le lutin ?",
+            "answer": "Le lutin va dire <span class='red'>${:x*:y}</span>.",
+            "value":"${:x*:y}"
+        },{
+            "name":"Antécédent d'un nombre par une fonction linéaire",
+            "vars":{
+                "x":"-10_10", "y":"-10_10"
+            },
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "demander [Donne un nombre] et attendre",
+                    "mettre [x v] à (réponse)",
+                    "mettre [x v] à ([${:y}] * (x))",
+                    "dire (x)"
+                ]
+            },
+            "question": "Si le lutin dit <b>${:x*:y}</b>, qu'a-t-on donné comme nombre initial ?",
+            "answer": "On a donné le nombre <span class='red'>${:x}</span>.",
+            "value":"${:x}"
+        }, {
+            "name":"Image d'un nombre par une fonction affine",
+            "vars":{
+                "x":"-10_10", "a":"-10_10", "b":"-10_10"
+            },
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "demander [Donne un nombre] et attendre",
+                    "mettre [x v] à (réponse)",
+                    "mettre [x v] à ([${:a}] * (x))",
+                    "mettre [x v] à ((x) + [${:b}])",
+                    "dire (x)"
+                ]
+            },
+            "question": "Si on répond <b>${:x}</b> à la question, que va dire le lutin ?",
+            "answer": "Le lutin va dire <span class='red'>${:a*:x+:b}</span>.",
+            "value":"${:a*:x+:b}"
+        }, {
+            "name":"Antécédent d'un nombre par une fonction affine",
+            "vars":{
+                "x":"-10_10", "a":"-10_10", "b":"-10_10"
+            },
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "demander [Donne un nombre] et attendre",
+                    "mettre [x v] à (réponse)",
+                    "mettre [x v] à ([${:a}] * (x))",
+                    "mettre [x v] à ((x) + [${:b}])",
+                    "dire (x)"
+                ]
+            },
+            "question": "Si le lutin dit <b>${:a*:x+:b}</b>, qu'a-t-on donné comme nombre initial ?",
+            "answer": "On a donné le nombre <span class='red'>${:x}</span>.",
+            "value":"${:x}"
+        }
+    ]
+}

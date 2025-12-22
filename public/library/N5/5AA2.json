@@ -1,0 +1,77 @@
+{
+    "ID":"5AA2",
+    "title":"Comprendre le si ... alors ... sinon",
+    "description":"scratch comparer des nombres",
+    "type":"text",
+    "dest":["5AA", "4AA", "3AA"],
+    "repeat":2,
+    "consts":{"objets":[
+        "pomme","poire","ballon","vélo","trotinette","carte","table","chaise","stylo"
+    ]},
+    "options": [
+        {
+            "name":"Comparer deux nombres",
+            "vars":{"x":"0_10","y":"0_10","ob1":"0_8", "dire":"${:x<:y?:objets[:ob1]:'rien'}"},
+            "question":"Que va dire le lutin ?",
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "si <(${:x}) < (${:y})> alors",
+                    "dire [${:objets[:ob1]}]"
+                ]
+            },
+            "answer":"Le lutin ${:dire=='rien'?'ne':''} dira <span class='red'>${:dire}</span>",
+            "value":"${:dire}"
+        },
+        {
+            "name":"Comparer deux nombres (2)",
+            "vars":{"x":"0_10","y":"0_10","ob1":"0_8", "dire":"${:x>:y?:objets[:ob1]:'rien'}"},
+            "question":"Que va dire le lutin ?",
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "si <(${:x}) > (${:y})> alors",
+                    "dire [${:objets[:ob1]}]"
+                ]
+            },
+            "answer":"Le lutin ${:dire=='rien'?'ne':''} dira <span class='red'>${:dire}</span>",
+            "value":"${:dire}"
+        },
+        {
+            "name":"Comparer deux nombres",
+            "vars":{"x":"0_10","y":"0_10","ob1":"0_8", "ob2":"0_8_^${:ob1}","dire":"${:x<:y?:objets[:ob1]::objets[:ob2]}"},
+            "question":"Que va dire le lutin ?",
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "si <(${:x}) < (${:y})> alors",
+                    "dire [${:objets[:ob1]}]",
+                    "sinon",
+                    "dire [${:objets[:ob2]}]"
+                ]
+            },
+            "answer":"Le lutin dira <span class='red'>${:dire}</span>",
+            "value":"${:dire}"
+        },
+        {
+            "name":"Comparer deux nombres (2)",
+            "vars":{"x":"0_10","y":"0_10","ob1":"0_8", "ob2":"0_8_^${:ob1}","dire":"${:x>:y?:objets[:ob1]::objets[:ob2]}"},
+            "question":"Que va dire le lutin ?",
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "si <(${:x}) > (${:y})> alors",
+                    "dire [${:objets[:ob1]}]",
+                    "sinon",
+                    "dire [${:objets[:ob2]}]"
+                ]
+            },
+            "answer":"Le lutin dira <span class='red'>${:dire}</span>",
+            "value":"${:dire}"
+        }
+        ]
+}

@@ -1,0 +1,111 @@
+{
+    "title":"Reconnaître un objet géométrique (6GC1+)",
+    "type":"text",
+    "textSize":"small",
+    "speech":1,
+    "repeat":true,
+    "ID":"6GC6",
+    "description":"Différencier les lignes géométriques de base",
+    "keys":["droite","segment","demi-droite","[","("],
+    "dest":["6GC","7GC","8GC"],
+    "consts":{"points":"ABCDEFGHJKLMNPRST"},
+    "options": [
+        {
+            "name":"Reconnaitre un élément de géométrie",
+            "vars":{
+                "obj":["pt","dt","dmd","ddm","sgt"],
+                "l":"0_${:points.length-1}_2_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "xA":"-8_-1",
+                "yA":"-3_3",
+                "xB":"1_8",
+                "yB":"-3_3"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,5,10,-5],
+                "content":[
+                    ["point",["${:xA}","${:yA}"],{"face":"x","name":"${:A}", "label":{"offset":[-2,10], "visible":false}}],
+                    ["point",["${:xB}","${:yB}"],{"face":"x","name":"${:B}", "visible":"${:obj!=='pt'?1:0}", "label":{"offset":[-2,10], "visible":false}}],
+                    ["${:obj=='sgt'?'segment':'line'}",["${:A}","${:B}"], {"visible":"${:obj!=='pt'?1:0}", "straightFirst":"${['ddm','dt'].includes(:obj)?1:0}", "straightLast":"${['dmd','dt'].includes(:obj)?1:0}"}]
+                ]
+            },
+            "question":"Quel type d'objet est dessiné ?",
+            "answer":"${:obj=='pt'?'un point'::obj=='dt'?'une droite'::obj=='sgt'?'un segment':'une demi-droite'}"
+        },{
+            "name":"Nommer un élément de géométrie",
+            "vars":{
+                "obj":["pt","dt","dmd","ddm","sgt"],
+                "l":"0_${:points.length-1}_2_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "xA":"-8_-1",
+                "yA":"-3_3",
+                "xB":"1_8",
+                "yB":"-3_3"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,5,10,-5],
+                "content":[
+                    ["point",["${:xA}","${:yA}"],{"face":"x","name":"${:A}", "label":{"offset":[-2,10]}}],
+                    ["point",["${:xB}","${:yB}"],{"face":"x","name":"${:B}", "visible":"${:obj!=='pt'?1:0}", "label":{"offset":[-2,10]}}],
+                    ["${:obj=='sgt'?'segment':'line'}",["${:A}","${:B}"], {"visible":"${:obj!=='pt'?1:0}", "straightFirst":"${['ddm','dt'].includes(:obj)?1:0}", "straightLast":"${['dmd','dt'].includes(:obj)?1:0}"}]
+                ]
+            },
+            "question":"Donner le nom de l'objet dessiné.",
+            "answer":"${:obj=='pt'?'un point '+:A::obj=='dt'?'une droite ('+:A+:B+')'::obj=='sgt'?'un segment ['+:A+:B+']'::obj=='dmd'?'une demi-droite ['+:A+:B+')':'une demi-droite ['+:B+:A+')'}"
+        },{
+            "name":"Dessiner un élément de géométrie",
+            "vars":{
+                "obj":["pt","dt","dmd","ddm","sgt"],
+                "l":"0_${:points.length-1}_2_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "xA":"-8_-1",
+                "yA":"-3_3",
+                "xB":"1_8",
+                "yB":"-3_3"
+            },
+            "figureCorrection":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,5,10,-5],
+                "content":[
+                    ["point",["${:xA}","${:yA}"],{"face":"x","name":"${:A}", "label":{"offset":[-2,10], "visible":false}}],
+                    ["point",["${:xB}","${:yB}"],{"face":"x","name":"${:B}", "visible":"${:obj!=='pt'?1:0}", "label":{"offset":[-2,10], "visible":false}}],
+                    ["${:obj=='sgt'?'segment':'line'}",["${:A}","${:B}"], {"visible":"${:obj!=='pt'?1:0}", "straightFirst":"${['ddm','dt'].includes(:obj)?1:0}", "straightLast":"${['dmd','dt'].includes(:obj)?1:0}"}]
+                ]
+            },
+            "question":"Dessiner ${:obj=='pt'?'un point'::obj=='dt'?'une droite'::obj=='sgt'?'un segment':'une demi-droite'}",
+            "answer":""
+        },{
+            "name":"Dessiner un élément de géométrie avec un nom",
+            "vars":{
+                "obj":["pt","dt","dmd","ddm","sgt"],
+                "l":"0_${:points.length-1}_2_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "xA":"-8_-1",
+                "yA":"-3_3",
+                "xB":"1_8",
+                "yB":"-3_3"
+            },
+            "figureCorrection":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,5,10,-5],
+                "content":[
+                    ["point",["${:xA}","${:yA}"],{"face":"x","name":"${:A}", "label":{"offset":[-2,10]}}],
+                    ["point",["${:xB}","${:yB}"],{"face":"x","name":"${:B}", "visible":"${:obj!=='pt'?1:0}", "label":{"offset":[-2,10]}}],
+                    ["${:obj=='sgt'?'segment':'line'}",["${:A}","${:B}"], {"visible":"${:obj!=='pt'?1:0}", "straightFirst":"${['ddm','dt'].includes(:obj)?1:0}", "straightLast":"${['dmd','dt'].includes(:obj)?1:0}"}]
+                ]
+            },
+            "question":"Dessiner ${:obj=='pt'?'un point '+:A::obj=='dt'?'une droite ('+:A+:B+')'::obj=='sgt'?'un segment ['+:A+:B+']'::obj=='dmd'?'une demi-droite ['+:A+:B+')':'une demi-droite ['+:B+:A+')'}.",
+            "answer":""
+        }
+    ]
+}

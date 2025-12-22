@@ -1,0 +1,57 @@
+{
+    "title": "Quotient de relatifs",
+    "ID": "5NC6",
+    "dest": [
+        "5NC",
+        "4NC",
+        "3NB"
+    ],
+    "options": [
+        {
+            "name": "Numérateur négatif uniquement",
+            "vars": {
+                "a": "1_10",
+                "s": -1,
+                "r": "${:s*:a}",
+                "d": "1_10",
+                "n": "${:a*:d*:s}"
+            }
+        },
+        {
+            "name": "Dénominateur relatif uniquement",
+            "vars": {
+                "a": "1_10",
+                "e": "1_10",
+                "s": -1,
+                "d": "${:s*:e}",
+                "n": "${:a*:e}",
+                "r": "${:a*:s}"
+            }
+        },
+        {
+            "name": "Numérateur et dénominateur négatifs",
+            "vars": {
+                "r": "1_10",
+                "d": "-10_-1",
+                "n": "${:r*:d}"
+            }
+        },
+        {
+            "name": "Numérateur et dénominateur positifs",
+            "vars": {
+                "r": "1_10",
+                "d": "1_10",
+                "n": "${:r*:d}"
+            }
+        }
+    ],
+    "question": [
+        "${:n}\\div ${(:d<0)?'('+:d+')'::d}",
+        "\\dfrac{${:n}}{${:d}}"
+    ],
+    "answer": [
+        ":question=\\color{red}{${:r}}",
+        ":question=\\color{red}{${:r}}"
+    ],
+    "value": "${:r}"
+}

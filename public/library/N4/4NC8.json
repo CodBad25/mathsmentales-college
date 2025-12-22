@@ -1,0 +1,47 @@
+{
+    "title": "Fractions de quantités",
+    "ID": "4NC8",
+    "dest": ["4NC", "3NB", "2N2"],
+    "consigne":"Calculer",
+    "description": "Calculs de produits avec des fractions",
+    "options": [{
+        "name": "Fraction de quantité multiple du dénominateur",
+        "vars": {
+            "num":"2_10_^prime",
+            "den":"2_11_^${:num}",
+            "k":"2_10",
+            "qte":"${:k*:den}"
+        },
+        "question": ["\\dfrac{${:num}}{${:den}} \\text{ de } ${:qte}",
+            "\\dfrac{${:num}}{${:den}} \\times ${:qte}",
+        "${:qte}\\times\\dfrac{${:num}}{${:den}}"],
+        "answer":":question = \\color{red}{${math.calc('\\frac{'+:num+'}{'+:den+'}\\times'+:qte)}}",
+        "value":"${math.calc('\\frac{'+:num+'}{'+:den+'}\\times'+:qte)}"
+},{
+    "name": "10e, 100e, 1000e de quantité multiple du dénominateur",
+    "vars": {
+        "num":"2_10",
+        "den": [10, 100, 1000],
+        "qte":"1_10"
+    },
+    "question": ["\\dfrac{${:num}}{${:den}} \\text{ de } ${:qte}",
+        "\\dfrac{${:num}}{${:den}} \\times ${:qte}",
+    "${:qte}\\times\\dfrac{${:num}}{${:den}}"],
+    "answer":":question = \\color{green}{${math.round(:num*:qte/:den,2)}}=\\color{red}{${math.calc('\\frac{'+:num+'}{'+:den+'}\\times'+:qte)}}",
+    "value":["${math.round(:num*:qte/:den,2)}","${math.calc('\\frac{'+:num+'}{'+:den+'}\\times'+:qte)}"]
+},{
+    "name": "Fraction de fraction",
+    "vars": {
+        "num1":"1_11",
+        "den1":"2_10_^${:num1}",
+        "num2":"1_10",
+        "den2":"2_11_^${:num2}"
+    },
+    "question":[
+        "\\dfrac{${:num1}}{${:den1}} \\text{ de } \\dfrac{${:num2}}{${:den2}}",
+        "\\dfrac{${:num1}}{${:den1}} \\times \\dfrac{${:num2}}{${:den2}}"
+    ],
+    "answer":":question = \\color{red}{${math.calc('\\frac{'+:num1+' \\times '+:num2+'}{'+:den1+' \\times '+:den2+'}')}}",
+    "value":"${math.calc('\\frac{'+:num1+' \\times '+:num2+'}{'+:den1+' \\times '+:den2+'}')}"
+}]
+}

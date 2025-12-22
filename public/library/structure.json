@@ -1,0 +1,197 @@
+{
+    "6":{
+        "nom":"6e",
+        "themes":{
+            "6N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "6NA":"Utiliser et représenter les grands nombres entiers",
+                    "6NB":"Utiliser et représenter des fractions simples",
+                    "6NC":"Utiliser et représenter les nombres décimaux",
+                    "6ND":"Calculer avec des nombres entiers",
+                    "6NE":"Calculer avec des nombres décimaux",
+                    "6NF":"Résoudre des problèmes avec des calculs",
+                    "6NN":"Faits numériques"
+                }
+            },
+            "6M":{
+                "nom": "Grandeurs et mesures",
+                "chapitres":{
+                    "6MA":"Longueurs, masses",
+                    "6MB":"Durées",
+                    "6MC":"Aires",
+                    "6MD":"Contenances et volumes",
+                    "6ME":"Angles",
+                    "6MF":"Résoudre des problèmes"
+                }
+            },
+            "6G":{
+                "nom": "Espace et géométrie",
+                "chapitres":{
+                    "6GA":"Se repérer et se déplacer dans l'espace",
+                    "6GB":"Reconnaitre, nommer, décrire, etc. des solides",
+                    "6GC":"Reconnaitre, nommer, décrire, etc. des figures planes",
+                    "6GD":"Utiliser quelques relations géométriques"
+                }
+            }
+        }
+    },
+    "5":{
+        "nom": "5e",
+        "themes":{
+            "5N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "5NA":"Connaissance des nombres",
+                    "5NB":"Comparaison des nombres",
+                    "5NC":"Calculer avec les nombres",
+                    "5ND":"Notion de divisibilité et nombres premiers",
+                    "5NE":"Utiliser le calcul littéral"
+                }
+            },
+            "5D":{
+                "nom":"Organisation et gestion de données, fonctions",
+                "chapitres":{
+                    "5DA":"Interpréter, représenter et traiter des données",
+                    "5DB":"Notions de probabilités",
+                    "5DC":"Problèmes de proportionnalité",
+                    "5DD":"Notion de fonction"
+                }
+            },
+            "5M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "5MA":"Calculs de grandeurs",
+                    "5MB":"Effet des transformations"
+                }
+            },
+            "5G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "5GA":"Représenter l'espace",
+                    "5GB":"Notions de géométrie pour démontrer"
+                }
+            },
+            "5A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "5AA":"Ecrire, mettre au point, exécuter un programme"
+                }
+            },
+            "5L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "5LN":"Nombres et calculs",
+                    "5LM":"Grandeurs et mesures",
+                    "5LG":"Espace et Géométrie",
+                    "5LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    },
+    "4":{
+        "nom":"4e",
+        "themes":{
+            "4N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "4NA":"Connaissance des nombres",
+                    "4NB":"Comparaison des nombres",
+                    "4NC":"Calculer avec les nombres",
+                    "4ND":"Notion de divisibilité et nombres premiers",
+                    "4NE":"Utiliser le calcul littéral"
+                }
+            },
+            "4D":{
+                "nom":"Organisation et gestion de données, fonctions",
+                "chapitres":{
+                    "4DA":"Interpréter, représenter et traiter des données",
+                    "4DB":"Notions de probabilités",
+                    "4DC":"Problèmes de proportionnalité",
+                    "4DD":"Notion de fonction"
+                }
+            },
+            "4M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "4MA":"Calculs de grandeurs",
+                    "4MB":"Effet des transformations"
+                }
+            },
+            "4G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "4GA":"Représenter l'espace",
+                    "4GB":"Notions de géométrie pour démontrer"
+                }
+            },
+            "4A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "4AA":"Ecrire, mettre au point, exécuter un programme"
+                }
+            },
+            "4L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "4LN":"Nombres et calculs",
+                    "4LM":"Grandeurs et mesures",
+                    "4LG":"Espace et Géométrie",
+                    "4LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    },
+    "3":{
+        "nom":"3e",
+        "themes":{
+            "3N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "3NA":"Connaissance des nombres",
+                    "3NB":"Calculer avec les nombres",
+                    "3NC":"Notion de divisibilité et nombres premiers",
+                    "3ND":"Utiliser le calcul littéral"
+                }
+            },
+            "3D":{
+                "nom":"Organisation et gestion de données, fonctions",
+                "chapitres":{
+                    "3DA":"Interpréter, représenter et traiter des données",
+                    "3DB":"Notions de probabilités",
+                    "3DC":"Problèmes de proportionnalité",
+                    "3DD":"Notion de fonction"
+                }
+            },
+            "3M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "3MA":"Calculs de grandeurs",
+                    "3MB":"Effet des transformations"
+                }
+            },
+            "3G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "3GA":"Représenter l'espace",
+                    "3GB":"Notions de géométrie pour démontrer"
+                }
+            },
+            "3A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "3AA":"Ecrire, mettre au point, exécuter un programme"
+                }
+            },
+            "3L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "3LN":"Nombres et calculs",
+                    "3LM":"Grandeurs et mesures",
+                    "3LG":"Espace et Géométrie",
+                    "3LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    }
+}

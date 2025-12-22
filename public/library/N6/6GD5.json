@@ -1,0 +1,76 @@
+{
+    "ID": "6GD5",
+    "title":"Cercles tangents ou sécants et distances",
+    "type":"text",
+    "dest":["6GD","5GB"],
+    "consts":{"lettres":"ABCDEFGHJKLMNPQRSTUVW"},
+    "options":[
+        {
+            "name": "Cercles tangents",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "s":"4_8",
+                "s1":"2_${:s-2}",
+                "s2":"${:s-:s1}",
+                "qp":", ${:A+:B}=?",
+                "ap":", ${:A+:B}=${math.round(:s)}"
+           },
+           "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[0,-8,17,8],
+                "content":[
+                    ["point",["${:s1+0.5}",0],{"name":"${:A}", "face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${:s1+:s+0.5}",0],{"name":"${:B}", "face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${:s1*2+0.5}",0],{"name":"${:C}", "face":"x","label":{"offset":[5,5]}}],
+                    ["circle",["${:A}","${:s1}"], {"strokeWidth":1.3}],
+                    ["circle",["${:B}","${:s2}"], {"strokeWidth":1.3}],
+                    ["point",["${0.5+:s1+:s1*Math.cos(2*Math.PI/3)}","${:s1*Math.sin(2*Math.PI/3)}"],{"name":"X","face":"","label":{"visible":false}}],
+                    ["point",["${0.5+:s+:s1+:s2*Math.cos(Math.PI/3)}","${:s2*Math.sin(Math.PI/3)}"],{"name":"Y","face":"","label":{"visible":false}}],
+                    ["segment",["${:A}","X"],{"strokeWidth":1.3, "dash":1, "label":{}}],
+                    ["segment",["${:B}","Y"],{"strokeWidth":1.3, "dash":1}],
+                    ["text", ["${:s1/2}","${:s1/2-0.5}","${:s1}"]],
+                    ["text", ["${:s1+:s+:s2/2}","${:s2/2-0.5}","${:s2}"]]
+                ]
+           }
+        },{
+            "name": "Cercles sécants",
+            "vars":{
+                "l":"0_${:lettres.length-1}_4_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "D":"${:lettres[:l[3]]}",
+                "s":"4_8",
+                "s1":"3_${:s-1}",
+                "s2":"${:s-:s1+1}_7",
+                "qp":", ${:D+:B}=?, ${:A+:D}=?",
+                "ap":", ${:D+:B}=${:s2}, ${:A+:D}=${:s1}"
+           },
+           "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[0,-8,18,8],
+                "content":[
+                    ["point",["${:s1+0.5}",0],{"name":"${:A}", "face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${:s1+:s+0.5}",0],{"name":"${:B}", "face":"x","label":{"offset":[5,5]}}],
+                    ["circle",["${:A}","${:s1}"], {"name":"C1","strokeWidth":1.3}],
+                    ["circle",["${:B}","${:s2}"], {"name":"C2","strokeWidth":1.3}],
+                    ["intersection",["C1","C2",0],{"name":"${:C}", "face":"x","label":{"offset":[-3,10]}}],
+                    ["intersection",["C1","C2",1],{"name":"${:D}", "face":"x","label":{"offset":[-3,-10]}}],
+                    ["point",["${0.5+:s1+:s1*Math.cos(2*Math.PI/3)}","${:s1*Math.sin(2*Math.PI/3)}"],{"name":"X","face":"","label":{"visible":false}}],
+                    ["point",["${0.5+:s+:s1+:s2*Math.cos(Math.PI/3)}","${:s2*Math.sin(Math.PI/3)}"],{"name":"Y","face":"","label":{"visible":false}}],
+                    ["segment",["${:A}","X"],{"strokeWidth":1.3, "dash":1, "label":{}}],
+                    ["segment",["${:B}","Y"],{"strokeWidth":1.3, "dash":1}],
+                    ["text", ["${:s1/2}","${:s1/2-0.5}","${:s1}"]],
+                    ["text", ["${:s1+:s+:s2/2}","${:s2/2-0.5}","${:s2}"]]
+                ]
+           }
+        }
+    ],
+    "question":"${:A+:C}=?, ${:B+:C}=?${:qp}",
+    "answer":"${:A+:C}=${math.round(:s1,1)}, ${:B+:C}=${math.round(:s2,1)}${:ap}"
+}

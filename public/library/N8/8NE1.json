@@ -1,0 +1,26 @@
+{
+    "title":"Ajouter un nombre décimal et ...",
+    "ID":"8NE1",
+    "speech":1,
+    "description":"Somme d'un nombre décimal avec un nombre de dixièmes, un petit décimal, un décimal quelconque",
+    "dest":["8NE", "7NE", "6NE"],
+    "keys":["_","_","_","_","_","_","_","_"],
+    "options":[{
+        "name":"Ajouter un entier",
+        "vars":{"a":[9,99,999],"d":"1_3", "t1":"d1_${:a}_${:d}", "t2":"1_9"}
+        },{
+            "name":"Ajouter des dixièmes",
+            "vars":{"a":[9,99,999],"d":"1_3", "t1":"d1_${:a}_${:d}", "t2":"d0_9_1_^0"}
+        },{
+            "name":"Un petit décimal",
+            "vars":{"a":[9,99,999],"d":"1_3", "t1":"d1_${:a}_${:d}", "t2":"d0_99_2_^0"}
+        },{
+            "name":"Un décimal",
+            "vars":{"a":[9,99,999],"d":"1_3", "t1":"d1_${:a}_${:d}", "t2":"d0_999_3_^0"}
+        }
+    ],
+    "question": "${:t1}+${:t2}",
+    "audio":"${String(:t1).replace('.',',')} plusse ${String(:t2).replace('.',',')}",
+    "answer":":question=\\color{red}{${MMmath.round(:t1+:t2,3)}}",
+    "value":"${MMmath.round(:t1+:t2,3)}"
+}

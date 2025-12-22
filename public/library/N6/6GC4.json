@@ -1,0 +1,99 @@
+{
+    "title":"Appartient ou n'appartient pas",
+    "ID":"6GC4",
+    "dest":["6GC", "5GB", "4GB", "3GB"],
+    "type":"text",
+    "valueType":"list",
+    "consts":{
+        "points":"ABCDEFGHIJKLMNOPRST"
+    },
+    "options":[{
+        "name":"Appartenance à une droite",
+        "consts":{
+            "vrai":["${:A}\\in(${:B+:D})","${:B}\\in(${:A+:D})", "${:C}\\notin(${:D+:A})", "${:D}\\in(${:B+:A})", "${:C}\\notin(${:D+:B})"],
+            "faux":["${:A}\\notin(${:B+:D})", "${:B}\\notin(${:A+:D})", "${:C}\\in(${:D+:A})", "${:D}\\in(${:C+:A})", "${:C}\\in(${:D+:B})"],
+            "repc":["F","V"],
+            "repl":["Faux","Vrai"]
+        },
+        "vars":{
+            "pts":"0_16_4_^&",
+            "A":"${:points[:pts[0]]}",
+            "B":"${:points[:pts[1]]}",
+            "C":"${:points[:pts[2]]}",
+            "D":"${:points[:pts[3]]}",
+            "xA":"d-4_-2.8_1",
+            "yA":"d-4_4_1",
+            "xB":"d2.8_4_1",
+            "yB":"d-4_4_1",
+            "pente":"${(:yB-:yA)/(:xB-:xA)}",
+            "intercept":"${:yA-(:pente*:xA)}",
+            "xC":"d-2_-0.5_1",
+            "yCf":"${:pente*:xC+:intercept}",
+            "ecart":"d2_4.5_1",
+            "yC":"${:yCf<0?:yCf+:ecart::yCf-:ecart}",
+            "xD":"d0.5_2_1",
+            "yD":"${:pente*:xD+:intercept}",
+            "yn":"0_1_2",
+            "num":"0_4_2_^&"
+        },
+        "figure":{
+            "type":"graph",
+            "boundingbox":[-6,6,6,-6],
+            "axis":false,
+            "grid":false,
+            "content":[
+                ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["point", ["${:xD}", "${:yD}"], {"name":"${:D}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+            ]
+        },
+        "question":"Vrai ou Faux ?<br><b>a.</b> $$${:yn[0]==0?:faux[:num[0]]::vrai[:num[0]]}$$<br><b>b.</b> $$${:yn[1]==0?:faux[:num[1]]::vrai[:num[1]]}$$",
+        "answer":"$$${:yn[0]==0?:faux[:num[0]]::vrai[:num[0]]}$$ est <span class='red'>${:repl[:yn[0]]}</span>.<br/>$$${:yn[1]==0?:faux[:num[1]]::vrai[:num[1]]}$$ est <span class='red'>${:repl[:yn[1]]}</span>.",
+        "value":["${:repl[:yn[0]]};${:repl[:yn[1]]}","${:repc[:yn[0]]};${:repc[:yn[1]]}"]
+    },{
+        "name":"Appartenance à la droite, au segment à la demi-droite",
+        "consts":{
+            "vrai":["${:A}\\in(${:B+:D})","${:C}\\in(${:D+:A})","${:B}\\in(${:A+:C})","${:D}\\in(${:A+:B})","${:A}\\in[${:D+:C})","${:C}\\in[${:A+:D})","${:D}\\in[${:C+:B})","${:B}\\in[${:C+:D})","${:C}\\in[${:A+:D})","${:D}\\in[${:A+:B}]","${:B}\\in[${:D+:B}]","${:D}\\in[${:B+:C}]","${:A}\\notin[${:C+:D})","${:A}\\notin[${:D+:B})","${:C}\\notin[${:D+:B})","${:D}\\notin[${:C+:A})","${:B}\\notin[${:D+:C})","${:B}\\notin[${:D+:A})","${:A}\\notin[${:C+:D}]","${:A}\\notin[${:C+:B}]","${:A}\\notin[${:D+:B}]","${:C}\\notin[${:B+:D}]","${:D}\\notin[${:C+:A}]","${:B}\\notin[${:C+:D}]","${:B}\\notin[${:D+:A}]"],
+            "faux":["${:A}\\notin(${:B+:D})", "${:C}\\notin(${:D+:A})", "${:B}\\notin(${:A+:C})", "${:D}\\notin(${:A+:B})", "${:A}\\notin(${:D+:C})", "${:C}\\notin(${:A+:D})", "${:D}\\notin(${:C+:B})", "${:B}\\notin(${:C+:D})","${:C}\\notin[${:A+:D})","${:D}\\notin[${:A+:B}]","${:B}\\notin[${:D+:B}]","${:D}\\notin[${:B+:C}]","${:A}\\in[${:C+:D})","${:A}\\in(${:D+:B})","${:C}\\in[${:D+:B})","${:D}\\in[${:C+:A})","${:B}\\in[${:D+:C})","${:B}\\in[${:D+:A})","${:A}\\in[${:C+:D}]","${:A}\\in[${:C+:B}]","${:A}\\in[${:D+:B}]","${:C}\\in[${:B+:D}]","${:D}\\in[${:C+:A}]","${:B}\\in[${:C+:D}]","${:B}\\in[${:D+:A}]"],
+            "repc":["F","V"],
+            "repl":["Faux","Vrai"]
+        },
+        "vars":{
+            "pts":"0_16_4_^&",
+            "A":"${:points[:pts[0]]}",
+            "B":"${:points[:pts[1]]}",
+            "C":"${:points[:pts[2]]}",
+            "D":"${:points[:pts[3]]}",
+            "xA":"d-4_-2.8_1",
+            "yA":"d-4_4_1",
+            "xB":"d2.8_4_1",
+            "yB":"d-4_4_1",
+            "pente":"${(:yB-:yA)/(:xB-:xA)}",
+            "intercept":"${:yA-(:pente*:xA)}",
+            "xC":"d-2_-0.5_1",
+            "yC":"${:pente*:xC+:intercept}",
+            "xD":"d0.5_2_1",
+            "yD":"${:pente*:xD+:intercept}",
+            "yn":"0_1_4",
+            "num":"0_24_4_^&"
+        },
+        "figure":{
+            "type":"graph",
+            "boundingbox":[-6,6,6,-6],
+            "axis":false,
+            "grid":false,
+            "content":[
+                ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["point", ["${:xD}", "${:yD}"], {"name":"${:D}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+            ]
+        },
+        "question":"Vrai ou Faux ?<br><b>a.</b> $$${:yn[0]==0?:faux[:num[0]]::vrai[:num[0]]}$$ &nbsp; &nbsp; <b>b.</b> $$${:yn[1]==0?:faux[:num[1]]::vrai[:num[1]]}$$<br><b>c.</b> $$${:yn[2]==0?:faux[:num[2]]::vrai[:num[2]]}$$ &nbsp; &nbsp; <b>d.</b> $$${:yn[3]==0?:faux[:num[3]]::vrai[:num[3]]}$$",
+        "answer":"$$${:yn[0]==0?:faux[:num[0]]::vrai[:num[0]]}$$ est <span class='red'>${:repl[:yn[0]]}</span>.<br>$$${:yn[1]==0?:faux[:num[1]]::vrai[:num[1]]}$$ est <span class='red'>${:repl[:yn[1]]}</span>.<br>$$${:yn[2]==0?:faux[:num[2]]::vrai[:num[2]]}$$ est <span class='red'>${:repl[:yn[2]]}</span>.<br>$$${:yn[3]==0?:faux[:num[3]]::vrai[:num[3]]}$$ est <span class='red'>${:repl[:yn[3]]}</span>.",
+        "value":["${:repl[:yn[0]]};${:repl[:yn[1]]};${:repl[:yn[2]]};${:repl[:yn[3]]}","${:repc[:yn[0]]};${:repc[:yn[1]]};${:repc[:yn[2]]};${:repc[:yn[3]]}"]
+    }]
+}

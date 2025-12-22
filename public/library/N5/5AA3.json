@@ -1,0 +1,74 @@
+{
+    "ID":"5AA3",
+    "title":"Comprendre la répétition",
+    "type":"text",
+    "description":"scratch boucle répéter",
+    "dest":["5AA","4AA","3AA"],
+    "consts":{
+        "sens":["turnright", "turnleft"]
+    },
+    "vars":{"d0":"1_10", "t":"${:d0*10}"},
+    "options":[
+        {
+            "name":"Répéter simple",
+            "vars":{"x":"0_10","y":"1_10"},
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "répéter (${:x}) fois",
+                    "avancer de (${:y}) pas",
+                    "fin"
+                ]
+            }
+        },{
+            "name":"Répéter et tourner",
+            "vars":{"x":"0_10","y":"1_10", "s0":"0_1"},
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "répéter (${:x}) fois",
+                    "avancer de (${:y}) pas",
+                    "tourner @${:sens[:s0]} de (${:t}) degrés",
+                    "fin"
+                ]
+            }
+        },{
+            "name":"Répéter et tourner (2)",
+            "vars":{"x":"0_10","y":"1_10", "s0":"0_1"},
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "répéter (${:x}) fois",
+                    "tourner @${:sens[:s0]} de (${:t}) degrés",
+                    "avancer de (${:y}) pas",
+                    "fin"
+                ]
+            }
+        },{
+            "consts":{
+                "mots":["Bonjour", "Bienvenue","Coucou","Hello","J'aime les fraises","J'aime faire du vélo"],
+                "distracteurs":["Dire (${:mots[:p]}) pendant (${:d0}) secondes",
+        "Ajouter (${:t}) à la taille", "Attendre (${:d0}) secondes", "penser à ((${:d0}) * (${:t})) pendant (2) secondes", "tourner @turnleft de (${:t}) degrés", "tourner @turnright de (${:t}) degrés"],
+        "actions":["avancer de (${:y}) pas", "${:distracteurs[:s0]}", "${:distracteurs[:s1]}"]
+        },
+            "name":"Répéter avec 2 distracteurs",
+            "vars":{"p":"0_5", "x":"0_10","y":"1_10", "s0":"0_5", "s1":"0_5_^${:s0}", "a":"0_2_3_^&"},
+            "figure":{
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "répéter (${:x}) fois",
+                    "${:actions[:a[0]]}",
+                    "${:actions[:a[1]]}",
+                    "${:actions[:a[2]]}",
+                    "fin"
+                ]
+            }
+        }],
+    "question":"De combien de pas va avancer le lutin ?",
+    "answer":"Le lutin va avancer de <span class='red'>${:x*:y}</span> pas.",
+    "value":"${:x*:y}"
+}

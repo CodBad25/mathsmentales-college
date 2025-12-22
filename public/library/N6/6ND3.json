@@ -1,0 +1,54 @@
+{
+    "title":"Complément à 10, 100, 1000",
+    "type":"text",
+    "speech":1,
+    "ID":"6ND3",
+    "textSize":"medium",
+    "dest":["8ND", "7ND", "6ND"],
+    "options":[{
+        "name":"Complément à 10",
+        "question": ["Combien manque-t-il à ${:a} pour faire 10 ?",
+            "$$${:a}+?=10$$",
+            "$$10-${:a}$$"
+        ],
+        "shortq":["$$${:a}+\\colorbox{#ECECEC}{\\quad}=10$$",
+            "$$${:a}+\\colorbox{#ECECEC}{\\quad}=10$$",
+            "$$10-${:a}=\\colorbox{#ECECEC}{\\quad}$$"
+        ],
+        "audio": ["Combien manquetil à ${:a} pour faire 10 ?",
+            "${:a} plusse combien pour faire 10 ?",
+            "Calcule 10 moins ${:a}."
+        ],
+        "answer":"$$${:a}+\\color{red}{${:b}}=10$$",
+        "vars":{"a":"1_9", "b":"${10-:a}"}
+    },{
+        "name":"Complément à 100",
+        "question": ["Combien manque-t-il à ${:a} pour faire 100 ?",
+            "$$${:a}+?=100$$",
+            "$$100-${:a}$$"],
+        "shortq": ["$$${:a}+\\colorbox{#ECECEC}{\\quad\\quad}=100$$",
+            "$$${:a}+\\colorbox{#ECECEC}{\\quad\\quad}=100$$",
+            "$$100-${:a}=\\colorbox{#ECECEC}{\\quad\\quad}$$"],
+        "audio": ["Combien manquetil à ${:a} pour faire 100 ?",
+            "${:a} plusse combien pour faire 100 ?",
+            "Calcule 100 moins ${:a}"],
+        "answer":"$$${:a}+\\color{red}{${:b}}=100$$",
+        "vars":{"a":"10_99", "b":"${100-:a}"}
+    },
+    {
+        "name":"Complément à 1000",
+        "question": ["Combien manque-t-il à ${:a} pour faire 1000 ?",
+            "$$${:a}+?=1000$$",
+            "$$1000-${:a}$$"],
+        "shortq": ["$$${:a}+\\colorbox{#ECECEC}{\\quad\\quad}=1000$$",
+            "$$${:a}+\\colorbox{#ECECEC}{\\quad\\quad}=1000$$",
+            "$$1000-${:a}=\\colorbox{#ECECEC}{\\quad\\quad}$$"],
+        "audio": ["Combien manquetil à ${:a} pour faire 1000 ?",
+            "${:a} plusse combien pour faire 1000 ?",
+            "Calcule 1000 moins ${:a}"],
+        "answer":"$$${:a}+\\color{red}{${:b}}=1000$$",
+        "vars":{"a":"10_999", "b":"${1000-:a}"}
+    }
+    ],
+    "value":"${:b}"
+}

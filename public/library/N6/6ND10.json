@@ -1,0 +1,36 @@
+{
+    "title":"Division entière, division euclidienne",
+    "ID":"6ND10",
+    "description":"Pour répondre, donner le quotient, puis le reste si nécessaire, séparés d'un point-virgule",
+    "keys":["_","_",";","_","_","_","_","_"],
+    "dest":["6ND", "7ND","5ND", "4ND", "3NC", "2N2"],
+    "options":[{
+        "name":"Division entière",
+        "vars":{"a":"0_10", "b":"1_10", "p":"${:a*:b}"},
+        "question": "${:p}\\div ${:b} = ?",
+        "answer":":question|2\\color{red}{${:a}}",
+        "value":"${:a}"
+    },{
+        "name":"Division à trou",
+        "vars":{"a":"1_10", "b":"1_10", "p":"${:a*:b}"},
+        "question":"${:p}\\, \\div \\, ? \\,=${:a}",
+        "shortq":"${:p}\\, \\div  \\colorbox{#ececec}{\\quad} =${:a}",
+        "answer":"${:p}\\div\\color{red}{${:b}}=${:a}",
+        "value":"${:b}"
+    },{
+        "name":"Division euclidienne (petits nombres)",
+        "vars":{"a":"11_50","b":"2_10", "qo":"${~~(:a/:b)}", "r":"${:a%:b}"},
+        "question":"\\text{Quels sont le quotient et }\\\\\\text{le reste de }${:a}\\div ${:b} ?",
+        "shortq":"${:a}\\div ${:b} \\, Q=\\colorbox{#ececec}{\\quad}; R=\\colorbox{#ececec}{\\quad}",
+        "answer":"${:a}=${:b}\\times\\color{red}{${:qo}}+\\color{red}{${:r}}\\text{ ou }\\color{green}{Q=${:qo}; R=${:r}}",
+        "value":["${:qo};${:r}", "Q=${:qo};R=${:r}"]
+    },{
+        "name":"Division euclidienne (grands nombres)",
+        "vars":{"a":"25_300","b":"2_25", "qo":"${~~(:a/:b)}", "r":"${:a%:b}"},
+        "question":"\\text{Quels sont le quotient et }\\\\\\text{le reste de }${:a}\\div ${:b} ?",
+        "shortq":"${:a}\\div ${:b} \\, Q=\\colorbox{#ececec}{\\quad\\quad}; R=\\colorbox{#ececec}{\\quad}",
+        "answer":"${:a}=${:b}\\times\\color{red}{${:qo}}+\\color{red}{${:r}}\\text{ ou }\\color{green}{Q=${:qo}; R=${:r}}",
+        "value":["${:qo};${:r}", "Q=${:qo};R=${:r}"]
+    }
+    ]
+}

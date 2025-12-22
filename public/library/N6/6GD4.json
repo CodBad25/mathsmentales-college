@@ -1,0 +1,163 @@
+{
+    "ID": "6GD4",
+    "title": "Cercle circonscrit au triangle",
+    "description": "Reconnaitre et égalités de longueurs",
+    "type":"text",
+    "dest":["6GD","5GB"],
+    "consts":{"lettres":"ABCDEFGHJKLMNPQRSTUVW"},
+    "options":[
+        {
+            "name": "cercle circonscrit",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "a1":"-9_9",
+                "ang1":"${:a1*10}",
+                "R":3.5,
+                "xA":"${Math.cos(Math.PI/180*(:ang1))*:R}",
+                "yA":"${Math.sin(Math.PI/180*(:ang1))*:R}",
+                "a2":"6_12",
+                "ang2":"${(:a1+:a2)*10}",
+                "xB":"${Math.cos(Math.PI/180*(:ang2))*:R}",
+                "yB":"${Math.sin(Math.PI/180*(:ang2))*:R}",
+                "a3":"6_12_^${18-:a2}",
+                "ang3":"${(:a1+:a2+:a3)*10}",
+                "xC":"${Math.cos(Math.PI/180*(:ang3))*:R}",
+                "yC":"${Math.sin(Math.PI/180*(:ang3))*:R}",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "egalites":"O${:A}=O${:B}=O${:C}",
+                "rep":"Oui"
+            },
+            "figure":{
+                "type": "graph",
+                "axis":false,
+                "boundingbox":[-8,-6,8,6],
+                "content":[
+                    ["point",[0,0],{"name":"O", "face":"x", "label":{"offset":[5,8]}}],
+                    ["circle",["O","${:R}"], {"strokeWidth":1.3}],
+                    ["point",["${:xA}","${:yA}"],{"name":"${:A}","face":"x", "label":{"offset":["${Math.cos(:ang1*Math.PI/180)*12-3}","${-Math.sin(:ang1*Math.PI/180)*12}"]}}],
+                    ["point",["${:xB}","${:yB}"],{"name":"${:B}","face":"x", "label":{"offset":["${Math.cos(:ang2*Math.PI/180)*12-3}","${-Math.sin(:ang2*Math.PI/180)*12}"]}}],
+                    ["point",["${:xC}","${:yC}"],{"name":"${:C}","face":"x", "label":{"offset":["${Math.cos(:ang3*Math.PI/180)*12-3}","${-Math.sin(:ang3*Math.PI/180)*12}"]}}],
+                    ["polygon",["${:A}", "${:B}", "${:C}"]]
+                ]
+            }
+        },{
+            "name": "cercle passant par 2 sommets",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "a1":"-9_9",
+                "ang1":"${:a1*10}",
+                "R":3.5,
+                "xA":"${Math.cos(Math.PI/180*(:ang1))*:R}",
+                "yA":"${Math.sin(Math.PI/180*(:ang1))*:R}",
+                "a2":"6_12",
+                "ang2":"${(:a1+:a2)*10}",
+                "delta":[-1.2,1.5],
+                "xB":"${Math.cos(Math.PI/180*(:ang2))*(:R+:delta)}",
+                "yB":"${Math.sin(Math.PI/180*(:ang2))*(:R+:delta)}",
+                "a3":"6_12_^${18-:a2}",
+                "ang3":"${(:a1+:a2+:a3)*10}",
+                "xC":"${Math.cos(Math.PI/180*(:ang3))*:R}",
+                "yC":"${Math.sin(Math.PI/180*(:ang3))*:R}",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "egalites":"O${:A}=O${:C}",
+                "rep":"Non"
+            },
+            "figure":{
+                "type": "graph",
+                "axis":false,
+                "boundingbox":[-8,-6,8,6],
+                "content":[
+                    ["point",[0,0],{"name":"O", "face":"x", "label":{"offset":[5,8]}}],
+                    ["circle",["O","${:R}"], {"strokeWidth":1.3}],
+                    ["point",["${:xA}","${:yA}"],{"name":"${:A}","face":"x", "label":{"offset":["${Math.cos(:ang1*Math.PI/180)*12-3}","${-Math.sin(:ang1*Math.PI/180)*12}"]}}],
+                    ["point",["${:xB}","${:yB}"],{"name":"${:B}","face":"x", "label":{"offset":["${Math.cos(:ang2*Math.PI/180)*12-3}","${-Math.sin(:ang2*Math.PI/180)*12}"]}}],
+                    ["point",["${:xC}","${:yC}"],{"name":"${:C}","face":"x", "label":{"offset":["${Math.cos(:ang3*Math.PI/180)*12-3}","${-Math.sin(:ang3*Math.PI/180)*12}"]}}],
+                    ["polygon",["${:A}", "${:B}", "${:C}"]]
+                ]
+            }
+        },{
+            "name": "cercle passant par 1 sommet",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "a1":"-9_9",
+                "ang1":"${:a1*10}",
+                "R":3.5,
+                "xA":"${Math.cos(Math.PI/180*(:ang1))*:R}",
+                "yA":"${Math.sin(Math.PI/180*(:ang1))*:R}",
+                "a2":"6_12",
+                "ang2":"${(:a1+:a2)*10}",
+                "d1":[-1.2,1.5],
+                "xB":"${Math.cos(Math.PI/180*(:ang2))*(:R+:d1)}",
+                "yB":"${Math.sin(Math.PI/180*(:ang2))*(:R+:d1)}",
+                "a3":"6_12",
+                "ang3":"${(:a1+:a2+:a3)*10}",
+                "d2":[-1.2,1.5],
+                "xC":"${Math.cos(Math.PI/180*(:ang3))*(:R+:d2)}",
+                "yC":"${Math.sin(Math.PI/180*(:ang3))*(:R+:d2)}",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "egalites":"",
+                "rep":"Non"
+            },
+            "figure":{
+                "type": "graph",
+                "axis":false,
+                "boundingbox":[-8,-6,8,6],
+                "content":[
+                    ["point",[0,0],{"name":"O", "face":"x", "label":{"offset":[5,8]}}],
+                    ["circle",["O","${:R}"], {"strokeWidth":1.3}],
+                    ["point",["${:xA}","${:yA}"],{"name":"${:A}","face":"x", "label":{"offset":["${Math.cos(:ang1*Math.PI/180)*12-3}","${-Math.sin(:ang1*Math.PI/180)*12}"]}}],
+                    ["point",["${:xB}","${:yB}"],{"name":"${:B}","face":"x", "label":{"offset":["${Math.cos(:ang2*Math.PI/180)*12-3}","${-Math.sin(:ang2*Math.PI/180)*12}"]}}],
+                    ["point",["${:xC}","${:yC}"],{"name":"${:C}","face":"x", "label":{"offset":["${Math.cos(:ang3*Math.PI/180)*12-3}","${-Math.sin(:ang3*Math.PI/180)*12}"]}}],
+                    ["polygon",["${:A}", "${:B}", "${:C}"]]
+                ]
+            }
+        },{
+            "name": "cercle de diamètre un côté",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "a1":"-9_9",
+                "ang1":"${:a1*10}",
+                "R":3.5,
+                "xA":"${Math.cos(Math.PI/180*(:ang1))*:R}",
+                "yA":"${Math.sin(Math.PI/180*(:ang1))*:R}",
+                "a2":"6_12",
+                "ang2":"${(:a1+:a2)*10}",
+                "d1":[-1.2,0,1.5,"A"],
+                "xB":"${:d1!='A'?Math.cos(Math.PI/180*(:ang2))*(:R+:d1)::xA+Math.cos((:ang1+90)*Math.PI/180)*3}",
+                "yB":"${:d1!='A'?Math.sin(Math.PI/180*(:ang2))*(:R+:d1)::yA+Math.sin((:ang1+90)*Math.PI/180)*3}",
+                "a3":"${18-:a2}",
+                "ang3":"${(:a1+:a2+:a3)*10}",
+                "xC":"${Math.cos(Math.PI/180*(:ang3))*:R}",
+                "yC":"${Math.sin(Math.PI/180*(:ang3))*:R}",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "egalites":"O${:A}=O${:C}${:d1==0?'=O'+:C:''}",
+                "rep":"${:d1==0?'Oui':'Non'}"
+            },
+            "figure":{
+                "type": "graph",
+                "axis":false,
+                "boundingbox":[-8,-6,8,6],
+                "content":[
+                    ["point",[0,0],{"name":"O", "face":"x", "label":{"offset":[5,8]}}],
+                    ["circle",["O","${:R}"], {"strokeWidth":1.3}],
+                    ["point",["${:xA}","${:yA}"],{"name":"${:A}","face":"x", "label":{"offset":["${Math.cos(:ang1*Math.PI/180)*12-3}","${-Math.sin(:ang1*Math.PI/180)*12}"]}}],
+                    ["point",["${:xB}","${:yB}"],{"name":"${:B}","face":"x", "label":{"offset":["${Math.cos(:ang2*Math.PI/180)*12-3}","${-Math.sin(:ang2*Math.PI/180)*12}"]}}],
+                    ["point",["${:xC}","${:yC}"],{"name":"${:C}","face":"x", "label":{"offset":["${Math.cos(:ang3*Math.PI/180)*12-3}","${-Math.sin(:ang3*Math.PI/180)*12}"]}}],
+                    ["polygon",["${:A}", "${:B}", "${:C}"]],
+                    ["angle",["${:d1=='A'?:B::C}","${:d1=='A'?:A::B}","${:d1=='A'?:C::A}"], {"radius":1,"label":{"visible":false}}]
+                ]
+            }
+        }
+    ],
+    "question":"Le cercle de centre O est-il circonscrit au triangle ${:A+:B+:C} ?<br>Écrire tous les égalités de longueurs possible entre les points O, ${:A}, ${:B} et ${:C}.",
+    "answer":"<span class='red'>${:rep}</span><br>$$${:egalites}$$",
+    "value":"${:egalites}"
+}

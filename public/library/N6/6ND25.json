@@ -1,0 +1,28 @@
+{
+    "title":"Double, carré, triple, cube d'un entier",
+    "ID":"6ND25",
+    "type":"text",
+    "speech":1,
+    "description":"Différencier le vocabulaire double, carré, triple, cube.",
+    "textSize":"medium",
+    "dest":["6ND", "5NC", "4NC", "3NC"],
+    "consts":{
+        "vocab":["double", "carré", "triple", "cube"],
+        "coef":[2,2,3,3]
+    },
+    "options":[
+        {
+            "name":"Double, carré",
+            "vars":{"choix":"0_1", "n":"1_10"}
+        },
+        {
+            "name":"Triple, cube",
+            "vars":{"choix":"2_3", "n":"1_${:choix<3?10:5}"}
+        }
+    ],
+    "question":"Quel est le ${:vocab[:choix]} de $$${:n}$$ ?",
+    "audio":"Quel est le ${:vocab[:choix]} de ${:n} ?",
+    "shortq":"${:vocab[:choix]} de $$${:n}$$ ?",
+    "answer":"Le ${:vocab[:choix]} de ${:n} vaut $$\\color{green}{${:n}${:choix==0||:choix==2?'\\times':'^'}${:coef[:choix]}}=\\color{red}{${:choix==0||:choix==2?:n*:coef[:choix]::n**:coef[:choix]}}$$",
+    "value":"${:choix==0||:choix==2?:n*:coef[:choix]::n**:coef[:choix]}"
+}
