@@ -159,7 +159,7 @@ export default function SessionResultsPage() {
         {/* Resultats */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-4 border-b">
-            <h2 className="font-bold text-lg">Resultats des eleves</h2>
+            <h2 className="font-bold text-lg">Résultats des élèves</h2>
           </div>
 
           {session.results.length === 0 ? (

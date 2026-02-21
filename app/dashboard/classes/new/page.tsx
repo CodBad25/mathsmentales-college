@@ -45,12 +45,12 @@ export default function NewClassPage() {
         .single()
 
       if (!profile || profile.role !== 'teacher') {
-        setError('Seuls les professeurs peuvent creer des classes')
+        setError('Seuls les professeurs peuvent créer des classes')
         setLoading(false)
         return
       }
 
-      // Creer la classe
+      // Créer la classe
       const { data: newClass, error: createError } = await supabase
         .from('classes')
         .insert({
@@ -62,8 +62,8 @@ export default function NewClassPage() {
         .single()
 
       if (createError) {
-        console.error('Erreur creation classe:', createError)
-        setError('Erreur lors de la creation de la classe')
+        console.error('Erreur création classe:', createError)
+        setError('Erreur lors de la création de la classe')
         setLoading(false)
         return
       }
@@ -92,7 +92,7 @@ export default function NewClassPage() {
 
       <main className="container mx-auto px-4 py-8 max-w-lg">
         <div className="bg-white rounded-xl shadow-lg p-8">
-          <h1 className="text-2xl font-bold mb-6 text-center">Creer une classe</h1>
+          <h1 className="text-2xl font-bold mb-6 text-center">Créer une classe</h1>
 
           <form onSubmit={handleSubmit}>
             {error && (
@@ -136,12 +136,12 @@ export default function NewClassPage() {
               disabled={loading || !name.trim()}
               className="w-full bg-primary-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creation en cours...' : 'Creer la classe'}
+              {loading ? 'Création en cours...' : 'Créer la classe'}
             </button>
           </form>
 
           <p className="mt-6 text-center text-sm text-gray-500">
-            Un code unique sera genere automatiquement pour que vos eleves puissent rejoindre la classe.
+            Un code unique sera généré automatiquement pour que vos élèves puissent rejoindre la classe.
           </p>
         </div>
       </main>

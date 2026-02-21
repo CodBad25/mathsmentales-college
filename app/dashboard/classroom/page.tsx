@@ -90,7 +90,7 @@ export default function ClassroomPage() {
         return
       }
 
-      setSuccess(`Classe "${course.name}" importee avec succes! ${data.studentsImported} eleve(s) ajoute(s).`)
+      setSuccess(`Classe "${course.name}" importée avec succès! ${data.studentsImported} élève(s) ajouté(s).`)
 
       // Retirer la classe de la liste et recharger
       setCourses(prev => prev.filter(c => c.id !== course.id))
@@ -187,7 +187,7 @@ export default function ClassroomPage() {
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📚</div>
               <p className="text-gray-600 mb-4">
-                Aucune classe Google Classroom a importer.
+                Aucune classe Google Classroom à importer.
               </p>
               <p className="text-sm text-gray-500">
                 Toutes vos classes ont deja ete importees, ou vous n&apos;avez pas de classes actives dans Google Classroom.
@@ -196,7 +196,7 @@ export default function ClassroomPage() {
           ) : (
             <div className="space-y-4">
               <p className="text-sm text-gray-600 mb-4">
-                Selectionnez les classes a importer :
+                Sélectionnez les classes à importer :
               </p>
 
               {courses.map((course) => (
@@ -276,12 +276,12 @@ export default function ClassroomPage() {
           )}
 
           <div className="mt-8 pt-6 border-t">
-            <h2 className="font-semibold mb-2">Comment ca marche ?</h2>
+            <h2 className="font-semibold mb-2">Comment ça marche ?</h2>
             <ul className="text-sm text-gray-600 space-y-1">
-              <li>1. Selectionnez une classe Google Classroom a importer</li>
-              <li>2. La classe sera creee dans MathsMentales avec un code de partage</li>
-              <li>3. Les eleves deja inscrits seront automatiquement ajoutes</li>
-              <li>4. Utilisez le bouton &quot;Synchroniser&quot; pour mettre a jour la liste des eleves</li>
+              <li>1. Sélectionnez une classe Google Classroom à importer</li>
+              <li>2. La classe sera créée dans MathsMentales avec un code de partage</li>
+              <li>3. Les élèves déjà inscrits seront automatiquement ajoutés</li>
+              <li>4. Utilisez le bouton &quot;Synchroniser&quot; pour mettre à jour la liste des élèves</li>
             </ul>
           </div>
         </div>

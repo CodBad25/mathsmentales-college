@@ -116,12 +116,13 @@ export default async function DashboardPage() {
   let studentStats = { averageScore: 0, totalExercises: 0 }
 
   if (isTeacher) {
-    // Classes du professeur
-    const { data } = await supabase
+    // Classes du professeur (via admin pour éviter les problèmes RLS)
+    const { data, error: classesError } = await supabaseAdmin
       .from('classes')
       .select('*, class_students(count)')
       .eq('teacher_id', user.id)
       .order('created_at', { ascending: false })
+    if (classesError) console.error('Erreur chargement classes:', classesError)
     classes = data || []
 
     // Sessions actives
@@ -184,235 +185,222 @@ export default async function DashboardPage() {
     }
   }
 
+  const classColors = ['bg-green-500', 'bg-blue-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500', 'bg-teal-500']
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
+      {/* Header avec dégradé */}
+      <header className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-primary-600">
-            🧮 MathsMentales
-          </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">{profile.email}</span>
+          <Link href="/" className="text-2xl font-bold">MathsMentales</Link>
+          <div className="flex items-center gap-3">
             {profile.avatar_url && (
-              <img
-                src={profile.avatar_url}
-                alt="Avatar"
-                className="w-10 h-10 rounded-full"
-              />
+              <img src={profile.avatar_url} alt="" className="w-9 h-9 rounded-full ring-2 ring-white/30" />
             )}
+            <span className="text-sm text-white/80 hidden sm:block">{profile.full_name}</span>
             <form action="/auth/logout" method="post">
-              <button className="text-sm text-gray-600 hover:text-gray-900">
+              <button className="text-sm text-white/60 hover:text-white transition-colors">
                 Déconnexion
               </button>
             </form>
           </div>
         </div>
-      </header>
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Titre et badge rôle */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-4xl font-bold">
-              Bonjour {profile.full_name || 'Utilisateur'}
+        {/* Hero section dans le header */}
+        <div className="container mx-auto px-4 pb-8 pt-4">
+          <div className="flex items-center gap-3 mb-6">
+            <h1 className="text-3xl font-bold">
+              Bonjour {(profile.full_name || 'Utilisateur').split(' ')[0]}
             </h1>
-            <span
-              className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                isTeacher
-                  ? 'bg-purple-100 text-purple-700'
-                  : 'bg-blue-100 text-blue-700'
-              }`}
-            >
-              {isTeacher ? '👨‍🏫 Professeur' : '🎓 Élève'}
+            <span className="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
+              {isTeacher ? 'Professeur' : 'Élève'}
             </span>
           </div>
-          <p className="text-gray-600">
-            {isTeacher
-              ? 'Gérez vos classes et suivez les progrès de vos élèves'
-              : 'Accédez à vos exercices et suivez votre progression'}
-          </p>
-        </div>
 
-        {/* Statistiques rapides */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="card">
-            <div className="text-sm text-gray-600 mb-1">
-              {isTeacher ? 'Classes créées' : 'Classes rejointes'}
+          {/* Stats dans le header */}
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-white/10 backdrop-blur rounded-xl p-4">
+              <div className="text-white/60 text-xs uppercase tracking-wide">{isTeacher ? 'Classes' : 'Classes'}</div>
+              <div className="text-3xl font-black mt-1">{classes.length}</div>
             </div>
-            <div className="text-3xl font-bold text-primary-600">
-              {classes.length}
+            <div className="bg-white/10 backdrop-blur rounded-xl p-4">
+              <div className="text-white/60 text-xs uppercase tracking-wide">Sessions actives</div>
+              <div className="text-3xl font-black mt-1">{activeSessions}</div>
             </div>
-          </div>
-          <div className="card">
-            <div className="text-sm text-gray-600 mb-1">Sessions actives</div>
-            <div className="text-3xl font-bold text-green-600">{activeSessions}</div>
-          </div>
-          <div className="card">
-            <div className="text-sm text-gray-600 mb-1">
-              {isTeacher ? 'Élèves totaux' : 'Score moyen'}
-            </div>
-            <div className="text-3xl font-bold text-blue-600">
-              {isTeacher ? totalStudents : `${studentStats.averageScore}%`}
+            <div className="bg-white/10 backdrop-blur rounded-xl p-4">
+              <div className="text-white/60 text-xs uppercase tracking-wide">{isTeacher ? 'Élèves' : 'Score moyen'}</div>
+              <div className="text-3xl font-black mt-1">{isTeacher ? totalStudents : `${studentStats.averageScore}%`}</div>
             </div>
           </div>
         </div>
+      </header>
 
+      <main className="container mx-auto px-4 py-6 -mt-0">
         {/* Actions rapides */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+          {isTeacher ? (
+            <>
+              <Link href="/exercices" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-indigo-200 transition-colors">
+                  <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Exercices</div>
+                <div className="text-xs text-gray-500 mt-0.5">Catalogue complet</div>
+              </Link>
+              <Link href="/dashboard/classroom" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Google Classroom</div>
+                <div className="text-xs text-gray-500 mt-0.5">Importer / synchroniser</div>
+              </Link>
+              <Link href="/dashboard/sessions/new" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-purple-200 transition-colors">
+                  <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Nouvelle session</div>
+                <div className="text-xs text-gray-500 mt-0.5">Lancer un exercice</div>
+              </Link>
+              <Link href="/dashboard/sessions" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-amber-200 transition-colors">
+                  <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Mes sessions</div>
+                <div className="text-xs text-gray-500 mt-0.5">Résultats et suivi</div>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/exercices" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-indigo-200 transition-colors">
+                  <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Exercices</div>
+              </Link>
+              <Link href="/dashboard/join" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Rejoindre une classe</div>
+              </Link>
+              <Link href="/dashboard/history" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-purple-200 transition-colors">
+                  <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Historique</div>
+              </Link>
+              <Link href="/dashboard/progress" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-amber-200 transition-colors">
+                  <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                </div>
+                <div className="font-semibold text-gray-900 text-sm">Progression</div>
+              </Link>
+            </>
+          )}
+        </div>
+
+        {/* Mes classes */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Actions rapides</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {isTeacher ? (
-              <>
-                <Link href="/exercices" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">🧮</div>
-                  <div className="font-semibold">Exercices</div>
-                </Link>
-                <Link href="/dashboard/classroom" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">🔗</div>
-                  <div className="font-semibold">Google Classroom</div>
-                </Link>
-                <Link href="/dashboard/classes/new" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">➕</div>
-                  <div className="font-semibold">Créer une classe</div>
-                </Link>
-                <Link href="/dashboard/sessions/new" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">📝</div>
-                  <div className="font-semibold">Nouvelle session</div>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link href="/dashboard/join" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">🔑</div>
-                  <div className="font-semibold">Rejoindre une classe</div>
-                </Link>
-                <Link href="/dashboard/exercises" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">📝</div>
-                  <div className="font-semibold">Mes exercices</div>
-                </Link>
-                <Link href="/dashboard/history" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">📜</div>
-                  <div className="font-semibold">Mon historique</div>
-                </Link>
-                <Link href="/dashboard/progress" className="card hover:bg-primary-50 cursor-pointer">
-                  <div className="text-3xl mb-2">📈</div>
-                  <div className="font-semibold">Ma progression</div>
-                </Link>
-              </>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-gray-900">Mes classes</h2>
+            {isTeacher && classes.length > 0 && (
+              <Link href="/dashboard/classroom" className="text-sm text-indigo-600 hover:text-indigo-700 font-medium">
+                Synchroniser Classroom
+              </Link>
             )}
           </div>
-        </div>
-
-        {/* Sessions récentes (professeur uniquement) */}
-        {isTeacher && recentSessions.length > 0 && (
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Sessions récentes</h2>
-              <Link href="/dashboard/sessions" className="text-primary-600 hover:underline text-sm">
-                Voir toutes les sessions →
-              </Link>
-            </div>
-            <div className="bg-white rounded-xl shadow overflow-hidden">
-              <table className="w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Session</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Classe</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-600">Réponses</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold text-gray-600">Statut</th>
-                    <th className="px-4 py-3 text-right text-sm font-semibold text-gray-600">Date</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {recentSessions.map((session: any) => (
-                    <tr key={session.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3">
-                        <Link href={`/dashboard/sessions/${session.code}`} className="font-medium text-primary-600 hover:underline">
-                          {session.title}
-                        </Link>
-                        <div className="text-xs text-gray-400 font-mono">{session.code}</div>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-gray-600">
-                        {session.classes?.name || '-'}
-                      </td>
-                      <td className="px-4 py-3 text-center">
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
-                          {session.session_results?.[0]?.count || 0} élève(s)
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-center">
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                          session.status === 'active'
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 text-gray-600'
-                        }`}>
-                          {session.status === 'active' ? 'Active' : 'Terminée'}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-right text-sm text-gray-500">
-                        {new Date(session.created_at).toLocaleDateString('fr-FR')}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* Liste des classes */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4">
-            {isTeacher ? 'Mes classes' : 'Mes classes'}
-          </h2>
 
           {classes.length === 0 ? (
-            <div className="card text-center py-12">
-              <div className="text-6xl mb-4">📚</div>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-white rounded-xl border-2 border-dashed border-gray-200 p-8 text-center">
+              <p className="text-gray-500 mb-4">
                 {isTeacher
-                  ? 'Vous n\'avez pas encore créé de classe'
-                  : 'Vous n\'avez pas encore rejoint de classe'}
+                  ? 'Importez vos classes depuis Google Classroom ou créez-en une manuellement.'
+                  : 'Rejoignez une classe avec un code pour commencer.'}
               </p>
-              <Link
-                href={isTeacher ? '/dashboard/classes/new' : '/dashboard/join'}
-                className="btn-primary inline-block"
-              >
-                {isTeacher ? 'Créer ma première classe' : 'Rejoindre une classe'}
-              </Link>
+              <div className="flex gap-3 justify-center">
+                {isTeacher && (
+                  <Link href="/dashboard/classroom" className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors text-sm">
+                    Importer depuis Classroom
+                  </Link>
+                )}
+                <Link
+                  href={isTeacher ? '/dashboard/classes/new' : '/dashboard/join'}
+                  className={`px-5 py-2.5 rounded-lg font-medium transition-colors text-sm ${isTeacher ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}
+                >
+                  {isTeacher ? 'Créer manuellement' : 'Rejoindre avec un code'}
+                </Link>
+              </div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {classes.map((classe: any) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {classes.map((classe: any, idx: number) => (
                 <Link
                   key={classe.id}
                   href={`/dashboard/classes/${classe.id}`}
-                  className="card hover:shadow-xl transition-all"
+                  className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden group"
                 >
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold">{classe.name}</h3>
-                    {isTeacher && (
-                      <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
-                        {classe.class_students?.[0]?.count || 0} élèves
-                      </span>
-                    )}
-                  </div>
-                  {classe.description && (
-                    <p className="text-gray-600 text-sm mb-4">
-                      {classe.description}
-                    </p>
-                  )}
-                  {isTeacher && (
-                    <div className="text-xs text-gray-500">
-                      Code: <span className="font-mono font-bold">{classe.join_code}</span>
+                  {/* Barre de couleur en haut */}
+                  <div className={`h-1.5 ${classColors[idx % classColors.length]}`} />
+                  <div className="p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">{classe.name}</h3>
+                      {classe.google_classroom_id && (
+                        <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Classroom</span>
+                      )}
                     </div>
-                  )}
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-sm text-gray-500">
+                        {classe.class_students?.[0]?.count || 0} élève{(classe.class_students?.[0]?.count || 0) !== 1 ? 's' : ''}
+                      </span>
+                      {isTeacher && classe.join_code && (
+                        <span className="font-mono text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{classe.join_code}</span>
+                      )}
+                    </div>
+                  </div>
                 </Link>
               ))}
             </div>
           )}
         </div>
+
+        {/* Sessions récentes (professeur) */}
+        {isTeacher && recentSessions.length > 0 && (
+          <div className="mb-8">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900">Sessions récentes</h2>
+              <Link href="/dashboard/sessions" className="text-sm text-indigo-600 hover:text-indigo-700 font-medium">
+                Tout voir
+              </Link>
+            </div>
+            <div className="space-y-2">
+              {recentSessions.map((session: any) => (
+                <Link
+                  key={session.id}
+                  href={`/dashboard/sessions/${session.id}`}
+                  className="flex items-center justify-between bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-2.5 h-2.5 rounded-full ${session.status === 'active' ? 'bg-green-500' : 'bg-gray-300'}`} />
+                    <div>
+                      <div className="font-medium text-gray-900">{session.title}</div>
+                      <div className="text-xs text-gray-500">
+                        {session.classes?.name} &middot; {session.nb_questions} questions &middot; Code : <span className="font-mono">{session.code}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                      {session.session_results?.[0]?.count || 0} réponse{(session.session_results?.[0]?.count || 0) !== 1 ? 's' : ''}
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      {new Date(session.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   )

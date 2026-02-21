@@ -91,13 +91,13 @@ export default function SessionsPage() {
             <div className="text-6xl mb-4">📋</div>
             <h2 className="text-xl font-bold mb-2">Aucune session</h2>
             <p className="text-gray-600 mb-6">
-              Creez votre premiere session pour commencer a evaluer vos eleves.
+              Créez votre première session pour commencer à évaluer vos élèves.
             </p>
             <Link
               href="/dashboard/sessions/new"
               className="inline-block bg-primary-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-primary-700 transition-all"
             >
-              Creer une session
+              Créer une session
             </Link>
           </div>
         ) : (

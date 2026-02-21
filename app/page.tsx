@@ -47,11 +47,11 @@ export default async function Home() {
       <section className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
           Calcul mental pour
-          <span className="text-primary-600"> collegiens</span>
+          <span className="text-primary-600"> collégiens</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
-          Plateforme d&apos;exercices interactifs avec suivi personnalise.
-          Connexion avec Google Classroom pour professeurs et eleves.
+          Plateforme d&apos;exercices interactifs avec suivi personnalisé.
+          Connexion avec Google Classroom pour professeurs et élèves.
         </p>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
@@ -73,7 +73,7 @@ export default async function Home() {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-20">
         <h2 className="text-4xl font-bold text-center mb-16">
-          Fonctionnalites
+          Fonctionnalités
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -82,23 +82,23 @@ export default async function Home() {
             <div className="text-4xl mb-4">👨‍🏫</div>
             <h3 className="text-2xl font-bold mb-3">Pour les professeurs</h3>
             <ul className="space-y-2 text-gray-600">
-              <li>✓ Creez des sessions personnalisees</li>
-              <li>✓ Suivez les progres de vos eleves</li>
-              <li>✓ Integration Google Classroom</li>
-              <li>✓ Statistiques detaillees</li>
-              <li>✓ Export des resultats</li>
+              <li>✓ Créez des sessions personnalisées</li>
+              <li>✓ Suivez les progrès de vos élèves</li>
+              <li>✓ Intégration Google Classroom</li>
+              <li>✓ Statistiques détaillées</li>
+              <li>✓ Export des résultats</li>
             </ul>
           </div>
 
           {/* Pour les élèves */}
           <div className="card">
             <div className="text-4xl mb-4">🎓</div>
-            <h3 className="text-2xl font-bold mb-3">Pour les eleves</h3>
+            <h3 className="text-2xl font-bold mb-3">Pour les élèves</h3>
             <ul className="space-y-2 text-gray-600">
-              <li>✓ Exercices adaptes au niveau</li>
+              <li>✓ Exercices adaptés au niveau</li>
               <li>✓ Historique personnel</li>
               <li>✓ Connexion Google simple</li>
-              <li>✓ Progression visualisee</li>
+              <li>✓ Progression visualisée</li>
               <li>✓ Interface intuitive</li>
             </ul>
           </div>
@@ -106,11 +106,11 @@ export default async function Home() {
           {/* Contenu pédagogique */}
           <div className="card">
             <div className="text-4xl mb-4">📚</div>
-            <h3 className="text-2xl font-bold mb-3">Contenu adapte</h3>
+            <h3 className="text-2xl font-bold mb-3">Contenu adapté</h3>
             <ul className="space-y-2 text-gray-600">
-              <li>✓ Programme de la 6eme a la 3eme</li>
+              <li>✓ Programme de la 6ème à la 3ème</li>
               <li>✓ Calcul mental et automatismes</li>
-              <li>✓ Exercices varies</li>
+              <li>✓ Exercices variés</li>
               <li>✓ Diaporamas interactifs</li>
               <li>✓ Open source et gratuit</li>
             </ul>
@@ -131,7 +131,7 @@ export default async function Home() {
                 {niveau}
               </div>
               <p className="text-gray-600">
-                Exercices adaptes au programme
+                Exercices adaptés au programme
               </p>
             </div>
           ))}
@@ -142,7 +142,7 @@ export default async function Home() {
       <footer className="bg-gray-900 text-white py-8 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p className="mb-2">
-            Base sur{' '}
+            Basé sur{' '}
             <a
               href="https://mathsmentales.net"
               target="_blank"
@@ -153,7 +153,7 @@ export default async function Home() {
             </a>
           </p>
           <p className="text-gray-400 text-sm">
-            Plateforme open-source pour l&apos;enseignement des mathematiques
+            Plateforme open-source pour l&apos;enseignement des mathématiques
           </p>
         </div>
       </footer>

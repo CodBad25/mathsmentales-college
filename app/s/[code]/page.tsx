@@ -153,12 +153,12 @@ export default function SessionPage() {
             onClick={handlePlayAsGuest}
             className="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl px-6 py-4 font-medium hover:bg-gray-50 hover:border-gray-300 transition-all"
           >
-            Jouer sans compte (resultats non sauvegardes)
+            Jouer sans compte (résultats non sauvegardés)
           </button>
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-500">
-          Connecte-toi avec ton compte Google pour que ton professeur puisse voir tes resultats.
+          Connecte-toi avec ton compte Google pour que ton professeur puisse voir tes résultats.
         </p>
       </div>
     </div>

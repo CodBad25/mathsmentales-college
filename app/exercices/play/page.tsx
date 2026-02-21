@@ -3,11 +3,13 @@
 import { useState, useEffect, useCallback, Suspense, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import katex from 'katex'
+import 'katex/dist/katex.min.css'
 import type { ExerciceJSON } from '@/lib/exercises'
 import { generateQuestion, type Question } from '@/lib/exercises'
 
 interface GameState {
-  status: 'loading' | 'config' | 'ready_to_start' | 'playing' | 'finished'
+  status: 'loading' | 'config' | 'ready_to_start' | 'countdown' | 'playing' | 'finished'
   exercice: ExerciceJSON | null
   questions: Question[]
   currentIndex: number
@@ -21,12 +23,40 @@ interface GameState {
   questionStartTime: number
 }
 
+/** Render a string that may contain LaTeX (between $$ or inline) */
+function MathDisplay({ text, className = '' }: { text: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    if (!ref.current || !text) return
+    // Check if text contains LaTeX markers
+    const hasLatex = text.includes('$$') || text.includes('\\') || text.includes('{')
+    if (hasLatex) {
+      try {
+        // Remove $$ wrappers if present
+        const cleaned = text.replace(/^\$\$|\$\$$/g, '').trim()
+        katex.render(cleaned, ref.current, {
+          throwOnError: false,
+          displayMode: true,
+          trust: true,
+        })
+        return
+      } catch {
+        // fallback to text
+      }
+    }
+    ref.current.textContent = text
+  }, [text])
+
+  return <span ref={ref} className={className} />
+}
+
 function LoadingSpinner() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
       <div className="text-center">
-        <div className="w-16 h-16 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-gray-600">Chargement...</p>
+        <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-white/80 text-lg">Chargement...</p>
       </div>
     </div>
   )
@@ -39,7 +69,18 @@ function PlayContent() {
   const sessionCode = searchParams.get('session')
   const nbQuestionsParam = searchParams.get('n')
   const autostart = searchParams.get('autostart') === 'true'
-  const optionsParam = searchParams.get('options') // Liste des options sélectionnées: "0,1,2"
+  const optionsParam = searchParams.get('options')
+  const optsParam = searchParams.get('opts')
+  const durationParam = searchParams.get('d')
+
+  const parsedSubOptions: Record<string, number[]> | null = (() => {
+    if (optsParam) {
+      try { return JSON.parse(optsParam) } catch { return null }
+    }
+    return null
+  })()
+
+  const displayDuration = durationParam ? parseInt(durationParam) : 8
 
   const [state, setState] = useState<GameState>({
     status: 'loading',
@@ -54,7 +95,8 @@ function PlayContent() {
   const [nbQuestions, setNbQuestions] = useState(nbQuestionsParam ? parseInt(nbQuestionsParam) : 10)
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [selectedOptions, setSelectedOptions] = useState<number[]>(
-    optionsParam ? optionsParam.split(',').map(n => parseInt(n)).filter(n => !isNaN(n)) : []
+    optionsParam ? optionsParam.split(',').map(n => parseInt(n)).filter(n => !isNaN(n)) :
+    parsedSubOptions ? Object.keys(parsedSubOptions).map(Number) : []
   )
   const [userAnswer, setUserAnswer] = useState('')
   const [showFeedback, setShowFeedback] = useState(false)
@@ -62,21 +104,53 @@ function PlayContent() {
   const [error, setError] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [countdown, setCountdown] = useState(3)
+  const [timerProgress, setTimerProgress] = useState(100)
 
-  // Ref pour focus automatique sur l'input
   const inputRef = useRef<HTMLInputElement>(null)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Focus automatique sur l'input quand le jeu démarre ou après chaque question
+  // Focus input during play
   useEffect(() => {
     if (state.status === 'playing' && !showFeedback) {
-      // Petit délai pour s'assurer que le DOM est prêt
-      setTimeout(() => {
-        inputRef.current?.focus()
-      }, 50)
+      setTimeout(() => inputRef.current?.focus(), 50)
     }
   }, [state.status, state.currentIndex, showFeedback])
 
-  // Sauvegarder les resultats
+  // Timer visuel pour chaque question
+  useEffect(() => {
+    if (state.status === 'playing' && !showFeedback) {
+      setTimerProgress(100)
+      const startTime = Date.now()
+      const duration = displayDuration * 1000
+
+      timerRef.current = setInterval(() => {
+        const elapsed = Date.now() - startTime
+        const remaining = Math.max(0, 100 - (elapsed / duration) * 100)
+        setTimerProgress(remaining)
+        if (remaining <= 0) {
+          if (timerRef.current) clearInterval(timerRef.current)
+        }
+      }, 50)
+
+      return () => {
+        if (timerRef.current) clearInterval(timerRef.current)
+      }
+    }
+  }, [state.status, state.currentIndex, showFeedback, displayDuration])
+
+  // Countdown animation
+  useEffect(() => {
+    if (state.status !== 'countdown') return
+    if (countdown <= 0) {
+      setState(prev => ({ ...prev, status: 'playing', questionStartTime: Date.now() }))
+      return
+    }
+    const timer = setTimeout(() => setCountdown(c => c - 1), 700)
+    return () => clearTimeout(timer)
+  }, [state.status, countdown])
+
+  // Save results
   const saveResults = useCallback(async () => {
     if (!state.exercice || state.answers.length === 0) return
 
@@ -85,7 +159,6 @@ function PlayContent() {
       const scoreValue = state.answers.filter(a => a.isCorrect).length
       const totalTimeSpent = state.answers.reduce((sum, a) => sum + a.timeSpent, 0)
 
-      // Sauvegarder dans l'historique general
       const response = await fetch('/api/results', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -106,7 +179,6 @@ function PlayContent() {
         }),
       })
 
-      // Si c'est une session, sauvegarder aussi dans session_results
       if (sessionCode) {
         await fetch('/api/sessions/results', {
           method: 'POST',
@@ -127,9 +199,7 @@ function PlayContent() {
         })
       }
 
-      if (response.ok) {
-        setSaved(true)
-      }
+      if (response.ok) setSaved(true)
     } catch (err) {
       console.error('Erreur sauvegarde:', err)
     } finally {
@@ -137,28 +207,21 @@ function PlayContent() {
     }
   }, [state.exercice, state.answers, state.questions.length, niveau, sessionCode])
 
-  // Sauvegarder quand le jeu est termine
   useEffect(() => {
-    if (state.status === 'finished' && !saved && !saving) {
-      saveResults()
-    }
+    if (state.status === 'finished' && !saved && !saving) saveResults()
   }, [state.status, saved, saving, saveResults])
 
-  // Charger l'exercice
+  // Load exercise
   useEffect(() => {
     async function loadExercice() {
       if (!file) {
-        setError('Aucun exercice specifie')
+        setError('Aucun exercice spécifié')
         return
       }
-
       try {
         const response = await fetch(`/library/${file}`)
-        if (!response.ok) {
-          throw new Error('Impossible de charger l\'exercice')
-        }
+        if (!response.ok) throw new Error('Impossible de charger l\'exercice')
         const data: ExerciceJSON = await response.json()
-        // Si autostart ou sessionCode, aller directement au jeu
         const shouldAutoStart = autostart || !!sessionCode
         setState(prev => ({
           ...prev,
@@ -169,30 +232,24 @@ function PlayContent() {
         setError(err instanceof Error ? err.message : 'Erreur inconnue')
       }
     }
-
     loadExercice()
   }, [file, sessionCode, autostart])
 
-  // Auto-demarrer si autostart ou session
+  // Auto-start
   useEffect(() => {
-    if (state.status === 'ready_to_start' && state.exercice) {
-      startGame()
-    }
+    if (state.status === 'ready_to_start' && state.exercice) startGame()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.status, state.exercice])
 
-  // Demarrer le jeu
   const startGame = useCallback(() => {
     if (!state.exercice) return
 
     const questions: Question[] = []
-    // Si des options sont passées via URL, les utiliser pour la génération
     const optionsToUse = selectedOptions.length > 0 ? selectedOptions :
       (selectedOption !== null ? [selectedOption] : undefined)
 
     for (let i = 0; i < nbQuestions; i++) {
       try {
-        // Choisir une option aléatoire parmi celles sélectionnées
         let optionIndex: number | undefined
         if (optionsToUse && optionsToUse.length > 0) {
           optionIndex = optionsToUse[Math.floor(Math.random() * optionsToUse.length)]
@@ -200,18 +257,19 @@ function PlayContent() {
         const q = generateQuestion(state.exercice, optionIndex)
         questions.push(q)
       } catch (err) {
-        console.error('Erreur generation question:', err)
+        console.error('Erreur génération question:', err)
       }
     }
 
     if (questions.length === 0) {
-      setError('Impossible de generer les questions')
+      setError('Impossible de générer les questions')
       return
     }
 
+    setCountdown(3)
     setState(prev => ({
       ...prev,
-      status: 'playing',
+      status: 'countdown',
       questions,
       currentIndex: 0,
       answers: [],
@@ -220,17 +278,15 @@ function PlayContent() {
     }))
   }, [state.exercice, nbQuestions, selectedOption, selectedOptions])
 
-  // Verifier la reponse
   const checkAnswer = useCallback(() => {
     if (state.status !== 'playing') return
+    if (timerRef.current) clearInterval(timerRef.current)
 
     const currentQuestion = state.questions[state.currentIndex]
     const timeSpent = (Date.now() - state.questionStartTime) / 1000
 
-    // Normaliser les reponses pour comparaison
     const normalizedUser = userAnswer.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.')
     const normalizedCorrect = currentQuestion.value.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.')
-
     const correct = normalizedUser === normalizedCorrect
 
     setIsCorrect(correct)
@@ -238,53 +294,36 @@ function PlayContent() {
 
     setState(prev => ({
       ...prev,
-      answers: [
-        ...prev.answers,
-        {
-          question: currentQuestion,
-          userAnswer,
-          isCorrect: correct,
-          timeSpent,
-        },
-      ],
+      answers: [...prev.answers, { question: currentQuestion, userAnswer, isCorrect: correct, timeSpent }],
     }))
 
-    // Passer a la question suivante apres un delai
     setTimeout(() => {
       setShowFeedback(false)
       setUserAnswer('')
-
       setState(prev => {
         if (prev.currentIndex + 1 >= prev.questions.length) {
           return { ...prev, status: 'finished' }
         }
-        return {
-          ...prev,
-          currentIndex: prev.currentIndex + 1,
-          questionStartTime: Date.now(),
-        }
+        return { ...prev, currentIndex: prev.currentIndex + 1, questionStartTime: Date.now() }
       })
     }, 1500)
   }, [state, userAnswer])
 
-  // Gerer la touche Entree
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !showFeedback && userAnswer.trim()) {
-      checkAnswer()
-    }
+    if (e.key === 'Enter' && !showFeedback && userAnswer.trim()) checkAnswer()
   }
 
-  // Calculer le score
   const score = state.answers.filter(a => a.isCorrect).length
   const totalTime = state.answers.reduce((sum, a) => sum + a.timeSpent, 0)
 
-  // Affichage erreur
+  // === ERROR ===
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
-          <Link href="/exercices" className="text-primary-600 hover:underline">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
+        <div className="text-center text-white">
+          <div className="text-6xl mb-4">&#x26A0;</div>
+          <p className="text-xl mb-6">{error}</p>
+          <Link href="/exercices" className="bg-white/20 hover:bg-white/30 px-6 py-3 rounded-xl font-bold transition-all">
             Retour aux exercices
           </Link>
         </div>
@@ -292,181 +331,184 @@ function PlayContent() {
     )
   }
 
-  // Affichage chargement
+  // === LOADING ===
   if (state.status === 'loading' || state.status === 'ready_to_start') {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement...</p>
-        </div>
-      </div>
-    )
+    return <LoadingSpinner />
   }
 
-  // Affichage configuration
+  // === CONFIG ===
   if (state.status === 'config' && state.exercice) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white shadow-sm">
-          <div className="container mx-auto px-4 py-4">
-            <Link href="/exercices" className="text-primary-600 hover:underline">
-              &larr; Retour aux exercices
-            </Link>
-          </div>
-        </header>
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full">
+          <h1 className="text-2xl font-bold mb-2 text-gray-900">{state.exercice.title}</h1>
+          <p className="text-gray-500 mb-6">Configurez votre session</p>
 
-        <main className="container mx-auto px-4 py-8 max-w-2xl">
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h1 className="text-2xl font-bold mb-2">{state.exercice.title}</h1>
-            <p className="text-gray-600 mb-6">Configurez votre session d&apos;entrainement</p>
+          <div className="space-y-6">
+            {/* Nombre de questions */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Nombre de questions</label>
+              <div className="flex gap-2">
+                {[5, 10, 15, 20].map(n => (
+                  <button
+                    key={n}
+                    onClick={() => setNbQuestions(n)}
+                    className={`flex-1 py-3 rounded-xl font-bold text-lg transition-all ${
+                      nbQuestions === n
+                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-            <div className="space-y-6">
-              {/* Nombre de questions */}
+            {/* Options */}
+            {state.exercice.options.length > 1 && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Nombre de questions
-                </label>
-                <div className="flex gap-2">
-                  {[5, 10, 15, 20].map(n => (
+                <label className="block text-sm font-medium text-gray-700 mb-2">Type de question</label>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => setSelectedOption(null)}
+                    className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                      selectedOption === null
+                        ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <span className="font-medium">Mélange</span>
+                    <span className="text-gray-500 text-sm ml-2">(tous les types)</span>
+                  </button>
+                  {state.exercice.options.map((opt, idx) => (
                     <button
-                      key={n}
-                      onClick={() => setNbQuestions(n)}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                        nbQuestions === n
-                          ? 'bg-primary-600 text-white'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      key={idx}
+                      onClick={() => setSelectedOption(idx)}
+                      className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                        selectedOption === idx
+                          ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
+                          : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
-                      {n}
+                      {opt.name}
                     </button>
                   ))}
                 </div>
               </div>
+            )}
 
-              {/* Type de question */}
-              {state.exercice.options.length > 1 && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Type de question
-                  </label>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => setSelectedOption(null)}
-                      className={`w-full text-left px-4 py-3 rounded-lg border transition-all ${
-                        selectedOption === null
-                          ? 'border-primary-600 bg-primary-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <span className="font-medium">Melange</span>
-                      <span className="text-gray-500 text-sm ml-2">(tous les types)</span>
-                    </button>
-                    {state.exercice.options.map((opt, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedOption(idx)}
-                        className={`w-full text-left px-4 py-3 rounded-lg border transition-all ${
-                          selectedOption === idx
-                            ? 'border-primary-600 bg-primary-50'
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                      >
-                        {opt.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <button
-                onClick={startGame}
-                className="w-full bg-primary-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-primary-700 transition-all"
-              >
-                Commencer
-              </button>
-            </div>
+            <button
+              onClick={startGame}
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl font-bold text-xl hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-600/30"
+            >
+              C&apos;est parti !
+            </button>
           </div>
-        </main>
+        </div>
       </div>
     )
   }
 
-  // Affichage jeu en cours
+  // === COUNTDOWN ===
+  if (state.status === 'countdown') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-white/60 text-xl mb-4">{state.exercice?.title}</div>
+          <div
+            className="text-9xl font-black text-white animate-bounce"
+            style={{ animationDuration: '0.5s' }}
+          >
+            {countdown > 0 ? countdown : ''}
+          </div>
+          {countdown === 0 && (
+            <div className="text-4xl font-bold text-green-400 animate-pulse">GO !</div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  // === PLAYING ===
   if (state.status === 'playing') {
     const currentQuestion = state.questions[state.currentIndex]
+    const timerColor = timerProgress > 50 ? 'bg-green-400' : timerProgress > 20 ? 'bg-yellow-400' : 'bg-red-400'
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex flex-col">
-        {/* Barre de progression */}
-        <div className="bg-white shadow-sm">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-600">
-                Question {state.currentIndex + 1} / {state.questions.length}
-              </span>
-              <span className="text-sm font-medium text-primary-600">
-                Score: {score} / {state.answers.length}
-              </span>
-            </div>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary-600 transition-all"
-                style={{ width: `${((state.currentIndex + 1) / state.questions.length) * 100}%` }}
-              />
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex flex-col">
+        {/* Header compact */}
+        <div className="px-4 pt-4 pb-2">
+          <div className="flex justify-between items-center text-white/70 text-sm mb-2">
+            <span>Question {state.currentIndex + 1} / {state.questions.length}</span>
+            <span className="font-mono text-lg text-white">
+              {score} <span className="text-white/50">/ {state.answers.length}</span>
+            </span>
+          </div>
+          {/* Timer bar */}
+          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div
+              className={`h-full ${timerColor} transition-all duration-100 ease-linear rounded-full`}
+              style={{ width: `${timerProgress}%` }}
+            />
           </div>
         </div>
 
-        {/* Zone de question */}
-        <main className="flex-1 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full text-center">
-            {/* Question */}
-            <div className="text-3xl md:text-4xl font-bold mb-8 min-h-[100px] flex items-center justify-center">
-              <span>{currentQuestion.question}</span>
-            </div>
-
-            {/* Input reponse */}
-            <div className="relative">
-              <input
-                ref={inputRef}
-                type="text"
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                onKeyDown={handleKeyDown}
-                disabled={showFeedback}
-                autoFocus
-                autoComplete="off"
-                placeholder="Votre reponse..."
-                className={`w-full text-center text-2xl py-4 px-6 rounded-xl border-2 transition-all outline-none ${
-                  showFeedback
-                    ? isCorrect
-                      ? 'border-green-500 bg-green-50'
-                      : 'border-red-500 bg-red-50'
-                    : 'border-gray-200 focus:border-primary-500'
-                }`}
+        {/* Question zone */}
+        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-8">
+          {/* Question display */}
+          <div className={`mb-8 transition-all duration-300 ${showFeedback ? 'scale-95 opacity-50' : 'scale-100'}`}>
+            <div className="text-white text-center">
+              <MathDisplay
+                text={currentQuestion.questionLatex || currentQuestion.question}
+                className="text-4xl md:text-6xl font-bold"
               />
-
-              {/* Feedback */}
-              {showFeedback && (
-                <div className={`mt-4 text-lg font-semibold ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                  {isCorrect ? (
-                    <span>Correct !</span>
-                  ) : (
-                    <span>
-                      Incorrect. La reponse etait : <strong>{currentQuestion.value}</strong>
-                    </span>
-                  )}
-                </div>
-              )}
             </div>
+          </div>
 
-            {/* Bouton valider */}
+          {/* Input zone */}
+          <div className="w-full max-w-md">
+            <input
+              ref={inputRef}
+              type="text"
+              inputMode="decimal"
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              onKeyDown={handleKeyDown}
+              disabled={showFeedback}
+              autoFocus
+              autoComplete="off"
+              placeholder="?"
+              className={`w-full text-center text-4xl py-5 px-6 rounded-2xl border-4 outline-none transition-all font-bold ${
+                showFeedback
+                  ? isCorrect
+                    ? 'border-green-400 bg-green-500/20 text-green-300'
+                    : 'border-red-400 bg-red-500/20 text-red-300'
+                  : 'border-white/30 bg-white/10 text-white placeholder-white/30 focus:border-white/60 focus:bg-white/15'
+              }`}
+            />
+
+            {/* Feedback */}
+            {showFeedback && (
+              <div className={`mt-4 text-center text-xl font-bold animate-in fade-in ${
+                isCorrect ? 'text-green-400' : 'text-red-400'
+              }`}>
+                {isCorrect ? (
+                  <span>Correct !</span>
+                ) : (
+                  <span>
+                    Réponse : <MathDisplay text={currentQuestion.answerLatex || currentQuestion.value} className="inline" />
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Validate button */}
             {!showFeedback && (
               <button
                 onClick={checkAnswer}
                 disabled={!userAnswer.trim()}
-                className="mt-6 bg-primary-600 text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-4 w-full bg-white/20 hover:bg-white/30 text-white py-4 rounded-2xl font-bold text-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur"
               >
                 Valider
               </button>
@@ -477,104 +519,103 @@ function PlayContent() {
     )
   }
 
-  // Affichage resultats
+  // === FINISHED ===
   if (state.status === 'finished') {
     const percentage = Math.round((score / state.questions.length) * 100)
+    const avgTime = totalTime / state.questions.length
+    const scoreColor = percentage >= 80 ? 'text-green-400' : percentage >= 50 ? 'text-yellow-400' : 'text-red-400'
+    const scoreBg = percentage >= 80 ? 'from-green-500/20' : percentage >= 50 ? 'from-yellow-500/20' : 'from-red-500/20'
 
     return (
-      <div className="min-h-screen bg-gray-50">
-        <main className="container mx-auto px-4 py-8 max-w-2xl">
-          <div className="bg-white rounded-xl shadow-lg p-8 text-center">
-            <h1 className="text-3xl font-bold mb-2">Session terminee !</h1>
-            <p className="text-gray-600 mb-2">{state.exercice?.title}</p>
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 p-4">
+        <div className="max-w-2xl mx-auto pt-8">
+          {/* Score principal */}
+          <div className={`bg-gradient-to-b ${scoreBg} to-transparent rounded-3xl p-8 text-center mb-6`}>
+            <p className="text-white/60 text-lg mb-2">{state.exercice?.title}</p>
 
-            {/* Indicateur de sauvegarde */}
-            {saving && (
-              <p className="text-sm text-gray-500 mb-6">Sauvegarde en cours...</p>
-            )}
-            {saved && (
-              <p className="text-sm text-green-600 mb-6">Resultat sauvegarde !</p>
-            )}
-
-            {/* Score principal */}
-            <div className={`text-6xl font-bold mb-4 ${
-              percentage >= 80 ? 'text-green-600' :
-              percentage >= 50 ? 'text-yellow-600' : 'text-red-600'
-            }`}>
-              {score} / {state.questions.length}
+            <div className={`text-8xl font-black ${scoreColor} mb-2`}>
+              {percentage}%
             </div>
-            <div className="text-2xl text-gray-600 mb-8">
-              {percentage}% de reussite
+            <div className="text-white/80 text-2xl font-medium">
+              {score} / {state.questions.length} correct{score > 1 ? 's' : ''}
             </div>
 
-            {/* Statistiques */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="text-sm text-gray-600">Temps total</div>
-                <div className="text-xl font-bold">{Math.round(totalTime)}s</div>
+            {/* Save status */}
+            {saving && <p className="text-white/50 text-sm mt-4">Sauvegarde en cours...</p>}
+            {saved && <p className="text-green-400/80 text-sm mt-4">Résultat sauvegardé</p>}
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+              <div className="text-white/50 text-xs uppercase tracking-wide">Temps total</div>
+              <div className="text-white text-2xl font-bold mt-1">{Math.round(totalTime)}s</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+              <div className="text-white/50 text-xs uppercase tracking-wide">Temps moyen</div>
+              <div className="text-white text-2xl font-bold mt-1">{avgTime.toFixed(1)}s</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+              <div className="text-white/50 text-xs uppercase tracking-wide">Meilleur</div>
+              <div className="text-white text-2xl font-bold mt-1">
+                {state.answers.length > 0 ? Math.min(...state.answers.map(a => a.timeSpent)).toFixed(1) : 0}s
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="text-sm text-gray-600">Temps moyen</div>
-                <div className="text-xl font-bold">{Math.round(totalTime / state.questions.length)}s</div>
-              </div>
-            </div>
-
-            {/* Detail des reponses */}
-            <div className="text-left mb-8">
-              <h2 className="font-bold text-lg mb-4">Detail des reponses</h2>
-              <div className="space-y-2 max-h-64 overflow-y-auto">
-                {state.answers.map((answer, idx) => (
-                  <div
-                    key={idx}
-                    className={`p-3 rounded-lg flex justify-between items-center ${
-                      answer.isCorrect ? 'bg-green-50' : 'bg-red-50'
-                    }`}
-                  >
-                    <div>
-                      <span className="text-sm text-gray-600">Q{idx + 1}: </span>
-                      <span dangerouslySetInnerHTML={{ __html: answer.question.question.substring(0, 50) }} />
-                    </div>
-                    <div className="text-right">
-                      <span className={`font-medium ${answer.isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                        {answer.userAnswer}
-                      </span>
-                      {!answer.isCorrect && (
-                        <span className="text-gray-500 text-sm ml-2">
-                          ({answer.question.value})
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex gap-4">
-              <button
-                onClick={() => {
-                  setSaved(false)
-                  setState(prev => ({
-                    ...prev,
-                    status: 'config',
-                    questions: [],
-                    currentIndex: 0,
-                    answers: [],
-                  }))
-                }}
-                className="flex-1 bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition-all"
-              >
-                Recommencer
-              </button>
-              <Link
-                href="/exercices"
-                className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-300 transition-all text-center"
-              >
-                Autres exercices
-              </Link>
             </div>
           </div>
-        </main>
+
+          {/* Détail des réponses */}
+          <div className="bg-white/10 backdrop-blur rounded-xl p-4 mb-6">
+            <h2 className="text-white font-bold text-lg mb-3">Détail des réponses</h2>
+            <div className="space-y-2 max-h-72 overflow-y-auto">
+              {state.answers.map((answer, idx) => (
+                <div
+                  key={idx}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+                    answer.isCorrect ? 'bg-green-500/15' : 'bg-red-500/15'
+                  }`}
+                >
+                  <span className={`text-lg ${answer.isCorrect ? 'text-green-400' : 'text-red-400'}`}>
+                    {answer.isCorrect ? '\u2713' : '\u2717'}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <MathDisplay
+                      text={answer.question.questionLatex || answer.question.question}
+                      className="text-white/80 text-sm"
+                    />
+                  </div>
+                  <div className="text-right shrink-0">
+                    <span className={`font-mono text-sm ${answer.isCorrect ? 'text-green-400' : 'text-red-400'}`}>
+                      {answer.userAnswer || '—'}
+                    </span>
+                    {!answer.isCorrect && (
+                      <span className="text-white/40 text-xs ml-2">({answer.question.value})</span>
+                    )}
+                  </div>
+                  <span className="text-white/30 text-xs">{answer.timeSpent.toFixed(1)}s</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => {
+                setSaved(false)
+                startGame()
+              }}
+              className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 rounded-xl font-bold text-lg hover:from-indigo-600 hover:to-purple-600 transition-all shadow-lg"
+            >
+              Recommencer
+            </button>
+            <Link
+              href="/exercices"
+              className="flex-1 bg-white/10 hover:bg-white/20 text-white py-4 rounded-xl font-bold text-lg transition-all text-center"
+            >
+              Autres exercices
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }
