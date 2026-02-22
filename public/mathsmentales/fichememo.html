@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Fiche Mémorisation MathsMentales</title>
+        <style>
+            /*MMentales*/
+            @page{
+                size:A4 portrait;
+                margin:1cm;
+            }
+        </style>
+        <link rel="stylesheet" href="css/fichememo-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script type="module" src="js/lib.fichememo-2.3.176.js" id="mmscriptid"></script>
+    </head>  
+    <body size="A4">
+        <section id="creator-menu">
+                <button onclick="window.print();">Imprimer</button> pour imprimer ou faire un pdf (pas de marge).
+                <button id="btnPageOrientation" title="Change l'orientation de la page">Portrait</button>
+                <button id="btnModele" title="Change le type d'impression">Modèle 2</button>
+                <br>
+                Police : <span id="fontSize"></span>
+                Titre fiche <input type="text" id="title" size="15" title="Entrée pour valider" placeholder="Titre de la fiche">
+                <button id="btnValidateTitle"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg></button>
+                | Couleur de fond pour : 
+                <input type="color" id="inputColorQuestion" title="Couleur de fond des question">
+                <label for="inputColorQuestion">Questions</label>
+                <input type="color" id="inputColorReponse" title="Couleur de fond des réponses">
+                <label for="inputColorReponse">réponses</label>
+                <input type="color" id="inputColorNumero" title="Couleur de fond des numéros">
+                <label for="inputColorNumero">Numéros</label>
+                <br>
+                Intérieur des zones textes :
+                <input id="inputPadding" value="5" title="Taille cartes" type="number" size="4" min="1" max="20"> mm |
+                <input type="checkbox" id="inputprogrammerev"><label for="inputprogrammerev">Programme de révision</label>
+                <br>=== Modèle 1 ===<br>
+                <input type="checkbox" id="inputseparationh" checked> <label for="inputseparationh">Séparation horizontale</label> | 
+                Séparation verticale question / réponse :
+                <input id="inputSeparator" value="50" type="number" title="Placement de la séparation" size="4" min="20" max="80">% 
+                <input type="checkbox" id="inputseparationv" checked><label for="inputseparationv">Afficher</label>
+                | Numérotation :
+                <input type="radio" id="radioNo" name="num" value="no" checked><label for="radioNo">non</label>
+                <input type="radio" id="radioQ" name="num" value="Q"><label for="radioQ">oui</label>
+            </section>
+        <div id="creator-container">
+            <div id="creator-content"></div>
+        </div>
+    <script src="bridge.js"></script>
+</body>
+</html>

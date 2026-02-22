@@ -1,0 +1,37 @@
+{
+    "title":"Dérivée de fonctions quotient",
+    "repeat":true,
+    "type":"latex",
+    "ID":"GA12",
+    "description":"Trouver la dérivée des fonctions de la forme f(x)/g(x)",
+    "dest":["GA1"],
+    "textSize":"medium",
+    "keys":["x²","/","+","-","x","y","z","t"],
+    "consts":{"lettres":["x","y","z","t"]},
+    "options":[{
+        "name":"Inverse d'une puissance",
+        "vars":{"p":"1_9","cx":"0_3","x":"${:lettres[:cx]}"},
+        "question":"${:x}\\in\\R^*,\\left(\\dfrac{1}{${:x}^{${:p}}}\\right)'",
+        "answer":":question=\\color{red}{${MMmath.calc(-:p+'/'+:x+'^{'+(:p+1)+'}')}}",
+        "value":"${MMmath.calc(-:p+'/'+:x+'^{'+(:p+1)+'}')}"
+        },{
+        "name":"Inverse d'un monome",
+        "vars":{"a":"-9_9_^0","p":"1_9","cx":"0_3","x":"${:lettres[:cx]}"},
+        "question":"${:x}\\in\\R^*,\\left(\\dfrac{1}{${MMmath.calc(:a+'*'+:x+'^'+:p)}}\\right)'",
+        "answer":":question=\\color{red}{${MMmath.calc((-:p)+'/('+:a+'*'+:x+'^{'+(:p+1)+'})')}}",
+        "value":"${MMmath.calc((-:p)+'/('+:a+'*'+:x+'^{'+(:p+1)+'})')}"
+    },{
+        "name":"Inverse d'un polynome",
+        "vars":{"a":"-9_9_3_^&,0","cx":"0_3","x":"${:lettres[:cx]}"},
+        "question":"\\left(\\dfrac{${1}}{${MMmath.calc(:a[0]+'*'+:x+'^2+('+:a[1]+')*'+:x+'+('+:a[2]+')')}}\\right)'",
+        "answer":":question=\\color{red}{-\\dfrac{${MMmath.calc((2*:a[0])+'*'+:x+'+('+:a[1]+')')}}{\\left(${MMmath.calc(:a[0]+'*'+:x+'^2+('+:a[1]+')*'+:x+'+('+:a[2]+')')}\\right)^2}}",
+        "value":"-\\dfrac{${MMmath.calc((2*:a[0])+'*'+:x+'+('+:a[1]+')')}}{\\left(${MMmath.calc(:a[0]+'*'+:x+'^2+('+:a[1]+')*'+:x+'+('+:a[2]+')')}\\right)^2}"
+    },{
+        "name":"Quotient de polynomes",
+        "vars":{"a":"-2_2_2","b":"1_3_2_^&","cx":"0_3","x":"${:lettres[:cx]}","n":"${:x}${:b[0]>1?'^'+:b[0]:''}${MMmath.signedNumber(:a[0])}","d":"${:x}${:b[1]>1?'^'+:b[1]:''}${MMmath.signedNumber(:a[1])}"},
+        "question":"\\left(\\dfrac{${:n}}{${:d}}\\right)'",
+        "answer":":question=\\color{green}{\\dfrac{${MMmath.calc(:b[0]+'*'+:x+'^'+(:b[0]-1))+'\\times('+:d+')-('+:n+')\\times('+MMmath.calc(:b[1]+'*'+:x+'^'+(:b[1]-1))+')'}}{\\left(${:d}\\right)^2}}=\\color{red}{\\dfrac{${MMmath.calc(:b[0]+'*'+:x+'^'+(:b[0]-1)+'*('+:d+')-('+:n+')*('+:b[1]+'*'+:x+'^'+(:b[1]-1)+')')}}{\\left(${:d}\\right)^2}}",
+        "value":"\\dfrac{${MMmath.calc('(d('+:n+'))*('+:d+')-('+:n+')*(d('+:d+'))')}}{\\left(${:d}\\right)^2}"
+    }
+    ]
+}

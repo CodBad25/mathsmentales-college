@@ -1,0 +1,29 @@
+{
+    "title":"CE1 Faits numériques -> Déterminer la moitié d'un nombre pair",
+    "dest":["10ND"],
+    "type":"text",
+    "auteur":"Xavier Levet",
+    "options":[{
+        "name":"Moitié de nombres pairs de 2 à 30",
+         "vars": {
+                "a":[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+                "qte": "${:a}"
+                  }
+                },{
+        "name":"Moitié des dizaines entières de 40 à 100",
+         "vars": {
+                "a":[40,50,60,70,80,90,100],
+                "qte": "${:a}"
+                  }
+                },{
+        "name":"Moitié des centaines paires entières de 200 à 1000",
+         "vars": {
+                "a":[200,400,600,800,1000],
+                "qte": "${:a}"
+                  }
+                }
+              ],
+    "question": "Quelle est la moitié de ${:qte}",
+  "answer":"La moitié de ${:qte} est <span class='red'>${:qte/2}</span>",
+  "value":"${:qte/2}"
+}

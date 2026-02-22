@@ -1,0 +1,137 @@
+{
+    "title": "Résolution de problèmes du champ additif",
+    "type": "text",
+    "textSize": "small",
+    "ID": "11NC1",
+    "description": "Problèmes comportant une ou deux étapes.",
+    "dest": ["11NC"],
+    "speech": 1,
+    "options": [
+        {
+            "name": "Une addition",
+            "consts": {
+                "additions": [
+                    "Dans un train, il y a ${:x} passagers dans le premier wagon,<br>et ${:y} dans le deuxième.<br>Combien y a-t-il de passagers en tout ?",
+                    "Dans une école, il y a ${:x} élèves dans une classe de CP, et ${:y} dans la deuxième.<br>Combien y a-t-il d'élèves de CP au total ?",
+                    "Dans un magasin, il y a ${:x} clients. Il en rentre ${:y}.<br>Combien y a-t-il de clients à présent ?",
+                    "Dans un restaurant, il y a eu ${:x} clients au premier service et ${:y} au deuxième.<br>Combien y a-t-il eu de clients ?",
+                    "Lors d'une course, ${:x} coureurs ont passé la ligne d'arrivée.<br>Il en reste ${:y} en course.<br>Combien y a-t-il de participants ?",
+                    "Lors d'une fête, on a éclaté ${:x} ballons.<br>Il en reste ${:y}.<br>Combien a-t-on gonflé de ballons ?",
+                    "Tu as mangé ${:x} biscuits d'un paquet.<br>Il en reste ${:y}.<br>Combien y avait-il de biscuits dans le paquet ?",
+                    "Dans le porte monnaie il reste ${:x}€ après avoir acheté un jeu à ${:y}€.<br>Combien y avait-il d'argent dans le porte-monnaie ?",
+                    "Dans un arbre, on a cueilli ${:x} pommes. Il en reste ${:y}.<br>Combien y avait-il de pommes dans l'arbre ?"
+                ],
+                "additionReponses": [
+                    "Il y a <span class='red'>${:x+:y}</span> passagers.",
+                    "Il y a <span class='red'>${:x+:y}</span> élèves.",
+                    "Il y a <span class='red'>${:x+:y}</span> clients.",
+                    "Il y a <span class='red'>${:x+:y}</span> clients.",
+                    "Il y a <span class='red'>${:x+:y}</span> coureurs.",
+                    "On a gonflé <span class='red'>${:x+:y}</span> ballons.",
+                    "Il y avait <span class='red'>${:x+:y}</span> biscuits.",
+                    "Il y avait <span class='red'>${:x+:y}</span> €.",
+                    "Il y avait <span class='red'>${:x+:y}</span> pommes."
+                ]
+            },
+            "vars": { "situation": "0_8", "x": "2_30", "y": "2_30" },
+            "question": "${:additions[:situation]}",
+            "audio": "${:additions[:situation]}",
+            "answer": "${:additionReponses[:situation]}",
+            "value": "${:x+:y}"
+        }, {
+            "name": "Deux additions",
+            "consts": {
+                "additions":[
+                "Dans un train, il y a ${:x} passagers dans le premier wagon,<br>${:y} dans le deuxième et ${:z} dans le troisième.<br>Combien y a-t-il de passagers en tout ?",
+                "Dans une école, il y a ${:x} élèves dans une classe de CP,<br>${:y} dans la deuxième et ${:z} dans la troisième.<br>Combien y a-t-il d'élèves de CP au total ?",
+                "Dans un magasin, il y a ${:x} clients.<br>Il en rentre ${:y}, puis ${:z}.<br>Combien y a-t-il de clients à présent ?",
+                "Dans un restaurant, il y a eu ${:x} clients au premier service,<br>${:y} au deuxième et ${:z} au troisième.<br>Combien y a-t-il eu de clients ?",
+                "Lors d'une course, ${:x} coureurs ont passé la ligne d'arrivée.<br>Il en reste ${:y} en course et ${:z} ont abandonné.<br>Combien y avait-t-il d'inscrits ?",
+                "Lors d'une fête, on a éclaté ${:x} ballons.<br>Il en reste ${:y}, mais ${:z} se sont envolés.<br>Combien a-t-on gonflé de ballons ?",
+                "Tu as mangé ${:x} bonbons d'un paquet, tu en as donné ${:y}.<br>Il en reste encore ${:z}.<br>Combien y avait-il de bonbons dans le paquet ?",
+                "Dans le porte monnaie il reste ${:x}€ après avoir acheté un jeu à ${:y}€ et une BD à ${:z}€.<br>Combien y avait-il d'argent dans le porte-monnaie ?",
+                "Dans un arbre, on a cueilli ${:x} abricots.<br>Il en reste ${:y}, mais ${:z} sont tombées au sol.<br>Combien y avait-t-il d'abricots dans l'arbre ?"
+                ],
+                "additionReponses": [
+                "Il y a <span class='red'>${:x+:y+:z}</span> passagers.",
+                "Il y a <span class='red'>${:x+:y+:z}</span> élèves.",
+                "Il y a <span class='red'>${:x+:y+:z}</span> clients.",
+                "Il y a eu <span class='red'>${:x+:y+:z}</span> clients.",
+                "Il y avait <span class='red'>${:x+:y+:z}</span> inscrits.",
+                "On a gonflé <span class='red'>${:x+:y+:z}</span> ballons.",
+                "Il y avait <span class='red'>${:x+:y+:z}</span> bonbons.",
+                "Il y avait <span class='red'>${:x+:y+:z}</span> €.",
+                "Il y avait <span class='red'>${:x+:y+:z}</span> abricots."
+            ]},
+            "vars": { "situation": "0_8", "x": "2_30", "y": "2_30", "z": "2_30" },
+            "question": "${:additions[:situation]}",
+            "audio": "${:additions[:situation]}",
+            "answer": "${:additionReponses[:situation]}",
+            "value": "${:x+:y+:z}"
+        }, {
+            "name": "Une soustration",
+            "consts": {
+                "soustractions":[
+                    "Dans un train, il y a ${:x} passagers. ${:y} en descendent.<br>Combien y a-t-il de passagers à présent ?",
+                    "Dans une école, il y a ${:x} élèves dans une classe de CP. ${:y} tombent malades.<br>Combien d'élèves sont présents ?",
+                    "Dans un magasin, il y a ${:x} clients. ${:y} en sortent.<br>Combien y a-t-il de clients à présent ?",
+                    "Dans un restaurant, il y a eu ${:x} clients au premier service.<br>${:y} ne commandent pas de dessert.<br>Combien de clients prennent un dessert ?",
+                    "Lors d'une course, ${:x} coureurs sont inscrits.<br>${:y} ont terminé la course.<br>Combien courrent toujours ?",
+                    "Lors d'une fête, on a gonflé ${:x} ballons.<br>On en lache ${:y}.<br>Combien reste-t-il de ballons ?",
+                    "Un paquet comporte ${:x} biscuits.<br>Tu en manges ${:y}.<br>Combien reste-t-il de biscuits dans le paquet ?",
+                    "Dans le porte monnaie il y avait ${:x}€.<br>Tu achètes un jeu à ${:y}€.<br>Combien reste-t-il d'argent dans le porte-monnaie ?",
+                    "Dans un arbre, il y avait ${:x} pommes.<br>On en cueille ${:y}.<br>Combien de pommes sont encore dans l'arbre ?"
+                ],
+                "soustractionReponses": [
+                    "Il y a <span class='red'>${:x-:y}</span> passagers.",
+                    "<span class='red'>${:x-:y}</span> élèves sont présents.",
+                    "Il y a <span class='red'>${:x-:y}</span> clients.",
+                    "<span class='red'>${:x-:y}</span> clients prennent un dessert.",
+                    "Il reste <span class='red'>${:x-:y}</span> coureurs.",
+                    "Il reste <span class='red'>${:x-:y}</span> ballons.",
+                    "Il reste <span class='red'>${:x-:y}</span> biscuits.",
+                    "Il reste <span class='red'>${:x-:y}</span> €.",
+                    "Il reste <span class='red'>${:x-:y}</span> pommes."
+                ]
+            },
+            "vars": { "situation": "0_8", "x": "2_30", "y": "1_${:x-1}" },
+            "question": "${:soustractions[:situation]}",
+            "audio": "${:soustractions[:situation]}",
+            "answer": "${:soustractionReponses[:situation]}",
+            "value": "${:x-:y}"
+        },{
+            "name": "Une soustraction suivie d'une addition",
+            "consts": {
+                "situations":[
+                    "Dans un bus, il y a ${:x} passagers.<br>Au premier arrêt, ${:y} passagers en descendent.<br>Au second, ${:z} passagers montent.<br>Combien y a-t-il de passagers à dans le bus ?",
+                    "Dans la bibliotheque, il y a ${:x} livres.<br>Les élèves empruntent ${:y}.<br>Le professeur amène ${:z} nouveaux livres.<br>Combien de livres sont maintenant dans la bibliotheque ?",
+                    "${:prenom} joue au jeu de l'oie.<br>${:Iel} était sur la case ${:x} et a reculé de ${:y} cases.<br>Au dernier coup, ${:iel} a avancé de ${:z} cases.<br>Sur quelle case se trouve-${:iel} à présent ?",
+                    "Dans son porte-monnaie, ${:prenom} avait ${:x}€.<br>${:Iel} a acheté un jeu à ${:y}€.<br>Puis, sa soeur lui a donné ${:z}€.<br>Combien y a-t-il maintenant d'argent dans son porte-monnaie ?",
+                    "Sur un cable électrique sont posés ${:x} oiseaux.<br>${:y} s'envolent alors que ${:z} viennent se poser.<br>Combien y a-t-il d'oiseaux sur le cable ?"
+                ],
+                "reponses":[
+                    "Il y a <span class='red'>${:x-:y+:z}</span> passagers.",
+                    "Il y a <span class='red'>${:x-:y+:z}</span> livres.",
+                    "${:iel} est sur la case <span class='red'>${:x-:y+:z}</span>.",
+                    "Il y a <span class='red'>${:x-:y+:z}</span>€.",
+                    "Il y a <span class='red'>${:x-:y+:z}</span> oiseaux."
+                ],
+                "prenoms":["Julie","Ralissa","Raya","Sofia","Léa", "Lili","Nour","Corentin","Antoine","Pierre","Jean","Ézio","Mustafa","Nael"]
+            },
+            "vars":{
+                "situation": "0_3",
+                "x": "2_30",
+                "y": "2_${:x-1}",
+                "z": "2_30",
+                "p0": "0_13",
+                "prenom":"${:prenoms[:p0]}",
+                "iel":"${:prenom<7?'elle':'il'}",
+                "Iel":"${:prenom<7?'Elle':'Il'}"
+            },
+            "question": "${:situations[:situation]}",
+            "audio": "${:situations[:situation]}",
+            "answer": "${:reponses[:situation]}",
+            "value": "${:x-:y+:z}"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "title": "Donner les nombres qui suivent ou qui précèdent",
+    "type":"text",
+    "ID":"11NA1",
+    "description":"Entiers suivant ou précèdant",
+    "consts":{
+        "vb":["suivent", "précèdent"],
+        "pp":["suivant", "précédant"]
+    },
+    "speech":1,
+    "dest":["11NA","10NA"],
+    "options":[{
+        "name":"2 à 10 nombres qui suivent",
+        "vars":{"n":"2_10", "m":"0_90", "v":"0", "liste":"${Array.from({length::n}, (_, i) => i+1+:m).join(', ')}"}
+    },{
+        "name":"11 à 20 nombres qui suivent",
+        "vars":{"n":"11_20", "v":"0", "m":"0_80", "liste":"${Array.from({length::n}, (_, i) => i+1+:m).join(', ')}"}
+    }, {
+        "name":"2 à 10 nombres qui précèdent",
+        "vars":{"n":"2_10", "v":"1", "m":"10_100", "liste":"${Array.from({length::n}, (_, i) => -i-1+:m).join(', ')}"}
+    }, {
+        "name":"11 à 20 nombres qui précèdent",
+        "vars":{"n":"11_20", "v":"1", "m":"20_100", "liste":"${Array.from({length::n}, (_, i) => -i-1+:m).join(', ')}"}
+    }
+    ],
+    "question": "Donne les ${:n} nombres qui ${:vb[:v]} ${:m}.",
+    "shortq":"Les ${:n} nombres ${:pp[:v]} ${:m}.",
+    "audio":"Donne les ${:n} nombres qui ${:vb[:v]} ${:m}.",
+    "answer":"Les ${:n} nombres qui ${:vb[:v]} ${:m} sont <span class='red'>${:liste}</span>.",
+    "value":"${:liste}"
+}

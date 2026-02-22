@@ -1,0 +1,30 @@
+{
+    "ID": "TP11",
+    "title": "Coefficient binomial",
+    "description": "Calculer le coefficient binomial pour des valeurs simpples.",
+    "type": "text",
+    "repeat": true,
+    "dest": [
+        "GG1",
+        "TC3"
+    ],
+    "options": [
+        {
+            "name": "Calculs triviaux",
+            "vars": {
+                "n": "2_10",
+                "k": [1,"${:n-1}"]
+            }
+        },
+        {
+            "name":"Calculs non triviaux",
+            "vars": {
+                "n": "4_10",
+                "k": "2_${:n-2}"
+            }
+        }
+    ],
+    "question":"Calculer $$\\dbinom{${:n}}{${:k}}$$",
+    "answer":"$$\\dbinom{${:n}}{${:k}}=\\dfrac{${:n}!}{${:k}!\\left(${:n}-${:k}\\right)!}=\\color{red}{${MMmath.factorial(:n)/(MMmath.factorial(:k)*MMmath.factorial(:n-:k))}}$$",
+    "value":"${MMmath.factorial(:n)/(MMmath.factorial(:k)*MMmath.factorial(:n-:k))}"
+}

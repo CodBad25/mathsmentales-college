@@ -1,0 +1,29 @@
+{
+    "title":"Calculer les coordonnées d'un vecteur",
+    "description":"Utilisation des coordonnées de l'origine et de l'extrémité pour calculer les coordonnées.",
+    "type":"latex",
+    "ID":"2G11",
+    "dest":["2G1"],
+    "textSize":"medium",
+    "keys":["(",";","-","_","_","_","_","_"],
+    "consts":{"points":"ABCDEFGHKLMNPQRST"},
+    "options":[{
+        "name":"Coordonnées entières positives",
+        "vars":{"x":"1_20_4","pt":"0_16_2_^&"}
+
+    },{
+        "name":"Coordonnées entières relatives",
+        "vars":{"x":"-20_20_4","pt":"0_16_2_^&"}
+    },{
+        "name":"Coordonnées décimales positives",
+        "vars":{"nbd":[1,2],"x":"d0.1_10_${:nbd}_4","pt":"0_16_2_^&"}
+
+    },{
+        "name":"Coordonnées décimales relatives",
+        "vars":{"nbd":[1,2],"x":"d-10_10_${:nbd}_4","pt":"0_16_2_^&"}
+    }
+    ],
+    "question": "\\begin{cases}${:points[:pt[0]]}(${:x[0]+';\\color{blue}{'+:x[1]}}) \\\\ ${:points[:pt[1]]}(${:x[2]+';\\color{blue}{'+:x[3]}})\\end{cases} \\quad \\overrightarrow{${:points[:pt[0]]+:points[:pt[1]]}}(? ; ?)",
+    "answer":"\\text{Pour }${:points[:pt[0]]}(${:x[0]+';\\color{blue}{'+:x[1]}}) \\text{ et } ${:points[:pt[1]]}(${:x[2]+';\\color{blue}{'+:x[3]}}), \\newline \\overrightarrow{${:points[:pt[0]]+:points[:pt[1]]}}\\color{red}{(${MMmath.round(:x[2]-:x[0],2)};${MMmath.round(:x[3]-:x[1],2)})}",
+    "value":"\\left(${MMmath.round(:x[2]-:x[0])};${MMmath.round(:x[3]-:x[1])}\\right)"
+}

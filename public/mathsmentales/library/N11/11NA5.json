@@ -1,0 +1,170 @@
+{
+    "title":"Le nombre qui précèdent ou celui qui suit",
+    "type":"text",
+    "ID":"11NA5",
+    "description":"Nombres précèdant ou suivant",
+    "dest":["11NA","10NA"],
+    "speech":1,
+    "options":[{
+        "name":"Nombre qui <b>précède</b> un nombre entre 1 et 10",
+        "vars":{"n":"1_10", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 11 et 20",
+        "vars":{"n":"11_20", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 21 et 30",
+        "vars":{"n":"21_30", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 31 et 40",
+        "vars":{"n":"31_40", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 41 et 50",
+        "vars":{"n":"41_50", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 51 et 60",
+        "vars":{"n":"51_60", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 61 et 70",
+        "vars":{"n":"61_70", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 71 et 80",
+        "vars":{"n":"71_80", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 81 et 90",
+        "vars":{"n":"81_90", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    },{
+        "name":"Nombre qui <b>précède</b> un nombre entre 91 et 100",
+        "vars":{"n":"91_100", "pre":"${:n-1}"},
+        "question": "Quel est le nombre qui vient <b>juste avant</b> ${:n} ?",
+        "shortq": "Nombre juste avant ${:n} ?",
+        "audio": "Quel nombre vient juste avant ${:n} ?",
+        "answer": "Le nombre <b>juste avant</b> ${:n} est <span class='red'>${:pre}</span>.",
+        "value":"${:pre}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 1 et 10",
+        "vars":{"n":"1_10", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 11 et 20",
+        "vars":{"n":"11_20", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 21 et 30",
+        "vars":{"n":"21_30", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 31 et 40",
+        "vars":{"n":"31_40", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 41 et 50",
+        "vars":{"n":"41_50", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 51 et 60",
+        "vars":{"n":"51_60", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 61 et 70",
+        "vars":{"n":"61_70", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 71 et 80",
+        "vars":{"n":"71_80", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 81 et 90",
+        "vars":{"n":"81_90", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }, {
+        "name":"Nombre qui suit un nombre entre 91 et 100",
+        "vars":{"n":"91_100", "sui":"${:n+1}"},
+        "question": "Quel est le nombre qui vient <b>juste après</b> ${:n} ?",
+        "shortq": "Nombre juste après ${:n} ?",
+        "audio": "Quel nombre vient juste après ${:n} ?",
+        "answer": "Le nombre <b>juste après</b> ${:n} est <span class='red'>${:sui}</span>.",
+        "value":"${:sui}"
+    }
+    ]
+}

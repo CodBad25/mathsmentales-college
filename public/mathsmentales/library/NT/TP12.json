@@ -1,0 +1,42 @@
+{
+  "title": "Dénombrement urne",
+  "type": "text",
+  "dest": [
+    "TP1"
+  ],
+  "options": [
+    {
+      "name": "combinaison",
+      "vars": {
+        "a": "2_12",
+        "b": "2_12",
+        "c": "${:a + :b }",
+        "d": "${:a+:b-5}"
+      },
+      "question": "Une urne contient ${:a} boules noires indiscernables au toucher numérotées de 1 à ${:a} et ${:b} boules blanches indiscernables au toucher numérotées de 1 à ${:b} . Dénombrer les façons de tirer 5 boules simultanément.",
+      "answer": "On choisit un groupe de 5 parmi ${:c}. <br> $$\\dbinom{${:c}}{5}=\\dfrac{${:c}!}{5! \\times ${:d}!}=\\color{red}{${MMmath.factorial(:c)/(MMmath.factorial(5)*MMmath.factorial(:d))}}$$"
+    },
+    {
+      "name": "k_uplets d'éléments distincts",
+      "vars": {
+        "a": "2_12",
+        "b": "3_12",
+        "c": "${:a + :b }",
+        "d": "${:a+:b-5}"
+      },
+      "question": "Une urne contient ${:a} boules noires indiscernables au toucher numérotées de 1 à ${:a} et ${:b} boules blanches indiscernables au toucher numérotées de 1 à ${:b} . Dénombrer les façons de tirer 5 boules successivement et sans remise.",
+      "answer": "On choisit une liste de 5 éléments distincts dans un ensemble de cardinal  ${:c} . <br>$$\\dfrac{${:c}!}{${:d}!}=\\color{red}{${MMmath.factorial(:c)/(MMmath.factorial(:d))}}$$"
+    },
+    {
+      "name": "k_uplets",
+      "vars": {
+        "a": "2_12",
+        "b": "2_12",
+        "c": "${:a + :b }",
+        "S": "${:c**(5)}"
+      },
+      "question": "Une urne contient ${:a} boules noires indiscernables au toucher numérotées de 1 à ${:a} et ${:b} boules blanches indiscernables au toucher numérotées de 1 à ${:b} . Dénombrer les façons de tirer 5 boules successivement et avec remise",
+      "answer": "On choisit une liste de 5 éléments dans un ensemble de cardinal  ${:c} . <br>$$ ${:c}^5=\\color{red}{${:S}}$$"
+    }
+  ]
+}

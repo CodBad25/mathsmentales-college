@@ -1,0 +1,73 @@
+{
+  "title": "CM Procédures -> Déterminer des doubles et moitiés de décimaux dans des cas simples",
+  "auteur":"Xavier Levet",
+  "dest": [
+    "7ND"
+  ],
+  "type": "text",
+  "options": [
+    {
+      "name": "Double de décimaux entre 0 et 1",
+      "vars": {
+        "dixiemes": "1_9",
+        "n": "${MMmath.round(0+:dixiemes/10,1)}"
+      },
+      "question": "Quelle est le double de $$:n$$ ?",
+      "answer": "Le double de $$:n$$ est $$\\color{red}{${:n*2}}$$.",
+      "value": "${:n*2}"
+    },
+    {
+      "name": "Double de décimaux entre 0 et 10, sans retenues",
+      "vars": {
+        "unites": "0_9",
+        "dixiemes": "1_4",
+        "n": "${MMmath.round(:unites+:dixiemes/10,1)}"
+      },
+      "question": "Quelle est le double de $$:n$$ ?",
+      "answer": "Le double de $$:n$$ est $$\\color{red}{${:n*2}}$$.",
+      "value": "${:n*2}"
+    },
+    {
+      "name": "Double de décimaux entre 0 et 10, avec retenues",
+      "vars": {
+        "unites": "0_9",
+        "dixiemes": "5_9",
+        "n": "${MMmath.round(:unites+:dixiemes/10,1)}"
+      },
+      "question": "Quelle est le double de $$:n$$ ?",
+      "answer": "Le double de $$:n$$ est $$\\color{red}{${:n*2}}$$.",
+      "value": "${:n*2}"
+    },
+    {
+      "name": "Moitié des décimaux entre 0 et 1",
+      "vars": {
+        "a": [
+          2,
+          4,
+          6,
+          8
+        ],
+        "qte": "${0+:a/10}"
+      },
+      "question": "Quelle est la moitié de $$:qte$$ ?",
+      "answer": "La moitié de $$:qte$$ est $$\\color{red}{${:qte/2}}$$.",
+      "value": "${:qte/2}"
+    },
+    {
+      "name": "Moitié des décimaux entre 0 et 10",
+      "vars": {
+        "a": [
+          2,
+          4,
+          6,
+          8
+        ],
+        "b": "0_9",
+        "qte": "${:b+:a/10}"
+      },
+      "question": "Quelle est la moitié de $$:qte$$ ?",
+      "answer": "La moitié de $$:qte$$ est $$\\color{red}{${:qte/2}}$$.",
+      "value": "${:qte/2}"
+    }
+  ]
+}

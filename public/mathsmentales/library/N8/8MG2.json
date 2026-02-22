@@ -1,0 +1,115 @@
+{
+    "ID":"8MG2",
+    "dest":["8MG","7MG","6MF"],
+    "type":"text",
+    "title":"Calculer dans une situation de proportionnalité",
+    "description":"Proportionnalité simple, à partir des tables",
+    "repeat":4,
+    "consts":{
+        "prenoms":[
+            "Marc","Alice","Pierre","Julie","Camille","Thomas","Léo","Hugo","Nathan","Clara","Louis","Emma","Noah","Chloé","Jules","Ambre","Mathis","Eva","Tom","Zoé","Alexandre","Louise","Arthur","Célia","Paul","Anaïs","Loïc","Camélia","Raphaël","Lilou","Yasmine","Saïd","Karim","Fatima","Nadia","Ahmed","Mourad","Leila","Hassan","Samira"
+        ],
+        "viennoiseries":[
+            "pain au chocolat","croissant","muffins","éclairs","tartes aux pommes","baguettes","brioches","gaufres","pains aux raisins","donuts","flans","palmiers","choux","millefeuilles","chaussons aux pommes","tartelettes", "donuts"
+        ],
+        "fruitsaupoids":["pommes", "poires","bananes", "oranges", "clémentines", "mandarines", "cerises", "fraises", "pamplemousses", "amandes", "noisettes", "noix", "abricots", "pêches", "nectarines", "prunes", "framboises", "figues", "mûres", "raisins","groseilles", "coings", "myrtilles", "chataignes", "citrons", "kakis"],
+        "legumesaupoids":["betteraves", "carottes","choux", "choux-fleur", "endives", "oignons","asperges","épinards","panais", "pommes de terre", "petits pois", "artichauts", "blettes","navets", "poivrons","aubergines","haricots verts"],
+        "alunite":["kiwi","laitue","scarole","avocat", "feuile de chêne", "melon"]
+    },
+    "options":[
+        {
+            "name":"Partir de l’unité",
+            "vars":{
+                "n":"2_10",
+                "nv":"0_${:viennoiseries.length-1}",
+                "np":"0_${:prenoms.length-1}",
+                "nu":"0_${:alunite.length-1}",
+                "nlp":"0_${:legumesaupoids.length-1}",
+                "prix":"2_9",
+                "phrase":[
+                    ["Tu achètes des ${:viennoiseries[:nv]} à <b>0,${:prix*10} €</b> pièce. Sans promotion, combien te coûtent <b>${:n}</b> ${:viennoiseries[:nv]} ?",
+                    "Comme il n’y a pas de promotion, le prix est proportionnel à la quantité. Tu vas payer $$${:prix*10}\\times${:n}=\\color{red}{${MMmath.twoDecimals(:n*:prix/10)}~~€}$$."],
+                    ["${:prenoms[:np]} achète des ${:alunite[:nu]}s à <b>${MMmath.twoDecimals(:prix/10)}&nbsp;€</b> l'unité. Sans promotion, combien doit payer ${:prenoms[:np]} <b>${:n}</b> ${:alunite[:nu]}s ?",
+                    "Les ${:alunite[:nu]} sont vendus à l’unité donc le prix est proportionnel à la quantité. ${:prenoms[:np]} doit payer $$${:prix/10}\\times${:n}=\\color{red}{${MMmath.twoDecimals(:n*:prix/10)}~€}$$."],
+                    ["Si des ${:legumesaupoids[:nlp]} sont vendus à <b>${:prix}&nbsp;€</b> le kilogramme, combien coûtent <b>${:n}&nbsp;kg</b> de ${:legumesaupoids[:nlp]} ?","Tout ce qui est vendu «au poids» a un prix proportionnel à la masse. ${:n}&nbsp;kg de ${:legumesaupoids[:nlp]} coûtent $$${:prix}\\times${:n}=\\color{red}{${MMmath.twoDecimals(:n*:prix)}~€}$$"]
+                ]
+            }
+        },
+        {
+            "name":"Situations multiplicatives",
+            "vars":{
+                "n":"2_10",
+                "m":"1_9",
+                "k":"2_10",
+                "prix":"1_9",
+                "centimes":"${:prix*10}",
+                "np":"0_${:prenoms.length-1}",
+                "nv":"0_${:viennoiseries.length-1}",
+                "nf":"0_${:fruitsaupoids.length-1}",
+                "phrase":[
+                    ["${:prenoms[:np]} a une collection de <b>${:n}</b> BD identiques qui prennent <b>${MMmath.nbToFr(:n*0.5)} cm</b> de place sur une étagère. Quelle largeur prendraient <b>${:n*:k}</b> de ces mêmes BD ?", "C’est une situation de proportionnalité car toutes les BD sont identiques. Le nombre de BD est multiplié par <b>${:k}</b>, donc la réponse est $$${:n*0.5}\\times${:k} = \\color{red}{${MMmath.round(:n*0.5*:k,2)}\\text{ cm}}$$."],
+                    ["${:prenoms[:np]} a acheté <b>${:n}</b> bonbons vendus en vrac à l'unité et a payé <b>${MMmath.twoDecimals(:centimes/100)}&nbsp;€</b>. Combien paie-t-on pour <b>${:n*:k}</b> de ces bonbons ?","C’est une situation de proportionnalité car tous les bonbons sont au même prix. Il y a <b>${:k}</b> fois plus de bonbons, donc la réponse est $$${MMmath.twoDecimals(:centimes/100)}\\times${:k} = \\color{red}{${MMmath.twoDecimals(:centimes*:k/100)}€}$$."],
+                    ["Tu as acheté <b>${:n*100}&nbsp;g</b> de ${:fruitsaupoids[:nf]} et tu as payé <b>${:prix}&nbsp;€</b>. Combien te couteraient <b>${:n*100*:k}&nbsp;g</b> de ces mêmes ${:fruitsaupoids[:nf]} ?","C’est une situation de proportionnalité car on achète les mêmes ${:fruitsaupoids[:nf]}. La masse est multipliée par <b>${:k}</b> donc la réponse est $$${:prix}\\times${:k} = \\color{red}{${:prix*:k}€}$$."],
+                    ["<b>${:n}</b> feuilles de papier empilées mesurent <b>${MMmath.twoDecimals(:m/100)}&nbsp;mm</b> d’épaisseur. Quelle est l’épaisseur de <b>${:n*:k}</b> de ces mêmes feuilles ?","Les feuilles sont identiques, donc l’épaisseur est proportionnelle à la quantité. Il y a <b>${:k}</b> plus de feuilles, donc $$${MMmath.twoDecimals(:m/100)}\\times${:k} = \\color{red}{${MMmath.twoDecimals(:m*:k/100)}}$$ mm"]
+                ]
+            }
+        },{
+            "name":"Situations additives",
+            "vars":{
+                "n":"1_10",
+                "m":"1_10_^${:n}",
+                "prix":"2_9",
+                "centimes":"${:prix*10}",
+                "np1":"0_${:prenoms.length-1}",
+                "np2":"0_${:prenoms.length-1}_^${:np1}",
+                "nv":"0_${:viennoiseries.length-1}",
+                "nf":"0_${:fruitsaupoids.length-1}",
+                "phrase":[
+                    ["${:prenoms[:np1]} a une collection de BD identiques. Sur une première étagère <b>${:n}</b> de ces BD prennent <b>${MMmath.nbToFr(:n*0.5)} cm</b> de large. Sur l'étagère du dessous, <b>${:m}</b> BD prennent <b>${MMmath.nbToFr(:m*0.5)} cm</b> de large. Quelle largeur prendraient <b>${:n+:m}</b> de ces mêmes BD ?", "C’est une situation de proportionnalité car toutes les BD sont identiques. ${:n+:m} est la somme des nombres de BD, donc la réponse est $$${:n*0.5}+${:m*0.5} = \\color{red}{${(:n+:m)*0.5}\\text{ cm}}$$."],
+                    ["${:prenoms[:np1]} a acheté <b>${:n}</b> bonbons vendus en vrac à l'unité et a payé <b>${MMmath.twoDecimals(:centimes*:n/100)} €</b>. ${:prenoms[:np1]} a acheté <b>${:m}</b> mêmes bonbons pour <b>${MMmath.twoDecimals(:centimes*:m/100)} €</b>. Combien paie-t-on pour <b>${:n+:m}</b> bonbons ?","C’est une situation de proportionnalité car tous les bonbons sont au même prix. ${:n+:m} est la somme des nombres de bonbons, donc la réponse est $$${MMmath.twoDecimals(:centimes*:n/100)}+${MMmath.twoDecimals(:centimes*:m/100)} = \\color{red}{${MMmath.twoDecimals(:centimes*(:n+:m)/100)}€}$$."],
+                    ["Tu as acheté <b>${:n*100}&nbsp;g</b> de ${:fruitsaupoids[:nf]} et tu as payé <b>${MMmath.twoDecimals(:prix*:n/10)}&nbsp;€</b>. J’en ai pour ma part achetés <b>${:m*100}&nbsp;g</b> pour <b>${MMmath.twoDecimals(:prix*:m/10)}&nbsp;€</b> Combien couteraient <b>${:n*100+:m*100}&nbsp;g</b> de ces mêmes ${:fruitsaupoids[:nf]} ?","C’est une situation de proportionnalité car on achète les mêmes ${:fruitsaupoids[:nf]}.<br>La masse est la somme des deux autres donc la réponse est $$${MMmath.twoDecimals(:prix*:n/10)}+${MMmath.twoDecimals(:prix*:m/10)} = \\color{red}{${MMmath.twoDecimals(:prix*(:n+:m)/10)}€}$$."],
+                    ["<b>${:n}</b> feuilles de papier empilées mesurent <b>${MMmath.twoDecimals(:prix*:n/100)}&nbsp;mm</b> d’épaisseur. Un tas de <b>${:m}</b> de ces mêmes feuilles mesure <b>${MMmath.twoDecimals(:prix*:m/100)}&nbsp;mm</b> Quelle est l’épaisseur de <b>${:n+:m}</b> de ces feuilles ?","Les feuilles sont identiques, donc l’épaisseur est proportionnelle à la quantité. Le nombre de feuilles est la somme des nombres de feuilles, donc $$${MMmath.twoDecimals(:prix*:n/100)}+${MMmath.twoDecimals(:prix*:m/100)} = \\color{red}{${MMmath.twoDecimals(:prix*(:n+:m)/100)}}$$ mm"]
+                ]
+            }
+        },{
+            "name":"Situations soustractives",
+            "vars":{
+                "n":"1_10",
+                "m":"1_10_^${:n},${2*:n}",
+                "prix":"2_9",
+                "centimes":"${:prix*10}",
+                "np1":"0_${:prenoms.length-1}",
+                "np2":"0_${:prenoms.length-1}_^${:np1}",
+                "nv":"0_${:viennoiseries.length-1}",
+                "nf":"0_${:fruitsaupoids.length-1}",
+                "phrase":[
+                    ["${:prenoms[:np1]} a une collection de BD identiques. Sur une première étagère ${:n} de ces BD prennent <b>${MMmath.nbToFr(:n*0.5)} cm</b> de large. Sur l'étagère du dessous, <b>${:m}</b> BD prennent <b>${MMmath.nbToFr(:m*0.5)} cm</b> de large. Quelle largeur prendraient <b>${Math.abs(:n-:m)}</b> de ces mêmes BD ?", "C’est une situation de proportionnalité car toutes les BD sont identiques. ${Math.abs(:n-:m)} est la différence des nombres de BD, donc la réponse est $$${Math.max(:n,:m)*0.5}-${Math.min(:n,:m)*0.5} = \\color{red}{${Math.abs(:n-:m)*0.5}\\text{ cm}}$$."],
+                    ["${:prenoms[:np1]} a acheté <b>${:n}</b> bonbons vendus en vrac à l'unité et a payé <b>${MMmath.twoDecimals(:centimes*:n/100)} €</b>. ${:prenoms[:np1]} a acheté <b>${:m}</b> mêmes bonbons pour <b>${MMmath.twoDecimals(:centimes*:m/100)} €</b>. Combien paie-t-on pour <b>${Math.abs(:n-:m)}</b> bonbons ?","C’est une situation de proportionnalité car tous les bonbons sont au même prix. ${Math.abs(:n-:m)} est la différence des nombres de bonbons, donc la réponse est $$${MMmath.twoDecimals(:centimes*Math.max(:n,:m)/100)}-${MMmath.twoDecimals(:centimes*Math.min(:n,:m)/100)} = \\color{red}{${MMmath.twoDecimals(:centimes*Math.abs(:n-:m)/100)}€}$$."],
+                    ["Tu as acheté <b>${:n*100}&nbsp;g</b> de ${:fruitsaupoids[:nf]} et tu as payé <b>${MMmath.twoDecimals(:prix*:n/10)}&nbsp;€</b>. J’en ai pour ma part achetés <b>${:m*100}&nbsp;g</b> pour <b>${MMmath.twoDecimals(:prix*:m/10)}&nbsp;€</b> Combien couteraient <b>${Math.abs(:n-:m)*100}&nbsp;g</b> de ces mêmes ${:fruitsaupoids[:nf]} ?","C’est une situation de proportionnalité car on achète les mêmes ${:fruitsaupoids[:nf]}.<br>La masse est la différence des deux autres donc la réponse est $$${:prix*Math.max(:n,:m)/10}-${:prix*Math.min(:n,:m)/10} = \\color{red}{${:prix*Math.abs(:n-:m)/10}€}$$."],
+                    ["<b>${:n}</b> feuilles de papier empilées mesurent <b>${MMmath.nbToFr(:prix*:n/100)}&nbsp;mm</b> d’épaisseur. Un tas de <b>${:m}</b> de ces mêmes feuilles mesure <b>${MMmath.nbToFr(:prix*:m/100)}&nbsp;mm</b>. Quelle est l’épaisseur de <b>${Math.abs(:n-:m)}</b> de ces feuilles ?","Les feuilles sont identiques, donc l’épaisseur est proportionnelle à la quantité. Le nombre de feuilles est la différence des nombres de feuilles, donc $$${MMmath.round(:prix*Math.max(:n,:m)/100,2)}-${MMmath.round(:prix*Math.min(:n,:m)/100,2)} = \\color{red}{${MMmath.round(:prix*Math.abs(:n-:m)/100,2)}}$$ mm"]
+                ]
+            }
+        },
+        {
+            "name":"Situations passage à l’unité",
+            "vars":{
+                "couples":[[2,3],[2,5],[2,7],[2,9],[3,4],[3,5],[3,7],[3,8],[3,10],[4,5],[4,6],[4,7],[4,9],[4,10],[5,6],[5,7],[5,8],[5,9],[6,7],[6,8],[6,9],[6,10],[7,8],[7,9],[7,10],[8,9],[8,10],[9,10],[3,2],[5,2],[7,2],[9,2],[4,3],[5,3],[7,3],[8,3],[10,3],[5,4],[6,4],[7,4],[9,4],[10,4],[6,5],[7,5],[8,5],[9,5],[7,6],[8,6],[9,6],[10,6],[8,7],[9,7],[9,7],[10,7],[9,8],[10,8],[10,9]],
+                "n":"${:couples[0]}",
+                "m":"${:couples[1]}",
+                "prix":"1_9",
+                "centimes":"${:prix*10}",
+                "np":"0_${:prenoms.length-1}",
+                "nv":"0_${:viennoiseries.length-1}",
+                "nf":"0_${:fruitsaupoids.length-1}",
+                "phrase":[
+                    ["${:prenoms[:np]} a une collection de <b>${:n}</b> BD identiques qui prennent <b>${MMmath.nbToFr(:n*0.5)} cm</b> de place sur une étagère. Quelle largeur prendraient <b>${:m}</b> de ces mêmes BD ?", "C’est une situation de proportionnalité car toutes les BD sont identiques. Une BD a une largeur de <b>0,5&nbsp;cm</b>, donc la réponse est $$${:n*0.5}\\times${:m} = \\color{red}{${:m*0.5}\\text{ cm}}$$."],
+                    ["${:prenoms[:np]} a acheté <b>${:n}</b> bonbons vendus en vrac à l'unité et a payé <b>${MMmath.twoDecimals(:centimes*:n/100)} €</b>. Combien paie-t-on pour <b>${:m}</b> de ces bonbons ?","C’est une situation de proportionnalité car tous les bonbons sont au même prix. Un bonbon coûte ${MMmath.round(:centimes/100,2)}€, donc la réponse est $$${MMmath.round(:centimes/100,2)}\\times${:m} = \\color{red}{${MMmath.round(:centimes*:m/100,2)}€}$$."],
+                    ["Tu as acheté <b>${:n*100}&nbsp;g</b> de ${:fruitsaupoids[:nf]} et tu as payé <b>${:prix*:n}&nbsp;€</b>. Combien te couteraient <b>${:m*100}&nbsp;g</b> de ces mêmes ${:fruitsaupoids[:nf]} ?","C’est une situation de proportionnalité car on achète les mêmes ${:fruitsaupoids[:nf]}. 100&nbsp;g coutent ${:prix} € donc la réponse est $$${:prix}\\times${:m} = \\color{red}{${:prix*:m}€}$$."],
+                    ["<b>${:n}</b> feuilles de papier empilées mesurent <b>${MMmath.nbToFr(:prix*:n/100)}&nbsp;mm</b> d’épaisseur. Quelle est l’épaisseur de <b>${:m}</b> de ces mêmes feuilles ?","Les feuilles sont identiques, donc l’épaisseur est proportionnelle à la quantité. L’épaisseur d’une feuille est ${:prix/100}&nbsp;mm, donc la réponse est $$${:prix/100}\\times${:m} = \\color{red}{${MMmath.round(:m*:prix/100,2)}}$$ mm"]
+                ]
+            }
+        }
+    ],
+    "question":"${:phrase[0]}",
+    "answer":"${:phrase[1]}"
+}

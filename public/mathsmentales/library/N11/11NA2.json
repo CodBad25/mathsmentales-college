@@ -1,0 +1,27 @@
+{
+    "title":"Le nombre qui précèdent et celui qui suit",
+    "type":"text",
+    "ID":"11NA2",
+    "description":"Nombres précèdant et suivant",
+    "dest":["11NA","10NA"],
+    "speech":1,
+    "valueType":"liste",
+    "options":[{
+        "name":"Nombre qui précède et nombre qui suit",
+        "vars":{"n":"1_99", "pre":"${:n-1}", "sui":"${:n+1}", "liste":"${:pre}, ${:n+1}"},
+        "question": "Quel est le nombre qui précède et celui qui suit ${:n} ?",
+        "shortq": "Nombres précèdant et suivant ${:n} ?",
+        "audio": "Quel nombre précède et quel nombre suit ${:n} ?",
+        "answer": "Le nombre qui précède ${:n} est <span class='red'>${:pre}</span> et le nombre qui suit est <span class='red'>${:sui}</span>.",
+        "value":"${:liste}"
+    }, {
+        "name":"Nombre qui suit et nombre qui précède",
+        "vars":{"n":"1_99", "pre":"${:n-1}", "sui":"${:n+1}", "liste":"${:n+1}, ${:n-1}"},
+        "question": "Quel est le nombre qui suit et celui qui précède ${:n} ?",
+        "shortq": "Nombres suivant et précèdant ${:n} ?",
+        "audio": "Quel nombre suit et quel nombre précède ${:n} ?",
+        "answer": "Le nombre qui suit ${:n} est <span class='red'>${:sui}</span> et le nombre qui précède est <span class='red'>${:pre}</span>.",
+        "value":"${:liste}"
+    }
+    ]
+}

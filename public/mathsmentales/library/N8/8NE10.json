@@ -1,0 +1,69 @@
+{
+    "title":"CM connaissances -> Diviser un décimal (simple) par 10, 100, 1000",
+    "dest":["8NE", "7NE"],
+    "auteur":"Xavier Levet",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Entier inférieur à 10 divisé par 10",
+        "vars":{"a":"1_9"},
+        "question": "${:a}\\div 10",
+        "answer":":question=\\color{red}{${MMmath.round(:a/10,5)}}",
+        "value":"${MMmath.round(:a/10,3)}"
+    },{
+        "name":"Entier inférieur à 100 divisé par 10",
+        "vars":{"a":"10_99"},
+        "question": "${:a}\\div 10",
+        "answer":":question=\\color{red}{${MMmath.round(:a/10,5)}}",
+        "value":"${MMmath.round(:a/10,3)}"
+    },{
+        "name":"Décimal à une décimale inférieur à 100 divisé par 10",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"1_9",
+            "a":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10,2)}"
+            },
+        "question": "${:a}\\div 10",
+        "answer":":question=\\color{red}{${MMmath.round(:a/10,5)}}",
+        "value":"${MMmath.round(:a/10,3)}"
+    },{
+        "name":"Décimal à deux décimales inférieur à 100 divisé par 10",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"1_9",
+            "a":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10+:centiemes/100,3)}"
+            },
+        "question": "${:a}\\div 10",
+        "answer":":question=\\color{red}{${MMmath.round(:a/10,5)}}",
+        "value":"${MMmath.round(:a/10,3)}"
+    },{
+        "name":"Décimal divisé par 100",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"0_9",
+            "a":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,3)}"
+            },
+        "question": "${:a}\\div 100",
+        "answer":":question=\\color{red}{${MMmath.round(:a/100,5)}}",
+        "value":"${MMmath.round(:a/100,3)}"
+    },{
+        "name":"Décimal divisé par 1000",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+            "centaines":"0_9",
+            "milliers":"0_9",
+            "a":"${MMmath.round(:milliers*1000+:centaines*100+:dizaines*10+:unites+:dixiemes/10,3)}"
+            },
+        "question": "${:a}\\div 1000",
+        "answer":":question=\\color{red}{${MMmath.round(:a/1000,5)}}",
+        "value":"${MMmath.round(:a/1000,3)}"
+    }
+    ]
+}

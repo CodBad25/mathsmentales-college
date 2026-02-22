@@ -1,0 +1,63 @@
+{
+    "type":"text",
+    "ID":"10ND3",
+    "repeat":true,
+    "title":"Tables de division des nombres de 2 à 9",
+    "speech":1,
+    "dest":["10ND","9ND","8ND","7ND", "6ND"],
+    "options":[
+        {
+            "name":"Table de 2",
+            "vars":{"a":2, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 3",
+            "vars":{"a":3, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 4",
+            "vars":{"a":4, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 5",
+            "vars":{"a":5, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 6",
+            "vars":{"a":6, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 7",
+            "vars":{"a":7, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 8",
+            "vars":{"a":8, "b":"1_10", "res": "${:a*:b}"}
+        },
+        {
+            "name":"Table de 9",
+            "vars":{"a":9, "b":"1_10", "res": "${:a*:b}"}
+        }
+    ],
+    "question":[
+        "$$${:res} \\div ${:a}$$",
+        "Dans $$${:res}$$ combien de fois $$${:a}$$ ?",
+        "$$${:res}$$ c'est $$${:a}$$ fois ... ?"
+    ],
+    "shortq":[
+        "$$${:res} \\div ${:a} = \\colorbox{#ECECEC}{\\quad}$$",
+        "$$${:res} = \\colorbox{#ECECEC}{\\quad} \\times ${:a}$$",
+        "$$${:res} = ${:a} \\times \\colorbox{#ECECEC}{\\quad}$$"
+    ],
+    "audio":[
+        "Combien vaut ${:res} divisé par ${:a} ?",
+        "Dans $$${:res}$$ combien y a-t-il de fois $$${:a}$$ ?",
+        "$$${:res}$$ c'est $$${:a}$$ fois combien ?"
+    ],
+    "answer":[
+        "$$${:res} \\div ${:a}=\\color{red}{${:b}}$$",
+        "Dans $$${:res}$$, il y a $$\\color{red}{${:b}}$$ fois $$${:a}$$.",
+        "$$${:res}$$ c'est $$${:a}$$ fois $$\\color{red}{${:b}}$$."
+    ],
+    "value":"${:b}"
+}

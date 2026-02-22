@@ -1,0 +1,105 @@
+{
+    "ID":"6NB10",
+    "title": "Lire une fraction supérieure à 1 sur un axe",
+    "dest": ["6NB", "5DB", "4DB", "3DB"],
+    "type":"latex",
+    "consigne":"Donner l’abscisse du point A sous forme de fraction",
+    "options":[
+        {
+            "name":"Lire des demis",
+            "vars":{
+                "num":"3_7"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-0.3,2,24.2,-2],
+                "axis":false,
+                "content":[
+                    ["line",[[0,0],[24,0]],{"name":"li","lastArrow":true}],
+                    ["ticks",["li"],{"drawZero":true, "minorTicks":1, "scale":6, "drawLabels":true, "label":{"anchorX":"middle","offset":[0,-12]}}],
+                    ["text", [0,-1.1,"0"],{"anchorX":"middle"}],
+                    ["point", ["${:num*3}", 0], {"name":"A","face":"x", "label":{"offset":[0,10]}}]
+                ]
+            },
+            "question":"",
+            "answer":"A\\left(\\dfrac{${:num}}{2}\\right)${:num%2==0?'\\text{ soit }A('+(:num/2)+')':''}",
+            "value":"\\dfrac{${:num}}{2}"
+        },{
+            "name":"Lire des tiers",
+            "vars":{
+                "num":"4_11"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-0.3,2,24.2,-2],
+                "axis":false,
+                "content":[
+                    ["line",[[0,0],[24,0]],{"name":"li","lastArrow":true}],
+                    ["ticks",["li"],{"drawZero":true, "minorTicks":2, "scale":6, "drawLabels":true, "label":{"anchorX":"middle","offset":[0,-12]}}],
+                    ["text", [0,-1.1,"0"],{"anchorX":"middle"}],
+                    ["point", ["${:num*2}", 0], {"name":"A","face":"x", "label":{"offset":[0,10]}}]
+                ]
+            },
+            "question":"",
+            "answer":"A\\left(\\dfrac{${:num}}{3}\\right)${:num%3==0?'\\text{ soit }A('+(:num/3)+')':''}",
+            "value":"\\dfrac{${:num}}{3}"
+        },{
+            "name":"Lire des quarts",
+            "vars":{
+                "num":"5_15"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-0.3,2,24.2,-2],
+                "axis":false,
+                "content":[
+                    ["line",[[0,0],[24,0]],{"name":"li","lastArrow":true}],
+                    ["ticks",["li"],{"drawZero":true, "minorTicks":3, "scale":6, "drawLabels":true, "label":{"anchorX":"middle","offset":[0,-12]}}],
+                    ["text", [0,-1.1,"0"],{"anchorX":"middle"}],
+                    ["point", ["${:num*1.5}", 0], {"name":"A","face":"x", "label":{"offset":[0,10]}}]
+                ]
+            },
+            "question":"",
+            "answer":"A\\left(\\dfrac{${:num}}{4}\\right)${:num%4==0?'\\text{ soit }A('+(:num/4)+')':''}",
+            "value":"\\dfrac{${:num}}{4}"
+        },{
+            "name":"Lire des cinquièmes",
+            "vars":{
+                "num":"6_18"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-0.3,2,24.2,-2],
+                "axis":false,
+                "content":[
+                    ["line",[[0,0],[24,0]],{"name":"li","lastArrow":true}],
+                    ["ticks",["li"],{"drawZero":true, "minorTicks":4, "scale":6, "drawLabels":true, "label":{"anchorX":"middle","offset":[0,-12]}}],
+                    ["text", [0,-1.1,"0"],{"anchorX":"middle"}],
+                    ["point", ["${:num*1.2}", 0], {"name":"A","face":"x", "label":{"offset":[0,10]}}]
+                ]
+            },
+            "question":"",
+            "answer":"A\\left(\\dfrac{${:num}}{5}\\right)${:num%5==0?'\\text{ soit }A('+(:num/5)+')':''}",
+            "value":"\\dfrac{${:num}}{5}"
+        },{
+            "name":"Lire des sixièmes",
+            "vars":{
+                "num":"7_22"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-0.3,2,24.2,-2],
+                "axis":false,
+                "content":[
+                    ["line",[[0,0],[24,0]],{"name":"li","lastArrow":true}],
+                    ["ticks",["li"],{"drawZero":true, "minorTicks":5, "scale":6, "drawLabels":true, "label":{"anchorX":"middle","offset":[0,-12]}}],
+                    ["text", [0,-1.1,"0"],{"anchorX":"middle"}],
+                    ["point", ["${:num}", 0], {"name":"A","face":"x", "label":{"offset":[0,10]}}]
+                ]
+            },
+            "question":"",
+            "answer":"A\\left(\\dfrac{${:num}}{6}\\right)${:num%6==0?'\\text{ soit }A('+(MMmath.round(:num/6,0))+')':''}",
+            "value":"\\dfrac{${:num}}{6}"
+        }
+    ]
+}

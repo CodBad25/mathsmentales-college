@@ -1,0 +1,157 @@
+{
+    "ID":"6MD2",
+    "dest":["6MD"],
+    "type":"text",
+    "title":"Cubes manquants dans une configuration",
+    "description":"Dénombrer les cubes manquants dans un cube ou un pavé",
+    "options":[
+                {
+            "name":"Dans un cube 3x3 (simple)",
+            "vars":{
+                "ah0":3,
+                "bh2":"2_3",
+                "bh1":"${:bh2}_3",
+                "bh3":"${:bh2}_3",
+                "ch1":"2_3",
+                "ch2":"2_${:bh2}",
+                "ch3":"2_${:bh2}",
+                "ch4":"2_${:bh3}",
+                "ch5":"2_${:bh1+:bh2+:bh3+:ch1+:ch2+:ch3+:ch4==21?2:3}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#C11007","#E1712B","#FFF085","#FE9A37","#FDC745","#E7180B"]},
+                    {"cubeincomplet":["${:ah0}","${:bh1}","${:ch1}","${:bh3}","${:bh2}","${:ch2}","${:ch5}","${:ch4}","${:ch3}"]}
+                ]
+            },
+            "question":"Combien manque-t-il de cubes pour former un grand cube 3x3 ?",
+            "answer":"Il manque $$\\color{red}{${24-:bh1-:bh2-:bh3-:ch1-:ch2-:ch3-:ch4-:ch5}}$$ cubes"
+        },
+        {
+            "name":"Dans un cube 3x3",
+            "vars":{
+                "ah0":3,
+                "bh2":"1_${:ah0}",
+                "bh1":"${:bh2}_${:ah0}",
+                "bh3":"${:bh2}_${:ah0}",
+                "ch1":"0_${:bh1}",
+                "ch2":"0_${:bh2}",
+                "ch3":"0_${:bh2}",
+                "ch4":"0_${:bh2}",
+                "ch5":"0_${:bh3}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#C11007","#E1712B","#FFF085","#FE9A37","#FDC745","#E7180B"]},
+                    {"cubeincomplet":["${:ah0}","${:bh1}","${:ch1}","${:bh3}","${:bh2}","${:ch2}","${:ch5}","${:ch4}","${:ch3}"]}
+                ]
+            },
+            "question":"Combien manque-t-il de cubes pour former un grand cube 3x3 ?",
+            "answer":"Il manque $$\\color{red}{${24-:bh1-:bh2-:bh3-:ch1-:ch2-:ch3-:ch4-:ch5}}$$ cubes"
+        }, {
+            "name":"Dans un cube 4x4 (sur 1 couche)",
+            "vars":{
+                "ah0":4,
+                "bh2":"3_4",
+                "bh1":"${:bh2}_4",
+                "bh3":"${:bh2}_4",
+                "ch1":"3_4",
+                "ch2":"3_${:bh2}",
+                "ch3":"3_${:bh2}",
+                "ch4":"3_${:bh3}",
+                "ch5":"3_${:bh3}",
+                "dh1":"3_4",
+                "dh2":"3_${Math.min(:ch1,:ch2)}",
+                "dh3":"3_${:ch2}",
+                "dh4":"3_${:ch3}",
+                "dh5":"3_${:ch3}",
+                "dh6":"3_${:ch5}",
+                "dh7":"3_${:ch5}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#C11007","#E1712B","#FFF085","#FE9A37","#FDC745","#E7180B"]},
+                    {"cubeincomplet":["${:ah0}","${:bh1}","${:ch1}","${:dh1}","${:bh3}","${:bh2}","${:ch2}","${:dh2}","${:ch5}","${:ch4}","${:ch3}","${:dh3}","${:dh7}","${:dh6}","${:dh5}","${:dh4}"]}
+                ]
+            },
+            "question":"Combien manque-t-il de cubes pour former un grand cube 4x4 ?",
+            "answer":"Il manque $$\\color{red}{${60-:bh1-:bh2-:bh3-:ch1-:ch2-:ch3-:ch4-:ch5-:dh1-:dh2-:dh3-:dh4-:dh5-:dh6-:dh7}}$$ cubes"
+        }, {
+            "name":"Dans un cube 4x4 (sur 2 couches)",
+            "vars":{
+                "ah0":4,
+                "bh2":"3_4",
+                "bh1":"${:bh2}_4",
+                "bh3":"${:bh2}_4",
+                "ch1":"3_4",
+                "ch2":"3_${:bh2}",
+                "ch3":"3_${:bh2}",
+                "ch4":"3_${:bh3}",
+                "ch5":"3_${:bh3}",
+                "dh1":"2_${Math.min(:ch1,:ch2)}",
+                "dh2":"2_${Math.min(:ch1,:ch2)}",
+                "dh3":"2_${:ch2}",
+                "dh4":"2_${:ch3}",
+                "dh5":"2_${Math.min(:ch4,:ch3)}",
+                "dh6":"2_${:ch5}",
+                "dh7":"2_${:ch5}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#C11007","#E1712B","#FFF085","#FE9A37","#FDC745","#E7180B"]},
+                    {"cubeincomplet":["${:ah0}","${:bh1}","${:ch1}","${:dh1}","${:bh3}","${:bh2}","${:ch2}","${:dh2}","${:ch5}","${:ch4}","${:ch3}","${:dh3}","${:dh7}","${:dh6}","${:dh5}","${:dh4}"]}
+                ]
+            },
+            "question":"Combien manque-t-il de cubes pour former un grand cube 4x4 ?",
+            "answer":"Il manque $$\\color{red}{${60-:bh1-:bh2-:bh3-:ch1-:ch2-:ch3-:ch4-:ch5-:dh1-:dh2-:dh3-:dh4-:dh5-:dh6-:dh7}}$$ cubes"
+        }, {
+            "name":"Dans un cube 4x4 (difficile)",
+            "vars":{
+                "ah0":4,
+                "bh2":"2_4",
+                "bh1":"${:bh2}_4",
+                "bh3":"${:bh2}_4",
+                "ch3":"2_${:bh2}",
+                "ch1":"${:ch3}_4",
+                "ch2":"${:ch3}_${:bh2}",
+                "ch4":"${:ch3}_${:bh3}",
+                "ch5":"${:ch3}_${:bh3}",
+                "dh1":"0_4",
+                "dh2":"0_${:ch2}",
+                "dh3":"0_${:ch2}",
+                "dh4":"0_${:ch3}",
+                "dh5":"0_${:ch3}",
+                "dh6":"0_${:ch5}",
+                "dh7":"0_${:ch5}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#C11007","#E1712B","#FFF085","#FE9A37","#FDC745","#E7180B"]},
+                    {"cubeincomplet":["${:ah0}","${:bh1}","${:ch1}","${:dh1}","${:bh3}","${:bh2}","${:ch2}","${:dh2}","${:ch5}","${:ch4}","${:ch3}","${:dh3}","${:dh7}","${:dh6}","${:dh5}","${:dh4}"]}
+                ]
+            },
+            "question":"Combien manque-t-il de cubes pour former un grand cube 4x4 ?",
+            "answer":"Il manque $$\\color{red}{${60-:bh1-:bh2-:bh3-:ch1-:ch2-:ch3-:ch4-:ch5-:dh1-:dh2-:dh3-:dh4-:dh5-:dh6-:dh7}}$$ cubes"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+title: 'Leçon : Statistiques'
+type: text
+description: 10 questions sur le vocabulaire et les formules de Statistiques
+dest:
+  - 5LD
+  - 4LD
+options:
+  - name: Vocabulaire
+    question:
+      - Qu’appelle-t-on <b>population</b> en statistiques ?
+      - Qu’appelle-t-on <b>caractère</b> en statistiques ?
+      - Quels sont les types de caractères ?
+      - Qu’est-ce que l’<b>effectif</b> d’une valeur ?
+    answer:
+      - Une population est un ensemble d’individus étudiés lors d’un sondage.
+      - Le caractère étudié est ce sur quoi pose la question d’une étude statistique.
+      - "Le caractère peut être <b>quantitatif</b> : il prend des valeurs que l’on peut compter (quantité, mesure...), ou <b>qualitatif</b> : il prend des valeurs que l’on ne peut pas compter (couleur, goût ...)"
+      - L’effectif d’une valeur est le <b>nombre</b> d’individus correspondants à cette valeur.
+  - name: Calculs et formules
+    question:
+      - Comment se calcule l’<b>effectif total</b> ?
+      - Comment se calcule la <b>fréquence</b> d’une valeur ?
+      - Comment se calcule la <b>moyenne</b> d’une série statistique ?
+      - Comment se calcule la <b>moyenne pondérée</b> d’une série statistique ?
+    answer:
+      - On compte combien il y a de valeurs au total.
+      - La fréquence d’une valeur est le quotient $$\dfrac{\text{effectif de la valeur}}{\text{effectif total}}$$ donné sous forme de fraction, pourcentage ou valeur décimale.
+      - La moyenne d’une série statistique est le quotient de la somme des valeurs par l’effectif total $$\dfrac{v_1+v_2+...}{\text{nombre de valeurs}}$$
+      - La moyenne pondérée est un raccourcis de la moyenne, elle s’obtient en ajoutant les produits des valeurs par leurs effectifs puis en divisant par l’effectif total.<br>$$\dfrac{n_1\times v_1+n_2\times v_2+...}{n_1+n_2+...}$$
+  - name: Représentations
+    question:
+      - Donne différentes représentations d’une étude statistique ?
+      - Quel outil informatique est utile pour étudier des statistiques
+    answer:
+      - Une liste de réponses, un tableau de valeurs, un diagramme en barres, un diagramme circulaire ou semi-circulaire.
+      - En informatique, on peut utiliser le <b>tableur-grapheur</b> (LibreOffice Calc par exemple)

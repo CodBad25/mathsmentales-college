@@ -1,0 +1,27 @@
+{
+    "title":"Somme et différence de deux vecteurs",
+    "description":"Calculer les coordonnées d'un vecteur resultant de la somme et de la différence de deux vecteurs.",
+    "type":"latex",
+    "ID":"2G12",
+    "dest":["2G1"],
+    "textSize":"medium",
+    "keys":["(",";","-","_","_","_","_","_"],
+    "consts":{"vecteurs":["u", "v", "w", "u'", "v'", "w'"]},
+    "options":[{
+        "name":"Somme à coordonnées positives",
+        "vars":{"x":"1_20_4","v":"0_5_2_^&","signe":"+"}
+    },{
+        "name":"Somme à coordonnées relatives",
+        "vars":{"x":"-20_20_4","v":"0_5_2_^&","signe":"+"}
+    },{
+        "name":"Différence à coordonnées positives",
+        "vars":{"x":"1_20_4","v":"0_5_2_^&","signe":"-"}
+    },{
+        "name":"Différence à coordonnées relatives",
+        "vars":{"x":"-20_20_4","v":"0_5_2_^&","signe":"-"}
+    }
+    ],
+    "question": "\\begin{cases}\\vec{${:vecteurs[:v[0]]}}(${:x[0]+';\\color{blue}{'+:x[1]}}) \\\\ \\vec{${:vecteurs[:v[1]]}}(${:x[2]+';\\color{blue}{'+:x[3]}})\\end{cases} \\quad \\vec{${:vecteurs[:v[0]]}}${:signe}\\vec{${:vecteurs[:v[1]]}}(? ; ?)",
+    "answer":"\\text{Pour }${:vecteurs[:v[0]]}(${:x[0]+';\\color{blue}{'+:x[1]}}) \\text{ et } ${:vecteurs[:v[1]]}(${:x[2]+';\\color{blue}{'+:x[3]}}), \\vec{${:vecteurs[:v[0]]+:vecteurs[:v[1]]}}\\color{red}{(${MMmath.round(:signe=='+'?:x[2]+:x[0]::x[0]-:x[2],2)};${MMmath.round(:signe=='-'?:x[1]-:x[3]::x[3]+:x[1],2)})}",
+    "value":"\\left(${MMmath.round(:signe=='+'?:x[2]+:x[0]::x[0]-:x[2],2)};${MMmath.round(:signe=='-'?:x[1]-:x[3]::x[3]+:x[1],2)}\\right)"
+}

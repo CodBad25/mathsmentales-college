@@ -1,0 +1,46 @@
+{
+    "ID":"6MC3",
+    "title":"Passage entre unités d'aire voisines",
+    "dest":["6MC"],
+    "type":"text",
+    "consts":{"units":["km","hm","dam","m","dm","cm","mm"]},
+    "fontSize":"small",
+    "options":[
+        {
+            "name":"Passages entre m, dm, cm",
+            "vars":{
+                "direction":["up","down"],
+                "unit":"${:direction=='up'?'4_5':'3_4'}",
+                "unit2":"${:direction=='up'?:unit-1::unit+1}",
+                "ans1":"${:direction=='up'?'petit':'grand'}",
+                "ans2":"${:direction=='down'?'petite':'grande'}",
+                "fraction":"${:direction=='up'?'un centième':'une centaire'}",
+                "nombre1":"${:direction=='up'?'\\dfrac{1}{100}':'100'}"
+            }
+        },{
+            "name":"Passages entre toutes les unités",
+            "vars":{
+                "direction":["up","down"],
+                "unit":"${:direction=='up'?'1_6':'0_5'}",
+                "unit2":"${:direction=='up'?:unit-1::unit+1}",
+                "ans1":"${:direction=='up'?'petit':'grand'}",
+                "ans2":"${:direction=='down'?'petite':'grande'}",
+                "fraction":"${:direction=='up'?'un centième':'une centaire'}",
+                "nombre1":"${:direction=='up'?'\\dfrac{1}{100}':'100'}"
+            }
+        }
+    ],
+    "question":[
+        "Complète la phrase :<br> $$1\\text{ ${:units[:unit]}}^2$$ est 100 fois plus ... que $$1\\text{ ${:units[:unit2]}}^2$$.",
+        "Complète la phrase :<br> La mesure d’une aire en $$\\text{${:units[:unit]}}^2$$ est 100 fois plus ... que la mesure en $$\\text{${:units[:unit2]}}^2$$.",
+        "Complète la phrase :<br> $$1\\text{ ${:units[:unit]}}^2$$ est égal à ... de $$1\\text{ ${:units[:unit2]}}^2$$",
+        "Complète l’égalité :<br> $$1\\text{ ${:units[:unit]}}^2 = ... \\text{ ${:units[:unit2]}}^2$$."
+    ],
+    "answer":[
+         "$$1\\text{ ${:units[:unit]}}^2$$ est 100 fois plus <span class='red'>${:ans1}</span> que $$1\\text{ ${:units[:unit2]}}^2$$.",
+        "La mesure d’une aire en $$\\text{${:units[:unit]}}^2$$ est 100 fois plus <span class='red'>${:ans2}</span> que la mesure en $$\\text{${:units[:unit2]}}^2$$.",
+        "$$1\\text{ ${:units[:unit]}}^2$$ est égal à <span class='red'>${:fraction}</span> de $$1\\text{ ${:units[:unit2]}}^2$$.",
+        "$$1\\text{ ${:units[:unit]}}^2 = \\color{red}{${:nombre1}} \\text{ ${:units[:unit2]}}^2$$"
+    ],
+    "value":["${:ans1}","${:ans2}","${:fraction}","${:nombre1}"]
+}

@@ -1,0 +1,193 @@
+{
+    "ID":"8GC5",
+    "title":"Reconnaitre des axes de symétrie",
+    "description":"identifier si une figure possède un ou plusieurs axes.",
+    "dest":["8GC","7GC","6GC"],
+    "repeat":5,
+    "type":"text",
+    "consts":{
+        "drapeaux":[
+            [["ad.andorre","d’"],["ba.bosnie herzegovine","de "],["by.bielorussie","de la "],["cy.chypre", "de "],["es.espagne","de l’"],["gb.royaume-uni","du "],["gb-nir.irlande du nord","de l’ "],["gb-wls.pays de galles","du "],["gr.grece","de la "],["hr.croatie", "de la "],["li.lichtenstein","du "],["md.moldavie","de la "],["me.montenegro", "du "],["mt.malte","de "],["pt.portugal","du "],["rs.serbie","de la "],["si.slovenie","de la "],["sk.slovaquie","de la "],["sm.saint-marin","de "]],
+            [["pl.pologne","de la ",1],["ro.roumanie","de la ",1], ["ru.russie","de la ",1],["se.suede","de la ",1],["ua.ukraine","de l’",1],["al.albanie","de l’",1],["at.autriche","de l’",2],["be.belgique","de la ",1],["bg.bulgarie","de la ",1],["ch.suisse","de la ",4],["cz.republique tcheque","de la ",1],["de.allemagne","de l’",1],["dk.danemark","du ",1],["ee.estonie","de l'’",1],["fi.finlande","de la ",1],["fr.france","de la ",1],["gb-eng.angleterre","de l’",2],["gb-sct.ecosse","de l’",2],["ie.irlande","de l’",1],["is.islande","de l’",1],["it.italie","de l’",1],["lt.lituanie","de la ",1],["lu.luxembourg","du ",1],["lv.lettonie","de la ",2],["mc.monaco","de ",1],["mk.macedoine du nord","de la ",2],["nl.pays bas","des ",1],["no.norvege","de la ",1]]
+        ],
+        "panneauxAvecAxes":[
+            ["arret et stationnement interdit",4],
+            ["autoroute",1],
+            ["Cédez le passage à droite",1],
+            ["chaussee retrecie",1],
+            ["circulation interdite","une infinité d’"],
+            ["Fin de toutes interdictions signalisées",2],
+            ["fin du caractere prioritaire",2],
+            ["Impasse",1],
+            ["Intersection avec route non prioritaire",1],
+            ["point de vue",1],
+            ["poste de secours",4],
+            ["ralentisseur de type dos dane",1],
+            ["route à accès réglementé",1],
+            ["route a caractere prioritaire",4],
+            ["sens interdit",2],
+            ["sens unique",1],
+            ["stationnement interdit",2],
+            ["virage droite",1]
+        ],
+        "panneauxSansAxe":[
+            "acces interdit aux cyclomoteurs",
+            "acces interdit aux pietons",
+            "acces interdit aux vehicules marchands",
+            "auberge de jeunesse",
+            "Cédez le passage aux véhicules venant en sens inverse",
+            "cedez le passage",
+            "chaussee retrecie par la droite",
+            "circulation dans les deux sens",
+            "contourrnement droite",
+            "fin interdiction de depasser",
+            "interdiction tourner à gauche",
+            "Stop"
+        ],
+        "icons":[
+            ["adobe","alarm-clock","alarm-snooze","arrow-rotate","arrow-trend-down","arrow-trend-up","arrows-rotate","at","badge-check","broom","bullhorn","carrot","check","circle-check","clock","coffee","credit-card","devices","feather","file-lines","file-search","filter","fire","folder","git-branch","image","key","link","map","message","music","objects-column","palette","shuffle","wave-pulse"],
+            [["airplay",1],["alarm-exclamation",1],["alarm-minus",1],["alarm-plus",1],["alien",1],["align-left",1],["align-right",1],["anchor",1],["angles-down",1],["angles-left",1],["angles-right",1],["angles-up",1],["backward",1],["backward-step",1],["bluesky",1],["circle-exclamation",1],["comment",1],["compact-disc",1],["cookie",1],["copy",1],["copyright",1],["equals",1],["face-smile",1],["ghost",1],["gitlab",1],["grid-plus",1],["heart",1],["location-dot",1],["microphone",1],["moon",1],["open-source",1],["rss",1],["search",1],["tag",1],["trash-can",1]],
+            [["align-center",2],["chain",2],["code",2],["bars",2],["binance",2],["equals",2],["eye",2],["film",2],["git-commit",2],["globe",2],["grip-dots",2],["pause",2],["radio",2],["rhombus",2],["unlink",2]],
+            [["codesandbox",3],["cube",3],["album",4],["atom",4],["circle-xmark",4],["clover",4],["command",4],["compress",4],["cross",4],["expand",4],["gear",8],["grid",4],["hexagon",6],["plus",4],["sparkle",4],["star",5],["sun",8],["triangle",3],["xmark",4],["microchip",4]]
+        ],"figuresClassiquesCodees":[
+            ["carré",4,["Carre1","Carre2","Carre3","Carre4"]],
+            ["rectangle",2,["rectangle1","rectangle2","rectangle3","rectangle4"]],
+            ["losange",2,["Losange1","Losange2","Losange3","Losange4"]],
+            ["parallélogramme",0,["Parallelogramme1","Parallelogramme2","Parallelogramme3"]],
+            ["triangle isocèle",1,["Triangleisocele1","Triangleisocele2","Triangleisocele3","Triangleisocele4"]],
+            ["triangle équilatéral",3,["Triangleequilateral1","Triangleequilateral2","Triangleequilateral3"]]
+        ],
+        "lettres":[
+            ["F","G","J","K","L","N","P","Q","R","S","Z"],
+            [["A",1],["B",1],["C",1],["D",1],["E",1],["H",2],["I",2],["M",1],["O",2],["T",1],["U",1],["V",1],["W",1],["X",1],["Y",1]]
+        ],
+        "mots":[
+            ["elle","non","gag","maths","ses","lol","taxe","vite","voie","bain","trop","ami"],
+            ["axa","bec","biche","bide","bio","bob","code","deci","dico","echo","ici","oie","tut","doc","choix"]
+        ],
+        "nombres":[
+            [["0",2],["1",1],["3",1],["8",2],["25",1],["52",1],["80",1],["88",2],["205",1],["502",1],["582",1],["800",1],["808",2],["888",2],["1133",1],["1830",1],["2005",1],["2255",1],["2525",1],["3010",1],["3180",1],["5522",1],["8000",1],["8001",1],["8008",2],["8031",1],["8080",1],["8258",1],["8800",1],["8888",2]],
+            [["2",0],["4",0],["5",0],["6",0],["7",0],["9",0],["22",0],["123",0],["421",0],["434",0],["505",0],["572",0],["689",0],["963",0],["1120",0],["2115",0]]
+        ]
+    },
+    "options":[
+        {
+            "name":"Panneaux de signalisation",
+            "vars":{
+                "axes":[true,false],
+                "numero":"0_${:axes?:panneauxAvecAxes.length-1::panneauxSansAxe.length-1}",
+                "fichier":"library/illustrations/signalisation/${:axes?:panneauxAvecAxes[:numero][0]::panneauxSansAxe[:numero]}.svg"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "answer":"La figure <span class='red'>${:axes?'possède '+:panneauxAvecAxes[:numero][1]+' axe'+(:panneauxAvecAxes[:numero][1]>1?'s':''):'ne possède pas d’axe'} de symétrie</span>."
+        },{
+            "name":"Meteor Icons",
+            "vars":{
+                "numero":"0_3",
+                "illustration":"0_${:icons[:numero].length-1}",
+                "fichier":"library/illustrations/icons-main/icons/${:numero!==0?:icons[:numero][:illustration][0]::icons[:numero][:illustration]}.svg"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "answer":"Cette icone <span class='red'>${:numero!==0?'possède '+:icons[:numero][:illustration][1]+' axe'+(:icons[:numero][:illustration][1]>1?'s':''):'ne possède pas d’axe'} de symétrie</span>"
+        },{
+            "name":"Figures géométriques codées",
+            "vars":{
+                "numero":"0_${:figuresClassiquesCodees.length-1}",
+                "illustration":"0_${:figuresClassiquesCodees[:numero][2].length-1}",
+                "fichier":"library/illustrations/geometrie/figuresAvecAxes/${:figuresClassiquesCodees[:numero][2][:illustration]}.svg"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "answer":"Le <b>${:figuresClassiquesCodees[:numero][0]}</b> <span class='red'>${:figuresClassiquesCodees[:numero][1]>0?'possède '+:figuresClassiquesCodees[:numero][1]+' axe'+(:figuresClassiquesCodees[:numero][1]>1?'s':''):'ne possède pas d’axe'} de symétrie</span>."
+        },{
+            "name":"Lettres majuscules",
+            "vars":{
+                "numero":"0_1",
+                "illustration":"0_${:lettres[:numero].length-1}",
+                "nomfichier":"${:numero>0?:lettres[:numero][:illustration][0]::lettres[:numero][:illustration]}",
+                "fichier":"library/illustrations/caracteres/${:nomfichier}.svg"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "answer":"Ce <b>${:nomfichier}</b> <span class='red'>${:numero>0?'possède '+:lettres[:numero][:illustration][1]+' axe'+(:lettres[:numero][:illustration][1]>1?'s':''):'ne possède pas d’axe'} de symétrie</span>."
+        },{
+            "name":"Mots en majuscules",
+            "vars":{
+                "numero":"0_1",
+                "illustration":"0_${:mots[:numero].length-1}",
+                "fichier":"library/illustrations/motsetaxes/${:mots[:numero][:illustration]}.svg"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "answer":"Ce mot <span class='red'>${:numero>0?'possède 1 axe':'ne possède pas d’axe'} de symétrie</span>."
+        },{
+            "name":"Nombres en écriture digitale",
+            "vars":{
+                "numero":"0_1",
+                "illustration":"0_${:nombres[:numero].length-1}",
+                "fichier":"library/illustrations/nombresetaxes/n${:nombres[:numero][:illustration][0]}.svg"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "answer":"Cette écriture de <b>${:nombres[:numero][:illustration][0]}</b> <span class='red'>${:nombres[:numero][:illustration][1]>0?'possède '+:nombres[:numero][:illustration][1]+' axe'+(:nombres[:numero][:illustration][1]>1?'s':''):'ne possède pas d’axe'} de symétrie</span>."
+        },{
+            "name":"Drapeaux européens",
+            "vars":{
+                "axes":[true,false],
+                "illustration":"0_${:drapeaux[:axes?1:0].length-1}",
+                "fichier":"library/illustrations/drapeaux/${:drapeaux[:axes?1:0][:illustration][0]}.svg",
+                "pays":"${:drapeaux[:axes?1:0][:illustration][1]+(:drapeaux[:axes?1:0][:illustration][0].charAt(:drapeaux[:axes?1:0][:illustration][0].indexOf('.')+1).toUpperCase())+:drapeaux[:axes?1:0][:illustration][0].substring(:drapeaux[:axes?1:0][:illustration][0].indexOf('.')+2)}",
+                "nombre":"${:axes?:drapeaux[1][:illustration][2]:0}"
+            },
+            "figure":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}'></custom-svg>"
+            },
+            "figureCorrection":{
+                "type":"svg",
+                "content":"<custom-svg src='${:fichier}' class='corrige'></custom-svg>"
+            },
+            "question":"Combien d’axes de symétrie possède le drapeau ${:pays} ?",
+            "answer":"Le drapeau ${:pays} <span class='red'>${:axes?'possède '+:nombre+' axe'+(:nombre>1?'s':''):'ne possède pas d’axe'} de symétrie</span>."
+        }
+    ],
+    "question":"Combien d’axes de symétrie cette figure possède-t-elle ?"
+}

@@ -1,0 +1,103 @@
+{
+    "dest":["8NE","7NE","6NE"],
+    "title":"CM Procédures -> Multiplier par 5 ou 50",
+    "description":"entier ou décimal contenant au plus 3 chiffres significatifs",
+    "auteur":"Xavier Levet",
+    "type":"latex",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Multiplier un entier entre 11 et 20 par 5",
+        "vars":{"d":"11_19"},
+        "question":"${:d}\\times5",
+        "shortq":"${:d}\\times5=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times10\\div2=\\color{red}{${MMmath.round(:d*5,2)}}",
+        "value":"${MMmath.round(:d*5,2)}"
+    },{
+        "name":"Multiplier un entier <100 par 5",
+        "vars":{"d":"1_100"},
+        "question":"${:d}\\times5",
+        "shortq":"${:d}\\times5=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times10\\div2=\\color{red}{${MMmath.round(:d*5,2)}}",
+        "value":"${MMmath.round(:d*5,2)}"
+    },{
+        "name":"Multiplier un entier <50 par 5",
+        "vars":{"d":"1_49"},
+        "question":"${:d}\\times5",
+        "shortq":"${:d}\\times5=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times10\\div2=\\color{red}{${MMmath.round(:d*5,2)}}",
+        "value":"${MMmath.round(:d*5,2)}"
+    },{
+        "name":"Multiplier par 5 un décimal à 1 chiffre significatif",
+        "vars":{
+            "n":"1_9",
+            "p":[1,-1,-2],
+            "d":"${MMmath.round(:n*Math.pow(10,:p),2)}"
+        },
+        "question":"${:d}\\times5",
+        "shortq":"${:d}\\times5=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times10\\div2=\\color{red}{${MMmath.round(:d*5,2)}}",
+        "value":"${MMmath.round(:d*5,2)}"
+    },{
+        "name":"Multiplier par 5 un décimal à 2 chiffre significatif dernier chiffre pair",
+        "vars":{
+            "u":"1_4",
+            "diz":"1_9",
+            "p":[1,0,-1,-2],
+            "d":"${MMmath.round((:u*2+10*:diz)*Math.pow(10,:p),2)}"
+        },
+        "question":"${:d}\\times5",
+        "shortq":"${:d}\\times5=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times10\\div2=\\color{red}{${MMmath.round(:d*5)}}",
+        "value":"${MMmath.round(:d*5,2)}"
+    },{
+        "name":"Multiplier par 5 un décimal à 3 chiffre significatif dernier chiffre pair",
+        "vars":{
+            "u":"1_4",
+            "diz":"0_9",
+            "cent":"1_9",
+            "p":[1,0,-1,-2],
+            "d":"${MMmath.round((:u*2+10*:diz+100*:cent)*Math.pow(10,:p),2)}"
+        },
+        "question":"${:d}\\times5",
+        "shortq":"${:d}\\times5=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times10\\div2=\\color{red}{${MMmath.round(:d*5)}}",
+        "value":"${MMmath.round(:d*5,2)}"
+    },{
+        "name":"Multiplier par 50 un décimal à 1 chiffre significatif",
+        "vars":{
+            "n":"1_9",
+            "p":[1,0,-1,-2],
+            "d":"${MMmath.round(:n*Math.pow(10,:p),2)}"
+        },
+        "question":"${:d}\\times50",
+        "shortq":"${:d}\\times50=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times100\\div2=\\color{red}{${MMmath.round(:d*50,2)}}",
+        "value":"${MMmath.round(:d*50,2)}"
+    },{
+        "name":"Multiplier par 50 un décimal à 2 chiffre significatif dernier chiffre pair",
+        "vars":{
+            "u":"1_4",
+            "diz":"1_9",
+            "p":[0,-1,-2],
+            "d":"${MMmath.round((:u*2+10*:diz)*Math.pow(10,:p),2)}"
+        },
+        "question":"${:d}\\times50",
+        "shortq":"${:d}\\times50=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times100\\div2=\\color{red}{${MMmath.round(:d*50)}}",
+        "value":"${MMmath.round(:d*50,2)}"
+    },{
+        "name":"Multiplier par 50 un décimal à 3 chiffre significatif dernier chiffre pair",
+        "vars":{
+            "u":"1_4",
+            "diz":"0_9",
+            "cent":"1_9",
+            "p":[-1,-2,-3],
+            "d":"${MMmath.round((:u*2+10*:diz+100*:cent)*Math.pow(10,:p),3)}"
+        },
+        "question":"${:d}\\times50",
+        "shortq":"${:d}\\times50=\\colorbox{#ECECEC}{\\quad}",
+        "answer":":question=${:d}\\times100\\div2=\\color{red}{${MMmath.round(:d*50,2)}}",
+        "value":"${MMmath.round(:d*50,2)}"
+    }
+    ]
+}

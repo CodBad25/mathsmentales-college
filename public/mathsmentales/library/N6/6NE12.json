@@ -1,0 +1,72 @@
+{
+    "title":"Multiplier un décimal (simple) par 0,1, 0,01, 0,001",
+    "speech":1,
+    "keys":["_","_","_","_","_","_","_","_"],
+    "description":"Multiplication de nombres à 1, 2 ou 3 chiffres significatifs par 0,1, 0,01, 0,001",
+    "dest":["6NE", "5NC", "4NC", "3NB"],
+    "options":[{
+        "name":"Décimal à 1 chiffre significatif par 0,1",
+        "vars":{"a":"1_9","p":"-3_3", "c":"${MMmath.round(:a*Math.pow(10,:p),3)}"},
+        "question":"${:c}\\times 0.1",
+        "audio": "${String(:c).replace('.',',')} × 0,1",
+        "answer":":question=\\color{red}{${MMmath.round(:c/10,6)}}",
+        "value":"${MMmath.round(:c/10,6)}"
+    },{
+        "name":"Décimal à 1 chiffre significatif par 0,01",
+        "vars":{"a":"1_9","p":"-3_3", "c":"${MMmath.round(:a*Math.pow(10,:p),3)}"},
+        "question": "${:c}\\times 0.01",
+        "audio": "${String(:c).replace('.',',')} × 0,01",
+        "answer":":question=\\color{red}{${MMmath.round(:c/100,6)}}",
+        "value":"${MMmath.round(:c/100,6)}"
+    },{
+        "name":"Décimal à 1 chiffre significatif par 0,001",
+        "vars":{"a":"1_9","p":"-3_3", "c":"${MMmath.round(:a*Math.pow(10,:p),3)}"},
+        "question": "${:c}\\times 0.001",
+        "audio": "${String(:c).replace('.',',')} × 0,001",
+        "answer":":question=\\color{red}{${MMmath.round(:c/1000,6)}}",
+        "value":"${MMmath.round(:c/1000,6)}"
+    },{
+        "name":"Décimal à 2 chiffres significatifs par 0,1",
+        "vars":{"a":"1_9_2","p":"-3_3", "c":"${MMmath.round((:a[0]*10+:a[1])*Math.pow(10,:p),3)}"},
+        "question":"${:c}\\times 0.1",
+        "audio": "${String(:c).replace('.',',')} × 0,1",
+        "answer":":question=\\color{red}{${MMmath.round(:c/10,6)}}",
+        "value":"${MMmath.round(:c/10,6)}"
+    },{
+        "name":"Décimal à 2 chiffres significatifs par 0,01",
+        "vars":{"a":"1_9_2","p":"-3_3", "c":"${MMmath.round((:a[0]*10+:a[1])*Math.pow(10,:p),3)}"},
+        "question": "${:c}\\times 0.01",
+        "audio": "${String(:c).replace('.',',')} × 0,01",
+        "answer":":question=\\color{red}{${MMmath.round(:c/100,6)}}",
+        "value":"${MMmath.round(:c/100,6)}"
+    },{
+        "name":"Décimal à 2 chiffres significatifs par 0,001",
+        "vars":{"a":"1_9_2","p":"-3_3", "c":"${MMmath.round((:a[0]*10+:a[1])*Math.pow(10,:p),3)}"},
+        "question": "${:c}\\times 0.001",
+        "audio": "${String(:c).replace('.',',')} × 0,001",
+        "answer":":question=\\color{red}{${MMmath.round(:c/1000,6)}}",
+        "value":"${MMmath.round(:c/1000,6)}"
+    },{
+        "name":"Décimal à 3 chiffres significatifs par 0,1",
+        "vars":{"a":"1_9_2","b":"0_9","p":"-4_4", "c":"${MMmath.round((:a[0]*100+:b*10+:a[1])*Math.pow(10,:p),4)}"},
+        "question": "${:c}\\times 0.1",
+        "audio": "${String(:c).replace('.',',')} × 0,1",
+        "answer":":question=\\color{red}{${MMmath.round(:c/10,6)}}",
+        "value":"${MMmath.round(:c/10,6)}"
+    },{
+        "name":"Décimal à 3 chiffres significatifs par 0,01",
+        "vars":{"a":"1_9_2","b":"0_9","p":"-4_4", "c":"${MMmath.round((:a[0]*100+:b*10+:a[1])*Math.pow(10,:p),4)}"},
+        "question": "${:c}\\times 0.01",
+        "audio": "${String(:c).replace('.',',')} × 0,01",
+        "answer":":question=\\color{red}{${MMmath.round(:c/100,6)}}",
+        "value":"${MMmath.round(:c/100,6)}"
+    },{
+        "name":"Décimal à 3 chiffres significatifs par 0,001",
+        "vars":{"a":"1_9_2","b":"0_9","p":"-4_4", "c":"${MMmath.round((:a[0]*100+:b*10+:a[1])*Math.pow(10,:p),4)}"},
+        "question": "${:c}\\times 0.001",
+        "audio": "${String(:c).replace('.',',')} × 0,001",
+        "answer":":question=\\color{red}{${MMmath.round(:c/1000,6)}}",
+        "value":"${MMmath.round(:c/1000,6)}"
+    }
+    ]
+}

@@ -1,0 +1,137 @@
+{
+  "title": "Calculs avec ln",
+  "dest": [
+    "HPL"
+  ],
+  "consigne": "Simplifier",
+  "options": [
+    {
+      "name": "ln d'une racine carrée",
+      "vars": {
+        "n": "1_10"
+      },
+      "question": "\\ln(\\sqrt:n)",
+      "answer": ":question=\\color{red}{${:n==1?0:'\\dfrac12 \\ln ('+:n+')'}}"
+    },
+    {
+      "name": "Sommes de ln de variables",
+      "consts": {
+        "lettres": "abcdexyz"
+      },
+      "vars": {
+        "l": "0_${:lettres.length-1}_2",
+        "x": "${:lettres[:l[0]]}",
+        "y": "${:lettres[:l[1]]}",
+        "a": "1_4_2"
+      },
+      "question": "${MMmath.signIfOne(:a[0])}\\ln(:x)+${MMmath.signIfOne(:a[1])}\\ln(:y)",
+      "answer": ":question=\\color{red}{\\ln(${MMmath.calc(MMmath.box(['Multiply',['Power',:x,:a[0]],['Power',:y,:a[1]]]))})}"
+    },
+    {
+      "name": "Différence de logarithmes de variables",
+      "consts": {
+        "lettres": "abcdexyz"
+      },
+      "vars": {
+        "l": "0_${:lettres.length-1}_2",
+        "x": "${:lettres[:l[0]]}",
+        "y": "${:lettres[:l[1]]}",
+        "a": "1_4_2"
+      },
+      "question": "${MMmath.signIfOne(:a[0])}\\ln(:x)-${MMmath.signIfOne(:a[1])}\\ln(:y)",
+      "answer": ":question=\\color{red}{\\ln\\left(${MMmath.calc(MMmath.box(['Divide',['Power',:x,:a[0]],['Power',:y,:a[1]]]))}\\right)}"
+    },
+    {
+      "name": "Introduction de ln(e^ax)",
+      "vars": {
+        "letter": [
+          "",
+          "x",
+          "y",
+          "z"
+        ],
+        "n": "2_5"
+      },
+      "question": "\\ln\\left(e^{:n:letter}\\right)",
+      "answer": ":question=\\color{red}{:n:letter}"
+    },
+    {
+      "name": "Somme de ln(e^ax)",
+      "vars": {
+        "l1": [
+          "",
+          "x",
+          "y",
+          "z"
+        ],
+        "n1": "2_5",
+        "l2": [
+          "",
+          "x",
+          "y",
+          "z"
+        ],
+        "n2": "2_5"
+      },
+      "question": "\\ln\\left(e^{:n1:l1}\\right)+ln\\left(e^{:n2:l2}\\right)",
+      "answer": ":question=${:l1!=:l2?'\\color{red}{':''}:n1:l1+:n2:l2}${:l1!=:l2?'}':'=\\color{red}{'+MMmath.parse(:n1+:l1+'+'+:n2+:l2)+'}'}"
+    },
+    {
+      "name": "Différence de ln(e^ax)",
+      "vars": {
+        "l1": [
+          "",
+          "x",
+          "y",
+          "z"
+        ],
+        "n1": "2_5",
+        "l2": [
+          "",
+          "x",
+          "y",
+          "z"
+        ],
+        "n2": "2_5"
+      },
+      "question": "\\ln\\left(e^{:n1:l1}\\right)-ln\\left(e^{:n2:l2}\\right)",
+      "answer": ":question=${:l1!=:l2?'\\color{red}{':''}:n1:l1-:n2:l2}${:l1!=:l2?'}':'=\\color{red}{'+MMmath.parse(:n1+:l1+'-'+:n2+:l2)+'}'}"
+    },
+    {
+      "name": "Somme de ln(x^n)",
+      "vars": {
+        "l1": [
+          "x",
+          "y",
+          "z"
+        ],
+        "n1": "2_5",
+        "l2": [
+          "x",
+          "y",
+          "z"
+        ],
+        "n2": "2_5"
+      },
+      "question": "\\ln\\left(:l1^:n1\\right)+\\ln\\left(:l2^:n2\\right)",
+      "answer": ":question=\\color{blue}{:n1\\ln(:l1)+:n2\\ln(:l2)}=\\color{red}{\\ln\\left(${MMmath.parse(:l1+'^'+:n1+'*'+:l2+'^'+:n2)}\\right)}"
+    },
+    {
+      "name": "ln d’un quotient de puissances",
+      "consts": {
+        "letters": "abcexyz"
+      },
+      "vars": {
+        "l": "0_${:letters.length-1}_3_^&",
+        "l1": "${:letters[:l[0]]}",
+        "n1": "1_5",
+        "l2": "${:letters[:l[1]]}",
+        "n2": "1_5",
+        "l3": "${:letters[:l[2]]}",
+        "n3": "1_5"
+      },
+      "question": "\\ln\\left(\\dfrac{:l1${:n1>1?'^'+:n1:''} :l2${:n2>1?'^'+:n2:''}}{:l3${:n3>1?'^'+:n3:''}}\\right)",
+      "answer": ":question=\\color{red}{${:n1>1||:l1=='e'?:n1:''}${:l1!='e'?'\\ln('+:l1+')':''}+${:n2>1||:l2=='e'?:n2:''}${:l2!='e'?'\\ln('+:l2+')':''}-${:n3>1||:l3=='e'?:n3:''}${:l3!='e'?'\\ln('+:l3+')':''}}"
+    }
+  ]
+}

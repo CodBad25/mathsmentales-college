@@ -1,0 +1,108 @@
+{
+    "ID":"6DA1",
+    "dest":["6DA"],
+    "type":"text",
+    "title":"Compléter un tableau à partir d’une collection",
+    "consts":{
+        "icons":[
+        ["de pommes","pommes","apple-one.svg"],
+        ["d’avions","avions","acceleration.svg"],
+        ["de poucettes","poucettes","boy-stroller.svg"],
+        ["de papillons","papillons","butterfly.svg"],
+        ["de carottes","carottes","carrot.svg"],
+        ["de chateaux","chateaux","castle.svg"],
+        ["de palmiers","palmiers","coconut-tree.svg"],
+        ["de diamants","diamants","diamond.svg"],
+        ["de ballons de basket","ballons de basket","dribble.svg"],
+        ["de canards","canards","duck.svg"],
+        ["d’éléphants","éléphants","elephant.svg"],
+        ["de smileys","smileys","emotion-happy.svg"],
+        ["de microphones","micros","entertainment.svg"],
+        ["de fantomes","fantomes","ghost.svg"],
+        ["de ceintres","ceintres","hanger.svg"],
+        ["de glaces","glaces","icecream-three.svg"],
+        ["de feuilles","feuilles","leaves.svg"],
+        ["de phares","phares","light-house.svg"],
+        ["de lunes","lunes","moon.svg"],
+        ["de souris","souris","mouse-one.svg"],
+        ["de pêches","pêches","peach.svg"],
+        ["de poires","poires","pear.svg"],
+        ["de fusées","fusées","rocket-one.svg"],
+        ["de bateaux","bateaux","sailboat-one.svg"],
+        ["de parapluies","parapluies","security.svg"],
+        ["de soleils","soleils","sun.svg"],
+        ["de montres","montres","watch-one.svg"]],
+        "colors":[["orange","orange"],["bleu","blue"],["violet","purple"],["vert","green"],["rouge","red"],["turquoise","turquoise"]]
+    },
+    "options":[
+        {
+            "name":"Compléter un tableau de deux objets",
+            "vars":{
+                "id1":"0_${:icons.length-1}",
+                "id2":"0_${:icons.length-1}_^${:id1}",
+                "obj1url":"${:icons[:id1][2]}",
+                "obj2url":"${:icons[:id2][2]}",
+                "nbobj":"8_16",
+                "suiteobjets":"0_1_${:nbobj}",
+                "nbp1":"${:suiteobjets.filter(x=>x===1).length}",
+                "nbp2":"${:nbobj-:nbp1}"
+            },
+            "question":"Complète le tableau suivant pour résumer la liste <b>${:icons[:id1][0]}</b> et de <b>${:icons[:id2][1]}</b>.<br>${:suiteobjets.map(x=>'<custom-svg src=library/illustrations/iconify/icon-park-outline--'+(x?:obj1url::obj2url)+'></custom-svg>').join(' ')}<br><table class='inline-table'><tr><th>Objet</th><th>${:icons[:id1][1]}</th><th>${:icons[:id2][1]}</th></tr><tr><td>Quantité</td><td></td><td></td></tr></table>",
+            "answer":"<table class='inline-table'><tr><th>Objet</th><th>${:icons[:id1][1]}</th><th>${:icons[:id2][1]}</th></tr><tr><td>Quantité</td><td> $$\\color{red}{${:nbp1}}$$</td><td>$$\\color{red}{${:nbp2}}$$</td></tr></table>"
+        },{
+            "name":"Compléter un tableau de trois objets",
+            "vars":{
+                "id1":"0_${:icons.length-1}",
+                "id2":"0_${:icons.length-1}_^${:id1}",
+                "id3":"0_${:icons.length-1}_^${:id1},${:id2}",
+                "obj1url":"${:icons[:id1][2]}",
+                "obj2url":"${:icons[:id2][2]}",
+                "obj3url":"${:icons[:id3][2]}",
+                "nbobj":"10_20",
+                "suiteobjets":"0_2_${:nbobj}",
+                "nbp1":"${:suiteobjets.filter(x=>x===0).length}",
+                "nbp2":"${:suiteobjets.filter(x=>x===1).length}",
+                "nbp3":"${:nbobj-:nbp1-:nbp2}"
+            },
+            "question":"Complète le tableau suivant pour résumer la liste <b>${:icons[:id1][0]}</b>, <b>${:icons[:id2][0]}</b> et <b>${:icons[:id3][0]}</b>.<br>${:suiteobjets.map(x=>'<custom-svg src=library/illustrations/iconify/icon-park-outline--'+(x==0?:obj1url:x==1?:obj2url::obj3url)+'></custom-svg>').join(' ')}<br><table class='inline-table'><tr><th>Objet</th><th>${:icons[:id1][1]}</th><th>${:icons[:id2][1]}</th><th>${:icons[:id3][1]}</th></tr><tr><td>Quantité</td><td> </td><td> </td><td></td></tr></table>",
+            "answer":"<table class='inline-table'><tr><th>Objet</th><th>${:icons[:id1][1]}</th><th>${:icons[:id2][1]}</th><th>${:icons[:id3][1]}</th></tr><tr><td>Quantité</td><td>$$\\color{red}{${:nbp1}}$$</td><td>$$\\color{red}{${:nbp2}}$$</td><td>$$\\color{red}{${:nbp3}}$$</td></tr></table>"
+        },{
+            "name":"Compléter un tableau de deux couleurs",
+            "vars":{
+                "idobj":"0_${:icons.length-1}",
+                "objurl":"${:icons[:idobj][2]}",
+                "idcolors":"0_${:colors.length-1}_2_^&",
+                "couleur1":"${:colors[:idcolors[0]][0]}",
+                "couleur2":"${:colors[:idcolors[1]][0]}",
+                "color1":"${:colors[:idcolors[0]][1]}",
+                "color2":"${:colors[:idcolors[1]][1]}",
+                "nbobj":"8_16",
+                "suiteobjets":"0_1_${:nbobj}",
+                "nbp1":"${:suiteobjets.filter(x=>x===1).length}",
+                "nbp2":"${:nbobj-:nbp1}"
+            },
+            "question":"Complète le tableau suivant pour résumer la liste <b>${:icons[:idobj][0]}</b> dont les couleurs sont : ${:couleur1} et ${:couleur2}</b>.<br>${:suiteobjets.map(x=>'<custom-svg style=color:'+(x===1?:color1::color2)+' src=library/illustrations/iconify/icon-park-outline--'+:objurl+'></custom-svg>').join(' ')}<br><table class='inline-table'><tr><th>${:icons[:idobj][1]}</th><th>${:couleur1}</th><th>${:couleur2}</th></tr><tr><td>Quantité</td><td> </td><td></td></tr></table>",
+            "answer":"<table class='inline-table'><tr><th>${:icons[:idobj][1]}</th><th>${:couleur1}</th><th>${:couleur2}</th></tr><tr><td>Quantité</td><td> $$\\color{red}{${:nbp1}}$$</td><td>$$\\color{red}{${:nbp2}}$$</td></tr></table>"
+        },{
+            "name":"Compléter un tableau de trois couleurs",
+            "vars":{
+                "idobj":"0_${:icons.length-1}",
+                "objurl":"${:icons[:idobj][2]}",
+                "idcolors":"0_${:colors.length-1}_3_^&",
+                "couleur1":"${:colors[:idcolors[0]][0]}",
+                "couleur2":"${:colors[:idcolors[1]][0]}",
+                "couleur3":"${:colors[:idcolors[2]][0]}",
+                "color1":"${:colors[:idcolors[0]][1]}",
+                "color2":"${:colors[:idcolors[1]][1]}",
+                "color3":"${:colors[:idcolors[2]][1]}",
+                "nbobj":"10_20",
+                "suiteobjets":"0_2_${:nbobj}",
+                "nbp1":"${:suiteobjets.filter(x=>x===0).length}",
+                "nbp2":"${:suiteobjets.filter(x=>x===1).length}",
+                "nbp3":"${:nbobj-:nbp1-:nbp2}"
+            },
+            "question":"Complète le tableau suivant pour résumer la liste <b>${:icons[:idobj][0]}</b> dont les couleurs sont : ${:couleur1}, ${:couleur2} et ${:couleur3}</b>.<br>${:suiteobjets.map(x=>'<custom-svg style=color:'+(x===0?:color1:x==1?:color2::color3)+' src=library/illustrations/iconify/icon-park-outline--'+:objurl+'></custom-svg>').join(' ')}<br><table class='inline-table'><tr><th>${:icons[:idobj][1]}</th><th>${:couleur1}</th><th>${:couleur2}</th><th>${:couleur3}</th></tr><tr><td>Quantité</td><td></td><td></td><td></td></tr></table>",
+            "answer":"<table class='inline-table'><tr><th>${:icons[:idobj][1]}</th><th>${:couleur1}</th><th>${:couleur2}</th><th>${:couleur3}</th></tr><tr><td>Quantité</td><td>$$\\color{red}{${:nbp1}}$$</td><td>$$\\color{red}{${:nbp2}}$$</td><td>$$\\color{red}{${:nbp3}}$$</td></tr></table>"
+        }
+    ]
+}

@@ -1,0 +1,117 @@
+{
+    "title":"CM Connaissances -> Ajouter un nombre entier inférieur à 10 d'unités, dizaines, ... à un nombre décimal lorsqu'il n'y a pas de retenues",
+    "auteur":"Xavier Levet",
+    "dest":["8NC","7NC"],
+    "type":"text",
+    "options":[{
+        "name":"Ajouter des centaines",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_8",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${9-:centaines}"
+        },
+        "question":[
+            "$$${:n} + ${:x*100}$$",
+            "$$${:n} + ${:x}\\times 100$$",
+            "Combien font $$${:n}$$ et $$${:x}$$ centaine${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n} + ${:x*100} = \\color{red}{${:n+:x*100}}$$",
+            "$$${:n} + ${:x}\\times 100 = \\color{red}{${:n+:x*100}}$$",
+            "$$${:n}$$ et $$${:x}$$ centaine${:x>1?'s':''} font $$\\color{red}{${:n+:x*100}}$$"
+        ],
+        "value":"${MMmath.round(:n+:x*100)}"
+    },{
+        "name":"Ajouter des dizaines",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_8",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${9-:dizaines}"
+        },
+        "question":[
+            "$$${:n} + ${:x*10}$$",
+            "$$${:n} + ${:x}\\times 10$$",
+            "Combien font $$${:n}$$ et $$${:x}$$ dizaine${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n} + ${:x*10} = \\color{red}{${:n+:x*10}}$$",
+            "$$${:n} + ${:x}\\times 10 = \\color{red}{${:n+:x*10}}$$",
+            "$$${:n}$$ et $$${:x}$$ dizaine${:x>1?'s':''} font $$\\color{red}{${:n+:x*10}}$$"
+        ],
+        "value":"${MMmath.round(:n+:x*10)}"
+    },{
+        "name":"Ajouter des unités",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_8",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${9-:unites}"
+        },
+        "question":[
+            "$$${:n}+${:x}$$",
+            "$$${:n} + ${:x}\\times 1$$",
+            "Combien font $$${:n}$$ et $$${:x}$$ unité${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n}+${:x}= \\color{red}{${MMmath.round(:n+:x,1)}}$$",
+            "$$${:n}+${:x}\\times 1= \\color{red}{${MMmath.round(:n+:x,1)}}$$",
+            "$$${:n}$$ et $$${:x}$$ unité${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n+:x,1)}}$$"
+        ],
+        "value":"${MMmath.round(:n+:x,1)}"
+    },{
+        "name":"Ajouter des dixièmes",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_8",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${9-:dixiemes}"
+        },
+        "question":[
+            "$$${:n}+${MMmath.round(:x/10,1)}$$",
+            "$$${:n} + \\dfrac{${:x}}{10}$$",
+            "Combien font $$${:n}$$ et $$${:x}$$ dixième${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n}+${MMmath.round(:x/10,1)}=\\color{red}{${MMmath.round(:n+:x/10,2)}}$$",
+            "$$${:n} + \\dfrac{${:x}}{10} = \\color{red}{${MMmath.round(:n+:x/10,2)}}$$",
+            "$$${:n}$$ et $$${:x}$$ dixième${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n+:x/10,2)}}$$."
+        ],
+        "value":"${MMmath.round(:n+:x/10,2)}"
+    },{
+        "name":"Ajouter des centièmes",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_8",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${9-:centiemes}"
+        },
+        "question":[
+            "$$${:n}+${MMmath.round(:x/100,2)}$$",
+            "$$${:n} + \\dfrac{${:x}}{100}$$",
+            "Combien font $$${:n}$$ et $$${:x}$$ centième${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n}+${MMmath.round(:x/100,2)}=\\color{red}{${MMmath.round(:n+:x/100,3)}}$$",
+            "$$${:n} + \\dfrac{${:x}}{100} = \\color{red}{${MMmath.round(:n+:x/100,3)}}$$",
+            "$$${:n}$$ et $$${:x}$$ centième${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n+:x/100,3)}}$$."
+        ],
+        "value":"${MMmath.round(:n+:x/100,3)}"
+    }]
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Norme d’un vecteur",
+  "dest": [
+    "GG1",
+    "2G1",
+    "TGO"
+  ],
+  "type": "text",
+  "consts": {
+    "letters": "abcdeuvw"
+  },
+  "vars": {
+    "idl": "0_${:letters.length-1}",
+    "v": "${:letters[:idl]}"
+  },
+  "options": [
+    {
+      "name": "Vecteur du plan",
+      "vars": {
+        "x": "-10_10",
+        "y": "-10_10"
+      },
+      "question": [
+        "Sachant que $$\\vec :v(:x;:y)$$, calculer $$\\lVert \\vec :v \\rVert$$.",
+        "Sachant que $$\\vec :v=:x\\vec i ${MMmath.signedNumberButOne(:y)} \\vec j$$, calculer $$\\lVert \\vec :v \\rVert$$."
+      ],
+      "answer": "$$\\lVert \\vec :v \\rVert=\\sqrt{(:x)^2+(:y)^2}=\\color{red}{${MMmath.simplifieRacine((:x)**2+(:y)**2)}}$$"
+    },
+    {
+      "name": "Vecteur de l’espace",
+      "vars": {
+        "x": "-10_10",
+        "y": "-10_10",
+        "z": "-10_10"
+      },
+      "question": [
+        "Sachant que $$\\vec :v(:x;:y;:z)$$, calculer $$\\lVert \\vec :v \\rVert$$.",
+        "Sachant que $$\\vec ${:v}=${:x}\\vec i ${MMmath.signedNumberButOne(:y)} \\vec j ${MMmath.signedNumberButOne(:y)} \\vec k$$, calculer $$\\lVert \\vec ${:v} \\rVert$$."
+      ],
+      "answer": "$$\\lVert \\vec ${:v} \\rVert=\\sqrt{(${:x})^2+(${:y})^2+(${:z})^2}=\\color{red}{${MMmath.simplifieRacine((:x)**2+(:y)**2+(:z)**2)}}$$"
+    }
+  ]
+}

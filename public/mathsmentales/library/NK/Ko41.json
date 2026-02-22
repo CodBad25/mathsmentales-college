@@ -1,0 +1,14 @@
+{
+    "title":"Signe d'une fonction affine",
+    "type":"text",
+    "textSize":"small",
+    "ID":"Ko41",
+    "description":"Dresser le tableau de signe d'une fonction affine",
+    "dest":["2G3","Ko4"],
+    "name":"Dresser un tableau de signes",
+    "vars":{"a":"-9_9_^0","b":"0_10","choix":"1_3"},
+    "question": "Compléter le tableau de signe de $$f(x)=${:a}x+${:b}$$<br><table class='inline-table'><tr><td>$$ x $$ </td><td> ... </tr><tr><td>$$ :a x+:b $$</td><td> ... 0 ... </td></tr></table>",
+    "answer":"<table class='inline-table'><tr><td>$$ x$$ </td><td>$$ \\color{red}{${MMmath.calc('-'+:b+'/('+:a+')')}}$$</td></tr><tr><td>$$ ${:a}x+${:b}$$</td><td>$$\\color{red}{${MMmath.sign(-:a)}} \\quad 0 \\quad \\color{red}{${MMmath.sign(:a)}}$$</td></tr></table>",
+    "value":"$$\\color{red}{${MMmath.sign(-:a)}} \\quad 0 \\quad \\color{red}{${MMmath.sign(:a)}}$$"
+
+}

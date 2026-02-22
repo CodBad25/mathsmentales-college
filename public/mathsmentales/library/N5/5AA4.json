@@ -1,0 +1,73 @@
+{
+    "ID":"5AA4",
+    "title":"Comprendre des commandes de tracé",
+    "type":"text",
+    "description":"scratch polygones",
+    "dest":["5AA","4AA","3AA"],
+    "repeat":3,
+    "options":[{
+        "name":"Reconnaitre un polygone avec jusqu'à 6 côtés",
+        "consts":{
+            "figures":["triangle", "carré", "pentagone", "hexagone"],
+            "angles":[120, 90, 72, 60]
+        },
+        "vars":{"x":"3_6","d0":"1_10", "d":"${:d0*10}", "sens":["turnright", "turnleft"]},
+        "figure":{
+            "type":"scratch",
+            "content":[
+                "Quand @greenFlag est cliqué",
+                "stylo en position d'écriture",
+                "répéter (${:x}) fois",
+                "avancer de (${:d}) pas",
+                "tourner @${:sens} de (${:angles[:x-3]}) degrés",
+                "fin"
+            ]
+        },
+        "question":"Quelle figure va être tracée ?",
+        "answer":"Un <span class='red'>${:figures[:x-3]}</span> va être tracé.",
+        "value":"${:figures[:x-3]}"
+    },{
+        "name":"Reconnaitre un polygone avec des cotés en trop",
+        "consts":{
+            "figures":["triangle", "carré", "pentagone", "hexagone"],
+            "angles":[120, 90, 72, 60]
+        },
+        "vars":{"x":"3_6","d0":"1_10", "d":"${:d0*10}", "sens":["turnright", "turnleft"], "trop":"-3_4_^0"},
+        "figure":{
+            "type":"scratch",
+            "content":[
+                "Quand @greenFlag est cliqué",
+                "stylo en position d'écriture",
+                "répéter (${:x+:trop}) fois",
+                "avancer de (${:d}) pas",
+                "tourner @${:sens} de (${:angles[:x-3]}) degrés",
+                "fin"
+            ]
+        },
+        "question":"Quelle figure va être tracée ?",
+        "answer":"${:trop>0?'Un <span class=\"red\">'+:figures[:x-3]+'</span> va être tracé.':(:x+:trop)==0?'<span class=\"red\">Un point</span> sera dessiné.':(:x+:trop)==1?'<span class=\"red\">Un segment</span> sera tracé.':'<span class=\"red\">Une ligne brisée</span> sera tracée.'}",
+        "value":"${:trop>0?'Un '+:figures[:x-3]:(:x+:trop)==0?'Un point':(:x+:trop)==1?'Un segment':'Une ligne brisée.'}"
+    },{
+        "name":"Reconnaitre un polygone avec 8, 9, 10, 12 côtés",
+        "consts":{
+            "figures":["octogone", "énnéagone", "décagone", "dodécagone"],
+            "cotes":[8, 9, 10, 12],
+            "angles":[45, 40, 36, 30]
+        },
+        "vars":{"x":"0_3","d0":"1_10", "d":"${:d0*10}", "sens":["turnright", "turnleft"]},
+        "figure":{
+            "type":"scratch",
+            "content":[
+                "Quand @greenFlag est cliqué",
+                "stylo en position d'écriture",
+                "répéter (${:cotes[:x]}) fois",
+                "avancer de (${:d}) pas",
+                "tourner @${:sens} de (${:angles[:x]}) degrés",
+                "fin"
+            ]
+        },
+        "question":"Quelle figure va être tracée ?",
+        "answer":"Un <span class='red'>${:figures[:x]}</span> va être tracé.",
+        "value":"${:figures[:x]}"
+    }]
+}

@@ -1,0 +1,37 @@
+{
+    "title":"CE2, CM1 Procédures -> Produit d'un nombre < 10 par un nombre entier de dizaines, de centaines",
+    "dest":["9ND","8ND"],
+    "auteur":"Xavier Levet",
+    "consigne":"Calculer",
+    "options":[
+        {
+        "name":"Nombre de dizaines < 3",
+        "vars":{"a":"1_9","b":"1_3","c":"${:b*10}",
+         "qte":"${:a*:c}"  }  
+        },{
+        "name":"Nombre de dizaines < 5",
+        "vars":{"a":"1_9","b":"1_5","c":"${:b*10}",
+         "qte":"${:a*:c}"  }  
+        },{
+        "name":"Nombre de dizaines < 9",
+        "vars":{"a":"1_9","b":"1_9","c":"${:b*10}",
+         "qte":"${:a*:c}"  }  
+        },{
+        "name":"Nombre de centaines < 3",
+        "vars":{"a":"1_9","b":"1_3","c":"${:b*100}",
+         "qte":"${:a*:c}"  }  
+        },{
+        "name":"Nombre de centaines < 5",
+        "vars":{"a":"1_9","b":"1_5","c":"${:b*100}",
+         "qte":"${:a*:c}"  }  
+        },{
+        "name":"Nombre de centaines < 9",
+        "vars":{"a":"1_9","b":"1_9","c":"${:b*100}",
+         "qte":"${:a*:c}"  }  
+        }
+    ],
+
+    "question":"${:a} \\times ${:c}",
+    "answer":":question =\\color{red}{${:a*:c}}",
+    "value":"${:a*:c}"
+}

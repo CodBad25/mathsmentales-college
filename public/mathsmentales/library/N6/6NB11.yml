@@ -1,0 +1,32 @@
+title: Connaissance des fractions simples
+description: valeur décimale de 1/2, 1/4, 3/4 et équivalences
+type: text
+options:
+  - name: Valeur décimale
+    consts:
+      fractions: [[1, 2], [1, 4], [3, 4], [3, 2], [4, 2], [5, 2]]
+      valeurs: [0.5, 0.25, 0.75, 1.5, 2, 2.5]
+    vars:
+      cxf: "0_${:fractions.length-1}"
+      fraction: \dfrac{${:fractions[:cxf][0]}}{${:fractions[:cxf][1]}}
+    question: Quelle est l’écriture décimale de $$:fraction$$ ?
+    answer: $$:fraction=\color{red}{${:valeurs[:cxf]}}$$
+    value: :valeurs[:cxf]
+  - name: Relations entre les fractions et 1
+    consts:
+      operations:
+        [
+          \dfrac12+\dfrac12,
+          \dfrac14+\dfrac14,
+          1-\dfrac14,
+          \dfrac34-\dfrac14,
+          \dfrac12+\dfrac14,
+          \dfrac34+\dfrac14,
+        ]
+      valeurs: [1, \dfrac12, \dfrac34, \dfrac12, \dfrac34, 1]
+    vars:
+      cxo: "0_${:operations.length-1}"
+      operation: ${:operations[:cxo]}
+    question: $$:operation=...$$ ?
+    answer: $$:operation=\color{red}{${:valeurs[:cxo]}}$$
+    value: :valeurs[:cxo]

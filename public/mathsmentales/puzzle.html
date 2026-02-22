@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        @page{
+            size:A4 portrait;
+            margin:0.8cm;
+        }
+    </style>
+    <link rel="stylesheet" href="css/puzzle-2.3.176.css">
+    <script src="js/lib.puzzle-2.3.176.js" type="module" id="mmscriptid"></script>
+    <title>Puzzle Mathsmentales</title>
+</head>
+<body size="A4">
+    <button onclick="window.print();" class="noprint" title="Imprimer ou enregistrer en pdf"style="position: absolute;left:1pt;top:1pt;width:70pt;height:18pt;">🖨️ Imprimer</button>
+    <section class="noprint">
+        <section class="is-flex" id="puzzleChoice">
+            <article>Puzzle >></article>
+            <article class="btn selected" id="btn-pyr16"><span class="noselect">Pyramide 16 pièces</span><div class="circle"></div></article>
+            <article class="btn" id="btn-los18"><span class="noselect">Losange 18 pièces</span><div class="circle"></div></article>
+            <article class="btn" id="btn-hexa24"><span class="noselect">Hexagone 24 pièces</span><div class="circle"></div></article>
+            <article class="btn" id="btn-pier12"><span class="noselect">Pierre 12 pièces</span><div class="circle"></div></article>
+        </section>
+        Distracteurs : 
+<input type="radio" id="radio-nodistract" name="radio-distract" checked><label for="radio-nodistract"> sans</label>
+<input type="radio" id="radio-distract" name="radio-distract"><label for="radio-distract"> avec</label> | 
+<label for="formulaSize">Taille des formules </label><input type="number" size="6" id="formulaSize" min="0.05" max="2" step="0.05" value="0.35">em
+<br>
+<div id="info"></div>
+</section>
+    <section id="creator-content">
+        <h2>Solution</h2>
+        <div id="puzzle"></div>
+        <h2>Pièces</h2>
+        <div id="impression"></div>
+    </section>
+<script src="bridge.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{
+    "ID": "11ND6",
+    "dest": ["11ND", "10ND", "9ND", "8ND"],
+    "description": "Variations autour de la somme de nombres inférieurs à 10",
+    "title": "Varier les tables d´addition.",
+    "speech": 1,
+    "options": [{
+            "name": "Table de 1",
+            "vars": {
+                "n": 1,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 2",
+            "vars": {
+                "n": 2,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 3",
+            "vars": {
+                "n": 3,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 4",
+            "vars": {
+                "n": 4,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 5",
+            "vars": {
+                "n": 5,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 6",
+            "vars": {
+                "n": 6,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 7",
+            "vars": {
+                "n": 7,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 8",
+            "vars": {
+                "n": 8,
+                "m": "0_10"
+            }
+        }, {
+            "name": "Table de 9",
+            "vars": {
+                "n": 9,
+                "m": "0_10"
+            }
+        }
+],
+    "question":[
+        "${:n} + ${:m} = ...",
+        "${:m} + ${:n} = ...",
+        "... + ${:n} = ${:m+:n}",
+        "${:n+:m} - ${:n} = ...",
+        "${:n+:m}\\text{ c'est }${:n}\\text{ plus ...}",
+        "\\text{À }${:m+:n}\\text{ j'enlève }${:n}\\text{. Combien reste-t-il ?}",
+        "\\text{Combien manque-t-il à }${:n}\\text{ pour faire }${:n+:m} ?"
+    ],
+    "shortq":[
+        "${:n} + ${:m} = \\colorbox{#ECECEC}{\\quad}",
+        "${:m} + ${:n} = \\colorbox{#ECECEC}{\\quad}",
+        "\\colorbox{#ECECEC}{\\quad} + ${:n} = ${:m+:n}",
+        "${:n+:m} - ${:n} = \\colorbox{#ECECEC}{\\quad}",
+        "${:n+:m}=${:n}+\\colorbox{#ECECEC}{\\quad}",
+        "${:m+:n}-${:n}=\\colorbox{#ECECEC}{\\quad}",
+        "${:n}+\\colorbox{#ECECEC}{\\quad}=${:n+:m}"
+    ],
+    "audio":[
+        "Combien font ${:n} pluss ${:m} ?",
+        "Combien font ${:m} pluss ${:n} ?",
+        "À combien ajouter ${:n} pour avoir ${:n+:m} ?",
+        "${:n+:m} moins ${:n} est égal à combien ?",
+        "${:n+:m} c'est ${:n} plus combien ?",
+        "À ${:m+:n} j'enlève ${:n} . Combien reste-t-il ?",
+        "Combien manque-t-il à ${:n} pour faire ${:n+:m} ?"
+    ],
+    "answer":[
+        "${:n} + ${:m} = \\color{red}{${:n+:m}}",
+        "${:m} + ${:n} = \\color{red}{${:n+:m}}",
+        "\\color{red}{${:m}} + ${:n}=${:n+:m}",
+        "${:n+:m} - ${:n} = \\color{red}{${:m}}",
+        "${:n+:m}\\text{ c'est } ${:n}\\text{ plus }\\color{red}{${:m}}",
+        "\\text{Il reste }\\color{red}{${:m}}",
+        "\\text{Il manque }\\color{red}{${:m}}"
+    ],
+    "value":[
+        "${:n+:m}",
+        "${:m+:n}",
+        "${:m}",
+        "${:m}",
+        "${:m}",
+        "${:m}",
+        "${:m}"
+    ]
+}

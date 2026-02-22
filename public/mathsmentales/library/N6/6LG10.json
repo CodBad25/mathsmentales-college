@@ -1,0 +1,42 @@
+{
+    "title":"Leçon : Symétrie axiale",
+    "type":"text",
+    "ID":"6LG10",
+    "description":"Questions sur la symétrie axiale. Ne pas utiliser en mode interactif",
+    "dest":["6LG"],
+    "options":[
+        {
+            "name":"Définition",
+            "question":[
+                "Deux points sont symétriques par rapport à une droite (d). Qu’est-ce que (d) pour ces deux points ?",
+                "Quel mouvement est associé à la symétrie axiale ?",
+                "Qu’appelle-t-on axe de symétrie d’une figure ?",
+                "Quand est-ce que deux figures sont symétriques par rapport à une droite ?"
+            ],
+            "answer":[
+                "(d) est la <span class='red'>médiatrice</span> du segment qui joint les deux points.",
+                "Le mouvement associé à la symétrie axiale est le <span class='red'>pliage</span>.",
+                "L’axe du symétrie d’une figure est une droite par rapport à laquelle le symétrique de la figure se superpose elle-même.",
+                "Deux figures sont symétriques par rapport à une droite si les figures se superposent par pliage le long de cette droite."
+            ]
+        },{
+            "name":"Propriétés",
+            "question":[
+                "Qu’est-ce que le symétrique d’un <b>point</b> par une symétrie axiale ?",
+                "Qu’est-ce que le symétrique d’une <b>droite</b par une symétrie axiale ?",
+                "Qu’est-ce que le symétrique d’une <b>demi-droite</b> par une symétrie axiale ?",
+                "Qu’est-ce que le symétrique d’un <b>segment</b> par une symétrie axiale ?",
+                "Qu’est-ce que le symétrique d’un <b>angle</b> par une symétrie axiale ?",
+                "Qu’est-ce que le symétrique d’un <b>cercle</b> par une symétrie axiale ?"
+            ],
+            "answer":[
+                "C’est <span class='red'>un point</span>.",
+                "C’est <span class='red'>une droite</span> car la symétrie axiale conserve l’alignement.",
+                "C’est <span class='red'>une demi-droite</span> car la symétrie axiale conserve l’alignement.",
+                "C’est <span class='red'>un segment de même longueur</span> car la symétrie axiale conserve l’alignement et les distances.",
+                "C’est <span class='red'>un angle de même mesure</span> car la symétrie axiale conserve la mesure des angles.",
+                "C’est <span class='red'>un cercle</span> car la symétrie axiale conserve les longueurs."
+            ]
+        }
+    ]
+}

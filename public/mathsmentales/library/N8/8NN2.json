@@ -1,0 +1,34 @@
+{
+    "title": "Faits numériques sur les moitiés",
+    "ID":"8NN2",
+    "dest":["8NN","7NN","6NN"],
+    "type":"text",
+    "repeat":true,
+    "options":[{
+        "name":"Nombres de 2 à 40",
+        "vars":{
+            "m":"1_20",
+            "n":"${:m*2}"
+        }
+    },{
+        "name":"Nombres de dizaines entières 40, 50... 150",
+        "vars":{
+            "m":[20,25,30,35,40,45,50,60,75],
+            "n":"${:m*2}"
+        }
+    },{
+        "name":"Nombres de centaines entières 200, 300... 1200",
+        "vars":{
+            "m":[100,150,200,250,300,400,500,600],
+            "n":"${:m*2}"
+        }
+    }],
+    "question":[
+        "Quelle est la moitié de $$${:n}$$ ?",
+        "$$${:n} \\div 2$$"
+    ],
+    "answer":[
+        "La moitié de $$${:n}$$ est $$\\color{red}{${:m}}$$.",
+        "$$${:n}\\div 2 = \\color{red}{${:m}}$$"
+    ]
+}

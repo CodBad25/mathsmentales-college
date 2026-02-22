@@ -1,0 +1,35 @@
+{
+    "title":"Quotient de fractions",
+    "type":"latex",
+    "ID":"4NC4",
+    "textSize":"medium",
+    "keys":["_","_","-","/","_","_","_","_"],
+    "dest":["4NC", "3NB", "2N2"],
+    "consigne":"Donner la fraction irréductible ou l'entier égal.",
+    "options":[{
+        "name":"Quotient de fractions positives",
+        "vars":{"num":"1_12_2","den":"2_12_2"}
+    },{
+        "name":"Quotient de fractions avec relatifs",
+        "vars":{"num":"-12_12_2_^0","den":"-12_12_2_^-1,0,1"}
+    },{
+        "name":"Diviser par un entier",
+        "vars":{"num":"-12_12_^0", "den":"-12_12_^-1,0,1","nb":"-12_12_^0,1"},
+        "question":["\\dfrac{${:num}}{${:den}}\\div${(:nb<0)?'('+:nb+')'::nb}=?",
+            "\\dfrac{\\dfrac{${:num}}{${:den}}}{${:nb}}=?"],
+        "answer":":question|2=\\color{green}{\\dfrac{${:num}}{${:den}}\\times\\dfrac{1}{${:nb}}}=\\color{red}{\\displaystyle${MMmath.calc(:num+'/('+:den+')/('+:nb+')',false)}}",
+        "value":"${MMmath.calc(:num+'/('+:den+')/('+:nb+')')}"
+    },{
+        "name":"Diviser un entier par une fraction",
+        "vars":{"num":"-12_12_^0", "den":"-12_12_^-1,0,1","nb":"-12_12_^0,1"},
+        "question":["${(:nb<0)?'('+:nb+')'::nb}\\div\\dfrac{${:num}}{${:den}}=?",
+            "\\dfrac{${:nb}}{\\dfrac{${:num}}{${:den}}}=?"],
+        "answer":":question|2=\\color{green}{${:nb}\\times\\dfrac{${:den}}{${:num}}}=\\color{red}{\\displaystyle${MMmath.calc('('+:nb+')*('+:den+')/('+:num+')',false)}}",
+        "value":"${MMmath.calc('('+:nb+')*('+:den+')/('+:num+')')}"
+    }
+    ],
+    "question":["\\dfrac{${:num[0]}}{${:den[0]}}\\div\\dfrac{${:num[1]}}{${:den[1]}}=?",
+        "\\dfrac{\\dfrac{${:num[0]}}{${:den[0]}}}{\\dfrac{${:num[1]}}{${:den[1]}}}=?"],
+    "answer":":question|2=\\color{green}{\\dfrac{${:num[0]}}{${:den[0]}}\\times\\dfrac{${:den[1]}}{${:num[1]}}}=\\color{red}{\\displaystyle${MMmath.calc(:num[0]+'*('+:den[1]+')/('+:den[0]+')/('+:num[1]+')',false)}}",
+    "value":"${MMmath.calc(:num[0]+'*('+:den[1]+')/('+:den[0]+')/('+:num[1]+')')}"
+}

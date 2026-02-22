@@ -1,0 +1,68 @@
+{
+    "ID":"TN72",
+    "title":"Primitives avec les fonctions logarithme népérien et exponentielle",
+    "dest":["TN7"],
+    "type":"text",
+    "options":[
+        {
+            "name":"Primitive de $$\\dfrac{f'}{f}$$",
+            "vars":{
+                "a":"-10_10_^0",
+                "bz":"0_1",
+                "b":"${:bz==0?0:'-10_10'}",
+                "F":"\\ln |${MMmath.box(['Add',['Multiply',:a,'x'],:b])}| + C",
+                "f":"${MMmath.box(['Divide',:a,['Add',['Multiply',:a,'x'],:b]])}"
+            }
+        },{
+            "name":"Primitive de $$\\dfrac1f$$",
+            "vars":{
+                "a":"-10_10_^0",
+                "bz":"0_1",
+                "b":"${:bz==0?0:'-10_10'}",
+                "F":"${MMmath.box(['Divide',1,:a])}\\ln |${MMmath.box(['Add',['Multiply',:a,'x'],:b])}| + C",
+                "f":"${MMmath.box(['Divide',1,['Add',['Multiply',:a,'x'],:b]])}"
+            }
+        },{
+            "name":"Primitive de $$\\dfrac af$$",
+            "vars":{
+                "a":"-10_10_^0",
+                "bz":"0_1",
+                "b":"${:bz==0?0:'-10_10'}",
+                "c":"-10_10_^0",
+                "F":"${MMmath.box(['Divide',:c,:a])}\\ln |${MMmath.box(['Add',['Multiply',:a,'x'],:b])}| + C",
+                "f":"${MMmath.box(['Divide',:c,['Add',['Multiply',:a,'x'],:b]])}"
+            }
+        },{
+            "name":"Primitive de $$f'(x)e^{f(x)}$$",
+            "vars":{
+                "a":"-10_10_^0",
+                "bz":"0_1",
+                "b":"${:bz==0?0:'-10_10'}",
+                "F":"e^{${MMmath.box(['Add',['Multiply',:a,'x'],:b])}} + C",
+                "f":"${:a}e^{${MMmath.box(['Add',['Multiply',:a,'x'],:b])}}"
+            }
+        },{
+            "name":"Primitive de $$e^{f(x)}$$",
+            "vars":{
+                "a":"-10_10_^0",
+                "bz":"0_1",
+                "b":"${:bz==0?0:'-10_10'}",
+                "F":"${MMmath.box(['Divide',1,:a])}e^{${MMmath.box(['Add',['Multiply',:a,'x'],:b])}} + C",
+                "f":"e^{${MMmath.box(['Add',['Multiply',:a,'x'],:b])}}"
+            }
+        },{
+            "name":"Primitive de $$a e^{f(x)}$$",
+            "vars":{
+                "a":"-10_10_^0",
+                "bz":"0_1",
+                "b":"${:bz==0?0:'-10_10'}",
+                "c":"-10_10_^0",
+                "F":"${MMmath.box(['Divide',:c,:a])}e^{${MMmath.box(['Add',['Multiply',:a,'x'],:b])}} + C",
+                "f":"${:c}e^{${MMmath.box(['Add',['Multiply',:a,'x'],:b])}}"
+            }
+        }
+    ],
+    "question": "Donner une primitive de la fonction<br> $$f(x)=${:f}$$",
+    "answer":"$$\\int\\!${:f}\\,\\operatorname{d}x = \\color{red}{${:F}}$$",
+    "value":"${:F}"
+}

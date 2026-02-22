@@ -1,0 +1,88 @@
+{
+    "ID":"6DA3",
+    "dest":["6DA"],
+    "type":"text",
+    "title":"Compléter un tableau à double entrée à partir d’une collection",
+    "consts":{
+        "icons":[
+        ["de pommes","pommes","apple-one.svg"],
+        ["de carottes","carottes","carrot.svg"],
+        ["de glaces","glaces","icecream-three.svg"],
+        ["de pêches","pêches","peach.svg"],
+        ["de poires","poires","pear.svg"],
+        ["de palmiers","palmiers","coconut-tree.svg"],
+        ["de canards","canards","duck.svg"],
+        ["de papillons","papillons","butterfly.svg"],
+        ["d’éléphants","éléphants","elephant.svg"],
+        ["d’avions","avions","acceleration.svg"],
+        ["de poucettes","poucettes","boy-stroller.svg"],
+        ["de chateaux","chateaux","castle.svg"],
+        ["de diamants","diamants","diamond.svg"],
+        ["de ballons de basket","ballons de basket","dribble.svg"],
+        ["de smileys","smileys","emotion-happy.svg"],
+        ["de microphones","micros","entertainment.svg"],
+        ["de fantomes","fantomes","ghost.svg"],
+        ["de ceintres","ceintres","hanger.svg"],
+        ["de feuilles","feuilles","leaves.svg"],
+        ["de phares","phares","light-house.svg"],
+        ["de lunes","lunes","moon.svg"],
+        ["de souris","souris","mouse-one.svg"],
+        ["de fusées","fusées","rocket-one.svg"],
+        ["de bateaux","bateaux","sailboat-one.svg"],
+        ["de parapluies","parapluies","security.svg"],
+        ["de soleils","soleils","sun.svg"],
+        ["de montres","montres","watch-one.svg"]],
+        "colors":[["orange","orange"],["bleu","blue"],["violet","purple"],["vert","green"],["rouge","red"],["turquoise","turquoise"]]
+    },
+    "options":[
+        {
+            "name":"Deux Objets et couleurs",
+            "vars":{
+                "ido":"0_${:icons.length-1}_2_^&",
+                "obj1":"${:icons[:ido[0]][1]}",
+                "obj2":"${:icons[:ido[1]][1]}",
+                "obj1url":"${:icons[:ido[0]][2]}",
+                "obj2url":"${:icons[:ido[1]][2]}",
+                "idc":"0_${:colors.length-1}_2_^&",
+                "couleur1":"${:colors[:idc[0]][0]}",
+                "couleur2":"${:colors[:idc[1]][0]}",
+                "color1":"${:colors[:idc[0]][1]}",
+                "color2":"${:colors[:idc[1]][1]}",
+                "nbo":"8_20",
+                "soc":"0_3_${:nbo}",
+                "nbo1c1":"${:soc.filter(x=>x===0).length}",
+                "nbo1c2":"${:soc.filter(x=>x===1).length}",
+                "nbo2c1":"${:soc.filter(x=>x===2).length}",
+                "nbo2c2":"${:soc.filter(x=>x===3).length}"
+            },
+            "question":"Complète le tableau suivant pour résumer la liste des objets avec leurs couleurs.<br>${:soc.map(x=>'<custom-svg style=color:'+(x%2?:color2::color1)+' src=library/illustrations/iconify/icon-park-outline--'+(x<2?:obj1url::obj2url)+'></custom-svg>').join(' ')}<br><table class='inline-table'><tr><th>Couleurs\\Objets</th><th>${:obj1}</th><th>${:obj2}</th></tr><tr><th>${:couleur1}</td><td></td><td></td></tr><tr><th>${:couleur2}</th><td></td><td></td></tr></table>",
+            "answer":"<table class='inline-table'><tr><th>Couleurs\\Objets</th><th>:obj1</th><th>:obj2</th></tr><tr><th>${:couleur1}</th><td>$$\\color{red}{${:nbo1c1}}$$</td><td>$$\\color{red}{:nbo2c1}$$</td></tr><tr><th>:couleur2</th><td>$$\\color{red}{${:nbo1c2}}$$</td><td>$$\\color{red}{${:nbo2c2}}$$</td></tr></table>"
+        },{
+            "name":"Trois Objet et deux couleurs",
+            "vars":{
+                "ido":"0_${:icons.length-1}_3_^&",
+                "obj1":"${:icons[:ido[0]][1]}",
+                "obj2":"${:icons[:ido[1]][1]}",
+                "obj3":"${:icons[:ido[2]][1]}",
+                "obj1url":"${:icons[:ido[0]][2]}",
+                "obj2url":"${:icons[:ido[1]][2]}",
+                "obj3url":"${:icons[:ido[2]][2]}",
+                "idc":"0_${:colors.length-1}_2_^&",
+                "couleur1":"${:colors[:idc[0]][0]}",
+                "couleur2":"${:colors[:idc[1]][0]}",
+                "color1":"${:colors[:idc[0]][1]}",
+                "color2":"${:colors[:idc[1]][1]}",
+                "nbo":"8_20",
+                "soc":"0_5_${:nbo}",
+                "nbo1c1":"${:soc.filter(x=>x===0).length}",
+                "nbo1c2":"${:soc.filter(x=>x===1).length}",
+                "nbo2c1":"${:soc.filter(x=>x===2).length}",
+                "nbo2c2":"${:soc.filter(x=>x===3).length}",
+                "nbo3c1":"${:soc.filter(x=>x===4).length}",
+                "nbo3c2":"${:soc.filter(x=>x===5).length}"
+            },
+            "question":"Complète le tableau suivant pour résumer la liste des objets avec leurs couleurs.<br>${:soc.map(x=>'<custom-svg style=color:'+(x%2?:color2::color1)+' src=library/illustrations/iconify/icon-park-outline--'+(x<2?:obj1url:x<4?:obj2url::obj3url)+'></custom-svg>').join(' ')}<br><table class='inline-table'><tr><th>Couleurs\\Objets</th><th>${:obj1}</th><th>${:obj2}</th><th>${:obj3}</th></tr><tr><th>${:couleur1}</td><td></td><td></td><td></td></tr><tr><th>${:couleur2}</td><td></td><td></td><td></td></tr></table>",
+            "answer":"<table class='inline-table'><tr><th>Couleurs\\Objets</th><th>${:obj1}</th><th>${:obj2}</th><th>${:obj3}</td></tr><tr><th>${:couleur1}</th><td>$$\\color{red}{${:nbo1c1}}$$</td><td>$$\\color{red}{${:nbo2c1}}$$</td><td>$$\\color{red}{${:nbo3c1}}$$</td></tr><tr><th>${:couleur2}</th><td>$$\\color{red}{${:nbo1c2}}$$</td><td>$$\\color{red}{${:nbo2c2}}$$</td><td>$$\\color{red}{${:nbo3c2}}$$</td></tr></table>"
+        }
+    ]
+}

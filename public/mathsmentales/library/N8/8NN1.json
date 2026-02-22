@@ -1,0 +1,31 @@
+{
+    "title": "Faits numériques sur les doubles",
+    "ID":"8NN1",
+    "dest":["8NN","7NN","6NN"],
+    "type":"text",
+    "repeat":true,
+    "options":[{
+        "name":"Nombres de 1 à 20",
+        "vars":{
+            "n":"1_20"
+        }
+    },{
+        "name":"Nombres 20, 25... 75",
+        "vars":{
+            "n":[20,25,30,35,40,45,50,60,75]
+        }
+    },{
+        "name":"Nombres 100, 150... 600",
+        "vars":{
+            "n":[100,150,200,250,300,400,500,600]
+        }
+    }],
+    "question":[
+        "Quel est le double de $$${:n}$$ ?",
+        "$$${:n} \\times 2$$"
+    ],
+    "answer":[
+        "Le double de $$${:n}$$ est $$\\color{red}{${:n*2}}$$.",
+        "$$${:n}\\times 2 = \\color{red}{${:n*2}}$$"
+    ]
+}

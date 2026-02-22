@@ -1,0 +1,121 @@
+{
+    "title":"Leçon : Distances : cercle, disque, médiatrice",
+    "dest":["6LG"],
+    "type":"text",
+    "consts":{
+        "lettres":"ABCDEFGHIJKLMNOPQRSTUV"
+    },
+    "options":[
+        {
+            "name":"Définitions",
+            "question":[
+                "Qu’appelle-t-on distance entre deux points ?",
+                "Qu’est-ce que le <b>cercle</b> de centre O et de rayon R ?",
+                "Qu’est-ce que le <b>disque</b> de centre O et de rayon R ?",
+                "Qu’est-ce qu’un <b>rayon</b> d’un cercle ?",
+                "Qu’est-ce qu’une <b>corde</b> d’un cercle ?",
+                "Qu’est-ce qu’un <b>diamètre</b> d’un cercle ?",
+                "Qu’est-ce que la <b>médiatrice</b> d’un segment ?"
+            ],
+            "answer":[
+                "La distance entre deux points est la longueur du segment qui joint ces deux points.",
+                "C’est l’ensemble de tous les points dont la distance au point O est égale à R.",
+                "C’est l’ensemble de tous les points dont la distance au point O est inférieure ou égale à R.",
+                "C’est un segment qui joint un point du cercle au centre du cercle.",
+                "C’est un segment qui joint deux points du cercle.",
+                "C’est une corde qui passe par le cerntre du cercle.",
+                "C’est la droite qui est perpendiculaire au segment en son milieu."
+            ]
+        },{
+            "name":"Définitions avec données numériques",
+            "vars":{
+                "R":"1_10",
+                "O":["A","B","C","D","E","O","P","M","T"]
+            },
+            "question":[
+                "Qu’est-ce que le <b>cercle</b> de centre :O et de rayon :R ?",
+                "Qu’est-ce que le <b>disque</b> de centre :O et de rayon :R ?"
+            ],
+            "answer":[
+                "C’est l’ensemble de tous les points M tels que $$${:O+'M'} = :R$$.",
+                "C’est l’ensemble de tous les points M tels que $$${:O+'M'} \\leqslant :R$$."
+            ]
+        },{
+            "name":"Propriétés",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}"
+            },
+            "question":[
+                "Que peut-on écrire avec les longueurs quand un point :C n’appartient pas au segment [:A:B] ?",
+                "Que peut-on écrire avec les longueurs quand un point :C appartient au segment [:A:B] ?",
+                "Complète la propriété : Si un point appartient à la médiatrice d’un segment ...",
+                "Complète la propriété : Si un point est équidistant des extrémités d’un segment ..."
+            ],
+            "answer":[
+                ":A:C + :C:B > :A:B",
+                ":A:C + :C:B = :A:B",
+                "Si un point appartient à la médiatrice d’un segment, alors il est équidistant des extrémités de ce segment",
+                "Si un point est équidistant des extrémités d’un segment, alors il appartient à la médiatrice de ce segment."
+            ]
+        },{
+            "name": "Ingégalités de longueurs",
+            "vars":{
+                "l":"0_${:lettres.length-1}_3_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "M":"${:lettres[:l[2]]}",
+                "xA":"d-3.5_-2_1",
+                "yA":"d-1_1_1",
+                "yB":"d-1_1_1",
+                "posM":[-1,0,1],
+                "yM":[0,1],
+                "lor":[-1,1]
+            },
+            "question":"Compare :M:A et :M:B.",
+            "answer":"${:posM<0?:M+:A+' < '+:M+:B::posM>0?:M+:A+' > '+:M+:B::M+:A+' = '+:M+:B}",
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-6,6,6,-6],
+                "content":[
+                    ["point",[":xA",":yA"],{"name":":A", "face":"x", "label":{"offset":[-10,10]}}],
+                    ["point",["${-:xA}",":yB"],{"name":":B", "face":"x", "label":{"offset":[0,10]}}],
+                    ["point",[0,"${(:yA+:yB)/2}"],{"name":"X", "face":"0", "visible":"false", "label":{"visible":false}}],
+                    ["segment",[":A",":B"],{"name":"s"}],
+                    ["text",["${:xA/2+0.1}","${:yA+(:yB-:yA)/4}","//"]],
+                    ["text",["${-:xA/2-0.1}","${:yA+(:yB-:yA)*3/4}","//"]],
+                    ["perpendicular",["s","X"],{"strokeColor":"grey", "name":"d"}],
+                    ["glider",[0,-5,"d"], {"name":"Y", "visible":false}],
+                    ["text",[0.5,0,"(d)"],{"anchor":"Y"}],
+                    ["angle",["Y","X",":B"], {"radius":0.8,"label":{"visible":false}}],
+                    ["circle",[":A","${:posM<0?-:xA-0.5::posM>0?-:xA*2+:lor:4}"], {"name":"C1","visible":false}],
+                    ["circle",[":B","${:posM<0?-:xA*2+:lor::posM>0?-:xA-0.5:4}"], {"name":"C2","visible":false}],
+                    ["intersection",["C1","C2",":yM"],{"name":":M", "face":"x", "label":{"offset":[6,0]}}]
+                ]
+            }
+        },{
+            "name":"Notations",
+            "consts":{
+                "lettres":"ABCDEFGHIJKLMNOPQRSTUV"
+            },
+            "vars":{
+                "l":"0_${:lettres.length-1}_2_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}"
+            },
+            "question":[
+                "Comment est notée la <b>distance</b> entre deux points :A et :B ?",
+                "Comment est noté un <b>segment</b> d’extrémités :A et :B ?",
+                "Comment est notée une <b>droite</b> passant par des points :A et :B"
+            ],
+            "answer":[
+                ":A:B<br>(sans crochet, ni parenthèses)",
+                "[:A:B]",
+                "(:A:B)"
+            ]
+        }
+    ]
+}

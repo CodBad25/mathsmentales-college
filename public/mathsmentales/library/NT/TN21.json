@@ -1,0 +1,40 @@
+{
+  "ID": "TN21",
+  "title": "Limite de suites de références",
+  "type": "text",
+  "dest": ["TN2"],
+ "options": [
+    {
+      "name": "Suite de type a·n^b",
+      "vars": {
+        "a": "-5_5_^0",
+        "b": "1_5",
+        "f": "${MMmath.box(['Multiply', :a, ['Power', 'n', :b]])}",
+        "lim": "${:a > 0 ? '+\\infty' : '-\\infty'}",
+        "set": "\\mathbb{N}"
+      }
+    },
+    {
+      "name": "Suite de type a/n^b",
+      "vars": {
+        "a": "-5_5_^0",
+        "b": "1_5",
+        "f": "${MMmath.box(['Divide', :a, ['Power', 'n', :b]])}",
+        "lim": "0",
+        "set": "\\mathbb{N}^*"
+      }
+    },
+    {
+      "name": "Suite de type a·√n",
+      "vars": {
+        "a": "-5_5_^0",
+        "f": "${MMmath.box(['Multiply', :a, ['Sqrt', 'n']])}",
+        "lim": "${:a > 0 ? '+\\infty' : '-\\infty'}",
+        "set": "\\mathbb{N}"
+      }
+    }
+  ],
+  "question": "Déterminer la limite de la suite définie sur $$ ${:set} $$ par $$u_n = ${:f}$$ lorsque $$n$$ tend vers $$+\\infty$$",
+  "answer": "$$\\lim\\limits_{n \\to +\\infty} u_n = \\color{red}{${:lim}}$$",
+  "value": "${:lim}"
+}

@@ -1,0 +1,118 @@
+{
+    "title":"Éléments du cercle",
+    "description": "Reconnaissance visuelle des éléments du cercle",
+    "ID": "8GC1",
+    "dest": ["8GC", "7GC", "6GC"],
+    "type": "text",
+    "consts": {
+        "figure": 
+            "<svg width='10em' height='10em' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'><text style='line-height:1.25;text-align:center' font-size='5.333' font-family='Arial' stroke-width='.265' text-anchor='middle' style='text-align:center'><tspan x='32.5' y='32.5'>${:O}</tspan></text><ellipse cx='35' cy='35' fill='none' stroke='#0072b2' stroke-width='.707' stroke-linecap='round' stroke-linejoin='round' rx='20' ry='20'/><path d='M33.5 33.5l3 3M33.5 36.5l3-3' fill='none' stroke='#d55e00' stroke-width='.467'/><g transform='translate(${:x} ${:y})'><text style='line-height:1.25;text-align:center' font-size='5.333' font-family='Arial' stroke-width='.265' text-anchor='middle' style='text-align:center'><tspan x='${:dx}' y='${:dy}'>${:A}</tspan></text><path d='M33.5 33.5l3 3M33.5 36.5l3-3' fill='none' stroke='#d55e00' stroke-width='.467'></g></svg>"
+        ,
+        "points": ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"]
+    },
+    "options":[
+        {
+            "name": "Vocabulaire diamètre, corde, rayon",
+            "vars": {
+                "il": "0_${:points.length-2}_3_^&",
+                "O": "${:points[:il[0]]}",
+                "A": "${:points[:il[1]]}",
+                "B": "${:points[:il[2]]}",
+                "angle": "-90_90",
+                "angleentre": "30_170",
+                "w": ["diamètre","rayon","corde"],
+                "v2pt": "${:w=='rayon'?'hidden':'visible'}",
+                "x":"${20*Math.cos(:angle*Math.PI/180)}",
+                "y":"${20*Math.sin(:angle*Math.PI/180)}",
+                "dx":"39",
+                "dy":"${:angle<0?33:40}",
+                "angle1": "${:w=='diamètre'?:angle+180::angle+:angleentre}",
+                "r1": "${:w=='rayon'?0:20}",
+                "x1":"${:r1*Math.cos(:angle1*Math.PI/180)}",
+                "y1":"${:r1*Math.sin(:angle1*Math.PI/180)}",
+                "dx1":"${:angle1>270?39::angle1>90?30:39}",
+                "dy1":"${:angle1>180?33:40}"
+            },
+            "figure": {
+                "type": "svg",
+                "content": "<svg width='10em' height='10em' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'><g visibility='${:v2pt}'><text style='line-height:1.25;text-align:center' font-size='5.333' font-family='Arial' stroke-width='.265' text-anchor='middle' style='text-align:center'><tspan x='32.5' y='32.5'>${:O}</tspan></text><path d='M33.5 33.5l3 3M33.5 36.5l3-3' fill='none' stroke='#d55e00' stroke-width='.467'/></g><ellipse cx='35' cy='35' fill='none' stroke='#0072b2' stroke-width='.707' stroke-linecap='round' stroke-linejoin='round' rx='20' ry='20'/><g transform='translate(${:x} ${:y})'><text style='line-height:1.25;text-align:center' font-size='5.333' font-family='Arial' stroke-width='.265' text-anchor='middle'><tspan x='39' y='${:dy}'>${:A}</tspan></text><path d='M33.5 33.5l3 3M33.5 36.5l3-3' fill='none' stroke='#d55e00' stroke-width='.467'></g><g transform='translate(${:x1} ${:y1})'><text style='line-height:1.25;text-align:center' font-size='5.333' font-family='Arial' stroke-width='.265' text-anchor='middle'><tspan x='${:dx1}' y='${:dy1}'>${:B}</tspan></text><path d='M33.5 33.5l3 3M33.5 36.5l3-3' fill='none' stroke='#d55e00' stroke-width='.467'></g><path d='M${35+:x} ${35+:y}L${35+:x1} ${35+:y1}' stroke-width='.707' stroke-linecap='round' fill='none' stroke='#0072b2'></svg>"
+            },
+            "question": "Qu'est-ce que le segment [${:A+:B}] pour le cercle ?",
+            "answer": "[${:A+:B}] est un${:w=='corde'?'e':''} <span class='red'>${:w}</span> du cercle.",
+            "value": "${:w}"
+        },
+        {
+            "name": "Appartenance au cercle",
+            "vars": {
+                "il": "0_${:points.length-1}_2_^&",
+                "O": "${:points[:il[0]]}",
+                "A": "${:points[:il[1]]}",
+                "angle": "20_340",
+                "w": ["in","out","on","on"],
+                "din":"5_16",
+                "dout":"22_30",
+                "l":"${:w=='in'?:din::w=='out'?:dout:20}",
+                "x":"${:l*Math.cos(:angle*Math.PI/180)}",
+                "y":"${:l*Math.sin(:angle*Math.PI/180)}",
+                "dx":"${:angle>270?39::angle>90?30:39}",
+                "dy":"${:angle>180?33:40}"
+            },
+            "figure": {
+                "type": "svg",
+                "content": "${:figure}"
+            },
+            "question": "Est-ce que ${:A} est un point du <b>cercle</b> de centre ${:O} ?",
+            "answer": "${:w=='on'?'Oui, '+:A+' appartient au cercle.':'Non, '+:A+' n’appartient pas au cercle.'}",
+            "value": ["${:w=='on'?'O':'N'}","${:w=='on'?'OUI':'NON'}"]
+        },
+        {
+            "name": "Appartenance au disque",
+            "vars": {
+                "il": "0_${:points.length-1}_2_^&",
+                "O": "${:points[:il[0]]}",
+                "A": "${:points[:il[1]]}",
+                "angle": "20_340",
+                "w": ["in","out","on","out"],
+                "din":"5_16",
+                "dout":"22_30",
+                "l":"${:w=='in'?:din::w=='out'?:dout:20}",
+                "x":"${:l*Math.cos(:angle*Math.PI/180)}",
+                "y":"${:l*Math.sin(:angle*Math.PI/180)}",
+                "dx":"${:angle>270?39::angle>90?30:39}",
+                "dy":"${:angle>180?33:40}"
+            },
+            "figure": {
+                "type": "svg",
+                "content": "${:figure}"
+            },
+            "question": "Est-ce que ${:A} est un point du <b>disque</b> de centre ${:O} ?",
+            "answer": "${:w=='out'?'Non, '+:A+' n’appartient pas au disque.':'Oui, '+:A+' appartient au disque.'}",
+            "value": ["${:w=='out'?'N':'O'}","${:w=='out'?'NON':'OUI'}"]
+        },
+        {
+            "name": "Distance au centre",
+            "vars": {
+                "il": "0_${:points.length-1}_3_^&",
+                "O": "${:points[:il[0]]}",
+                "A": "${:points[:il[1]]}",
+                "angle": "20_340",
+                "r": "1_10",
+                "w": ["in","out","on"],
+                "din":"5_16",
+                "dout":"22_30",
+                "l":"${:w=='in'?:din::w=='out'?:dout:20}",
+                "x":"${:l*Math.cos(:angle*Math.PI/180)}",
+                "y":"${:l*Math.sin(:angle*Math.PI/180)}",
+                "dx":"${:angle>270?39::angle>90?30:39}",
+                "dy":"${:angle>180?33:40}"
+            },
+            "figure": {
+                "type": "svg",
+                "content": "${:figure}"
+            },
+            "question": "Voici un cercle de centre ${:O} et de rayon ${:r}. Comparer ${:O}${:A} au rayon.",
+            "answer": "${:w=='on'?:O+:A+' = '+:r::w=='in'?:O+:A+' < '+:r::O+:A+' > '+:r}",
+            "value": ["${:w=='on'?'='::w=='in'?'&lt;':'>'}","${:w=='on'?:O+:A+'='+:r::w=='in'?:O+:A+'<'+:r::O+:A+'>'+:r}"]
+        }
+    ]
+}

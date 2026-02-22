@@ -1,0 +1,148 @@
+{
+    "ID": "8NF1",
+    "dest": [
+        "8NF",
+        "7NF",
+        "6NF"
+    ],
+    "title": "Résoudre des problèmes multiplicatifs",
+    "type": "text",
+    "consts":{
+        "legumes":[
+                    "pommes de terre","salades","oignons","pieds de tomates","plans de poivrons","fèves"
+                ],
+        "livres":["livres","BD","mangas","manuels"],
+        "gateaux":["éclairs","macarons","choux"],
+        "prenoms": [
+            "Alexandre", "Pierre", "Jean", "Paul", "Théo",
+            "Luc", "Guillaume", "Hugo", "Clément", "Jules",
+            "Marie", "Anne", "Sophie", "Alice", "Chloé",
+            "Émilie", "Léa", "Manon", "Sarah", "Camille",
+            "Lina","Fatima","Amina","Amira","Samira",
+            "Rayan","Aaron","Leo","Liam",
+            "Ava","Emma","Mia"
+        ]
+    },
+
+    "options": [
+        {
+            "name":"Résolution par multiplication",
+            "consts": {
+                "phrases": [
+                    [
+                        "Un jardinier plante ${:n1} rangées de ${:legumes[:legn]} avec ${:n2} ${:legumes[:legn]} par rangée.<br>Combien de ${:legumes[:legn]} plante-t-il au total ?",
+                        "Le jardinier plante $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ ${:legumes[:legn]}."
+                    ],
+                    [
+                        "Une bibliothèque comporte ${:n1} étagères avec ${:n2} ${:livres[:livn]} chacune.<br>Combien de ${:livres[:livn]} y a-t-il en tout ?",
+                        "La bibliothèque contient $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ ${:livres[:livn]}."
+                    ],
+                    [
+                        "Un pâtissier prépare ${:n1} gâteaux et met ${:n2} bougies sur chacun.<br>Combien de bougies utilise-t-il en tout ?",
+                        "Le patissier utilise $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ bougies."
+                    ],
+                    [
+                        "Un fermier a ${:n1} vaches et chaque vache donne ${:n2} litres de lait par jour.<br>Combien de litres de lait obtient-il chaque jour ?",
+                        "Le fermier obtient $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ litres de lait."
+                    ],
+                    [
+                        "Un magasin vend ${:n1} cartons de stylos avec ${:n2} stylos dans chaque carton.<br>Combien de stylos y a-t-il en tout ?",
+                        "Il y a $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ stylos."
+                    ],
+                    [
+                        "Un professeur distribue ${:n1} feuilles de travail à chacun de ses ${:n2} élèves.<br>Combien de feuilles distribue-t-il en tout ?",
+                        "Le professeur distribue $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ feuilles."
+                    ],[
+                        "${:paul} et ${:pierre} jouent à la bataille. Il reste ${:n1} cartes à ${:paul}. ${:pierre} en a ${:n2} fois plus.<br>Combien de cartes a ${:pierre} ?",
+                        "${:pierre} a $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ cartes."
+                    ],[
+                        "${:paul} et ${:pierre} jouent à la bataille. ${:paul} a ${:n1} cartes en main. Sachant que ${:paul} a ${:n2} fois moins de cartes que ${:pierre},<br>combien de cartes a ${:pierre} ?",
+                        "${:pierre} a $$${:n1}\\times${:n2}=\\color{red}{${:produit}}$$ cartes."
+                    ]
+                ]
+            },
+            "vars": {
+                "situation": "0_${:phrases.length-1}",
+                "legn":"0_${:legumes.length-1}",
+                "livn":"0_${:livres.length-1}",
+                "gatn":"0_${:gateaux.length-1}",
+                "pren":"0_${:prenoms.length-1}_2_^&",
+                "paul":"${:prenoms[:pren[0]]}",
+                "pierre":"${:prenoms[:pren[1]]}",
+                "n1": "2_10",
+                "n2": "2_10",
+                "produit": "${:n1*:n2}"
+            }
+        },{
+            "name":"Résolution par division",
+            "consts":{
+                "phrases":[
+                    ["Un jardinier plante ${:n1} rangées identiques de ${:legumes[:legn]}. Au total, cela lui fait ${:produit} ${:legumes[:legn]}.<br>Combien de ${:legumes[:legn]} y a-t-il par rangée  ?",
+                    "Le jardinier plante $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ ${:legumes[:legn]} par rangée."],
+                    ["On a rangé ${:produit} ${:livres[:livn]} dans une bibliothèque de manière équilibrée.<br>Combien a-t-on mis de ${:livres[:livn]} sur chacune des ${:n1} étagères ?",
+                    "Chaque étagère comporte $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ ${:livres[:livn]}."],
+                    ["Un patissier a préparé ${:produit} ${:gateaux[:gatn]} de ${:n1} types différents dans des mêmes quantités.<br>Combien de ${:gateaux[:gatn]} y a-t-il de chaque type ?",
+                    "Il y a $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ ${:gateaux[:gatn]} de chaque."],
+                    ["Un professeur distribue ${:produit} feuilles à ${:n1} élèves.<br>Combien chaque élève reçoit-il de feuilles ?",
+                    "Chaque élève reçoit $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ feuilles."],
+                    ["Un magasin reçoit un carton de ${:produit} stylos répartis dans ${:n1} boites identiques.<br>Combien de stylos comporte chaque boite ?",
+                    "Chaque boite comporte $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ stylos."],
+                    [
+                        "${:paul} et ${:pierre} jouent à la bataille. Il reste ${:produit} cartes à ${:paul}. ${:pierre} en a ${:n2} fois moins.<br>Combien de cartes a ${:pierre} ?",
+                        "${:pierre} a $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ cartes."
+                    ],
+                    [
+                        "${:paul} et ${:pierre} jouent à la bataille. Paul a ${:produit} cartes en main. Sachant que ${:paul} en a ${:n2} fois plus que ${:pierre}, combien de cartes a ${:pierre} ?",
+                        "${:pierre} a $$${:produit}\\div${:n1}=\\color{red}{${:n2}}$$ cartes."
+                    ]
+                ]
+            },
+            "vars": {
+                "situation": "0_${:phrases.length-1}",
+                "legn":"0_${:legumes.length-1}",
+                "livn":"0_${:livres.length-1}",
+                "gatn":"0_${:gateaux.length-1}",
+                "pren":"0_${:prenoms.length-1}_2_^&",
+                "paul":"${:prenoms[:pren[0]]}",
+                "pierre":"${:prenoms[:pren[1]]}",
+                "n1": "2_10",
+                "n2": "2_10",
+                "produit": "${:n1*:n2}"
+            }
+        },{
+            "name":"Résolution par division euclidienne",
+            "consts":{
+                "phrases":[
+                    ["Un jardinier plante ${:produit} ${:legumes[:legn]} en rangs de ${:n1}.<br>Combien de rangs complets peut-il réaliser ?",
+                    "$$${:produit}=${:n1}\\times\\color{red}{${:n2}}+${:r}$$ donc le jardinier peut faire <span class='red'>${:n2} rangs</span>, il reste ${:r} ${:legumes[:legn]}."],
+                    ["Un patissier a préparé ${:produit} ${:gateaux[:gatn]}. Il veut créer ${:n1} garnitures différentes.<br>Combien peut-il en créer de chaque ?",
+                    "$$${:produit}=${:n1}\\times\\color{red}{${:n2}}+${:r}$$ donc le patissier peut créer <span class='red'>${:n2} ${:gateaux[:gatn]}</span> de chaque sorte, il en restera ${:r}."],
+                    [
+                        "On veut remplir les ${:n1} étagères d'une bibliothèque avec ${:produit} ${:livres[:livn]}, en les répartissant régulièrement.<br>Combien de ${:livres[:livn]} y aura-t-il sur chaque étagère ?",
+                        "$$${:produit}=${:n1}\\times\\color{red}{${:n2}}+${:r}$$ donc on peut placer <span class='red'>${:n2} ${:livres[:livn]}</span> sur chaque étagère, il en restera ${:r}."
+                    ],
+                    [
+                        "Un professeur a de ${:produit} feuilles de couleurs qu'il veut distribuer équitablement entre ${:n1} élèves.<br>Combien de feuilles peut-il donner à chaque élève ?",
+                        "$$${:produit}=${:n1}\\times\\color{red}{${:n2}}+${:r}$$ donc il peut donner <span class='red'>${:n2} feuilles</span> à chaque élève, il en restera ${:r}."
+                    ],
+                    [
+                        "Un magasin reçoit ${:produit} stylos en vrac qu'il répartit dans ${:n1} boites identiques.<br>Combien de stylos y aura-t-il dans chaque boite au maximum ?",
+                        "$$${:produit}=${:n1}\\times\\color{red}{${:n2}}+${:r}$$ donc il y aura <span class='red'>${:n2} stylos</span> dans chaque boite, il en restera ${:r}."
+                    ]
+                ]
+            },
+            "vars": {
+                "situation": "0_${:phrases.length-1}",
+                "legn":"0_${:legumes.length-1}",
+                "livn":"0_${:livres.length-1}",
+                "gatn":"0_${:gateaux.length-1}",
+                "n1": "2_10",
+                "n2": "2_10",
+                "r":"1_${:n1-1}",
+                "produit": "${:n1*:n2+:r}"
+            }
+        }
+    ],
+    "question": "${:phrases[:situation][0]}",
+    "answer": "${:phrases[:situation][1]}"
+}

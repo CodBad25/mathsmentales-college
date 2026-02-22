@@ -1,0 +1,62 @@
+{
+    "title":"Enchainements complexes d'opérations avec des carrés",
+    "ID":"4NC7",
+    "dest":["4NC","3NB"],
+    "description":"Enchainement d'opérations avec des carrés comportant des produits ou des quotients",
+    "consigne":"Calculer",
+    "consts":{
+        "diviseursDuCarre":[[0],[1,1],[1,2,4],[1,3,9],[1,2,4,8,16],
+        [1,5,25],[1,2,3,4,6,9,12,36],[1,7,49],[1,2,4,8,16,32,64],[1,3,9,27,81],[1,2,4,5,10,25,100]]
+    },
+    "options":[{
+        "name":"Produit avec un carré (nb < 5)",
+        "vars":{"x":"1_5","y":"1_5"},
+        "question": ["${:x}^2\\times${:y}","${:y}\\times${:x}^2"],
+        "answer":":question = \\color{red}{${:x*:x*:y}}",
+        "value":"${:x*:x*:y}"
+    },{
+        "name":"Produit avec un carré (nb > 5)",
+        "vars":{"x":"6_10","y":"1_5"},
+        "question": ["${:x}^2\\times${:y}","${:y}\\times${:x}^2"],
+        "answer":":question = \\color{red}{${:x*:x*:y}}",
+        "value":"${:x*:x*:y}"
+    },{
+        "name":"Quotient d'un carré par un nombre",
+        "vars":{"x":"2_10","i":"0_${:diviseursDuCarre[:x].length-1}","y":"${:diviseursDuCarre[:x][:i]}"},
+        "question": ["${:x}^2\\div${:y}","\\dfrac{${:x}^2}{${:y}}"],
+        "answer":":question = \\color{red}{${:x*:x/:y}}",
+        "value":"${:x*:x/:y}"
+    },{
+        "name":"Quotient d'un nombre par un carré",
+        "vars":{"x":"2_6","i":"1_5","y":"${:x*:x*:i}"},
+        "question": ["${:y}\\div${:x}^2","\\dfrac{${:y}}{${:x}^2}"],
+        "answer":":question = \\color{red}{${:y/:x/:x}}",
+        "value":"${:y/:x/:x}"
+    },{
+        "name":"Quotient d'une différence par un nombre",
+        "vars":{"x":"2_10","d":"2_5", "m":"1_10", "y":"${:d*:m+:x*:x}"},
+        "question": ["(${:y}-${:x}^2)\\div${:d}","\\dfrac{${:y}-${:x}^2}{${:d}}"],
+        "answer":":question = \\color{red}{${:m}}",
+        "value":"${:m}"
+    },{
+        "name":"Produit d'une difference par un carré (nb < 5)",
+        "vars":{"d":"1_5","x":"1_5", "a":"2_10", "b":"2_10", "y":"${:d+:a*:b}"},
+        "question": "(${:y}-${:a}\\times${:b})\\times${:x}^2",
+        "answer":":question = \\color{red}{${:d*:x*:x}}",
+        "value":"${:d*:x*:x}"
+    },{
+        "name":"Produit par le carré d'une difference (nb < 5)",
+        "vars":{"c":"2_5","x":"1_5", "a":"2_10", "b":"2_10", "y":"${:x+:a*:b}"},
+        "question": ["${:c}\\times(${:y}-${:a}\\times${:b})^2", "(${:y}-${:a}\\times${:b})^2\\times${:c}"],
+        "answer":":question = \\color{red}{${:c*:x*:x}}",
+        "value":"${:c*:x*:x}"
+    },{
+        "name":"Quotient d'une différence par un carré (nb < 5)",
+        "vars":{"y":"1_4","c":"1_4",
+        "x":"${Math.ceil(Math.sqrt(:y*:y*:c))}_${Math.ceil(Math.sqrt(:y*:y*:c))+3}",
+        "p":"${MMmath.unProduitEgalA(:x*:x-:y*:y*:c)}"},
+        "question":["(${:x}^2 - ${:p} )\\div ${:y}^2","\\dfrac{(${:x}^2-${:p})}{${:y}^2}"],
+        "answer":":question = \\color{red}{${:c}}",
+        "value":"${:c}"
+    }]
+}

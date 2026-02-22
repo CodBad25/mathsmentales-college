@@ -1,0 +1,46 @@
+{
+    "ID":"11ND3",
+    "dest":["11ND","10ND","9ND"],
+    "title":"Doubles des petits nombres, moitié",
+    "description":"doubler, ajouter le même nombre, inférieur à 10, dizaines",
+    "type":"text",
+    "speech":1,
+    "options":[
+        {
+            "name":"Phrase, doubles des nombres inférieurs à 10",
+            "vars":{"k":"1_9", "r":"${:k*2}"},
+            "question":"Quel est le double de ${:k} ?",
+            "audio":"Quel est le double de ${:k} ?",
+            "answer":"Le double de ${:k} est <span class='red'>${:r}</span>.",
+            "value":"${:r}"
+        },{
+            "name":"Phrase, doubles de dizaines jusqu'à 50",
+            "vars":{"k0":"1_5", "k":"${:k0*10}", "r":"${:k*2}"},
+            "question":"Quel est le double de ${:k} ?",
+            "audio":"Quel est le double de ${:k} ?",
+            "answer":"Le double de ${:k} est <span class='red'>${:r}</span>.",
+            "value":"${:r}"
+        },{
+            "name":"Opération, doubles des nombres inférieurs à 10",
+            "vars":{"k":"1_9", "r":"${:k*2}"},
+            "question":["$$${:k} \\times 2 $$","$$${:k} + ${:k} $$"],
+            "audio":"Combien font ${:k} pluss ${:k} ?",
+            "answer":"$$${:k} + ${:k} = \\color{red}{${:r}}$$",
+            "value":"${:r}"
+        },{
+            "name":"Opération, doubles de dizaines jusqu'à 50",
+            "vars":{"k0":"1_5", "k":"${:k0*10}", "r":"${:k*2}"},
+            "question":["$$${:k} \\times 2 $$","$$${:k} + ${:k} $$"],
+            "audio":"Combien font ${:k} pluss ${:k} ?",
+            "answer":"$$${:k} + ${:k} = \\color{red}{${:r}}$$",
+            "value":"${:r}"
+        },{
+            "name":"Moitié des nombres pairs inférieurs à 20",
+            "vars":{"n":"1_10","double":"${:n*2}"},
+            "question":"Quelle est la moitié de ${:double} ?",
+            "audio":"Quelle est la moitié de ${:double} ?",
+            "answer":"La moitié de ${:double} est <span class='red'>${:n}</span>.",
+            "value":"${:n}"
+        }
+    ]
+}

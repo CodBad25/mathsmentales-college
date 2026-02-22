@@ -1,0 +1,66 @@
+{
+    "ID":"TN71",
+    "title":"Primitive d’un polynome",
+    "type":"text",
+    "dest":["TN7"],
+    "options":[{
+        "name":"Monôme de degré 0",
+        "vars":{
+            "a":"-10_10_^0",
+            "F":"${MMmath.box(['Multiply',:a,'x'])} + C",
+            "f":"${:a}"
+        }
+    }, {
+        "name":"Monôme de degré 1",
+        "vars":{
+            "a":"-10_10_^0",
+            "F":"${MMmath.box(['Multiply',['Divide',:a,2],['Power','x',2]])} + C",
+            "f":"${MMmath.box(['Multiply',:a,'x'])}"
+        }
+    }, {
+        "name":"Monôme de degré 2",
+        "vars":{
+            "a":"-10_10_^0",
+            "F":"${MMmath.box(['Multiply',['Divide',:a,3],['Power','x',3]])} + C",
+            "f":"${MMmath.box(['Multiply',:a,['Power','x',2]])}"
+        }
+    }, {
+        "name":"Monôme de degré 3",
+        "vars":{
+            "a":"-10_10_^0",
+            "F":"${MMmath.box(['Multiply',['Divide',:a,4],['Power','x',4]])} + C",
+            "f":"${MMmath.box(['Multiply',:a,['Power','x',3]])}"
+        }
+    },
+        {
+        "name":"Polynome de degré 1",
+        "vars":{
+            "a":"-10_10_^0",
+            "b":"-10_10",
+            "F":"${MMmath.box(['Add', ['Multiply', ['Divide',:a,2], ['Power','x',2]], ['Multiply', :b, 'x']])} + C",
+            "f":"${MMmath.box(['Add', ['Multiply', :a, 'x'], :b])}"
+        }
+    },{
+        "name":"Polynome de degré 2",
+        "vars":{
+            "a":"-10_10_^0",
+            "b":"-10_10",
+            "c":"-10_10",
+            "F":"${MMmath.box(['Add', ['Multiply', ['Divide',:a,3], ['Power','x',3]], ['Add',['Multiply', ['Divide',:b,2], ['Power','x',2]]],['Multiply', :c, 'x']])} + C",
+            "f":"${MMmath.box(['Add', ['Multiply', :a, ['Power','x',2]], ['Add',['Multiply',:b,'x'],:c]])}"
+        }
+    },{
+        "name":"Polynome de degré 3",
+        "vars":{
+            "a":"-10_10_^0",
+            "b":"-10_10",
+            "c":"-10_10",
+            "d":"-10_10",
+            "F":"${MMmath.box(['Add', ['Multiply', ['Divide',:a,4], ['Power','x',4]], ['Add',['Multiply', ['Divide',:b,3], ['Power','x',3]]],['Add',['Multiply', ['Divide',:c,2], ['Power','x',2]],['Multiply', :d, 'x']]])} + C",
+            "f":"${MMmath.box(['Add', ['Multiply', :a, ['Power','x',3]], ['Add',['Multiply',:b,['Power','x',2]],['Multiply',:c,'x']],:d])}"
+        }
+    }],
+    "question": "Donner une primitive de la fonction<br> $$f(x)=${:f}$$",
+    "answer":"$$\\int\\!${:f}\\,\\operatorname{d}x = \\color{red}{${:F}}$$",
+    "value":"${:F}"
+}

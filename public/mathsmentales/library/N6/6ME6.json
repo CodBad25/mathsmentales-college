@@ -1,0 +1,122 @@
+{
+    "ID":"6ME6",
+    "dest":["6ME"],
+    "title":"Calcul d’angles dans des situations multiplicatives",
+    "type":"text",
+    "consts":{
+        "phi":"${Math.PI/180}",
+        "colors":[["oranges","orange"],["bleus","blue"],["violets","purple"],["verts","green"],["rouges","red"],["turquoise","turquoise"]]
+    },
+    "options":[
+        {
+            "name":"Division de l’angle droit",
+            "vars":{
+                "aa":"-10_100",
+                "div":"2_6",
+                "col":"0_${:colors.length-1}",
+                "color":"${:colors[:col][1]}",
+                "couleur":"${:colors[:col][0]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content":[
+                    ["point", [0,0], {"name":"O","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"A","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+90))}","${6.5*Math.sin(:phi*(:aa+90))}"], {"name":"B","visible":false}],
+                    ["line", ["O","A"], {"straightFirst":false}],
+                    ["line", ["O","B"], {"straightFirst":false}],
+                    ["divideAngle","O",{"divisions":"${:div}","angle":90,"angleInit":"${:aa}","rayon":4,"color":"${:color}","opacity":0.7}],
+                    ["angle", ["A","O","B"], {"radius":1,"withLabel":false,"strokeColor":"black","fillColor":"black"}]
+                ]
+            },
+            "question":"Tous les angles ${:couleur} sont égaux. Quelle est la mesure de l’un d’entre eux ?",
+            "answer":"L’angle droit est partagé en ${:div} parties égales. $$90\\degree\\div${:div}=\\color{red}{${90/:div}\\degree}$$"
+    },{
+            "name":"Division de l’angle plat",
+            "vars":{
+                "aa":"-10_10",
+                "div":"2_10_^7,8",
+                "col":"0_${:colors.length-1}",
+                "color":"${:colors[:col][1]}",
+                "couleur":"${:colors[:col][0]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content":[
+                    ["point", [0,0], {"name":"O","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"A","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+180))}","${6.5*Math.sin(:phi*(:aa+180))}"], {"name":"B","visible":false}],
+                    ["line", ["O","A"], {"straightFirst":false}],
+                    ["line", ["O","B"], {"straightFirst":false}],
+                    ["divideAngle","O",{"divisions":"${:div}","angle":180,"angleInit":"${:aa}","rayon":4,"color":"${:color}","opacity":0.7}],
+                    ["text", [0,-1,"angle plat"], {"anchorX":"middle"}]
+                ]
+            },
+            "question":"Tous les angles ${:couleur} sont égaux. Quelle est la mesure de l’un d’entre eux ?",
+            "answer":"L’angle plat est partagé en ${:div} parties égales. $$180°\\div${:div}=\\color{red}{${180/:div}°}$$"
+    },{
+            "name":"Sous-Division de l’angle droit",
+            "vars":{
+                "aa":"-10_100",
+                "div":"3_6",
+                "mul":"2_${:div-1}",
+                "decal":"0_${:div-:mul}",
+                "col":"0_${:colors.length-1}_2_^&",
+                "color":"${:colors[:col[0]][1]}",
+                "couleur":"${:colors[:col[0]][0]}",
+                "color2":"${:colors[:col[1]][1]}",
+                "couleur2":"${:colors[:col[1]][0]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content":[
+                    ["point", [0,0], {"name":"O","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"A","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+90))}","${6.5*Math.sin(:phi*(:aa+90))}"], {"name":"B","visible":false}],
+                    ["point",["${6*Math.cos(:phi*(:aa+90*:decal/:div))}","${6*Math.sin(:phi*(:aa+90*:decal/:div))}"],{"name":"C","visible":false}],
+                    ["point",["${6*Math.cos(:phi*(:aa+90*(:decal+:mul)/:div))}","${6*Math.sin(:phi*(:aa+90*(:decal+:mul)/:div))}"],{"name":"D","visible":false}],
+                    ["line", ["O","A"], {"straightFirst":false}],
+                    ["line", ["O","B"], {"straightFirst":false}],
+                    ["divideAngle","O",{"divisions":"${:div}","angle":90,"angleInit":"${:aa}","rayon":4,"color":"${:color}","opacity":0.7}],
+                    ["angle",["C","O","D"],{"radius":2.5,"orthoType":"sector","withLabel":false,"strokeColor":"black","fillColor":"${:color2}","opacity":0.9}],
+                    ["angle", ["A","O","B"], {"radius":1,"withLabel":false,"strokeColor":"black","fillColor":"black"}]
+                ]
+            },
+            "question":"Tous les angles ${:couleur} sont égaux. Quelle est la mesure de l’angle ${:couleur2.slice(0,-1)} ?",
+            "answer":"L’angle droit est partagé en ${:div} parties égales. $$90°\\div${:div}\\times${:mul}=\\color{red}{${90*:mul/:div}°}$$"
+    },{
+            "name":"Sous-Division de l’angle plat",
+            "vars":{
+                "aa":"-10_10",
+                "div":"3_10_^8,7",
+                "mul":"2_${:div-1}",
+                "decal":"0_${:div-:mul}",
+                "col":"0_${:colors.length-1}_2_^&",
+                "color":"${:colors[:col[0]][1]}",
+                "couleur":"${:colors[:col[0]][0]}",
+                "color2":"${:colors[:col[1]][1]}",
+                "couleur2":"${:colors[:col[1]][0]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content":[
+                    ["point", [0,0], {"name":"O","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"A","visible":false}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+180))}","${6.5*Math.sin(:phi*(:aa+180))}"], {"name":"B","visible":false}],
+                    ["point",["${6*Math.cos(:phi*(:aa+180*:decal/:div))}","${6*Math.sin(:phi*(:aa+180*:decal/:div))}"],{"name":"C","visible":false}],
+                    ["point",["${6*Math.cos(:phi*(:aa+180*(:decal+:mul)/:div))}","${6*Math.sin(:phi*(:aa+180*(:decal+:mul)/:div))}"],{"name":"D","visible":false}],
+                    ["line", ["O","A"], {"straightFirst":false}],
+                    ["line", ["O","B"], {"straightFirst":false}],
+                    ["divideAngle","O",{"divisions":"${:div}","angle":180,"angleInit":"${:aa}","rayon":4,"color":"${:color}","opacity":0.7}],
+                    ["angle",["C","O","D"],{"radius":2.5,"orthoType":"sector","withLabel":false,"strokeColor":"black","fillColor":"${:color2}","opacity":0.9}],
+                    ["text", [0,-1,"angle plat"], {"anchorX":"middle"}]
+                ]
+            },
+            "question":"Tous les angles ${:couleur} sont égaux. Quelle est la mesure de l’angle ${:couleur2.slice(0,-1)} ?",
+            "answer":"L’angle droit est partagé en ${:div} parties égales. $$180°\\div${:div}\\times${:mul}=\\color{red}{${180*:mul/:div}°}$$"
+    }]
+}

@@ -1,0 +1,106 @@
+{
+    "title":"Encadrer un décimal (6e)",
+    "type":"text",
+    "description":"Donner les deux nombres encadrant, le plus petit d'abord, séparés par un point-virgule",
+    "speech":1,
+    "keys":["_","_","_",";"],
+    "ID":"6NC10",
+    "dest":["6NC"],
+    "options":[
+    {
+        "name":"Encadrer au dixième près",
+        "vars":{
+            "a":[10,100,1000,10000],
+            "c":"2_3",
+            "dix":"d0_${:a}_1_^0",
+            "cent":"0_9",
+            "mil":"${:c==0?'1_9':'0_9'}",
+            "b":"${MMmath.round(:dix+:cent/100+:mil/1000,3)}"
+        },
+        "question": "Encadrer $$${:b}$$ par deux décimaux, au dixième près",
+        "audio": "Encadrer ${MMmath.NumberToLetter(:b)} par deux décimaux, au dixième près",
+        "answer":"$$\\color{red}{${MMmath.valeurParDefaut(:b,1)}} \\lt ${:b} \\lt \\color{red}{${MMmath.valeurParExces(:b,1)}}$$ au dixième",
+        "value":"${MMmath.valeurParDefaut(:b,1)};${MMmath.valeurParExces(:b,1)}"
+    },
+    {
+        "name":"Encadrer au centième près",
+        "vars":{
+            "a":[10,100,1000,10000],
+            "c":"3_4",
+            "cent":"d0_${:a}_2_^0",
+            "mil":"0_9",
+            "dixmil":"${:mil==0?'1_9':'0_9'}",
+            "b":"${MMmath.round(:cent+:mil/1000+:dixmil/10000,4)}"
+        },
+        "question": "Encadrer $$${:b}$$ par deux décimaux, au centième près",
+        "audio": "Encadrer ${MMmath.NumberToLetter(:b)} par deux décimaux, au centième près",
+        "answer":"$$\\color{red}{${MMmath.valeurParDefaut(:b,2)}} \\lt ${:b} \\lt \\color{red}{${MMmath.valeurParExces(:b,2)}}$$ au centième",
+        "value":"${MMmath.valeurParDefaut(:b,2)};${MMmath.valeurParExces(:b,2)}"
+    },
+    {
+        "name":"Encadrer au millième près",
+        "vars":{
+            "a":[10,100,1000,10000],
+            "c":"4",
+            "mil":"d0_${:a}_3_^0",
+            "dixmil":"0_9",
+            "centmil":"${:dixmil==0?'1_9':'0_9'}",
+            "b":"${MMmath.round(:mil+:dixmil/10000+:centmil/100000,5)}"
+        },
+        "question": "Encadrer $$${:b}$$ par deux décimaux, au millième près",
+        "audio": "Encadrer ${MMmath.NumberToLetter(:b)} par deux décimaux, au millième près",
+        "answer":"$$\\color{red}{${MMmath.valeurParDefaut(:b,3)}} \\lt ${:b} \\lt \\color{red}{${MMmath.valeurParExces(:b,3)}}$$ au millième",
+        "value":"${MMmath.valeurParDefaut(:b,3)};${MMmath.valeurParExces(:b,3)}"
+    },{
+        "name":"Entre deux entiers consécutifs",
+        "vars":{
+            "a":[10,100,1000,10000],
+            "c":"1_3",
+            "u":"0_${:a}",
+            "dix":"${:c<2?'1_9':'0_9'}",
+            "cent":"${:c<2?0::dix==0?'1_9':'0_9'}",
+            "mil":"${:c<3?0::dix+:cent==0?'1_9':'0_9'}",
+            "b":"${MMmath.round(:u+:dix/10+:cent/100+:mil/1000,4)}"
+        },
+        "question": "Encadrer $$${:b}$$ par deux entiers consécutifs",
+        "audio": "Encadrer ${MMmath.NumberToLetter(:b)} par deux entiers consécutifs",
+        "answer":"$$\\color{red}{${Math.floor(:b)}} \\lt ${:b} \\lt \\color{red}{${Math.ceil(:b)}}$$ à l'unité",
+        "value":"${Math.floor(:b)};${Math.ceil(:b)}"
+    },
+    {
+        "name":"Encadrer à la dizaine près",
+        "vars":{
+            "a":[10,100,1000,10000],
+            "c":"0_3",
+            "d":"0_${:a}",
+            "u":"${:c<1?'1_9':'0_9'}",
+            "dix":"${:c<1?0::c<2?'1_9':'0_9'}",
+            "cent":"${:c<2?0::dix+:u==0?'1_9':'0_9'}",
+            "mil":"${:c<3?0::dix+:cent+:u==0?'1_9':'0_9'}",
+            "b":"${MMmath.round(:d+:u+:dix/10+:cent/100+:mil/1000,4)}"
+        },
+        "question": "Encadrer $$${:b}$$ par deux dizaines consécutives",
+        "audio": "Encadrer ${MMmath.NumberToLetter(:b)} par deux dizaines consécutives",
+        "answer":"$$\\color{red}{${MMmath.valeurParDefaut(:b,-1)}} \\lt ${:b} \\lt \\color{red}{${MMmath.valeurParExces(:b,-1)}}$$ à la dizaine",
+        "value":"${MMmath.valeurParDefaut(:b,-1)};${MMmath.valeurParExces(:b,-1)}"
+    },
+    {
+        "name":"Encadrer à la centaine près",
+        "vars":{
+            "a":[100,1000,10000,100000],
+            "c":"-1_3",
+            "ct":"0_${:a}",
+            "d":"${:c<0?'1_9':'0_9'}",
+            "u":"${:c<0?0::c<1?'1_9':'0_9'}",
+            "dix":"${:c<1?0::u+:d==0?'1_9':'0_9'}",
+            "cent":"${:c<2?0::dix+:u+:d==0?'1_9':'0_9'}",
+            "mil":"${:c<3?0::dix+:cent+:u+:d==0?'1_9':'0_9'}",
+            "b":"${MMmath.round(:ct+:d+:u+:dix/10+:cent/100+:mil/1000,4)}"
+        },
+        "question": "Encadrer $$${:b}$$ par deux centaines consécutives",
+        "audio": "Encadrer ${MMmath.NumberToLetter(:b)} par deux centaines consécutives",
+        "answer":"$$\\color{red}{${MMmath.valeurParDefaut(:b,-2)}} \\lt ${:b} \\lt \\color{red}{${MMmath.valeurParExces(:b,-2)}}$$ à la centaine",
+        "value":"${MMmath.valeurParDefaut(:b,-2)};${MMmath.valeurParExces(:b,-2)}"
+    }
+    ]
+}

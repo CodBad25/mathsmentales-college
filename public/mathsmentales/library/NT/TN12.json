@@ -1,0 +1,33 @@
+{
+  "type": "texte",
+  "title": "Formule explicite d'une suite arithmétique",
+  "ID": "TN12",
+  "dest": [
+    "TN1"
+  ],
+  "vars": {
+    "a": "-5_5_^0,1"
+  },
+  "options": [
+    {
+      "name": "Donner l'expression",
+      "vars": {
+        "r": "-5_5_^0,1"
+      },
+      "question": [
+        "Quelle est la formule explicite d'une suite arithmétique définie par $$u_0 = ${:a}$$ et $$r = ${:r}$$ ?"
+      ],
+      "answer": "$$u_n = ${:a} ${MMmath.signedNumber(:r)} n$$"
+    },
+    {
+      "name": "Retrouver le premier terme et la raison",
+      "vars": {
+        "r": "-5_5_^0,1"
+      },
+      "question": [
+        "Une suite est définie sur $$ \\mathbb{N} $$ par $$u_n = ${:a} ${MMmath.signedNumber(:r)} n$$ , préciser sa nature et ses éléments caractéristiques."
+      ],
+      "answer": "$$(u_n)$$ est une suite arithmétique de premier terme $$u_0 = ${:a}$$ et de raison $$ ${:r} $$"
+    }
+  ]
+}

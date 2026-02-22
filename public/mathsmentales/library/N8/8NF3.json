@@ -1,0 +1,47 @@
+{
+    "title":"Trouver le résultat d’une multiplication décimale à partir d’une multiplication entière",
+    "dest":["8NE","7NE","6NE"],
+    "type":"text",
+    "options":[
+        {
+            "name":"Décimal × (entier < 10) - CM1",
+            "vars":{
+                "a":"2_9",
+                "b":"10_999",
+                "d":[10,100,1000]
+            },
+            "question":["On sait que $$${:a}\\times${:b}=${:a*:b}$$.<br>Combien vaut $$${:a}\\times${MMmath.round(:b/:d,3)}$$ ?",
+            "On sait que $$${:b}\\times${:a}=${:a*:b}$$.<br>Combien vaut $$${MMmath.round(:b/:d,3)}\\times${:a}$$ ?"
+        ],
+            "answer":["$$${:a}\\times${MMmath.round(:b/:d,3)}=\\color{red}{${MMmath.round(:a*:b/:d,3)}}$$",
+            "$$${MMmath.round(:b/:d,3)}\\times${:a}=\\color{red}{${MMmath.round(:a*:b/:d,3)}}$$"
+            ],
+            "value":"${MMmath.round(:a*:b/:d,3)}"
+        },{
+            "name":"Décimal × entier - CM2",
+            "vars":{
+                "a":"10_99",
+                "b":"10_999",
+                "d":[10,100,1000]
+            },
+            "question":["On sait que $$${:a}\\times${:b}=${:a*:b}$$.<br>Combien vaut $$${:a}\\times${MMmath.round(:b/:d,3)}$$ ?",
+            "On sait que $$${:b}\\times${:a}=${:a*:b}$$.<br>Combien vaut $$${MMmath.round(:b/:d,3)}\\times${:a}$$ ?"
+        ],
+            "answer":["$$${:a}\\times${MMmath.round(:b/:d,3)}=\\color{red}{${MMmath.round(:a*:b/:d,3)}}$$",
+            "$$${MMmath.round(:b/:d,3)}\\times${:a}=\\color{red}{${MMmath.round(:a*:b/:d,3)}}$$"
+            ],
+            "value":"${MMmath.round(:a*:b/:d,3)}"
+        },{
+            "name":"Décimal × Décimal - 6e",
+            "vars":{
+                "a":"10_999",
+                "b":"10_999",
+                "da":[10,100],
+                "db":"${:da==100?10:MMmath.aleaInt(0,1)?10:100}"
+            },
+            "question":"On sait que $$${:a}\\times${:b}=${:a*:b}$$.<br>Combien vaut $$${MMmath.round(:a/:da,3)}\\times${MMmath.round(:b/:db,3)}$$ ?",
+            "answer":"$$${MMmath.round(:a/:da,3)}\\times${MMmath.round(:b/:db,3)}=\\color{red}{${MMmath.round(:a*:b/:da/:db,3)}}$$",
+            "value":"${MMmath.round(:a*:b/:da/:db,3)}"
+        }
+    ]
+}

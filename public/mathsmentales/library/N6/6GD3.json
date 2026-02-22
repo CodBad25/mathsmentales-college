@@ -1,0 +1,75 @@
+{
+    "ID":"6GD3",
+    "title":"Appartenance au cercle",
+    "description":"Déterminer si un point appartient à un cercle donné.",
+    "dest":["6GD", "7GD", "8GD"],
+    "type":"text",
+    "fontSize":"small",
+    "keys":["o","n"],
+    "consts":{
+        "lettres":"ABCDEFGHJKLMNPRST"
+    },
+    "options":[
+        {
+            "name":"Cercle et rayon",
+            "vars":{
+                "R":"2_10",
+                "l":"0_${:lettres.length-1}",
+                "A":"${:lettres[:l]}",
+                "app":[true,false],
+                "dist":"${:app?:R:'1_10_^'+:R}",
+                "rep":"${:app?'Oui':'Non'}",
+                "justif":"${:app?', car O'+:A+' est égal au rayon':', car O'+:A+' est différent du rayon'}"
+            },
+            "question":"$$O${:A}=${:dist}$$.<br>${:A} appartient-il au cercle de centre O et de rayon ${:R} ?",
+            "answer":"<span class='red'>${:rep}</span>${:justif}",
+            "value":["${:app?'oui':'non'}","${:app?'O':'N'}"]
+        },{
+            "name":"Disque et rayon",
+            "vars":{
+                "R":"2_9",
+                "l":"0_${:lettres.length-1}",
+                "A":"${:lettres[:l]}",
+                "app":[true,false],
+                "dist":"${:app?'1_'+:R:(:R+1)+'_10'}",
+                "rep":"${:app?'Oui':'Non'}",
+                "justif":"${:app?', car O'+:A+' est inférieur ou égal au rayon':', car O'+:A+' est supérieur au rayon'}"
+            },
+            "question":"$$O ${:A}=${:dist}$$.<br>${:A} appartient-il au disque de centre O et de rayon ${:R} ?",
+            "answer":"<span class='red'>${:rep}</span>${:justif}",
+            "value":["${:app?'oui':'non'}","${:app?'O':'N'}"]
+        },{
+            "name":"Comparaison de longueurs et cercle",
+            "vars":{
+                "l":"0_${:lettres.length-1}_4_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "D":"${:lettres[:l[3]]}",
+                "lg":"1_10_3_^&",
+                "cx":"0_3_2_^&",
+                "rep":"${:cx[0]==1&&:cx[1]==2?'Oui':'Non'}",
+                "justif":"${:cx[0]==1&&:cx[1]==2?', car $$O'+:B+'=O'+:C+'$$':', car $$O'+:lettres[:l[:cx[0]]]+'\\not = O'+:lettres[:l[:cx[1]]]+'$$'}"
+            },
+            "question":"On sait que $$O ${:A}=${:lg[0]}$$, $$O ${:B}=${:lg[1]}$$, $$O ${:C}=${:lg[1]}$$ et $$O ${:D}=${:lg[2]}$$.<br>Le point ${:lettres[:l[:cx[0]]]} appartient-il au cercle de centre O passant par ${:lettres[:l[:cx[1]]]} ?",
+            "answer":"<span class='red'>${:rep}</span>${:justif}",
+            "value":["${:cx[0]==1&&:cx[1]==2?'oui':'non'}","${:cx[0]==1&&:cx[1]==2?'O':'N'}"]
+        },{
+            "name":"Comparaison de longueurs et disque",
+            "vars":{
+                "l":"0_${:lettres.length-1}_4_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "C":"${:lettres[:l[2]]}",
+                "D":"${:lettres[:l[3]]}",
+                "lg":"1_10_3_^&",
+                "cx":"0_3_2_^&",
+                "rep":"${:lg[Math.round((:cx[0]+0.5)/2,0)]<=:lg[Math.round((:cx[1]+0.5)/2,0)]?'Oui':'Non'}",
+                "justif":"${:lg[Math.round((:cx[0]+0.5)/2,0)]<:lg[Math.round((:cx[1]+0.5)/2,0)]?', car $$O'+:lettres[:l[:cx[0]]]+'< O'+:lettres[:l[:cx[1]]]+'$$'::lg[Math.round((:cx[0]+0.5)/2,0)]==:lg[Math.round((:cx[1]+0.5)/2,0)]?', car $$O'+:lettres[:l[:cx[0]]]+'=O'+:lettres[:l[:cx[1]]]+'$$':', car $$O'+:lettres[:l[:cx[0]]]+'> O'+:lettres[:l[:cx[1]]]+'$$'}"
+            },
+            "question":"On sait que $$O:A=:lg[0]$$, $$O:B=:lg[1]$$, $$O:C=:lg[1]$$ et $$O:D=:lg[2]$$.<br>Le point ${:lettres[:l[:cx[0]]]} appartient-il au disque de centre O passant par ${:lettres[:l[:cx[1]]]} ?",
+            "answer":"<span class='red'>${:rep}</span>${:justif}",
+            "value":["${:lg(Math.round((:cx[0]+0.5)/2,0)]<=:lg[Math.round((:cx[1]+0.5)/2,0)]?'oui':'non'}","${:lg[Math.round((:cx[0]+0.5)/2,0)]<=:lg[Math.round((:cx[1]+0.5)/2,0)]?'O':'N'}"]
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "title":"Déterminer si un nombre est un multiple, un diviseur d'un autre nombre",
+    "type":"text",
+    "ID":"6ND14",
+    "textSize":"small",
+    "dest":["6ND", "5NA", "4NA", "3NA"],
+    "options":[{
+        "name":"Trouver le multiple",
+        "vars":{
+            "a":"8_24_^prime",
+            "d":"${MMmath.unDiviseur(:a,true,true)}",
+            "e":"-1_1_^0",
+            "nd":"${MMmath.nonDiviseur(:a)}",
+            "m":"${:a*MMmath.aleaInt(1,5)}",
+            "nm":"${:a*MMmath.aleaInt(2,5)+MMmath.aleaInt(1,:a-1)*:e}",
+            "t":"${:d},${:nd},${:m},${:nm}"
+        },
+        "question": "Parmi les nombres ci-dessous, lequel est un <b>multiple</b> de ${:a} ?<br>${utils.shuffle(:t.split(',')).join(' ; ')}",
+        "shortq":"Que est le <b>multiple</b> de ${:a} ?<br>${utils.shuffle(:t.split(',')).join(' ; ')}",
+        "answer":"<span class='red'>${:m}</span> est un <b>multiple</b> de ${:a}.",
+        "value":"${:m}"
+    },{
+        "name":"Trouver le diviseur",
+        "vars":{
+            "a":"8_24_^prime",
+            "d":"${MMmath.unDiviseur(:a,true,false)}",
+            "e":"-1_1_^0",
+            "nd":"${MMmath.nonDiviseur(:a)}",
+            "m":"${:a*MMmath.aleaInt(2,5)}",
+            "nm":"${:a*MMmath.aleaInt(2,5)+MMmath.aleaInt(1,:a-1)*:e}",
+            "t":"${:d},${:nd},${:m},${:nm}"
+        },
+        "question": "Parmi les nombres ci-dessous, lequel est un <b>diviseur</b> de ${:a} ?<br>${utils.shuffle(:t.split(',')).join(' ; ')}",
+        "shortq":"Quel est le <b>diviseur</b> de ${:a}?<br>${utils.shuffle(:t.split(',')).join(' ; ')}",
+        "answer":"<span class='red'>${:d}</span> est un <b>diviseur</b> de ${:a}.",
+        "value":"${:d}"
+    }]
+}

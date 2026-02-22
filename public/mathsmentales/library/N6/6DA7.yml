@@ -1,0 +1,87 @@
+title: Lire un diagramme circulaire ou en barres
+dest:
+  - 6DA
+  - 5DA
+type: text
+consigne: On a fait un sondage auprès d'un groupe de personnes.
+consts:
+  valeurs:
+    - ["rouge", "bleu", "vert", "jaune"]
+    - ["pommes", "bananes", "oranges", "kiwis"]
+    - ["carottes", "haricots", "tomates", "salades"]
+    - ["pommes de terre", "pâtes", "riz", "semoule"]
+    - ["futsal", "basket", "volley", "badminton"]
+  titres:
+    - "Couleurs préférées"
+    - "Fruits préférés"
+    - "Légumes préférés"
+    - "Accompagnements préférés"
+    - "Sports en salle préférés"
+options:
+  - name: Lire un diagramme en barres
+    vars:
+      nbvalues: [10, 15, 20, 25, 30, 40, 50]
+      v1: "1_${:nbvalues-4}"
+      v2: "1_${:nbvalues-3-:v1}"
+      v3: "1_${:nbvalues-2-:v1-:v2}"
+      v4: "${:nbvalues-:v1-:v2-:v3}"
+      pop: ["d’élèves", "de personnes", "d’enfants", "d’adolescents"]
+      cxv: "1_4"
+      value: ${:cxv==1?:v1::cxv==2?:v2::cxv==3?:v3::v4}
+      cxt: "0_4"
+      cat: ${:valeurs[:cxt][:cxv-1]}
+      article: "${:cxt==0||:cxt==4||(:cxt==3&&:cxv==3)?'le'::cxt==3&&:cxv==4?'la':'les'}"
+    figure:
+      type: chart
+      content:
+        type: vertical
+        labels:
+          [
+            "${:valeurs[:cxt][0]}",
+            "${:valeurs[:cxt][1]}",
+            "${:valeurs[:cxt][2]}",
+            "${:valeurs[:cxt][3]}",
+          ]
+        data: [":v1", ":v2", ":v3", ":v4"]
+        options:
+          {
+            title: "${:titres[:cxt]}",
+            colors: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+            showLegend: true,
+          }
+  - name: Lire un diagramme circulaire
+    vars:
+      nbvalues: [10, 15, 20, 25, 30, 40, 50]
+      v1: "1_${:nbvalues-4}"
+      v2: "1_${:nbvalues-3-:v1}"
+      v3: "1_${:nbvalues-2-:v1-:v2}"
+      v4: "${:nbvalues-:v1-:v2-:v3}"
+      pop: ["d’élèves", "de personnes", "d’enfants", "d’adolescents"]
+      cxv: "1_4"
+      value: ${:cxv==1?:v1::cxv==2?:v2::cxv==3?:v3::v4}
+      cxt: "0_4"
+      cat: ${:valeurs[:cxt][:cxv-1]}
+      article: "${:cxt==0||:cxt==4||(:cxt==3&&:cxv==3)?'le'::cxt==3&&:cxv==4?'la':'les'}"
+    figure:
+      type: chart
+      content:
+        type: pie
+        labels:
+          [
+            "${:valeurs[:cxt][0]}",
+            "${:valeurs[:cxt][1]}",
+            "${:valeurs[:cxt][2]}",
+            "${:valeurs[:cxt][3]}",
+          ]
+        data: [":v1", ":v2", ":v3", ":v4"]
+        options:
+          {
+            title: "${:titres[:cxt]}",
+            colors: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+            showLegend: true,
+          }
+question: >
+  Combien préfèrent :article :cat ?
+answer: >
+  $$\color{red}{:value}$$${:value==1?' seul':''} préfère${:value>1?'nt':''} :article :cat.
+value: :value

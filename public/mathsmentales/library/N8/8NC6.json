@@ -1,0 +1,117 @@
+{
+    "title":"CM Connaissances -> Soustraire un nombre entier inférieur à 10 d'unités, dizaines, ... à un nombre décimal lorsqu'il n'y a pas de retenues",
+    "auteur":"Xavier Levet",
+    "dest":["8NC","7NC"],
+    "type":"text",
+    "options":[{
+        "name":"soustraire des centaines",
+        "vars":{
+            "unites":"1_9",
+            "dizaines":"0_9",
+            "centaines":"1_9",
+            "dixiemes":"0_9",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${:centaines-1}"
+        },
+        "question":[
+            "$$${:n} - ${MMmath.round(:x*100,2)}$$",
+            "$$${:n} - ${:x}\\times 100$$",
+            "Combien font $$${:n}$$ moins $$${:x}$$ centaine${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n} - ${MMmath.round(:x*100,2)} = \\color{red}{${MMmath.round(:n-:x*100,2)}}$$",
+            "$$${:n} - ${:x}\\times 100 = \\color{red}{${MMmath.round(:n-:x*100,2)}}$$",
+            "$$${:n}$$ moins $$${:x}$$ centaine${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n-:x*100,2)}}$$"
+        ],
+        "value":"${MMmath.round(:n-(:x*100))}"
+    },{
+        "name":"Soustraire des dizaines",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"1_9",
+            "centaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${:dizaines-1}"
+        },
+        "question":[
+            "$$${:n} - ${MMmath.round(:x*10,2)}$$",
+            "$$${:n} - ${:x}\\times 10$$",
+            "Combien font $$${:n}$$ moins $$${:x}$$ dizaine${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n} - ${:x*10} = \\color{red}{${MMmath.round(:n-:x*10,2)}}$$",
+            "$$${:n} - ${:x}\\times 10 = \\color{red}{${MMmath.round(:n-:x*10,2)}}$$",
+            "$$${:n}$$ moins $$${:x}$$ dizaine${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n-:x*10,2}}$$"
+        ],
+        "value":"${MMmath.round(:n+:x*10)}"
+    },{
+        "name":"Soustraire des unités",
+        "vars":{
+            "unites":"1_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${:unites-1}"
+        },
+        "question":[
+            "$$${:n}-${:x}$$",
+            "$$${:n} - ${:x}\\times 1$$",
+            "Combien font $$${:n}$$ moins $$${:x}$$ unité${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n}-${:x}= \\color{red}{${MMmath.round(:n-:x,1)}}$$",
+            "$$${:n}-${:x}\\times 1= \\color{red}{${MMmath.round(:n-:x,1)}}$$",
+            "$$${:n}$$ moins $$${:x}$$ unité${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n-:x,1)}}$$"
+        ],
+        "value":"${MMmath.round(:n-:x,1)}"
+    },{
+        "name":"Soustraire des dixièmes",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"1_9",
+            "centiemes":"0_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${:dixiemes-1}"
+        },
+        "question":[
+            "$$${:n}-${MMmath.round(:x/10,1)}$$",
+            "$$${:n} - \\dfrac{${:x}}{10}$$",
+            "Combien font $$${:n}$$ moins $$${:x}$$ dixième${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n}-${MMmath.round(:x/10,1)}=\\color{red}{${MMmath.round(:n-:x/10,2)}}$$",
+            "$$${:n} - \\dfrac{${:x}}{10} = \\color{red}{${MMmath.round(:n-:x/10,2)}}$$",
+            "$$${:n}$$ moins $$${:x}$$ dixième${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n-:x/10,2)}}$$."
+        ],
+        "value":"${MMmath.round(:n-:x/10,2)}"
+    },{
+        "name":"Soustraire des centièmes",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "centaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"1_9",
+            "n":"${MMmath.round(:centaines*100+:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}",
+            "x":"1_${:centiemes-1}"
+        },
+        "question":[
+            "$$${:n}-${MMmath.round(:x/100,2)}$$",
+            "$$${:n} - \\dfrac{${:x}}{100}$$",
+            "Combien font $$${:n}$$ moins $$${:x}$$ centième${:x>1?'s':''} ?"
+        ],
+        "answer":[
+            "$$${:n}-${MMmath.round(:x/100,2)}=\\color{red}{${MMmath.round(:n-:x/100,3)}}$$",
+            "$$${:n} - \\dfrac{${:x}}{100} = \\color{red}{${MMmath.round(:n-:x/100,3)}}$$",
+            "$$${:n}$$ moins $$${:x}$$ centième${:x>1?'s':''} font $$\\color{red}{${MMmath.round(:n-:x/100,3)}}$$."
+        ],
+        "value":"${MMmath.round(:n-:x/100,3)}"
+    }]
+}

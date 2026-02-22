@@ -1,0 +1,41 @@
+{
+  "title": "Équations avec quotient",
+  "type": "latex",
+  "dest": [
+    "3ND","4NE"
+  ],
+  "auteur":"Dominique PORRONE",
+  "consigne": "Résoudre",
+  "options": [
+    {
+      "name": "$$\\dfrac{x}{b}=a$$",
+      "vars": {
+        "a": "2_10",
+        "b": "2_10"
+      },
+      "question": [
+        "\\dfrac{x}{:b}=:a",
+        ":a=\\dfrac{x}{:b}"
+      ],
+      "answer": [
+        "\\dfrac{x}{:b}=\\dfrac{:a}{1} \\text{ donc } x=\\frac{{:a}\\times{:b}}{1}=\\color{red}{${:a*:b}}",
+        "\\dfrac{:a}{1}=\\dfrac{x}{:b} \\text{ donc } x=\\frac{{:a}\\times{:b}}{1}=\\color{red}{${:a*:b}}"
+        ]
+    },
+    {
+      "name": "$$\\dfrac{b}{x}=a$$",
+      "vars": {
+        "a": "2_10",
+        "b": "2_10"
+      },
+      "question": [
+        "\\frac{:b}{x}=:a",
+        ":a=\\frac{:b}{x}"
+      ],
+      "answer": [
+        "\\frac{:b}{x}=\\dfrac{:a}{1} \\text{ donc } x=\\frac{{:b}\\times{1}}{:a}=\\color{red}{${MMmath.calc(:b+'/'+:a)}}",
+        "\\frac{:a}{1}=\\dfrac{:b}{x} \\text{ donc } x=\\frac{{:b}\\times{1}}{:a}=\\color{red}{${MMmath.calc(:b+'/'+:a)}}"
+        ]
+    }
+  ]
+}

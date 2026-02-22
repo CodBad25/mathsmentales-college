@@ -1,0 +1,22 @@
+{
+    "title":"CM Procédures -> Multiplier deux entiers en utilisant la distributivité",
+    "auteur":"Xavier Levet",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Un entier <10 par un nombre compris entre 12 et 19",
+        "vars":{"b":"2_9","c":"2_9","n":[10],"d":"${:c+:n}"
+        }
+    },{
+        "name":"Un entier <10 par un nombre compris entre 12 et 29",
+        "vars":{"b":"2_9","c":"2_9","n":[10,20],"d":"${:c+:n}"
+        }
+    },{
+        "name":"Un entier <20 par un nombre compris entre 12 et 19",
+        "vars":{"b":"2_19","c":"2_9","n":[10],"d":"${:c+:n}"
+        }
+    }
+    ],
+    "question": ["${:b}\\times ${:d}"],
+    "answer":":question=\\color{green}{${:b}\\times${:c} + ${:b}\\times${:n}}=\\color{red}{${:b*:d}}",
+    "value":"${:b*:d}"
+}

@@ -1,0 +1,46 @@
+{
+    "title":"CE Procédures -> Déterminer la moitié d'un nombre pair, ou impairs jusqu’à 15",
+    "auteur":"Xavier Levet",
+    "dest":["10ND", "9ND"],
+    "type":"text",
+    "options":[{
+        "name":"Moitié de nombres < 100 avec des dizaines entières paires",
+         "vars": {
+                "a":[20,40,60,80],
+                "qte": "${:a}"
+                  }
+                },{
+        "name":"Moitié de nombres < 100 avec des dizaines paires",
+         "vars": {
+                "a":[0,20,40,60,80],"b":[0,2,4,6,8],
+                "qte": "${:a+:b}"
+                  }
+                },{
+        "name":"Moitié de nombres < 100 avec des dizaines paires et impaires",
+         "vars": {
+                "a":"0_9","b":[0,2,4,6,8],"c":"${:a*10}",
+                "qte": "${:c+:b}"
+                  }
+                },{
+        "name":"Moitié de nombres < 1000 avec des dizaines et des centaines paires",
+         "vars": {
+                "a":[0,20,40,60,80],"b":[0,2,4,6,8],"c":[0,200,400,600,800],
+                "qte": "${:c+:b+:a}"
+                  }
+                },{
+        "name":"Moitié de nombres < 1000 avec des dizaines et des centaines paires",
+         "vars": {
+                "a":"0_499",
+                "qte": "${:a*2}"
+                  }
+                },{
+      "name": "Moitié de nombres impairs -> 15",
+      "vars": {
+        "a": "0_7",
+        "qte": "${:a*2+1}"
+      }
+    }],
+    "question": "Quelle est la moitié de ${:qte}",
+  "answer":"La moitié de ${:qte} est <span class='red'>${:qte/2}</span>",
+  "value":"${:qte/2}"
+}

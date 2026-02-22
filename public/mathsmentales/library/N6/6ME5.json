@@ -1,0 +1,166 @@
+{
+    "ID":"6ME5",
+    "dest":["6ME"],
+    "title":"Calculer des mesures d’angles avec angles droits, plats, opposés par le sommet.",
+    "description":"Déterminer si des angles sont complémentaires ou supplémentaires.",
+    "type":"text",
+    "consts":{
+        "points":"ABCDEFGHIJKLMNOPQRST",
+        "phi":"${Math.PI/180}"
+    },
+    "options":[
+        {
+            "name":"Angle droit ou pas ?",
+            "vars":{
+                "l":"0_${:points.length-1}_4_^&",
+                "O":"${:points[:l[0]]}",
+                "A":"${:points[:l[1]]}",
+                "B":"${:points[:l[2]]}",
+                "C":"${:points[:l[3]]}",
+                "aa":"-10_100",
+                "ac":[90,90,100,80],
+                "ab":"20_${Math.min(:ac-10,80)}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content": [
+                    ["point", [0,0], {"name":"${:O}","size":3,"face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${-12*Math.cos(:phi*:aa)}","${-12*Math.sin(:phi*:aa)}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"${:A}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa-90))}","${12*Math.sin(:phi*(:aa-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+:ab))}","${6.5*Math.sin(:phi*(:aa+:ab))}"], {"name":"${:B}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ab-90))}","${12*Math.sin(:phi*(:aa+:ab-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+90))}","${6.5*Math.sin(:phi*(:aa+90))}"], {"name":"${:C}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ac+90))}","${12*Math.sin(:phi*(:aa+:ac+90))}"]}}],
+                    ["line", ["${:O}","${:A}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:B}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:C}"], {"straightFirst":false}],
+                    ["angle", ["${:A}","${:O}","${:B}"], {"radius":2.5,"name":"${:ab}°","label":{"strokeColor":"red"}}],
+                    ["angle", ["${:B}","${:O}","${:C}"], {"radius":2,"name":"${:ac-:ab}°","fillColor":"blue","strokeColor":"blue","label":{"strokeColor":"blue"}}]
+                ]
+            },
+            "question":"Sur ce schéma, $$\\widehat{${:A+:O+:B}}=${:ab}°$$ et $$\\widehat{${:B+:O+:C}}=${:ac-:ab}°$$. L‘angle $$\\widehat{${:A+:O+:C}}$$ est-il droit ?",
+            "answer":"$$${:ab}°+${:ac-:ab}°=${:ac}°$$ donc $$\\widehat{${:A+:O+:C}}$$ <span class='red'>${:ac==90?'est':'n’est pas'} un angle droit.</span>.",
+            "value":"${:ac==90?'oui':'non'}"
+        },{
+            "name":"Angles complémentaires",
+            "vars":{
+                "l":"0_${:points.length-1}_4_^&",
+                "O":"${:points[:l[0]]}",
+                "A":"${:points[:l[1]]}",
+                "B":"${:points[:l[2]]}",
+                "C":"${:points[:l[3]]}",
+                "aa":"-10_100",
+                "ab":"20_70",
+                "AOB":[true,false]
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content": [
+                    ["point", [0,0], {"name":"${:O}","size":3,"face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${-12*Math.cos(:phi*:aa)}","${-12*Math.sin(:phi*:aa)}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"${:A}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa-90))}","${12*Math.sin(:phi*(:aa-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+:ab))}","${6.5*Math.sin(:phi*(:aa+:ab))}"], {"name":"${:B}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ab-90))}","${12*Math.sin(:phi*(:aa+:ab-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+90))}","${6.5*Math.sin(:phi*(:aa+90))}"], {"name":"${:C}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+180))}","${12*Math.sin(:phi*(:aa+180))}"]}}],
+                    ["line", ["${:O}","${:A}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:B}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:C}"], {"straightFirst":false}],
+                    ["angle", ["${:A}","${:O}","${:B}"], {"radius":2.5,"name":"${:ab}°","withLabel":"${:AOB?1:0}","label":{"strokeColor":"red"}}],
+                    ["angle", ["${:B}","${:O}","${:C}"], {"radius":2,"name":"${90-:ab}°","fillColor":"blue","strokeColor":"blue","withLabel":"${:AOB?0:1}","label":{"strokeColor":"blue"}}]
+                ]
+            },
+            "question":"Sur ce schéma, l‘angle $$\\widehat{${:A+:O+:C}}$$ est droit et $$\\widehat{${:AOB?:A+:O+:B::B+:O+:C}}=${:AOB?:ab:90-:ab}°$$. Quelle est la mesure de $$\\widehat{${:AOB?:B+:O+:C::A+:O+:B}}$$ ?",
+            "answer":"$$\\widehat{${:AOB?:B+:O+:C::A+:O+:B}}=90°-${:AOB?:ab:90-:ab}°=\\color{red}{${:AOB?90-:ab::ab}°}$$.",
+            "value":["${:AOB?90-:ab::ab}","${:AOB?90-:ab::ab}°"]
+        },{
+            "name":"Angle complétant un angle droit",
+            "vars":{
+                "l":"0_${:points.length-1}_4_^&",
+                "O":"${:points[:l[0]]}",
+                "A":"${:points[:l[1]]}",
+                "B":"${:points[:l[2]]}",
+                "C":"${:points[:l[3]]}",
+                "aa":"-10_20",
+                "ab":"20_70",
+                "AOC":[true,false]
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content": [
+                    ["point", [0,0], {"name":"${:O}","size":3,"face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":[0,-12]}}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"${:A}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa-90))}","${12*Math.sin(:phi*(:aa-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+90))}","${6.5*Math.sin(:phi*(:aa+90))}"], {"name":"${:B}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ab-90))}","${12*Math.sin(:phi*(:aa+:ab-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+90+:ab))}","${6.5*Math.sin(:phi*(:aa+90+:ab))}"], {"name":"${:C}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ab+180))}","${12*Math.sin(:phi*(:aa+:ab+180))}"]}}],
+                    ["line", ["${:O}","${:A}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:B}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:C}"], {"straightFirst":false}],
+                    ["angle", ["${:A}","${:O}","${:C}"], {"radius":4,"name":"${:ab+90}°","fillColor":"red","withLabel":"${:AOC?1:0}","label":{"strokeColor":"red"}}],
+                    ["angle", ["${:A}","${:O}","${:B}"], {"radius":1,"strokeColor":"black","fillColor":"blak","withLabel":false}],
+                    ["angle", ["${:B}","${:O}","${:C}"], {"radius":2.5,"name":"${:ab}°","fillColor":"blue","strokeColor":"blue","withLabel":"${:AOC?0:1}","label":{"strokeColor":"blue"}}]
+                ]
+            },
+            "question":"Sur ce schéma, l‘angle $$\\widehat{${:A+:O+:B}}$$ est droit et $$\\widehat{${:AOC?:A+:O+:C::B+:O+:C}}=${:AOC?90+:ab::ab}°$$. Quelle est la mesure de $$\\widehat{${:AOC?:B+:O+:C::A+:O+:C}}$$ ?",
+            "answer":"$$\\widehat{${:AOC?:B+:O+:C::A+:O+:C}}=${:AOC?(:ab+90)+'°-90°':'90°+'+:ab+'°'}=\\color{red}{${:AOC?:ab:90+:ab}°}$$.",
+            "value":["${:AOC?:ab:90+:ab}","${:AOC?:ab:90+:ab}°"]
+        },{
+            "name":"Angle plat ou pas ?",
+            "vars":{
+                "l":"0_${:points.length-1}_4_^&",
+                "O":"${:points[0]}",
+                "A":"${:points[1]}",
+                "B":"${:points[2]}",
+                "C":"${:points[3]}",
+                "aa":"-10_10",
+                "ac":[180,180,200,190],
+                "ab":"20_${Math.min(:ac-10,170)}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content": [
+                    ["point", [0,0], {"name":"${:O}","size":3,"face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":[0,-12]}}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"${:A}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa-90))}","${12*Math.sin(:phi*(:aa-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+:ab))}","${6.5*Math.sin(:phi*(:aa+:ab))}"], {"name":"${:B}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ab-90))}","${12*Math.sin(:phi*(:aa+:ab-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+180))}","${6.5*Math.sin(:phi*(:aa+180))}"], {"name":"${:C}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+270))}","${12*Math.sin(:phi*(:aa+270))}"]}}],
+                    ["line", ["${:O}","${:A}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:B}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:C}"], {"straightFirst":false}],
+                    ["angle", ["${:A}","${:O}","${:B}"], {"orthoType":"sector","radius":2.5,"name":"${:ab}°","label":{"strokeColor":"red"}}],
+                    ["angle", ["${:B}","${:O}","${:C}"], {"orthoType":"sector","radius":2,"name":"${:ac-:ab}°","fillColor":"blue","strokeColor":"blue","label":{"strokeColor":"blue","anchorX":"auto","anchorY":"auto"}}]
+                ]
+            },
+            "question":"Sur ce schéma, $$\\widehat{${:A+:O+:B}}=${:ab}°$$ et $$\\widehat{${:B+:O+:C}}=${:ac-:ab}°$$. L‘angle $$\\widehat{${:A+:O+:C}}$$ est-il plat ?",
+            "answer":"$$${:ab}°+${:ac-:ab}°=${:ac}°$$ donc $$\\widehat{${:A+:O+:C}}$$ <span class='red'>${:ac==180?'est':'n’est pas'} un angle plat.</span>.",
+            "value":"${:ac==90?'oui':'non'}"
+        },{
+            "name":"Avec un angle plat",
+            "vars":{
+                "l":"0_${:points.length-1}_4_^&",
+                "O":"${:points[0]}",
+                "A":"${:points[1]}",
+                "B":"${:points[2]}",
+                "C":"${:points[3]}",
+                "aa":"-10_10",
+                "ac":180,
+                "ab":"15_165",
+                "AOB":[true,false]
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-8,8,8,-2.5],
+                "content": [
+                    ["point", [0,0], {"name":"${:O}","size":3,"face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":[0,-12]}}],
+                    ["point", ["${6.5*Math.cos(:phi*:aa)}","${6.5*Math.sin(:phi*:aa)}"], {"name":"${:A}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa-90))}","${12*Math.sin(:phi*(:aa-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+:ab))}","${6.5*Math.sin(:phi*(:aa+:ab))}"], {"name":"${:B}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+:ab-90))}","${12*Math.sin(:phi*(:aa+:ab-90))}"]}}],
+                    ["point", ["${6.5*Math.cos(:phi*(:aa+180))}","${6.5*Math.sin(:phi*(:aa+180))}"], {"name":"${:C}","face":"x","label":{"anchorX":"middle","anchorY":"middle","offset":["${12*Math.cos(:phi*(:aa+270))}","${12*Math.sin(:phi*(:aa+270))}"]}}],
+                    ["line", ["${:O}","${:A}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:B}"], {"straightFirst":false}],
+                    ["line", ["${:O}","${:C}"], {"straightFirst":false}],
+                    ["angle", ["${:A}","${:O}","${:B}"], {"orthoType":"sector","radius":2.5,"name":"${:ab}°","withLabel":"${:AOB?1:0}","label":{"autoposition":true,"offset":[0,0],"strokeColor":"red"}}],
+                    ["angle", ["${:B}","${:O}","${:C}"], {"orthoType":"sector","radius":2,"name":"${:ac-:ab}°","fillColor":"blue","strokeColor":"blue","withLabel":"${:AOB?0:1}","label":{"autoposition":true,"offset":[0,0],"strokeColor":"blue"}}]
+                ]
+            },
+            "question":"Sur ce schéma, l‘angle $$\\widehat{${:A+:O+:C}}$$ est plat et $$\\widehat{${:AOB?:A+:O+:B::B+:O+:C}}=${:AOB?:ab:180-:ab}°$$. Quelle est la mesure de $$\\widehat{${:AOB?:B+:O+:C::A+:O+:B}}$$?",
+            "answer":"$$\\widehat{${:AOB?:B+:O+:C::A+:O+:B}}=180°-${:AOB?:ab:180-:ab}°=\\color{red}{${:AOB?180-:ab::ab}°}$$.",
+            "value":["${:AOB?180-:ab::ab}","${:AOB?180-:ab::ab}°"]
+        }
+    ]
+}

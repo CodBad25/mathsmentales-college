@@ -1,0 +1,57 @@
+{
+    "title":"CE1 Procédures -> Ajouter 9,19,29 à un nombre",
+    "dest":["10ND"],
+    "auteur":"Xavier Levet",
+    "options":[{
+        "name":"Ajouter 9 à un nombre dont l'unité est 0",
+        "vars":{"a":9,"b":[0,10,20,30,40,50,60,70,80,90]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre dont l'unité est 1",
+        "vars":{"a":9,"b":[1,11,21,31,41,51,61,71,81,91]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre inférieur à 20",
+        "vars":{"a":9,"b":"1_19"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre inférieur à 50",
+        "vars":{"a":9,"b":"1_49"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre inférieur à 90",
+        "vars":{"a":9,"b":"1_89"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 19 à un nombre dont l'unité est 0",
+        "vars":{"a":19,"b":[0,10,20,30,40,50,60,70,80,90]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 19 à un nombre dont l'unité est 1",
+        "vars":{"a":19,"b":[1,11,21,31,41,51,61,71,81,91]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 19 à un nombre inférieur à 50",
+        "vars":{"a":19,"b":"1_49"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 19 à un nombre inférieur à 80",
+        "vars":{"a":19,"b":"1_79"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 29 à un nombre dont l'unité est 0",
+        "vars":{"a":29,"b":[0,10,20,30,40,50,60,70,80,90]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 29 à un nombre dont l'unité est 1",
+        "vars":{"a":29,"b":[1,11,21,31,41,51,61,71,81,91]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 29 à un nombre inférieur à 70",
+        "vars":{"a":29,"b":"1_69"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           }
+    ],
+    "answer":":question=\\color{red}{${:a+:b}}",
+    "value":"${:a+:b}"
+}

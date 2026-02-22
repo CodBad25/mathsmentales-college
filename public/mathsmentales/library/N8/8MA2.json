@@ -1,0 +1,49 @@
+{
+    "title":"Sens des préfixes",
+    "ID":"8MA2",
+    "dest":["8MA","7MA","6MA"],
+    "type":"text",
+    "consigne":"Compléter avec 10, 100 ou 1000 et grand ou petit.",
+    "consts":{
+        "prefixes":["k","h","da","","d","c","m"],
+        "pm":["grand","grand","grand","","petit","petit","petit"],
+        "mult":[1000,100,10,1,10,100,1000]
+    },
+    "options":[{
+        "name":"Comparaison au mètre",
+        "valueType":"liste",
+        "vars":{
+            "choix":"0_6_^3"
+        },
+        "question":"1&nbsp;${:prefixes[:choix]}m est ... fois plus ... que 1&nbsp;m.",
+        "answer":"1&nbsp;${:prefixes[:choix]}m est $$\\color{red}{${:mult[:choix]}}$$ fois plus <span class='red'>${:pm[:choix]}</span> que 1&nbsp;m.",
+        "value":"${:mult[:choix]};${:pm[:choix]}"
+    },{
+        "name":"Comparaison au gramme",
+        "valueType":"liste",
+        "vars":{
+            "choix":"0_6_^3"
+        },
+        "question":"1&nbsp;${:prefixes[:choix]}g est ... fois plus ... que 1&nbsp;g.",
+        "answer":"1&nbsp;${:prefixes[:choix]}g est $$\\color{red}{${:mult[:choix]}}$$ fois plus <span class='red'>${:pm[:choix]}</span> que 1&nbsp;g.",
+        "value":"${:mult[:choix]};${:pm[:choix]}"
+    },{
+        "name":"Du mètre à son multiple ou sous multiple",
+        "valueType":"liste",
+        "vars":{
+            "choix":"0_6_^3"
+        },
+        "question":"1&nbsp;m est ... fois plus ... que 1&nbsp;${:prefixes[:choix]}m.",
+        "answer":"1&nbsp;m est $$\\color{red}{${:mult[:choix]}}$$ fois plus <span class='red'>${:pm[6-:choix]}</span> que 1&nbsp;${:prefixes[:choix]}m.",
+        "value":"${:mult[:choix]};${:pm[6-:choix]}"
+    },{
+        "name":"Du gramme à son multiple ou sous multiple",
+        "valueType":"liste",
+        "vars":{
+            "choix":"0_6_^3"
+        },
+        "question":"1&nbsp;g est ... fois plus ... que 1&nbsp;${:prefixes[:choix]}g.",
+        "answer":"1&nbsp;g est $$\\color{red}{${:mult[:choix]}}$$ fois plus <span class='red'>${:pm[6-:choix]}</span> que 1&nbsp;${:prefixes[:choix]}g.",
+        "value":"${:mult[:choix]};${:pm[6-:choix]}"
+    }]
+}

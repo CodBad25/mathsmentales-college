@@ -1,0 +1,137 @@
+title: Calculer un fréquence simple
+dest:
+  - 5DA
+  - 4DA
+  - 3DA
+type: text
+textSize: medium
+description: >
+  Calculer une fréquence simple à partir d’un tableau de données ou d’un texte.
+options:
+  - name: Fréquence fraction à partir d’une situation
+    consts:
+      textq:
+        - Dans une classe de :tout élèves, :partie sont externes. Quelle est la fréquence des élèves non externes ?
+        - Dans un club de sport de :tout membres, :partie sont des femmes. Quelle est la fréquence des membres hommes ?
+        - Dans une chorale de :tout chanteurs, :partie sont des sopranos. Quelle est la fréquence des chanteurs non sopranos ?
+        - Sur une étagère de :tout livres, :partie sont des romans. Quelle est la fréquence des livres non romans ?
+        - Dans une équipe de travail de :tout employés, :partie sont des cadres. Quelle est la fréquence des employés non cadres ?
+    vars:
+      tout: "20_30"
+      partie: "1_15"
+      reste: "${:tout-:partie}"
+      choixtext: "0_4"
+    question: ${:textq[:choixtext]}
+    answer: La fréquence des élèves non externes est de $$\color{red}{\dfrac{:reste}{:tout}}${MMmath.pgcd(:reste,:tout)>1?'=\color{green}{'+MMmath.fractionSimplifiee(:reste,:tout)+'}':''}$$.
+    value: \dfrac{:reste}{:tout}
+  - name: Fréquence fraction à partir d’un tableau connaissant l’effectif total
+    consts:
+      valeurs:
+        - ["rouge", "bleu", "vert", "jaune"]
+        - ["pommes", "bananes", "oranges", "kiwis"]
+        - ["carottes", "haricots", "tomates", "salades"]
+        - ["pommes de terre", "pâtes", "riz", "semoule"]
+        - ["futsal", "basket", "volley", "badminton"]
+    vars:
+      nbvalues: [10, 20, 25, 30, 40, 50, 80, 100]
+      v1: "1_${:nbvalues-4}"
+      v2: "1_${:nbvalues-3-:v1}"
+      v3: "1_${:nbvalues-2-:v1-:v2}"
+      v4: "${:nbvalues-:v1-:v2-:v3}"
+      pop: ["élèves", "personnes", "enfants", "adolescents"]
+      cxv: "1_4"
+      value: ${:cxv==1?:v1::cxv==2?:v2::cxv==3?:v3::v4}
+      cxt: "0_4"
+      cat: ${:valeurs[:cxt][:cxv-1]}
+    question: >
+      Dans une enquête réalisée auprès de :nbvalues :pop, on a recueilli les
+      réponses suivantes :
+      <table class="inline-table">
+        <tr><th>Réponse</th><th>${:valeurs[:cxt][0]}</th><th>${:valeurs[:cxt][1]}</th><th>${:valeurs[:cxt][2]}</th><th>${:valeurs[:cxt][3]}</th></tr>
+        <tr><th>Effectif</th><td>:v1</td><td>:v2</td><td>:v3</td><td>:v4</td></tr>
+      </table><br>
+      Quelle est la fréquence de la réponse <b>:cat</b> ?
+    answer: >
+      La fréquence de la réponse :cat est de $$\color{red}{\dfrac{:value}{:nbvalues}}${MMmath.pgcd(:value,:nbvalues)>1?'=\color{green}{'+MMmath.fractionSimplifiee(:value,:nbvalues)+'}':''}$$.
+    value: \dfrac{:value}{:nbvalues}
+  - name: Fréquence fraction à partir d’un tableau avec calcul de l’effectif total
+    consts:
+      valeurs:
+        - ["rouge", "bleu", "vert", "jaune"]
+        - ["pommes", "bananes", "oranges", "kiwis"]
+        - ["carottes", "haricots", "tomates", "salades"]
+        - ["pommes de terre", "pâtes", "riz", "semoule"]
+        - ["futsal", "basket", "volley", "badminton"]
+    vars:
+      nbvalues: [10, 15, 20, 25, 30, 40, 50]
+      v1: "1_${:nbvalues-4}"
+      v2: "1_${:nbvalues-3-:v1}"
+      v3: "1_${:nbvalues-2-:v1-:v2}"
+      v4: "${:nbvalues-:v1-:v2-:v3}"
+      pop: ["d’élèves", "de personnes", "d’enfants", "d’adolescents"]
+      cxv: "1_4"
+      value: ${:cxv==1?:v1::cxv==2?:v2::cxv==3?:v3::v4}
+      cxt: "0_4"
+      cat: ${:valeurs[:cxt][:cxv-1]}
+    question: >
+      Dans une enquête réalisée auprès :pop, on a recueilli les
+      réponses suivantes :
+      <table class="inline-table">
+        <tr><th>Réponse</th><th>${:valeurs[:cxt][0]}</th><th>${:valeurs[:cxt][1]}</th><th>${:valeurs[:cxt][2]}</th><th>${:valeurs[:cxt][3]}</th></tr>
+        <tr><th>Effectif</th><td>:v1</td><td>:v2</td><td>:v3</td><td>:v4</td></tr>
+      </table><br>
+      Quelle est la fréquence de la réponse <b>:cat</b> ?
+    answer: >
+      La fréquence de la réponse :cat est de $$\color{red}{\dfrac{:value}{:nbvalues}}${MMmath.pgcd(:value,:nbvalues)>1?'=\color{green}{'+MMmath.fractionSimplifiee(:value,:nbvalues)+'}':''}$$.
+    value:
+      - \dfrac{:value}{:nbvalues}
+      - MMmath.fractionSimplifiee(:value,:nbvalues)
+  - name: Fréquence fraction à partir d’une représentation graphique
+    consts:
+      valeurs:
+        - ["rouge", "bleu", "vert", "jaune"]
+        - ["pommes", "bananes", "oranges", "kiwis"]
+        - ["carottes", "haricots", "tomates", "salades"]
+        - ["pommes de terre", "pâtes", "riz", "semoule"]
+        - ["futsal", "basket", "volley", "badminton"]
+      titres:
+        - "Couleurs préférées"
+        - "Fruits préférés"
+        - "Légumes préférés"
+        - "Accompagnements préférés"
+        - "Sports en salle préférés"
+    vars:
+      nbvalues: [10, 15, 20, 25, 30, 40, 50]
+      v1: "1_${:nbvalues-4}"
+      v2: "1_${:nbvalues-3-:v1}"
+      v3: "1_${:nbvalues-2-:v1-:v2}"
+      v4: "${:nbvalues-:v1-:v2-:v3}"
+      pop: ["d’élèves", "de personnes", "d’enfants", "d’adolescents"]
+      cxv: "1_4"
+      value: ${:cxv==1?:v1::cxv==2?:v2::cxv==3?:v3::v4}
+      cxt: "0_4"
+      cat: ${:valeurs[:cxt][:cxv-1]}
+      type: ["vertical", "pie"]
+    figure:
+      type: chart
+      content:
+        type: ${:type}
+        labels:
+          [
+            "${:valeurs[:cxt][0]}",
+            "${:valeurs[:cxt][1]}",
+            "${:valeurs[:cxt][2]}",
+            "${:valeurs[:cxt][3]}",
+          ]
+        data: [":v1", ":v2", ":v3", ":v4"]
+        options:
+          {
+            title: "${:titres[:cxt]}",
+            colors: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+            showLegend: true,
+          }
+    question: >
+      Quelle est la fréquence de la réponse ":cat" ?
+    answer: >
+      La fréquence de la réponse :cat est de $$\color{red}{\dfrac{:value}{:nbvalues}}${MMmath.pgcd(:value,:nbvalues)>1?'=\color{green}{'+MMmath.fractionSimplifiee(:value,:nbvalues)+'}':''}$$.
+    value: \dfrac{:value}{:nbvalues}

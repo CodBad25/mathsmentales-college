@@ -1,0 +1,25 @@
+{
+    "title":"Complément à l'unité",
+    "description":"Trouver le complément qui donne une unité entière",
+    "ID":"6NE10",
+    "dest":["6NE", "5NA", "7NE","4NA"],
+    "repeat":"true",
+    "options":[{
+        "name":"Compléter des dixièmes",
+        "vars":{"n":"1_9","a":"${MMmath.round(:n/10,1)}","c":"${MMmath.round(1-:a,1)}"}
+    },{
+        "name":"Compléter des centièmes",
+        "vars":{"n":"1_99","a":"${MMmath.round(:n/100,2)}","c":"${MMmath.round(1-:a,2)}"}
+    },{
+        "name":"Compléter des millièmes",
+        "vars":{"n":"1_999","a":"${MMmath.round(:n/1000,3)}","c":"${MMmath.round(1-:a,3)}"}
+    }
+    ],
+    "question": ["\\begin{array}{c} \\text{Combien manque-t-il à}\\\\ ${:a} \\text{ pour faire 1 ?}\\end{array}",
+        "${:a}+?=1",
+        "1-${:a}"],
+    "shortq": ["${:a}+ \\colorbox{#ececec}{\\quad\\quad} = 1", "${:a}+ \\colorbox{#ececec}{\\quad\\quad} = 1",
+    "1- ${:a} = \\colorbox{#ececec}{\\quad\\quad}"],
+    "answer":"${:a}+\\color{red}{${:c}}=1",
+    "value":"${:c}"
+}

@@ -1,0 +1,50 @@
+{
+    "title": "CE Faits numériques -> Variations autour de la table de multiplication de 25",
+    "dest": ["10ND"],
+    "auteur":"Xavier Levet",
+    "speech": 1,
+    "options": [
+        {
+            "name": "Table de 25 (de 0 -> 4)",
+            "vars": {
+                "a": 25,
+                "b": "0_4"
+            }
+        }
+    ],
+    "question": [
+        "${:a}\\times${:b}",
+        "${:a}\\times ?=${:a*:b}",
+        "${:b}\\times ?=${:a*:b}",
+        "${:a*:b}=${:a}\\times ?",
+        "${:a*:b}=${:b}\\times ?"
+    ],
+    "shortq": [
+        "${:a}\\times${:b}=\\colorbox{#ECECEC}{\\quad}",
+        "${:a}\\times \\colorbox{#ECECEC}{\\quad}=${:a*:b}",
+        "${:b}\\times \\colorbox{#ECECEC}{\\quad}=${:a*:b}",
+        "${:a*:b}=${:a}\\times \\colorbox{#ECECEC}{\\quad}",
+        "${:a*:b}=${:b}\\times \\colorbox{#ECECEC}{\\quad}"
+    ],
+    "answer": [
+        "${:a}\\times${:b}=\\color{red}{${:a*:b}}",
+        "${:a}\\times\\color{red}{${:b}}=${:a*:b}",
+        "${:b}\\times\\color{red}{${:a}}=${:a*:b}",
+        "${:a*:b}=${:a}\\times \\color{red}{${:b}}",
+        "${:a*:b}=${:b}\\times \\color{red}{${:a}}"
+    ],
+    "audio": [
+        "${:a}×${:b}= ?",
+        "${:a} fois combien vaut ${:a*:b} ?",
+        "${:b} fois combien vaut ${:a*:b} ?",
+        "${:a*:b}, c’est ${a} fois ?",
+        "${:a*:b}, c’est ${b} fois ?"
+    ],
+    "value": [
+        "${:a*:b}",
+        "${:b}",
+        "${:a}",
+        "${:b}",
+        "${:a}"
+    ]
+}

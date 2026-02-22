@@ -1,0 +1,82 @@
+{
+    "ID":"8ND4",
+    "title":"Diviser un entier par 4 ou par 8",
+    "type":"text",
+    "dest":["8ND","7ND","6ND"],
+    "options":[
+        {
+            "name":"Diviser par 4 en utilisant les tables",
+            "vars":{
+                "n":"1_10",
+                "m":4,
+                "nom":"quart",
+                "p":"${:n*:m}",
+                "ci":"${:p/2}\\div 2"
+            }
+        },{
+            "name":"Diviser par 4 un multiple 40",
+            "vars":{
+                "n0":"1_10",
+                "n":"${:n0*10}",
+                "m":4,
+                "nom":"quart",
+                "p":"${:n*:m}",
+                "ci":"${:p/2}\\div 2"
+            }
+        },{
+            "name":"Diviser par 4 un multiple de 4 > 40",
+            "vars":{
+                "u":"1_9",
+                "d":"1_9",
+                "n":"${:d*10+:u}",
+                "m":4,
+                "nom":"quart",
+                "p":"${:n*:m}",
+                "ci":"${:p/2}\\div 2"
+            }
+        },{
+            "name":"Diviser par 8 en utilisant les tables",
+            "vars":{
+                "n":"1_10",
+                "m":8,
+                "nom":"huitième",
+                "p":"${:n*:m}",
+                "ci":"${:p/2}\\div 4=${:p/4}\\div 2"
+            }
+        },{
+            "name":"Diviser par 8 un multiple 80",
+            "vars":{
+                "n0":"1_10",
+                "n":"${:n0*10}",
+                "m":8,
+                "nom":"huitième",
+                "p":"${:n*:m}",
+                "ci":"${:p/2}\\div 4=${:p/4}\\div 2"
+            }
+        },{
+            "name":"Diviser par 8 un multiple de 8 > 80",
+            "vars":{
+                "u":"1_9",
+                "d":"1_9",
+                "n":"${:d*10+:u}",
+                "m":8,
+                "nom":"huitième",
+                "p":"${:n*:m}",
+                "ci":"${:p/2}\\div 4=${:p/4}\\div 2"
+            }
+        }
+    ],
+    "question":[
+        "$$${:p}\\div ${:m}$$",
+        "$$\\dfrac{${:p}}{${:m}}$$",
+        "Divise $$${:p}$$ par $$${:m}$$",
+        "Quel est le ${:nom} de $$${:p}$$ ?"
+    ],
+    "answer":[
+        "$$${:p}\\div ${:m}=${:ci}=\\color{red}{${:n}}$$",
+        "$$\\dfrac{${:p}}{${:m}}=${:ci}=\\color{red}{${:n}}$$",
+        "$$${:p}\\div ${:m}=${:ci}=\\color{red}{${:n}}$$",
+        "Le ${:nom} de $$${:p}$$ est $$\\color{red}{${:n}}$$"
+    ],
+    "value":"${:n}"
+}

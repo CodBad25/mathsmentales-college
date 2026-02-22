@@ -1,0 +1,41 @@
+{
+  "title": "Exponentielle de logarithme néperien",
+  "dest": [
+    "TN5"
+  ],
+  "consigne": "Calculer",
+  "options": [
+    {
+      "name": "exp(ln) nombres positifs",
+      "vars": {
+        "n": "1_20"
+      },
+      "question": "e^{ln(${:n})}",
+      "answer": ":question=\\color{red}{${:n}}"
+    },
+    {
+      "name": "exp(2ln), nombres positifs",
+      "vars": {
+        "n": "1_20"
+      },
+      "question": "e^{2 ln( ${:n})}",
+      "answer": ":question=\\color{red}{${:n**2}}"
+    },
+    {
+      "name": "exp(-ln)",
+      "vars": {
+        "n": "1_20"
+      },
+      "question": "e^{-ln(${:n})}",
+      "answer": ":question=\\color{red}{${MMmath.fractionSimplifiee(1,:n)}}"
+    },
+    {
+      "name": "exp(-2ln)",
+      "vars": {
+        "n": "1_20"
+      },
+      "question": "e^{-2 ln(${:n})}",
+      "answer": ":question=\\color{red}{${MMmath.fractionSimplifiee(1,:n**2)}}"
+    }
+  ]
+}

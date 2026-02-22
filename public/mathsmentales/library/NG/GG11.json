@@ -1,0 +1,39 @@
+{
+    "ID": "GG11",
+    "title":"Produit scalaire",
+    "description":"Le produit scalaire est une opération entre deux vecteurs qui renvoie un nombre réel.",
+    "type":"text",
+    "dest":["GG1","TC3"],
+    "options":[
+        {
+            "name":"Dimension 2, avec entiers",
+            "vars":{
+                "u1":"-10_10",
+                "u2":"-10_10",
+                "cu":"${:u1}\\\\ ${:u2}",
+                "v1":"-10_10",
+                "v2":"-10_10",
+                "cv":"${:v1}\\\\ ${:v2}",
+                "calc": "${:u1}\\times ${:v1<0?'('+:v1+')'::v1} + ${:u2<0?'('+:u2+')'::u2}\\times ${:v2<0?'('+:v2+')'::v2}",
+                "ans":"${:u1*:v1 + :u2*:v2}"
+            }
+        },{
+            "name":"Dimension 3, avec entiers",
+            "vars":{
+                "u1":"-10_10",
+                "u2":"-10_10",
+                "u3":"-10_10",
+                "cu":"${:u1}\\\\ ${:u2}\\\\ ${:u3}",
+                "v1":"-10_10",
+                "v2":"-10_10",
+                "v3":"-10_10",
+                "cv":"${:v1}\\\\ ${:v2}\\\\ ${:v3}",
+                "calc": "${:u1}\\times ${:v1<0?'('+:v1+')'::v1} + ${:u2<0?'('+:u2+')'::u2}\\times ${:v2<0?'('+:v2+')'::v2} + ${:u3<0?'('+:u3+')'::u3}\\times ${:v3<0?'('+:v3+')'::v3}",
+                "ans":"${:u1*:v1 + :u2*:v2 + :u3*:v3}"
+            }
+        }
+    ],
+    "question":"Calculer le produit scalaire de $$\\vec{u} \\begin{pmatrix}${:cu}\\end{pmatrix}$$ et $$\\vec{v} \\begin{pmatrix}${:cv}\\end{pmatrix}$$.",
+    "answer":"$$\\vec{u}.\\vec{v} = ${:calc} = \\color{red}{${:ans}}$$",
+    "value":"${:ans}"
+}

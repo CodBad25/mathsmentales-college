@@ -1,0 +1,83 @@
+{
+    "ID": "6GD6",
+    "title":"Reconnaitre une médiatrice",
+    "type":"text",
+    "dest":["6GD","5GB"],
+    "consts":{"lettres":"ABCDEFGHJKLMNPQRSTUVW"},
+    "options":[
+        {
+            "name": "Reconnaitre la médiatrice, cas visibles",
+            "vars":{
+                "l":"0_${:lettres.length-1}_2_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "estperpendiculaire":[true,false],
+                "xA":"-5_-2",
+                "yA":"d-3_3_1",
+                "yB":"d-3_3_1_^{:estperpendiculaire?:yA:6}",
+                "penteAB":"${(:yB-:yA)/(-2*:xA)}",
+                "angAB":"${Math.atan(:penteAB)*180/Math.PI}",
+                "ordonneOrigine":"${:yA-:penteAB*:xA}",
+                "passeparmilieu":[true,false],
+                "xX":"${:passeparmilieu?0:'-1_1_^0'}",
+                "yX":"${:ordonneOrigine + :penteAB * :xX}",
+                "angle":"${:estperpendiculaire?90:'70_110_^90,89,91,88,92,87,93'}",
+                "xZ":"${:xX+3*Math.cos((:angAB+:angle)*Math.PI/180)}",
+                "yZ":"${:yX+3*Math.sin((:angAB+:angle)*Math.PI/180)}",
+                "estmediatrice":"${:passeparmilieu&&:estperpendiculaire}"
+            },
+            "question":"La droite (d) est-elle la médiatrice de [${:A}${:B}] ? Justifie.",
+            "answer":"${:estmediatrice?'Oui, car (d) est perpendiculaire à ['+:A+:B+'] en son milieu.': 'Non, car '+(!:passeparmilieu?'(d) ne passe pas par le milieu de ['+:A+:B+']'+(!:estperpendiculaire?' et ':'.'):'')+(!:estperpendiculaire?'(d) n’est pas perpendiculaire à ['+:A+:B+']':'')}.",
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-6,6,6,-6],
+                "content":[
+                    ["point",["${:xA}","${:yA}"],{"name":"${:A}", "face":"x", "label":{"offset":[-10,10]}}],
+                    ["point",["${-:xA}","${:yB}"],{"name":"${:B}", "face":"x", "label":{"offset":[0,10]}}],
+                    ["point",["${:xX}","${:yX}"],{"name":"X", "face":"", "visible":"false", "label":{"visible":false}}],
+                    ["point",["${:xZ}","${:yZ}"],{"name":"Z","face":"", "visible":"false", "label":{"visible":false}}],
+                    ["segment",["${:A}","${:B}"],{"name":"s"}],
+                    ["line",["X","Z"],{"strokeColor":"grey", "name":"d"}],
+                    ["glider",[0,-5, "d"], {"name":"Y", "visible":false}],
+                    ["text",[0.5,0,"(d)"],{"anchor":"Y"}],
+                    ["text",["${:xA/2+0.1}","${:yA+(:yB-:yA)/4}","${:passeparmilieu?'//':''}"]],
+                    ["text",["${-:xA/2-0.1}","${:yA+(:yB-:yA)*3/4}","${:passeparmilieu?'//':''}"]],
+                    ["angle",["Y","X","${:B}"], {"radius":0.8,"label":{"visible":false},"visible":"${:estperpendiculaire?true:false}"}]
+                ]
+            }
+        },{
+            "name": "Reconnaitre la médiatrice aux codages",
+            "vars":{
+                "l":"0_${:lettres.length-1}_2_^&",
+                "A":"${:lettres[:l[0]]}",
+                "B":"${:lettres[:l[1]]}",
+                "xA":"-5_-2",
+                "yA":"d-3_3_1",
+                "yB":"d-3_3_1",
+                "passeparmilieu":[true,false],
+                "estperpendiculaire":[true,false],
+                "estmediatrice":"${:passeparmilieu&&:estperpendiculaire}"
+            },
+            "question":"La droite (d) est-elle la médiatrice de [${:A}${:B}] ? Justifie.",
+            "answer":"${:estmediatrice?'Oui, car (d) est perpendiculaire à ['+:A+:B+'] en son milieu': 'Non, car '+(!:passeparmilieu?'il n’y a pas le codage du milieu de ['+:A+:B+']'+(!:estperpendiculaire?' et ':'.'):'')+(!:estperpendiculaire?'(d) n’est pas codée perpendiculaire à ['+:A+:B+']':'')}.",
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-6,6,6,-6],
+                "content":[
+                    ["point",["${:xA}","${:yA}"],{"name":"${:A}", "face":"x", "label":{"offset":[-10,10]}}],
+                    ["point",["${-:xA}","${:yB}"],{"name":"${:B}", "face":"x", "label":{"offset":[0,10]}}],
+                    ["point",[0,"${(:yA+:yB)/2}"],{"name":"X", "face":"0", "visible":"false", "label":{"visible":false}}],
+                    ["segment",["${:A}","${:B}"],{"name":"s"}],
+                    ["text",["${:xA/2+0.1}","${:yA+(:yB-:yA)/4}","${:passeparmilieu?'//':''}"]],
+                    ["text",["${-:xA/2-0.1}","${:yA+(:yB-:yA)*3/4}","${:passeparmilieu?'//':''}"]],
+                    ["perpendicular",["s","X"],{"strokeColor":"grey", "name":"d"}],
+                    ["glider",[0,-5,"d"], {"name":"Y", "visible":false}],
+                    ["text",[0.5,0,"(d)"],{"anchor":"Y"}],
+                    ["angle",["Y","X","${:B}"], {"radius":0.8,"label":{"visible":false},"visible":"${:estperpendiculaire?true:false}"}]
+                ]
+            }
+        }
+    ]
+}

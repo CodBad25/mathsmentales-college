@@ -1,0 +1,208 @@
+{
+    "title":"Nommer une droite",
+    "description":"Donner le nom d’une droite avec deux lettres.",
+    "type":"text",
+    "ID":"6GC3",
+    "dest":["6GC", "5GB", "4GB", "3GB"],
+    "consts":{
+        "points":"ABCDEFGHIJKLMNOPRST",
+        "directions":"tuvwxyz"
+    },
+    "options":[
+        {
+            "name":"Nommer une droite à l’aide de deux points",
+            "vars":{
+                "pts":"0_16_2_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "xA":"d-4_-0.5_1",
+                "yA":"d-4_4_1",
+                "xB":"d0.5_4_1",
+                "yB":"d-4_4_1",
+                "pente":"${(:yB-:yA)/(:xB-:xA)}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+                ]
+            },
+            "question":"Les points ${:A} et ${:B} sont sur la droite. Quels sont les noms possibles pour cette droite ?",
+            "answer":"$$\\left(${:A+:B}\\right), \\left(${:B+:A}\\right)$$",
+            "value":"(${:A+:B});(${:B+:A})"
+        },{
+            "name":"Nommer une droite à l’aide de trois points",
+            "vars":{
+                "pts":"0_16_3_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "C":"${:points[:pts[2]]}",
+                "xA":"d-4_-2.8_1",
+                "yA":"d-4_4_1",
+                "xB":"d2.8_4_1",
+                "yB":"d-4_4_1",
+                "pente":"${(:yB-:yA)/(:xB-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "xC":"d${:xA+1}_${:xB-1}_1",
+                "yC":"${:pente*:xC+:intercept}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+                ]
+            },
+            "question":"Les points ${:A}, ${:C} et ${:B} sont sur la droite. Quels sont les noms possibles pour cette droite ?",
+            "answer":"$$\\left(${:A+:C}\\right), \\left(${:A+:B}\\right), \\left(${:C+:B}\\right), \\left(${:B+:C}\\right), \\left(${:B+:A}\\right), \\left(${:C+:A}\\right)$$",
+            "value":"(${:A+:C});(${:A+:B});(${:C+:B});(${:B+:C});(${:B+:A});(${:C+:A})"
+        }, {
+            "name":"Nommer une droite à l’aide de quatre points",
+            "vars":{
+                "pts":"0_16_4_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "C":"${:points[:pts[2]]}",
+                "D":"${:points[:pts[3]]}",
+                "xA":"d-4_-2.8_1",
+                "yA":"d-4_4_1",
+                "xB":"d2.8_4_1",
+                "yB":"d-4_4_1",
+                "pente":"${(:yB-:yA)/(:xB-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "xC":"d-2_-0.5_1",
+                "yC":"${:pente*:xC+:intercept}",
+                "xD":"d0.5_2_1",
+                "yD":"${:pente*:xD+:intercept}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xD}", "${:yD}"], {"name":"${:D}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+                ]
+            },
+            "question":"Les points ${:A}, ${:C}, ${:D} et ${:B} sont sur la droite. Nommer la droite de quatre façons différentes.",
+            "answer":"Les noms possibles sont : $$\\left(${:A+:C}\\right), \\left(${:A+:D}\\right), \\left(${:A+:B}\\right), \\left(${:C+:D}\\right), \\left(${:C+:B}\\right), \\left(${:D+:B}\\right)$$ et ceux avec les lettres inversées.",
+            "value":"(${:A+:C});(${:A+:D});(${:A+:B});(${:C+:D});(${:C+:B});(${:D+:B})"
+        },{
+            "name":"Nommer une droite à l’aide de deux directions",
+            "vars":{
+                "pts":"0_16_2_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "xA":-5,
+                "yA":"d-5_5_1",
+                "xB":5,
+                "yB":"d-5_5_1",
+                "pente":"${(:yB-:yA)/(:xB-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "dirs":"0_6_2_^&",
+                "x":"${:directions[:dirs[0]]}",
+                "y":"${:directions[:dirs[1]]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["text", ["${:xA-.4}", "${:pente<0?:yA+1::yA-1}","${:x}"],{"cssClass":"italic", "fontSize":13}],
+                    ["text", ["${:xB}", "${:pente<0?:yB+1::yB-1}","${:y}"],{"cssClass":"italic", "fontSize":13}],
+                    ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+                ]
+            },
+            "question":"Quels sont les noms possibles pour cette droite ?",
+            "answer":"La droite peut s’appeler $$\\left(${:x+:y}\\right)$$ ou $$\\left(${:y+:x}\\right)$$.",
+            "value":"${:x+:y};${:y+:x}"
+        },{
+            "name":"Nommer une droite à l’aide d’un point et deux directions",
+            "vars":{
+                "pts":"0_16_3_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "C":"${:points[:pts[2]]}",
+                "xA":-5,
+                "yA":"d-5_5_1",
+                "xB":5,
+                "yB":"d-5_5_1",
+                "pente":"${(:yB-:yA)/(:xB-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "xC":"d${:xA+1}_${:xB-1}_1",
+                "yC":"${:pente*:xC+:intercept}",
+                "dirs":"0_6_2_^&",
+                "x":"${:directions[:dirs[0]]}",
+                "y":"${:directions[:dirs[1]]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["text", ["${:xA-.4}", "${:pente<0?:yA+1::yA-1}","${:x}"],{"cssClass":"italic", "fontSize":13}],
+                    ["text", ["${:xB}", "${:pente<0?:yB+1::yB-1}","${:y}"],{"cssClass":"italic", "fontSize":13}],
+                    ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+                ]
+            },
+            "question":"Le point ${:C} est sur la droite. Quels sont les noms possibles pour cette droite ?",
+            "answer":" $$\\left(${:x+:y}\\right), \\left(${:y+:x}\\right), \\left(${:x+:C}\\right), \\left(${:C+:x}\\right), \\left(${:C+:y}\\right), \\left(${:y+:C}\\right)$$.",
+            "value":"${:x+:y};${:y+:x};${:x+:C};${:C+:x};${:C+:y};${:y+:C}"
+        },{
+            "name":"Nommer une droite à l’aide de deux points et deux directions",
+            "vars":{
+                "pts":"0_16_4_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "C":"${:points[:pts[2]]}",
+                "D":"${:points[:pts[3]]}",
+                "xA":-5,
+                "yA":"d-5_5_1",
+                "xB":5,
+                "yB":"d-5_5_1",
+                "pente":"${(:yB-:yA)/(:xB-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "xC":"d${:xA+1}_${:xB-3}_1",
+                "yC":"${:pente*:xC+:intercept}",
+                "xD":"d${:xC+1}_${:xB-1}_1",
+                "yD":"${:pente*:xD+:intercept}",
+                "dirs":"0_6_2_^&",
+                "x":"${:directions[:dirs[0]]}",
+                "y":"${:directions[:dirs[1]]}"
+            },
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x","label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["point", ["${:xD}", "${:yD}"], {"name":"${:D}", "size":3, "face":"x","label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["text", ["${:xA-.4}", "${:pente<0?:yA+1::yA-1}","${:x}"],{"cssClass":"italic", "fontSize":13}],
+                    ["text", ["${:xB}", "${:pente<0?:yB+1::yB-1}","${:y}"],{"cssClass":"italic", "fontSize":13}],
+                    ["line", [["${:xA}", "${:yA}"], ["${:xB}", "${:yB}"]]]
+                ]
+            },
+            "question":"Les points ${:C} et ${:D} est sur la droite. Donne quatre noms possibles pour cette droite.",
+            "answer":" $$\\left(${:x+:C}\\right), \\left(${:x+:D}\\right), \\left(${:x+:y}\\right), \\left(${:C+:D}\\right), \\left(${:C+:y}\\right), \\left(${:D+:y}\\right)$$ et ceux en inversant les lettres",
+            "value":"${:x+:C};${:x+:D};${:x+:y};${:C+:D};${:C+:y};${:D+:y}"
+        }
+    ]
+}

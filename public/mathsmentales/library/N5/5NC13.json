@@ -1,0 +1,72 @@
+{
+    "title":"Additions et soustractions de relatifs (notation parenthèses)",
+    "dest":["5NC","4NC"],
+    "consigne":"Calculer",
+    "consts":{
+        "signes":["+","-"]
+    },
+    "options":[
+        {
+            "name":"Somme de trois termes",
+            "vars":{
+                "nb":"-10_10_3_^0"
+            },
+            "question":"(${MMmath.signedNumber(:nb[0])}) + (${MMmath.signedNumber(:nb[1])}) + (${MMmath.signedNumber(:nb[2])})",
+            "answer":":question=\\color{red}{${MMmath.calc(:nb[0]+'+('+:nb[1]+')+('+:nb[2]+')')}}",
+            "value":"${MMmath.calc(:nb[0]+'+('+:nb[1]+')+('+:nb[2]+')')}"
+        },{
+            "name":"Somme de quatre termes",
+            "vars":{
+                "nb":"-10_10_4_^0"
+            },
+            "question":"(${MMmath.signedNumber(:nb[0])}) + (${MMmath.signedNumber(:nb[1])}) + (${MMmath.signedNumber(:nb[2])})+ (${MMmath.signedNumber(:nb[3])})",
+            "answer":":question=\\color{red}{${MMmath.calc(:nb[0]+'+('+:nb[1]+')+('+:nb[2]+')+('+:nb[3]+')')}}",
+            "value":"${MMmath.calc(:nb[0]+'+('+:nb[1]+')+('+:nb[2]+')+('+:nb[3]+')')}"
+        },{
+            "name":"Somme de cinq termes",
+            "vars":{
+                "nb":"-10_10_5_^0"
+            },
+            "question":"(${MMmath.signedNumber(:nb[0])}) + (${MMmath.signedNumber(:nb[1])}) + (${MMmath.signedNumber(:nb[2])}) + (${MMmath.signedNumber(:nb[3])}) + (${MMmath.signedNumber(:nb[4])})",
+            "answer":":question=\\color{red}{${MMmath.calc(:nb[0]+'+('+:nb[1]+')+('+:nb[2]+')+('+:nb[3]+')+('+:nb[4]+')')}}",
+            "value":"${MMmath.calc(:nb[0]+'+('+:nb[1]+')+('+:nb[2]+')+('+:nb[3]+')+('+:nb[4]+')')}"
+        },
+        {
+            "name":"+ ou - avec trois termes",
+            "vars":{
+                "nb":"-10_10_3_^0",
+                "opes":"0_1_2",
+                "op1":"${:signes[:opes[0]]}",
+                "op2":"${:op1==='+'?'-'::signes[:opes[1]]}"
+            },
+            "question":"(${MMmath.signedNumber(:nb[0])}) :op1 (${MMmath.signedNumber(:nb[1])}) :op2 (${MMmath.signedNumber(:nb[2])})",
+            "answer":":question=\\color{red}{${MMmath.calc(:nb[0]+:op1+'('+:nb[1]+')'+:op2+'('+:nb[2]+')')}}",
+            "value":"${MMmath.calc(:nb[0]+:op1+'('+:nb[1]+')'+:op2+'('+:nb[2]+')')}"
+        },{
+            "name":"+ ou - avec quatre termes",
+            "vars":{
+                "nb":"-10_10_4_^0",
+                "opes":"0_1_3",
+                "op1":"${:signes[:opes[0]]}",
+                "op2":"${:signes[:opes[1]]}",
+                "op3":"${:op1==='+'&&:op2==='+'?'-'::signes[:opes[2]]}"
+            },
+            "question":"(${MMmath.signedNumber(:nb[0])}) :op1 (${MMmath.signedNumber(:nb[1])}) :op2 (${MMmath.signedNumber(:nb[2])}):op3 (${MMmath.signedNumber(:nb[3])})",
+            "answer":":question=\\color{red}{${MMmath.calc(:nb[0]+:op1+'('+:nb[1]+')'+:op2+'('+:nb[2]+')'+:op3+'('+:nb[3]+')')}}",
+            "value":"${MMmath.calc(:nb[0]+:op1+'('+:nb[1]+')'+:op2+'('+:nb[2]+')'+:op3+'('+:nb[3]+')')}"
+        },{
+            "name":"+ ou - avec cinq termes",
+            "vars":{
+                "nb":"-10_10_5_^0",
+                "opes":"0_1_4",
+                "op1":"${:signes[:opes[0]]}",
+                "op2":"${:signes[:opes[1]]}",
+                "op3":"${:signes[:opes[2]]}",
+                "op4":"${:op1==='+'&&:op2==='+'&&:op3==='+'?'-'::signes[:opes[3]]}"
+            },
+            "question":"(${MMmath.signedNumber(:nb[0])}) :op1 (${MMmath.signedNumber(:nb[1])}) :op2 (${MMmath.signedNumber(:nb[2])}):op3 (${MMmath.signedNumber(:nb[3])}):op4 (${MMmath.signedNumber(:nb[4])})",
+            "answer":":question=\\color{red}{${MMmath.calc(:nb[0]+:op1+'('+:nb[1]+')'+:op2+'('+:nb[2]+')'+:op3+'('+:nb[3]+')'+:op4+'('+:nb[4]+')')}}",
+            "value":"${MMmath.calc(:nb[0]+:op1+'('+:nb[1]+')'+:op2+'('+:nb[2]+')'+:op3+'('+:nb[3]+')'+:op4+'('+:nb[4]+')')}"
+        }
+    ]
+}

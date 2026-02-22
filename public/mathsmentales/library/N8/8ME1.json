@@ -1,0 +1,112 @@
+{
+    "ID":"8ME1",
+    "dest":["8ME","7ME","6ME"],
+    "title":"Reconnaître un angle",
+    "speech":1,
+    "textSize":"small",
+    "keys":["obtus","aigu","droit","_"],
+    "repeat":3,
+    "type":"text",
+    "consts":{
+        "vocab":["aigu", "droit", "obtus", "nul", "plat", "plein"],
+        "relation":["adjacents", "opposés par le sommet", "supplémentaires"],
+        "points":"ABCDEFGHJKLMNPRST",
+        "directions":"xyztuvw"
+    },
+    "options":[
+        {
+            "name":"Angle droit, obtus, aigu",
+            "vars":{
+                "pts":"0_16_3_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "C":"${:points[:pts[2]]}",
+                "cx":"0_2",
+                "ai":"5_80",
+                "obt":"100_175",
+                "in":"-180_180",
+                "mes":"${:cx==0?:ai::cx==1?90::obt}"},
+            "figure":{
+                "type":"graph", 
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content" :[
+                        ["point",[0,0],{"name":"${:A}","size":3, "face":"x", "label":{"offset":["${10*Math.cos(Math.PI*(:in+:mes/2+180)/180)}","${10*Math.sin(Math.PI*(:in+:mes/2+180)/180)}"]}}],
+                        ["point",["${MMmath.round(4*Math.cos(Math.PI*:in/180),3)}","${MMmath.round(4*Math.sin(Math.PI*:in/180),3)}"],{"name":"${:B}","size":3, "face":"x", "label":{"offset":["${10*Math.cos(Math.PI*(:in-90)/180)}","${10*Math.sin(Math.PI*(:in-90)/180)}"],"anchorX":"middle","anchorY":"middle"}}],
+                        ["line",["${:A}","${:B}"],{"straightFirst":false}],
+                        ["point",["${MMmath.round(4*Math.cos(Math.PI*(:in+:mes)/180),3)}","${MMmath.round(4*Math.sin(Math.PI*(:in+:mes)/180),3)}"],{"name":"${:C}","size":3, "face":"x", "label":{"offset":["${10*Math.cos(Math.PI*(:in+:mes+90)/180)}","${10*Math.sin(Math.PI*(:in+:mes+90)/180)}"],"anchorX":"middle","anchorY":"middle"}}],
+                        ["line",["${:A}","${:C}"],{"straightFirst":false}],
+                        ["angle", ["${:B}", "${:A}", "${:C}"],{"radius":1,"label":{"visible":false}}]
+                    ]    
+                },
+            "question":"Quelle est la nature de l'angle $$\\widehat{\\text{${:B+:A+:C}}}$$ ?",
+            "audio":"Quelle est la nature de l'angle ${:B} ${:A} ${:C} ?",
+            "answer":"L'angle $$\\widehat{\\text{${:B+:A+:C}}}$$ est un angle <span class='red'>${:vocab[:cx]}</span>",
+            "value":"${:vocab[:cx]}"
+        },
+        {
+            "name": "Angle nul, plat ou plein",
+            "vars":{
+                "pts":"0_16_3_^&",
+                "A":"${:points[:pts[0]]}",
+                "B":"${:points[:pts[1]]}",
+                "C":"${:points[:pts[2]]}",
+                "cx":"3_5",
+                "in":"-180_180",
+                "mes":"${:cx==3?0.2::cx==4?180:359.8}"},
+            "figure":{
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content" :[
+                        ["point",[0,0],{"name":"${:A}","size":3, "face":"x", "label":{"offset":["${12*Math.cos(Math.PI*(:in+:mes/2+180)/180)}","${12*Math.sin(Math.PI*(:in+:mes/2+180)/180)}"]}}],
+                        ["point",["${MMmath.round(3.5*Math.cos(Math.PI*:in/180),3)}","${MMmath.round(3.5*Math.sin(Math.PI*:in/180),3)}"],{"name":"${:B}","size":3, "face":"x", "label":{"offset":["${12*Math.cos(Math.PI*(:in-90)/180)}","${12*Math.sin(Math.PI*(:in-90)/180)}"],"anchorX":"middle","anchorY":"middle"}}],
+                        ["line",["${:A}","${:B}"],{"straightFirst":false}],
+                        ["point",["${MMmath.round(4.55*Math.cos(Math.PI*(:in+:mes)/180),3)}","${MMmath.round(4.55*Math.sin(Math.PI*(:in+:mes)/180),3)}"],{"name":"${:C}","size":3, "face":"x", "label":{"offset":["${12*Math.cos(Math.PI*(:in+:mes+90)/180)}","${12*Math.sin(Math.PI*(:in+:mes+90)/180)}"],"anchorX":"middle","anchorY":"middle"}}],
+                        ["line",["${:A}","${:C}"],{"straightFirst":false}],
+                        ["angle", ["${:B}", "${:A}", "${:C}"],{"radius":1,"label":{"visible":false}}]
+                    ]    
+                },
+            "question":"Quelle est la nature de l'angle $$\\widehat{\\text{${:B+:A+:C}}}$$ ?",
+            "audio":"Quelle est la nature de l'angle ${:B} ${:A} ${:C} ?",
+            "answer":"L'angle $$\\widehat{\\text{${:B+:A+:C}}}$$ est un angle <span class='red'>${:vocab[:cx]}</span>",
+            "value":"${:vocab[:cx]}"
+        },
+        { 
+            "name": "Angles adjacents, opposés par le sommet, supplémentaires",
+            "vars":{
+                "cx":"0_2",
+                "angh":"-9_9",
+                "aa":"${:angh*10}",
+                "ab":"20_149",
+                "ac":"${:cx==0?(:ab+20)+'_170':180}",
+                "ans":"${:cx==0?'adjacents'::cx==1?'opposés par le sommet':'supplémentaires'}"
+            },
+            "figure":{
+                "type":"graph", 
+                "boundingbox":[-5,5,5,-5],
+                "axis":false,
+                "grid":false,
+                "content": [
+                    ["point", [0,0], {"name":"O","size":3,"face":"x","visible":false}],
+                    ["point", ["${MMmath.round(3.5*Math.cos(Math.PI*:aa/180),3)}","${MMmath.round(3.5*Math.sin(Math.PI*:aa/180),3)}"], {"name":"A","visible":0}],
+                    ["point", ["${MMmath.round(3.5*Math.cos(Math.PI*(:aa+:ab)/180),3)}","${MMmath.round(3.5*Math.sin(Math.PI*(:aa+:ab)/180),3)}"], {"name":"B","visible":0}],
+                    ["point", ["${MMmath.round(3.5*Math.cos(Math.PI*(:aa+:ac)/180),3)}","${MMmath.round(3.5*Math.sin(Math.PI*(:aa+:ac)/180),3)}"], {"name":"C","visible":0}],
+                    ["point", ["${MMmath.round(3.5*Math.cos(Math.PI*(:aa+:ab+180)/180),3)}","${MMmath.round(3.5*Math.sin(Math.PI*(:aa+:ab+180)/180),3)}"], {"name":"D","visible":0}],
+                    ["line", ["O","A"], {"straightFirst":false}],
+                    ["line", ["O","B"], {"straightFirst":false}],
+                    ["line", ["O","C"], {"straightFirst":false, "visible":1}],
+                    ["line", ["O","D"], {"straightFirst":false, "visible":"${:cx!=1?0:1}"}],
+                    ["angle", ["A","O","B"], {"radius":2.5,"label":{"visible":false}}],
+                    ["angle", ["B","O","C"], {"radius":2,"label":{"visible":false},"fillColor":"blue","strokeColor":"blue", "visible":"${:cx!=1?1:0}"}],
+                    ["angle", ["C","O","D"], {"radius":2,"label":{"visible":false},"fillColor":"blue","strokeColor":"blue", "visible":"${:cx!=1?0:1}"}]
+                ]
+            },
+            "question":"Les angles semblent adjacents, opposés par le sommet ou supplémentaires ?",
+            "answer":"Les angles jaune et bleu semblent <span class='red'>${:ans}</span>.",
+            "value":"${:ans}"
+        }
+    ]
+}

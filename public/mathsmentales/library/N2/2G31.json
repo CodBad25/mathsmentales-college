@@ -1,0 +1,30 @@
+{
+    "ID":"2G31",
+    "dest":["2G3","GG2"],
+    "type":"text",
+    "title":"Pente d'une droite",
+    "description":"Trouver la pente d'une droite connaissant les coordonnées de deux de ses points.",
+    "consts":{"lettres":["A","B","C","D","E","F","G","H","J","K","L","M","N","P","Q","R","S","T","U","V","W"]},
+    "options":[{
+        "name":"Pente entière positive",
+        "vars":{ "y2":"0_10", "y1":"0_${:y2}", "x1":"0_10", "x2":"${MMmath.unDiviseur(:y2-:y1)+:x1}",
+        "pente":"${(:y1-:y2)/(:x1-:x2)}",
+        "cl":"0_20_2_^&", "A":"${:lettres[:cl[0]]}","B":"${:lettres[:cl[1]]}"
+        }
+    }, {
+        "name":"Pente entière negative",
+        "vars":{ "y2":"-10_10", "y1":"${:y2}_10", "x1":"-10_10", "x2":"${MMmath.unDiviseur(:y2-:y1)+:x1}",
+        "pente":"${(:y1-:y2)/(:x1-:x2)}",
+        "cl":"0_20_2_^&", "A":"${:lettres[:cl[0]]}","B":"${:lettres[:cl[1]]}"
+        }
+    }, {
+        "name": "Pente fractionnaire",
+        "vars":{ "y2":"-10_10", "y1":"-10_10_^${:y2}", "x1":"-10_10", "x2":"${:x1+MMmath.nonDiviseur(Math.abs(:y2-:y1), true)}",
+        "pente":"${MMmath.fractionSimplifiee(:y2-:y1,:x2-:x1)}",
+        "cl":"0_20_2_^&", "A":"${:lettres[:cl[0]]}","B":"${:lettres[:cl[1]]}" 
+        }
+    }],
+    "question":"Quelle est la pente de la droite passant par les points ${:A}$$(${:x1};${:y1})$$ et ${:B}$$(${:x2};${:y2})$$ ?",
+    "answer":"$$\\dfrac{${:y2}-${:y1>=0?:y1:'('+:y1+')'}}{${:x2}-${:x1>=0?:x1:'('+:x1+')'}}=\\color{red}{${:pente}}$$",
+    "value":"${:pente}"
+}

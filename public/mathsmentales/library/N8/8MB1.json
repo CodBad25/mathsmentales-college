@@ -1,0 +1,65 @@
+{
+    "ID":"8MB1",
+    "title":"Aire et périmètres par comptage",
+    "dest":["8MB","7MB","6MC"],
+    "type":"text",
+    "options":[
+        {
+            "name":"Aire et périmètre du carré",
+            "vars":{
+                "c1":"2_6",
+                "c2":"${:c1}",
+                "fig":"carré",
+                "w":"${3+Math.floor((9-:c1)/2)}",
+                "h":"${1+Math.floor((6-:c2)/2)}"
+            }
+        },{
+            "name":"Aire et périmètre du rectangle",
+            "vars":{
+                "c1":"2_9",
+                "c2":"1_6_^${:c1}",
+                "fig":"rectangle",
+                "w":"${3+Math.floor((9-:c1)/2)}",
+                "h":"${1+Math.floor((6-:c2)/2)}"
+            }
+        }
+    ],
+    "figure":{
+        "type":"graph",
+        "axis":false,
+        "boundingbox":[0,8,13,0],
+        "content":[
+            ["grid", [],{}],
+            ["point", [1, 2], {"name":"A","face":"", "label":{"visible":false}}],
+            ["point", [2, 2], {"name":"B","face":"", "label":{"visible":false}}],
+            ["segment", ["A","B"]],
+            ["text", [0.7, 1.2, "1 cm"], {"fontSize":8}],
+            ["point", [1, 5], {"name":"C","face":"", "label":{"visible":false}}],
+            ["point", [2, 5], {"name":"D","face":"", "label":{"visible":false}}],
+            ["point", [2, 6], {"name":"E","face":"", "label":{"visible":false}}],
+            ["point", [1, 6], {"name":"F","face":"", "label":{"visible":false}}],
+            ["polygon", ["C","D","E","F"], {"fillColor":"green"}],
+            ["text", [0.7, 4.2, "1 cm²"], {"fontSize":8}],
+            ["point", ["${:w}", "${:h}"], {"name":"G","face":"", "label":{"visible":false}}],
+            ["point", ["${:w}", "${:h+:c2}"], {"name":"H","face":"", "label":{"visible":false}}],
+            ["point", ["${:w+:c1}", "${:h+:c2}"], {"name":"I","face":"", "label":{"visible":false}}],
+            ["point", ["${:w+:c1}", "${:h}"], {"name":"J","face":"", "label":{"visible":false}}],
+            ["polygon", ["G","H","I","J"], {"fillColor":"none"}]
+        ]
+    },
+    "question":[
+        "Quel est le périmètre du ${:fig} ?",
+        "Quelle est l'aire du ${:fig} ?",
+        "Quels sont le périmètre et l’aire du ${:fig} ?"
+    ],
+    "answer":[
+        "$$${:c1*2 + :c2*2} \\text{ cm}$$",
+        "$$${:c1*:c2} \\text{ cm}^2$$",
+        "$$${:c1*2 + :c2*2} \\text{ cm}$$ et $$${:c1*:c2} \\text{ cm}^2$$"
+    ],
+    "value":[
+        "${:c1*2 + :c2*2}\\text{ cm}",
+        "${:c1*:c2}\\text{ cm}^2",
+        "${:c1*2 + :c2*2}\\text{ cm}$$ et $$${:c1*:c2}\\text{ cm}^2"
+    ]
+}

@@ -1,0 +1,91 @@
+{
+    "ID":"6GC14",
+    "title":"Angles et bissectrices",
+    "dest":["6GC"],
+    "type":"text",
+    "repeat":4,
+    "consts":{
+        "colors":["blue","red","green","brown","black","orange","purple"],
+        "lettres":"ABCDEFGHIJKLMNPQRST",
+        "directions":"uvwxyz"
+    },
+    "options":[
+        {
+            "name":"Mesure du grand angle",
+            "vars":{
+                "li":"0_${:lettres.length-1}_2_^&",
+                "A":"${:lettres.charAt(:li[0])}",
+                "B":"${:lettres.charAt(:li[1])}",
+                "mi":"0_${:directions.length-1}",
+                "x":"${:directions.charAt(:mi)}",
+                "ang1":"20_90",
+                "ang2":"${:ang1}",
+                "rotation":"-90_90",
+                "ang1rad":"${:ang1*Math.PI/180}",
+                "ang2rad":"${:ang2*Math.PI/180}",
+                "rotationrad":"${:rotation*Math.PI/180}",
+                "color1c":"0_${:colors.length-1}",
+                "color1":"${:colors[:color1c]}",
+                "color2c":"0_${:colors.length-1}_^:color1c",
+                "color2":"${:colors[:color2c]}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-6,6,6,-6],
+                "content":[
+                    ["point",[0,0],{"name":"O","face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${4*Math.cos(:rotationrad)}","${4*Math.sin(:rotationrad)}"],{"name":"${:A}","face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${4*Math.cos(:rotationrad+:ang1rad)}","${4*Math.sin(:rotationrad+:ang1rad)}"],{"name":"${:x}","face":"","label":{"offset":[5,5]}}],
+                    ["point",["${4*Math.cos(:rotationrad+:ang1rad+:ang2rad)}","${4*Math.sin(:rotationrad+:ang1rad+:ang2rad)}"],{"name":"${:B}","face":"x","label":{"offset":[5,5]}}],
+                    ["line",["O","${:A}"],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",["O","${:x}"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"red"}],
+                    ["line",["O","${:B}"],{"straightFirst":false, "strokeWidth":1}],
+                    ["angle",["${:A}","O","${:x}"],{"orthoType":"sector","radius":2,"name":"${:ang1}°","fillColor":"transparent","strokeColor":"${:color1}"}],
+                    ["angle",["${:x}","O","${:B}"],{"orthoType":"sector","radius":2.3,"label":{"visible":false},"fillColor":"transparent","strokeColor":"${:color1}"}]
+                ]
+            },
+            "question":"[O${:x}) est la bissectrice de l'angle $$\\widehat{${:A}O${:B}}$$, quelle est la mesure de $$\\widehat{${:A}O${:B}}$$ ?",
+            "answer":"$$\\widehat{${:A}O${:B}}=${2*:ang1}°$$",
+            "value":"${2*:ang1}"
+        },{
+            "name":"Mesure de l’autre angle",
+            "vars":{
+                "li":"0_${:lettres.length-1}_2_^&",
+                "A":"${:lettres.charAt(:li[0])}",
+                "B":"${:lettres.charAt(:li[1])}",
+                "mi":"0_${:directions.length-1}",
+                "x":"${:directions.charAt(:mi)}",
+                "ang1":"20_90",
+                "ang2":"${:ang1}",
+                "rotation":"-90_90",
+                "ang1rad":"${:ang1*Math.PI/180}",
+                "ang2rad":"${:ang2*Math.PI/180}",
+                "rotationrad":"${:rotation*Math.PI/180}",
+                "color1c":"0_${:colors.length-1}",
+                "color1":"${:colors[:color1c]}",
+                "color2c":"0_${:colors.length-1}_^:color1c",
+                "color2":"${:colors[:color2c]}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-6,6,6,-6],
+                "content":[
+                    ["point",[0,0],{"name":"O","face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${4*Math.cos(:rotationrad)}","${4*Math.sin(:rotationrad)}"],{"name":"${:A}","face":"x","label":{"offset":[5,5]}}],
+                    ["point",["${4*Math.cos(:rotationrad+:ang1rad)}","${4*Math.sin(:rotationrad+:ang1rad)}"],{"name":"${:x}","face":"","label":{"offset":[5,5]}}],
+                    ["point",["${4*Math.cos(:rotationrad+:ang1rad+:ang2rad)}","${4*Math.sin(:rotationrad+:ang1rad+:ang2rad)}"],{"name":"${:B}","face":"x","label":{"offset":[5,5]}}],
+                    ["line",["O","${:A}"],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",["O","${:x}"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"red"}],
+                    ["line",["O","${:B}"],{"straightFirst":false, "strokeWidth":1}],
+                    ["angle",["${:A}","O","${:x}"],{"orthoType":"sector","radius":2,"name":"${:ang1}°","fillColor":"transparent","strokeColor":"${:color1}"}],
+                    ["angle",["${:x}","O","${:B}"],{"orthoType":"sector","radius":2.3,"label":{"visible":false},"fillColor":"transparent","strokeColor":"${:color1}"}]
+                ]
+            },
+            "question":"[O${:x}) est la bissectrice de l'angle $$\\widehat{${:A}O${:B}}$$, quelle est la mesure de $$\\widehat{${:x}O${:B}}$$ ?",
+            "answer":"$$\\widehat{${:x}O${:B}}=${:ang1}°$$",
+            "value":"${:ang1}"
+        }
+    ]
+}

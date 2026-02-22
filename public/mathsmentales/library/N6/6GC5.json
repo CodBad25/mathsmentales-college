@@ -1,0 +1,130 @@
+{
+    "title": "Inégalité triangulaire",
+    "ID":"6GC5",
+    "dest":["6GC","5GB", "4GB", "3GB"],
+    "type":"text",
+    "textSize":"small",
+    "consts":{
+        "points":"ABCDEFGHIJKLMNOPRST"
+    },
+    "options":[
+        {
+            "name": "Comparer (6e)",
+            "vars":{
+                "l":"0_${:points.length-1}_3_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "C":"${:points[:l[2]]}",
+                "eq":[true,false],
+                "xA":"d-4_-2.8_1",
+                "yA":"d-3_3_1",
+                "xC":"d2.8_4_1",
+                "yC":"d-3_3_1",
+                "pente":"${(:yC-:yA)/(:xC-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "xB":"d${:xA+1}_${:xC-1}_1",
+                "yBf":"${:pente*:xB+:intercept}",
+                "ecart":"d2_4.5_1",
+                "yB":"${:eq?:yBf::yBf<0?:yBf+:ecart::yBf-:ecart}",
+                "long":"d2_10_1"
+            },
+            "question":"Que peut-on dire de ${:A+:B} + ${:B+:C} ?",
+            "answer":"${:A+:B} + ${:B+:C} ${:eq?'=':'>'} ${:long} cm",
+            "value":"${:A+:B} + ${:B+:C}${:eq?'=':'>'}${:long}",
+            "figure": {
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[-15,0]}}],
+                    ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3,"face":"x", "label":{"offset":[10,0]}}],
+                    ["segment", ["${:A}", "${:C}"]],
+                    ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[5,"${:pente<0?10:-10}"]}}],
+                    ["text", ["${(:xA+:xC)/2-1.5}", "${(:yA+:yC)/2+(:eq?(:pente<0?-1.5:1.5)::yB<Math.min(:yA,:yC)?1.5:-1.5)}", "${:long} cm"]]
+                ]
+            }
+        },{
+            "name": "Inégalités triangulaires (5e)",
+            "vars":{
+                "l":"0_${:points.length-1}_3_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "C":"${:points[:l[2]]}",
+                "xA":"d-4_-2.8_1",
+                "yA":"d-4_4_1",
+                "xC":"d2.8_4_1",
+                "yC":"d-4_4_1",
+                "pente":"${(:yC-:yA)/(:xC-:xA)}",
+                "intercept":"${:yA-(:pente*:xA)}",
+                "xB":"d-2_-0.5_1",
+                "yBf":"${:pente*:xB+:intercept}",
+                "ecart":"d2_4.5_1",
+                "yB":"${:yBf<0?:yBf+:ecart::yBf-:ecart}"
+            },
+            "question":"Écrire les 3 inégalités triangulaires.",
+            "answer":"${:A+:C} < ${:A+:B} + ${:B+:C}<br>${:C+:B} < ${:C+:A} + ${:A+:B}<br>${:B+:A} < ${:B+:C} + ${:C+:A}",
+            "figure": {
+                "type":"graph",
+                "boundingbox":[-6,6,6,-6],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[-15,0]}}],
+                    ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3,"face":"x", "label":{"offset":[10,0]}}],
+                    ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[0,"${:yB>Math.min(:yA,:yC)?10:-10}"]}}],
+                    ["polygon", ["${:A}", "${:C}", "${:B}"]]
+                ]
+            }
+        },{
+            "name":"Existence du triangle (5e)",
+            "vars":{
+                "l1":"1_10",
+                "l2":"1_10",
+                "exists":[true, false],
+                "l3":"${:exists?(Math.abs(:l1-:l2)+1)+'_'+(:l1+:l2-1):(:l1+:l2+1)+'_21'}",
+                "tri":"0_2_3_^&",
+                "max":"${Math.max(:l1,:l2,:l3)}",
+                "min":"${Math.min(:l1,:l2,:l3)}",
+                "third":"${MMmath.valeursIntermediaires([:l1,:l2,:l3])[0]}"
+            },
+            "consts":{
+                "longueurs":[":l1", ":l2", ":l3"]
+            },
+            "question":"Existe-t-il un triangle avec des côtés de longueur ${:longueurs[:tri[0]]}, ${:longueurs[:tri[1]]} et ${:longueurs[:tri[2]]} ?",
+            "answer":"${:exists?'Oui, car '+:min+' + '+:third+' > '+:max:'Non, car '+:l1+' + '+:l2+' < '+:l3}",
+            "value":["${:exists?'O':'N'}", "${:exists?'Oui':'Non'}"]
+        },{
+            "name":"Écriture d’une égalité (5e)",
+            "vars":{
+                "l":"0_${:points.length-1}_3_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "C":"${:points[:l[2]]}"
+            },
+            "question":[
+                "Écrire une égalité de longueurs sachant que $$${:B} \\in [${:A+:C}]$$",
+                "Écrire une égalité de longueurs sachant que ${:A}, ${:B} et ${:C} sont alignés dans cet ordre."
+            ],
+            "answer":"$$${:B} \\in [${:A+:C}]$$ donc $$${:A+:B} + ${:B+:C} = ${:A+:C}$$"
+        },{
+            "name": "Appartenance au segment (5e)",
+            "vars": {
+                "l1":"1_10",
+                "l2":"1_10",
+                "l3":"${:l1+:l2}",
+                "l":"0_${:points.length-1}_3_^&",
+                "A":"${:points[:l[0]]}",
+                "B":"${:points[:l[1]]}",
+                "C":"${:points[:l[2]]}",
+                "tri":"0_2_3_^&",
+                "cx":"0_1_3"
+            },
+            "consts":{
+                "egalites":[["${:A+:B}=${:l1}","${:B+:A}=${:l1}"], ["${:C+:B}=${:l2}","${:B+:C}=${:l2}"],["${:A+:C}=${:l3}","${:C+:A}=${:l3}"]]
+            },
+            "question":"Que peut-on dire de trois points ${:A}, ${:B} et ${:C} points tels que ${:egalites[:tri[0]][:cx[0]]}, ${:egalites[:tri[1]][:cx[1]]} et ${:egalites[:tri[2]][:cx[2]]} ?",
+            "answer":"${:A}, ${:B} et ${:C} sont alignés dans cet ordre ou $$\\color{red}{${:B} \\in [${:A+:C}]}$$"
+        }
+    ]
+}

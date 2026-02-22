@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+            @page{
+                size:A4 portrait;
+                margin:0.8cm;
+            }
+        </style>
+        <title>Fiche d'exercices MathsMentales</title>
+        <link rel="stylesheet" href="css/exercices-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script type="module" src="js/lib.exercices-2.3.176.js" id="mmscriptid"></script>
+    </head>  
+    <body size="A4">
+        <div class="noprint">
+            <button onclick="document.getElementById('creator-menu').classList.toggle('hidden')" style="width:90pt;height:18pt;">🛠 Mise en page</button>
+            <button onclick="window.print();" title="Imprimer ou enregistrer en pdf"style="width:70pt;height:18pt;">🖨️ Imprimer</button> (mettre les marges à zéro)
+        </div>
+        <div id="creator-container">
+            <section id="creator-menu" class="noprint hidden">
+                <b>Page</b> :
+                <button id="pageOrientation" title="Change l'orientation de la page">paysage</button>
+                Police : <span id="fontSize"></span>
+                <br><b>Énoncés</b> : 
+                <input type="number" min="1" id="nbFiches" size="3">
+                <button id="fichesSeparation" title="Fiches imprimées sur une même page ou pas">Feuilles séparées</button>
+                Affichés en colonnes : 
+                <input type="radio" name="columns" value="1" id="columns1" checked>
+                <label for="columns1"> 1 </label>
+                <input type="radio" name="columns" value="2" id="columns2"> 
+                <label for="columns2"> 2 </label>
+                <div id="corriges-params">
+                <b>Corrigés</b> :
+                <button id="toggleCorriges">Afficher</button>
+                <input type="radio" name="corriges" value="hidden" id="corriges-hidden" checked>
+                    <label for="corriges-hidden">cachés</label>
+                <input type="radio" name="corriges" value="each" id="corriges-dessous">
+                    <label for="corriges-dessous">sous chaque exercice</label>
+                <input type="radio" name="corriges" value="acote" id="corriges-acote">
+                    <label for="corriges-acote">à côté</label>
+                <input type="radio" name="corriges" value="end" id="corriges-separe">
+                    <label for="corriges-separe">après les exercices</label>
+                <input type="radio" name="corriges" value="separe" id="corriges-separe">
+                    <label for="corriges-separe">sur feuille separée</label>
+                </div>
+            </section>
+            <section id="tab-accueil" class="noprint"></section>
+            <section id="creator-content">            
+            </section>
+            </div>
+    <script src="bridge.js"></script>
+</body>
+</html>

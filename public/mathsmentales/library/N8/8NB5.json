@@ -1,0 +1,95 @@
+{
+    "title": "Fraction (inférieure ou égale à 1) d’unité",
+    "dest": ["8NB", "7NB", "6NB"],
+    "type":"text",
+    "consigne":"Quelle fraction de l’objet qui est colorée ?",
+    "description":"carré, disque, rectangle ou barre découpé en parties égales dont certaines sont colorées.",
+    "question":"",
+    "options":[
+      {
+          "name":"Découpe du carré",
+          "vars":{
+              "den":[2, 4, 8, 16],
+              "num":"1_${:den}",
+              "b":["b",""],
+              "denb":"${:den==8||:den==2?:den+:b::den}"
+          },
+          "answer":"On a coloré $$\\color{red}{\\dfrac{:num}{:den}}$$ du carré.",
+          "value":"\\dfrac{${:num}}{:den}",
+          "figure":{
+              "type":"graph",
+              "boundingbox":[0,6,6,0],
+              "axis":false,
+              "content":[
+                  ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                  ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                  ["point", [5, 5], {"name":"C","face":"", "label":{"visible":false}}],
+                  ["point", [1, 5], {"name":"D","face":"", "label":{"visible":false}}],
+                  ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                  ["fillSquares",[], {"width":"${'2,4,8'.indexOf(:denb)>-1?2::denb=='2b'?1:4}","height":"${:denb==2?1::denb==4||:denb=='8b'||:denb=='2b'?2:4}","qty":":num","left":1,"top":1,"scaleX":"${'2,4,8'.indexOf(:denb)>-1?2::denb=='2b'?4:1}","scaleY":"${:denb==2?4::denb==4||:denb=='8b'||:denb=='2b'?2:1}","allLines":true}]
+              ]
+          }
+      },
+        {
+            "name":"Découpe du disque",
+            "vars":{
+                "den":"2_10",
+                "num":"1_${:den}"
+            },
+            "answer":"On a coloré $$\\color{red}{\\dfrac{:num}{:den}}$$ du disque. ${:den===:num?'Tout le disque est coloré.':''}",
+            "value":"\\dfrac{:num}{:den}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,6,6,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,2.5]], "radius":2,"unitCut":":den","qty":":num","allRadius":true}]
+                ]
+            }
+        },{
+            "name":"Découpe du rectangle",
+            "vars":{
+                "den":[2, 3, 4, 6, 8, 12],
+                "num":"1_${:den}"
+            },
+            "answer":"On a coloré $$\\color{red}{\\dfrac{:num}{:den}}$$ du rectangle.",
+            "value":"\\dfrac{${:num}}{:den}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,5,10,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [9, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [9, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["fillSquares",[], {"width":"${'2,4,6'.indexOf(:den)>-1?2:'8,12'.indexOf(:den)>-1?4:1}","height":"${:den==2?1:'3,6,12'.indexOf(:den)>-1?3:2}","qty":":num","left":1,"top":1,"scaleX":"${'2,4,6'.indexOf(:den)>-1?4:'8,12'.indexOf(:den)>-1?2:8}","scaleY":"${:den==2?3:'3,6,12'.indexOf(:den)>-1?1:1.5}","allLines":true}]
+                ]
+            }
+        },{
+            "name":"Découpe d’une barre",
+            "vars":{
+              "den":"2_12",
+                "num":"1_${:den}"
+            },
+            "answer":"On a coloré $$\\color{red}{\\dfrac{:num}{:den}}$$ de la barre.",
+            "value":"\\dfrac{:num}{:den}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,3,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [13, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [13, 2], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 2], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["fillSquares",[], {"width":"${:den}","height":"1","qty":":num","left":1,"top":1,"scaleX":"${MMmath.round(12/:den,4)}","scaleY":1,"allLines":true}]
+                ]
+            }
+        }
+    ]
+}

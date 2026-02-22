@@ -1,0 +1,91 @@
+{
+    "title":"Leçon : triangle",
+    "type":"text",
+    "ID":"5LG3",
+    "description":"Questions sur les triangles",
+    "dest":["5LG", "4LG"],
+    "consts":{"lettres":["A","B","C","D","E","F","J","K","L","M","N","P","R","S","T"]},
+    "options":[{
+        "name":"Définitions",
+        "question": [
+            "Qu'est-ce qu'un triangle ?",
+            "Combien de côtés comporte un triangle ?",
+            "Combien de sommets comporte un triangle ?",
+            "Qu'est-ce qu'un triangle isocèle ?",
+            "Qu'est-ce qu'un triangle équilatéral ?",
+            "Qu'est-ce qu'un triangle rectangle ?",
+            "Qu'est-ce qu'un triangle isocèle rectangle ?",
+            "Qu'est-ce qu'un triangle scalène ?",
+            "Qu'est-ce qu'un triangle obtusangle ?",
+            "Qu'est-ce qu'un triangle acutangle ?",
+            "Comment nomme-t-on un triangle ?",
+            "Comment appelle-t-on des triangles dont les mesures d'angles sont égales 2 à 2 ?",
+            "Comment appelle-t-on des triangles dont les côtés sont égaux 2 à 2 ?"
+    ],
+        "answer":[
+            "Un triangle est un <b>polygone à trois côtés</b>.",
+            "Un triangle comporte <b>trois côtés</b>.",
+            "Un triangle comporte <b>trois sommets</b>.",
+            "Un triangle <b>isocèle</b> est un triangle comportant <b>deux côtés de même longueur</b>.",
+            "Un triangle <b>équilatéral</b> est un triangle dont <b>les 3 côtés ont la même longueur</b>.",
+            "Un triangle <b>rectangle</b> est un triangle dont <b>l'un des angles est droit</b>.",
+            "Un triangle <b>isocèle rectangle</b> est un triangle <b>deux côtés sont perpendiculaires et de même longueur</b>.",
+            "Un triangle <b>scalène est un triangle n'ayant <b>pas de particularité</b>.",
+            "Un triangle <b>obtusangle</b> est un triangle comportant <b>un angle obtus</b>.",
+            "Un triangle <b>acutangle</b> est un triangle ne comportant <b>que des angles aigus</b>.",
+            "Un triangle est nommé par l'écriture juxtaposée de ses trois sommets en lettres majuscules.",
+            "Des triangles qui ont les <b>mêmes mesures d'angles</b> sont dits <b>semblables</b>.",
+            "Des triangles qui ont les <b>mêmes longueurs de côtés</b> sont dits <b>égaux</b> (ou isométriques)."
+    ]},{
+        "name":"Propriétés",
+        "vars":{"l":"0_14_3_^&","A":"${:lettres[:l[0]]}","B":"${:lettres[:l[1]]}","C":"${:lettres[:l[2]]}"},
+        "question":[
+            "Qu'appelle-t-on l'inégalité triangulaire ?",
+            "Quand est-ce que trois longueurs ne peuvent être les longueurs des côtés d'un triangle ?",
+            "Si ${:A+:B}+${:B+:C}=${:A+:C}, que peut-on dire des points ${:A}, ${:B} et ${:C} ?",
+            "Si ${:B} appartient au segment [${:A}${:C}], que peut-on écrire comme égalité ?",
+            "Que peut-on dire des angles d'un triangle ?",
+            "Comment obtient-on le périmètre d'un triangle ?"
+        ],
+        "answer":[
+            "La longueur de n'importe quel côté d'un triangle est inférieure à la somme des longueurs des deux autres côtés.<br>ou<br>Pour tous points ${:A}, ${:B}, ${:C}, ${:A+:B} < ${:A+:C} + ${:C+:B}.",
+            "Si une longueur est supérieure à la somme de deux autres longueurs, alors on ne peut pas former de triangle avec ces trois longueurs pour côtés.",
+            "${:A+:B}+${:B+:C}=${:A+:C}, donc ${:B} appartient au segment [${:A}${:C}].",
+            "${:B} appartient au segment [${:A}${:C}], donc ${:A+:B}+${:B+:C}=${:A+:C}.",
+            "La somme des angles d'un triangle est un angle plat. Sa mesure est 180°.",
+            "Le périmètre d'un triangle s'obtient en ajoutant les longueurs de ses côtés."
+        ]
+    },
+    {
+        "name":"Droites remarquables",
+        "question":[
+            "Qu'est-ce qu'une hauteur d'un triangle ?",
+            "Qu'est-ce qu'une médiatrice d'un triangle ?",
+            "Qu'est-ce qu'une médiane d'un triangle ?",
+            "Qu'est-ce qu'une bissectrice d'un triangle ?",
+            "Comment s'appelle le point d'intersection des hauteurs ?",
+            "Comment s'appelle le point d'intersection des médiatrices ?",
+            "Comment s'appelle le point d'intersection des médianes d'un triangle ?",
+            "Comment s'appelle le point d'intersection des bissectrices d'un triangle ?",
+            "Dans un triangle, comment appelle-t-on une droite qui passe par un sommet et est perpendiculaire au côté opposé à ce sommet ?",
+            "Dans un triangle, comment appelle-t-on une droite qui est perpendiculaire à un côté en son milieu ?",
+            "Dans un triangle, comment appelle-t-on une droite qui passe par un sommet et le milieu du côté opposé ?",
+            "Dans un triangle, comment appelle-t-on une droite qui partage un angle en deux angles de même égaux ?"
+        ],
+        "answer":[
+            "Une <b>hauteur d'un triangle</b> est une <b>droite passant par un sommet et perpendiculaire au côté opposé</b> à ce sommet.",
+            "Une <b>médiatrice d'un triangle</b> est une médiatrice de l'un de ses trois côtés. C'est la <b>droite perpendiculaire à ce côté en son milieu</b>.",
+            "Une <b>médiane d'un triangle</b> est une droite ou un segment joignant <b>un sommet et le milieu du côté opposé</b> à ce sommet.",
+            "Une <b>bissectrice d'un triangle</b> est la bissectrice de l'un de ses trois angles. C'est la droite qui <b>partage cet angle en deux angles égaux</b>.",
+            "Le point d'intersection des hauteurs d'un triangle s'appelle l'<b>orthocentre</b> du triangle.",
+            "Le point d'intersection des médiatrice d'un triangle est le <b>centre du cercle circonscrit</b> au triangle. C'est l'unique cercle qui passe par les sommets du triangle.",
+            "Le point d'intersection des médianes d'un triangle s'appelle le <b>centre de gravité</b> du triangle.",
+            "Le point d'intersection des bissectrices d'un triangle est le <b>centre du cercle inscrit</b> dans le triangle. C'est l'unique cercle qui est tangent aux trois côtés du triangle.",
+            "C'est une <b>hauteur</b> du triangle.",
+            "C'est une <b>médiatrice</b> du triangle.",
+            "C'est une <b>médiane</b> du triangle.",
+            "C'est une <b>bissectrice</b> du triangle."
+        ]
+    }
+    ]
+}

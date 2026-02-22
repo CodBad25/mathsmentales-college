@@ -1,0 +1,25 @@
+{
+    "title":"Nombre dans une collection",
+    "type":"text",
+    "ID":"11NA3",
+    "dest":["11NA","10NA"],
+    "speech":1,
+    "description":"Trouver le nième nombre dans une suite de nombres",
+    "options":[{
+        "name":"Nième nombre",
+        "vars":{"n":"1_90", "l":"5_10", "pas":"1_4", "liste":"${Array.from({length::l}, (_, i) => i+:pas+:n).join(', ')}", "choix":"2_${:l-1}", "reponse":"${:liste.split(', ')[:choix - 1]}"},
+        "question": "Trouver le ${:choix}<sup>e</sup> nombre dans la liste ${:liste}.",
+        "shortq": "${:choix}<sup>e</sup> nombre de ${:liste} ?",
+        "audio": "Quel est le ${:choix}<sup>e</sup> nombre dans la liste ${:liste} ?",
+        "value":"${:reponse}",
+        "answer": "Le ${:choix}<sup>e</sup> nombre de la liste ${:liste} est <span class='red'>${:reponse}</span>."
+    }, {
+        "name":"Nième nombre en partant de la fin",
+        "vars":{"n":"1_90", "l":"5_10", "pas":"1_4", "liste":"${Array.from({length::l}, (_, i) => i+:pas+:n).join(', ')}", "choix":"2_${:l-1}", "reponse":"${:liste.split(', ')[:l - :choix]}"},
+        "question": "Trouver le ${:choix}<sup>e</sup> nombre de la liste ${:liste} en partant de la fin.",
+        "shortq": "${:choix}<sup>e</sup> nombre de ${:liste} depuis la fin ?",
+        "audio": "Quel est le ${:choix}<sup>e</sup> nombre de la liste ${:liste} en partant de la fin ?",
+        "value":"${:reponse}",
+        "answer": "Le ${:choix}<sup>e</sup> nombre de la liste ${:liste} en partant de la fin est <span class='red'>${:reponse}</span>."
+    }]
+}

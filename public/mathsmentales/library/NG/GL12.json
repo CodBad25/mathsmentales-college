@@ -1,0 +1,71 @@
+{
+    "dest":["GL1"],
+    "title":"Trouver le n<sup>e</sup> terme d’une suite",
+    "type":"text",
+    "options":[
+        {
+            "name":"Suites arithmétiques définies de manière récursive",
+            "vars":{
+                "u1":"-10_10",
+                "r":"-10_10_^0",
+                "n":"2_8"
+            },
+            "consts":{
+                "quest":"Soit la suite définie par $$u_1=${:u1}$$ et $$u_n=u_{n-1}${MMmath.signedNumber(:r)}$$.<br>"
+            },
+            "answer":"$$u_${:n}=${:u1}+${:r}\\times(${:n}-1)=\\color{red}{${:u1+:n*:r}}$$",
+            "value":"${:u1+:n*:r}"
+        },{
+            "name":"Suites arithmétiques définie par formule linéaire",
+            "consts":{
+                "quest":"Soit la suite définie par $$u_n=${:u0}${:u0!=0?MMmath.signedNumberButOne(:k):MMmath.signIfOne(:k)}${:b!=0?'(':''}n${MMmath.signedNumber(:b)}${:b!=0?')':''}$$<br>"
+            },
+            "vars":{
+                "u0":"-10_10",
+                "k":"-10_10_^0,1",
+                "b":"-10_10",
+                "n":"3_9"
+            },
+            "answer":"$$u_${:n}=${:u0}${:u0!=0?MMmath.signedNumberButOne(:k):MMmath.signIfOne(:k)}${:b!=0?'(':''}${:n}${MMmath.signedNumber(:b)}${:b!=0?')':''}=\\color{red}{${:u0+:k*(:n+:b)}}$$",
+            "value":"${:u0+:k*(:n+:b)}"
+        },{
+            "name":"Suite constante",
+            "consts":{
+                "quest":"Soit la suite définie par $$u_n=${:n}$$<br>"
+            },
+            "vars":{
+                "n":"2_20"
+            },
+            "answer":"$$u_${:n}=\\color{red}{${:n}}$$"
+        },{
+            "name":"Suites géométriques de raison 2",
+            "consts":{
+                "quest":"Soit la suite définie par $$u_n=${:u0}\\times2^{n${MMmath.signedNumber(:b)}}$$<br>"
+            },
+            "vars":{
+                "u0":[-3,-1,1,3],
+                "b":"-2_2_^0",
+                "n":"2_8"
+            },
+            "answer":"$$u_${:n}=${:u0}\\times2^{${:n}${MMmath.signedNumber(:b)}}=\\color{red}{${:u0*(2**(:n+:b))}}$$"
+        },{
+            "name":"Suites géométriques de raison 1/2 ou 1/3",
+            "consts":{
+                "quest":"Soit la suite définie par $$u_n=${:u0}\\times\\left(\\dfrac 1${:r}\\right)^{n${MMmath.signedNumber(:b)}}$$<br>"
+            },
+            "vars":{
+                "r":[2,3],
+                "n0":"1_4",
+                "n":"2_${:r==3?:n0+3:8}",
+                "u0":"${:r**:n0}",
+                "b":"-2_2"
+            },
+            "answer":"$$u_${:n}=${:u0}\\times\\left(\\dfrac 1${:r}\\right)^{${:n}${MMmath.signedNumber(:b)}}=\\color{red}{${MMmath.calc(:u0+'/'+:r**(:n+:b))}}$$",
+            "value":"${MMmath.calc(:u0+'/'+:r**(:n+:b))}"
+        }
+    ],
+    "question":[
+        "${:quest}Combien vaut $$u_{${:n}} ?$$",
+        "${:quest}Quel est le ${:n}<sup>e</sup> terme ?"
+    ]
+}

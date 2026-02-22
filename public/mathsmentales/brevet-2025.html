@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Automatismes DNB - Maths 3ème</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 20px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                color: #667eea;
+                font-size: 2.5em;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                color: #666;
+                font-size: 1.1em;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 25px;
+                margin-bottom: 30px;
+            }
+
+            .card {
+                background: white;
+                border-radius: 15px;
+                padding: 25px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .card-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 3px solid #667eea;
+            }
+
+            .icon {
+                font-size: 2em;
+                margin-right: 15px;
+            }
+
+            .card h2 {
+                color: #333;
+                font-size: 1.4em;
+            }
+
+            .card ul {
+                list-style: none;
+            }
+
+            .card li {
+                padding: 10px 0;
+                padding-left: 25px;
+                position: relative;
+                line-height: 1.6;
+            }
+
+            .card li a {
+                color: #555;
+                text-decoration: none;
+            }
+
+            .card li:before {
+                content: "✓";
+                position: absolute;
+                left: 0;
+                color: #667eea;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+
+            .nombres {
+                border-left: 5px solid #ff6b6b;
+            }
+            .geometrie {
+                border-left: 5px solid #4ecdc4;
+            }
+            .donnees {
+                border-left: 5px solid #ffe66d;
+            }
+            .proportionnalite {
+                border-left: 5px solid #95e1d3;
+            }
+            .algo {
+                border-left: 5px solid #f38181;
+            }
+
+            .sommaire {
+                border-left: 5px solid #a29bfe;
+                background: linear-gradient(135deg, #f5f6fa 0%, #e8eaf6 100%);
+            }
+
+            .sommaire-list li {
+                padding: 12px 0;
+            }
+
+            .sommaire-list a {
+                color: #667eea;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1.1em;
+                display: block;
+            }
+
+            footer {
+                background: white;
+                padding: 20px;
+                border-radius: 15px;
+                text-align: center;
+                color: #666;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.8em;
+                }
+
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .highlight {
+                background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>🎯 Automatismes du Brevet</h1>
+                <p class="subtitle">
+                    Les compétences essentielles à maîtriser pour l'épreuve de
+                    maths avec
+                    <a href="https://mathsmentales.net">MathsMentales</a>
+                </p>
+            </header>
+
+            <div class="grid">
+                <div class="card sommaire">
+                    <div class="card-header">
+                        <div class="icon">📚</div>
+                        <h2>Sommaire des thèmes</h2>
+                    </div>
+                    <ul class="sommaire-list">
+                        <li><a href="#nombres">🔢 Nombres et Calculs</a></li>
+                        <li><a href="#geometrie">📐 Espace et Géométrie</a></li>
+                        <li>
+                            <a href="#donnees">📊 Données et Probabilités</a>
+                        </li>
+                        <li>
+                            <a href="#proportion"
+                                >📈 Proportionnalité et Fonctions</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#algo"
+                                >💻 Algorithmique et Programmation</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card nombres" id="nombres">
+                    <div class="card-header">
+                        <div class="icon">🔢</div>
+                        <h2>Nombres et Calculs</h2>
+                    </div>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=%C3%89criture%20d%C3%A9cimale%20des%20fractions%20simples&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=6NB1~o=~q=~p=~t=8~n=10"
+                                >Connaître l'écriture décimale des fractions
+                                simples (½, ¼, ¾...)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Comparer%20et%20calculer%20avec%20des%20d%C3%A9cimaux&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5NA4~o=0,2,3~q=0.-2.-3.~p=~t=8~n=3_i=5NC1~o=4,2~q=2.-4.~p=~t=8~n=3_i=5NC5~o=~q=~p=~t=8~n=2_i=5NC6~o=0,1,2,3~q=0.0,1-1.0,1-2.0,1-3.0,1~p=~t=8~n=2_i=6ND11~o=~q=~p=~t=8~n=3_i=4NC7~o=5~q=5.~p=~t=8~n=2"
+                                >Comparer et calculer avec des nombres décimaux
+                                (y compris négatifs)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Comparer%20et%20calculer%20avec%20des%20fractions&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=6NB3~o=~q=~p=~t=8~n=3_i=6NB5~o=~q=~p=~t=8~n=3_i=5NC7~o=4,6~q=4.0,1-6.~p=~t=8~n=2_i=5NC12~o=~q=~p=~t=8~n=2_i=5NC8~o=4,5,7~q=4.-5.0,1-7.~p=~t=8~n=2_i=4NC3~o=~q=~p=~t=8~n=2_i=4NC4~o=~q=~p=~t=8~n=2_i=2N13~o=~q=~p=~t=8~n=2"
+                                >Simplifier, comparer et calculer avec des
+                                fractions</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Fraction%20de%20quantit%C3%A9&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=7NB1~o=1,2~q=1.0,1-2.0,1~p=~t=8~n=4_i=4NC8~o=1,0~q=0.0,1,2-1.0,1,2~p=~t=8~n=4"
+                                >Prendre une fraction simple d'un nombre (le
+                                tiers de 18, le quart de 12)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Pourcentages&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5NA5~o=~q=~p=~t=8~n=4_i=5NC10~o=0,2~q=0.0,1-2.0,1~p=~t=8~n=4_i=5NC9~o=0,3,2~q=0.0,1-2.0,1-3.0,1~p=~t=8~n=4"
+                                >Déterminer des pourcentages simples (100%, 50%,
+                                25%, 10%, 1%)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=%C3%89critures%20d'un%20nombre&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5NA5~o=~q=~p=~t=8~n=4_i=6NB1~o=~q=~p=~t=8~n=4"
+                                >Écrire un nombre sous plusieurs formes (1,2 =
+                                12/10 = 6/5 = 120%...)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Notation%20scientifique&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=4NA1~o=0,1,6~q=0.-1.-6.~p=~t=8~n=8"
+                                >Passer de l'écriture décimale à la notation
+                                scientifique</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Carr%C3%A9s%20de%201%20%C3%A0%2012&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=6ND13~o=1~q=1.0,1~p=~t=8~n=10"
+                                >Connaître les
+                                <span class="highlight"
+                                    >carrés de 1 à 12</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Crit%C3%A8res%20de%20divisibilit%C3%A9&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5ND2~o=~q=~p=~t=8~n=8"
+                                >Appliquer les critères de divisibilité (2, 3,
+                                5, 9)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Connaissance%20des%20nombres&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=6NB7~o=3,4,6~q=0.-1.-3.-4.-6.~p=~t=8~n=8_i=11NA5~o=~q=~p=~t=8~n=2"
+                                >Exprimer le double, triple, moitié, successeur
+                                d'un nombre</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Simplifier%20des%20expressions%20litt%C3%A9rales&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5NE2~o=~q=~p=~t=8~n=3_i=5NE11~o=~q=~p=~t=8~n=3_i=4NE2~o=~q=~p=~t=8~n=3_i=5NE1~o=3,4,1,0~q=0.0,1-1.-3.-4.0,1,2,3~p=~t=8~n=4_i=3ND4~o=~q=~p=~t=8~n=2"
+                                >Simplifier des expressions littérales</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Calculer%20la%20valeur%20d'une%20expression&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5NE3~o=2,3,4,5,8,9~q=2.-3.-4.-5.-8.-9.~p=~t=8~n=6_i=5NE5~o=8,9,10,11~q=8.-9.-10.-11.~p=~t=8~n=4"
+                                >Calculer la valeur d'expressions algébriques
+                                avec puissances</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=D%C3%A9velopper%2C%20factoriser&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=4NE4~o=~q=~p=~t=8~n=5_i=3ND2~o=~q=~p=~t=8~n=2_i=4NE5~o=~q=~p=~t=8~n=3"
+                                >Développer et factoriser des expressions
+                                simples</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=R%C3%A9soudre&p=0~t=Diapo%201~c=1~o=false~d=normal~at=10_i=4NE8~o=0,1~q=0.-1.~p=~t=8~n=2_i=4NE6~o=0,1~q=0.0,1-1.0,1~p=~t=8~n=2_i=4NE9~o=0,1~q=0.-1.~p=~t=8~n=4"
+                                >Résoudre des équations : ax = c, x + b = c, ax
+                                + b = c</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Lire%20et%20placer%20des%20points&p=0~t=Diapo%201~c=1~o=false~d=normal~at=10_i=6NA4~o=~q=~p=~t=8~n=6"
+                                >Lire et placer des points sur une droite
+                                graduée</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card geometrie" id="geometrie">
+                    <div class="card-header">
+                        <div class="icon">📐</div>
+                        <h2>Espace et Géométrie</h2>
+                    </div>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Lire%20et%20placer%20un%20point%20dans%20un%20rep%C3%A8re&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5GR1~o=~q=~p=~t=8~n=10"
+                                >Lire et placer des points dans un repère
+                                orthogonal</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Codages%20des%20figures&p=0~t=Diapo%201~c=1~o=false~d=normal~at=10_i=8GC3~o=~q=~p=~t=8~n=4_i=6GC12~o=~q=~p=~t=8~n=4_i=6GD6~o=~q=~p=~t=8~n=4"
+                                >Exploiter le codage d'une figure (triangles,
+                                quadrilatères, médiatrice)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Types%20d'angles&p=0~t=Diapo%201~c=1~o=false~d=normal~at=10_i=8ME1~o=~q=~p=~t=8~n=6"
+                                >Reconnaître les différents types d'angles
+                                (droit = 90°, plat = 180°)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Somme%20des%20angles%20d'un%20triangle&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5LG3~o=1~q=1.4~p=~t=8~n=1_i=5GB1~o=0~q=0.-3.~p=~t=8~n=2_i=5GB1~o=0~q=0.-3.~p=~t=8~n=2_i=5GB2~o=~q=~p=~t=8~n=4"
+                                >Connaître la somme des angles d'un triangle
+                                (180°)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Conversions&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=9MA1~o=~q=~p=~t=8~n=4_i=8MA1~o=~q=~p=~t=8~n=6_i=7MC2~o=~q=~p=~t=8~n=4_i=7MC3~o=~q=~p=~t=8~n=4_i=8MC1~o=2,1,0~q=0.0,1-1.-2.0,1~p=~t=8~n=4"
+                                >Convertir les unités : longueur, aire, volume,
+                                masse, capacité, temps</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Solides&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5MA4~o=~q=~p=~t=8~n=4"
+                                >Reconnaître les solides (cube, pavé, prisme,
+                                cylindre, pyramide, cône)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=P%C3%A9rim%C3%A8tres&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5LM1~o=1~q=1.0,1,2,3~p=~t=8~n=4_i=8MB1~o=0,1~q=0.0-1.0~p=~t=8~n=2_i=6MA1~o=4,5,1,0~q=0.-1.-4.-5.~p=~t=8~n=4"
+                                >Calculer le périmètre d'un polygone et d'un
+                                disque</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Aires&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5LM1~o=2~q=2.0,1,3,4~p=~t=8~n=4_i=6MC1~o=0,1,2,5,6,7~q=0.-1.-2.-3.-4.-5.-6.-7.~p=~t=8~n=6"
+                                >Connaître les formules d'aire (triangle,
+                                rectangle, disque)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Volumes&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5MA2~o=0,1~q=0.-1.~p=~t=8~n=2_i=5MA2~o=2~q=0.-1.-2.~p=~t=8~n=1_i=5MA4~o=0,1~q=0.-1.~p=~t=8~n=2"
+                                >Connaître les formules de volume (cube, pavé,
+                                prisme, cylindre)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Pythagore&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=4GB1~o=~q=~p=~t=8~n=2_i=4GB8~o=1~q=1.~p=~t=8~n=1_i=4GB7~o=~q=~p=~t=8~n=2"
+                                >Appliquer le
+                                <span class="highlight"
+                                    >théorème de Pythagore</span
+                                ></a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Thal%C3%A8s&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=4GB2~o=0~q=0.~p=~t=8~n=2_i=4GB10~o=0~q=0.~p=~t=8~n=2_i=4GB9~o=0~q=0.~p=~t=8~n=2"
+                                >Appliquer le
+                                <span class="highlight"
+                                    >théorème de Thalès</span
+                                >
+                                (triangles emboîtés)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Trigonom%C3%A9trie&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=4GB5~o=0~q=0.~p=~t=8~n=2_i=4GB5~o=1~q=0.-1.~p=~t=8~n=2_i=4GB4~o=0~q=0.~p=~t=8~n=2"
+                                >Utiliser le
+                                <span class="highlight">cosinus</span> dans un
+                                triangle rectangle</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Sym%C3%A9tries&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5LG1~o=~q=~p=~t=8~n=8"
+                                >Mobiliser les propriétés des symétries et de la
+                                translation</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card donnees" id="donnees">
+                    <div class="card-header">
+                        <div class="icon">📊</div>
+                        <h2>Données et Probabilités</h2>
+                    </div>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Probabilit%C3%A9&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=6DA6~o=~q=~p=~t=8~n=5"
+                                >Attribuer des probabilités dans des cas simples
+                                (équiprobabilité)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Exprimer%20une%20fr%C3%A9quence%20simple&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5DA3~o=~q=0.~p=~t=8~n=10"
+                                >Exprimer une fréquence</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Moyenne&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5DA2~o=0~q=0.~p=~t=8~n=4"
+                                >Calculer une moyenne</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=M%C3%A9diane&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5DA2~o=1~q=1.~p=~t=8~n=4"
+                                >Déterminer une médiane pour une petite série de
+                                valeurs</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Tableau%20et%20graphiques&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=6DA5~o=~q=~p=~t=8~n=3_i=5DA1~o=~q=~p=~t=8~n=3"
+                                >Lire et interpréter tableaux, diagrammes et
+                                graphiques</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card proportionnalite" id="proportionnalite">
+                    <div class="card-header">
+                        <div class="icon">📈</div>
+                        <h2>Proportionnalité et Fonctions</h2>
+                    </div>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Reconnaitre%20la%20proportionnalit%C3%A9&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5LN3~o=1,0~q=0.0,1-1.0,1,2,5~p=~t=8~n=6_i=8MG1~o=~q=~p=~t=8~n=4_i=5DC4~o=2,3~q=2.-3.~p=~t=8~n=2"
+                                >Reconnaître une situation de
+                                proportionnalité</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Calculer%20avec%20la%20proportionnalit%C3%A9&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5LN3~o=2~q=2.0,1,2,4,3~p=~t=8~n=4_i=6NB9~o=~q=~p=~t=8~n=4_i=5DC3~o=~q=~p=~t=8~n=4"
+                                >Résoudre des problèmes de proportionnalité
+                                (linéarité, retour à l'unité)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Variations%20en%20pourcentages&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5DC1~o=1~q=1.0,1~p=~t=8~n=4_i=3DD5~o=~q=1.~p=~t=8~n=6"
+                                >Appliquer une augmentation ou diminution en
+                                pourcentage</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Lecture%20graphique&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=3DD6~o=~q=~p=~t=8~n=6"
+                                >Exploiter un graphique pour lire des valeurs
+                                (abscisses, ordonnées)</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card algo" id="algo">
+                    <div class="card-header">
+                        <div class="icon">💻</div>
+                        <h2>Algorithmique et Programmation</h2>
+                    </div>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Interpr%C3%A9ter%20un%20algorithme&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5AA5~o=~q=~p=~t=8~n=5_i=5AA2~o=~q=~p=~t=8~n=3"
+                                >Interpréter une suite d'instructions</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Interpr%C3%A9ter%20un%20algorithme%20de%20calcul&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5NE9~o=~q=~p=~t=8~n=3_i=5NE8~o=~q=~p=~t=8~n=3_i=5AA5~o=~q=~p=~t=8~n=3_i=3AA1~o=~q=~p=~t=8~n=3"
+                                >Comprendre un programme de calcul</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Interpr%C3%A9ter%20un%20algorithme%20de%20d%C3%A9placement&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5AA1~o=~q=~p=~t=8~n=4_i=5AA3~o=~q=~p=~t=8~n=4"
+                                >Suivre des instructions de déplacement</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://mathsmentales.net/wall.html?a=,fs=serif,t=Interpr%C3%A9ter%20un%20algorithme%20de%20construction&p=0~t=Diapo%201~c=1~o=true~d=normal~at=10_i=5AA4~o=~q=~p=~t=8~n=5"
+                                >Suivre un programme de construction
+                                géométrique</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <footer>
+                <p>
+                    <strong>💡 Conseil :</strong> Ces automatismes doivent être
+                    travaillés <b>régulièrement</b> pour répondre rapidement et
+                    sans hésitation !
+                </p>
+                <p style="margin-top: 10px; font-size: 0.9em">
+                    d’après document officiel - Octobre 2025 -
+                    <a
+                        href="https://www.education.gouv.fr/le-diplome-national-du-brevet-10613"
+                        >Diplôme National du Brevet</a
+                    >
+                </p>
+            </footer>
+        </div>
+        <script src="bridge.js"></script>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+{
+    "title":"Conversions de durées simples",
+    "ID":"7MC3",
+    "type":"text",
+    "speech":1,
+    "dest":["9MC","8MC","7MC","6MB","5MA","4MA","3MA"],
+    "options":[{
+        "name":"Conversions minutes en secondes",
+        "vars":{"min":"1_10","s":"${60*:min}"},
+        "question": ["Combien de secondes dans ${:min} minutes ?",
+            "$$${:min}$$ min = ? s."],
+        "audio": "Combien y a-t-il de secondes dans ${:min} minutes ?",
+        "answer":"${:min} min = <span class='red'>${:s}</span> s.",
+        "value":["${:s}","${:s} s"]
+    },{
+        "name":"Conversions heures en minutes",
+        "vars":{"h":"1_10","min":"${60*:h}"},
+        "question": ["Combien de minutes dans ${:h} heures ?",
+            "$$${:h}$$ h = ? min."],
+        "audio": "Combien y a-t-il de minutes dans ${:h} heures ?",
+        "answer":"${:h} h = <span class='red'>${:min}</span> min",
+        "value":["${:min}","${:min} min"]
+    },{
+        "name":"Conversions heures en secondes",
+        "vars":{"h":[1,2,10],"s":"${3600*:h}"},
+        "question": ["Combien de secondes dans ${:h} heures ?",
+        "$$${:h}$$ h = ? s."],
+        "audio": "Combien y a-t-il de seondes dans ${:h} heures ?",
+        "answer":"${:h} h = <span class='red'>$$${:s}$$</span> s.",
+        "value":["${:s}","${:s} s"]
+    },{
+        "name":"Conversion de minutes secondes en secondes",
+        "vars":{"min":"1_10","s":[15,30,45],"r":"${60*:min+:s}"},
+        "question": ["Combien de secondes dans ${:min} minutes et ${:s} secondes ?",
+        "$$${:min}$$ min $$${:s}$$ s = ? s."],
+        "audio": "Combien y a-t-il de secondes dans ${:min} minutes et ${:s} secondes ?",
+        "answer":"${:min} min $$${:s}$$ s = <span class='red'>${:r}</span> s.",
+        "value":["${:r}","${:r} s"]
+    },{
+        "name":"Conversion d'heures minutes en minutes",
+        "vars":{"h":"1_10", "min":[15,30,45],"r":"${60*:h+:min}"},
+        "question": ["Combien de minutes dans ${:h} heures et ${:min} minutes ?",
+        "$$${:h}$$ h $$${:min}$$ min = ? min."],
+        "audio": "Combien y a-t-il de minutes dans ${:h} heures et ${:min} minutes ?",
+        "answer":"${:h} h $$${:min}$$ min = <span class='red'>${:r}</span> min",
+        "value":["${:r}","${:r} min"]
+    },{
+        "name":"Conversion d'heures minutes secondes en secondes",
+        "vars":{"h":[1,2,10], "min":"1_10","s":[15,30,45],"r":"${3600*:h+60*:min+:s}"},
+        "question": ["Combien de secondes dans ${:h} heures, ${:min} minutes et ${:s} secondes ?",
+        "$$${:h}$$ h $$${:min}$$ min $$${:s}$$ s = ? s."],
+        "audio": "Combien y a-t-il de secondes dans ${:h} heures, ${:min} minutes et ${:s} secondes ?",
+        "answer":"${:h} h $$${:min}$$ min $$${:s}$$ s = <span class='red'>${:r}</span> s.",
+        "value":["${:r}","${:r} s"]
+    }]
+}

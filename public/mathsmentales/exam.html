@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+            @page{
+                size:A4 portrait;
+                margin:0.8cm;
+            }
+        </style>
+        <title>Interrogation MathsMentales</title>
+        <link rel="stylesheet" href="css/exam-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script type="module" src="js/lib.exam-2.3.176.js" id="mmscriptid"></script>
+    </head>  
+    <body size="A4">
+        <button onclick="document.getElementById('creator-menu').classList.toggle('hidden')" class="noprint" style="position: absolute;left:0;top:0;width:90pt;height:18pt;">🛠 Mise en page</button>
+        <button onclick="window.print();" class="noprint" title="Imprimer ou enregistrer en pdf"style="position: absolute;left:92pt;top:0;width:70pt;height:18pt;">🖨️ Imprimer</button>
+        <div id="creator-container">
+            <section id="creator-menu" class="noprint hidden">
+                <button id="pageOrientation" title="Change l'orientation de la page">paysage</button>
+                <button id="btn-hide-inputanswer" title="Affiche ou non un espace pour écrire la réponse">Reponse</button>
+                | Énoncés : 
+                <input type="number" min="1" id="nbFiches" size="3" title="Nombre de fiches à générer">
+                <button id="fichesSeparation" title="Regrouper ou Séparer les fiches d’interro">Séparer</button>
+                <button id="fusionEnonces" title="Fusionne et mélange les questions ou sépare les exercices">Fusionner</button>
+                | Corrigé :
+                <button id="toggleCorriges"> ▲ </button>
+                <span id="btpCorrigePlace"></span>
+                | Police :
+            </section>
+            <section id="tab-accueil" class="noprint"></section>
+            <section id="creator-content">
+            </section>
+            </div>
+    <script src="bridge.js"></script>
+</body>
+</html>

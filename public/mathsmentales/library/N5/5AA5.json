@@ -1,0 +1,77 @@
+{
+    "ID": "5AA5",
+    "title": "Utiliser des variables",
+    "description":"scratch variables dire texte ou variable",
+    "type":"text",
+    "dest":["5AA","4AA","3AA"],
+    "options":[
+        {
+            "name":"Utiliser une variable ou sa valeur",
+            "consts":{
+                "varnames":[
+                    "poire","pomme","banane","a", "b", "c","chien","chat","truc","machin"
+                ]
+            },"vars":{"a":"1_10", "b":"1_10", "var0":"0_9", "var":"${:varnames[:var0]}", "varoupas":"0_1"},
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "mettre [${:var} v] à (${:a})",
+                    "ajouter (${:b}) à [${:var} v]",
+                    "dire ${:varoupas==0?'['+:var+']':'('+:var+')'}"
+                ]
+            },
+            "question":"Que va dire le lutin ?",
+            "answer":"Le lutin va dire <span class='red'>${:varoupas==0?:var::a+:b}</span>.",
+            "value":"${:varoupas==0?:var::a+:b}"
+        },{
+            "name":"Utiliser une variable et la modifier",
+            "consts":{
+                "varnames":[
+                    "poire","pomme","banane","a", "b", "c","chien","chat","truc","machin"
+                ],
+                "operations":[
+                    "+","-","*"
+                ],
+                "valeurs":[
+                    "${:a+:b}", "${:a-:b}", "${:a*:b}"
+                ]
+            },
+            "vars":{"a":"1_10", "b":"1_10", "ope0":"0_2", "var0":"0_9", "var":"${:varnames[:var0]}", "varoupas":"0_1"},
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "mettre [${:var} v] à (${:a})",
+                    "mettre [${:var} v] à ((${:var}) ${:operations[:ope0]} (${:b}))",
+                    "dire ${:varoupas==0?'['+:var+']':'('+:var+')'}"
+                ]
+            },
+            "question":"Que va dire le lutin ?",
+            "answer":"Le lutin va dire <span class='red'>${:varoupas==0?:var::valeurs[:ope0]}</span>.",
+            "value":"${:varoupas==0?:var::valeurs[:ope0]}"
+        },{
+            "name":"Utiliser une variable et la modifier",
+            "consts":{
+                "varnames":[
+                    "poire","pomme","banane","a", "b", "c","chien","chat","truc","machin"
+                ]
+            },
+            "vars":{"a":"1_10", "r":"1_9", "b":"-10_10_^0", "ope0":"0_2", "var0":"0_9", "var":"${:varnames[:var0]}", "varoupas":"0_1"},
+            "figure": {
+                "type":"scratch",
+                "content":[
+                    "Quand @greenFlag est cliqué",
+                    "mettre [${:var} v] à (${:a})",
+                    "répéter (${:r}) fois",
+                    "ajouter (${:b}) à [${:var} v]",
+                    "fin",
+                    "dire ${:varoupas==0?'['+:var+']':'('+:var+')'}"
+                ]
+            },
+            "question":"Que va dire le lutin ?",
+            "answer":"Le lutin va dire <span class='red'>${:varoupas==0?:var::a+:r*:b}</span>.",
+            "value":"${:varoupas==0?:var::a+:r*:b}"
+        }
+    ]
+}

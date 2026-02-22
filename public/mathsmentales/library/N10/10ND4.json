@@ -1,0 +1,45 @@
+{
+    "title":"Ajouter, soustraire 9 à un nombre = prgm 2025",
+    "dest":["10ND"],
+    "auteur":"Xavier Levet",
+    "options":[{
+        "name":"Ajouter 9 à un nombre dont l'unité est 0",
+        "vars":{"a":9,"b":[0,10,20,30,40,50,60,70,80,90]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre dont l'unité est 1",
+        "vars":{"a":9,"b":[1,11,21,31,41,51,61,71,81,91]},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre inférieur à 20",
+        "vars":{"a":9,"b":"1_19"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre inférieur à 50",
+        "vars":{"a":9,"b":"1_49"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9 à un nombre inférieur à 90",
+        "vars":{"a":9,"b":"1_89"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Soustraire 9 à un nombre dont l'unité est 9",
+        "vars":{"a":-9,"b":[9,19,29,39,49,59,69,79,89,99]},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 9 à un nombre inférieur à 20",
+        "vars":{"a":-9,"b":"9_19"},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 9 à un nombre inférieur à 50",
+        "vars":{"a":-9,"b":"9_49"},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 9 à un nombre inférieur à 100",
+        "vars":{"a":-9,"b":"9_99"},
+        "question": "${:b}${:a}"
+           }
+    ],
+    "answer":":question=\\color{red}{${:a+:b}}",
+    "value":"${:a+:b}"
+}

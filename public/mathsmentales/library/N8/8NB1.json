@@ -1,0 +1,171 @@
+{
+    "ID":"8NB1",
+    "title": "Fraction (supérieure à 1) d’un rectangle unité",
+    "dest": ["8NB", "7NB", "6NB"],
+    "type":"text",
+    "options":[
+        {
+            "name":"Découpe en demis",
+            "vars":{
+                "num":"3_6"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{2}}$$ d’unité${:num%2==0?', soit $$\\color{red}{'+:num/2+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{2}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [5, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["text",[3,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [1, 5], {"name":"E","face":"", "label":{"visible":false}}],
+                    ["point", [13, 5], {"name":"F","face":"", "label":{"visible":false}}],
+                    ["point", [13, 8], {"name":"G","face":"", "label":{"visible":false}}],
+                    ["point", [1, 8], {"name":"H","face":"", "label":{"visible":false}}],
+                    ["polygon", ["E","F","G","H"], {"fillColor":"none"}],
+                    ["fillSquares",[], {"width":6,"height":1,"qty":"${:num}","left":1,"top":5,"scaleX":2,"scaleY":3,"allLines":true}]
+                ]
+            }
+        },{
+            "name":"Découpe en tiers",
+            "vars":{
+                "num":"4_9"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{3}}$$ d’unité${:num%3==0?', soit $$\\color{red}{'+:num/3+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{3}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [5, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["text",[3,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [1, 5], {"name":"E","face":"", "label":{"visible":false}}],
+                    ["point", [13, 5], {"name":"F","face":"", "label":{"visible":false}}],
+                    ["point", [13, 8], {"name":"G","face":"", "label":{"visible":false}}],
+                    ["point", [1, 8], {"name":"H","face":"", "label":{"visible":false}}],
+                    ["polygon", ["E","F","G","H"], {"fillColor":"none"}],
+                    ["fillSquares", [], {"width":3,"height":3,"qty":"${:num}","left":1,"top":5,"scaleX":4,"scaleY":1,"allLines":true}]
+                ]
+            }
+        },{
+            "name":"Découpe en quarts",
+            "vars":{
+                "num":"5_12"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{4}}$$ d’unité${:num%4==0?', soit $$\\color{red}{'+:num/4+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{4}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [5, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["text",[3,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [1, 5], {"name":"E","face":"", "label":{"visible":false}}],
+                    ["point", [13, 5], {"name":"F","face":"", "label":{"visible":false}}],
+                    ["point", [13, 8], {"name":"G","face":"", "label":{"visible":false}}],
+                    ["point", [1, 8], {"name":"H","face":"", "label":{"visible":false}}],
+                    ["polygon", ["E","F","G","H"], {"fillColor":"none"}],
+                    ["fillSquares", [], {"width":6,"height":2,"qty":"${:num}","left":1,"top":5,"scaleX":2,"scaleY":1.5,"allLines":true}]
+                ]
+            }
+        },{
+            "name":"Découpe en sixièmes",
+            "vars":{
+                "num":"7_18"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{6}}$$ d’unité${:num%6==0?', soit $$\\color{red}{'+:num/6+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{6}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [5, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["text",[3,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [1, 5], {"name":"E","face":"", "label":{"visible":false}}],
+                    ["point", [13, 5], {"name":"F","face":"", "label":{"visible":false}}],
+                    ["point", [13, 8], {"name":"G","face":"", "label":{"visible":false}}],
+                    ["point", [1, 8], {"name":"H","face":"", "label":{"visible":false}}],
+                    ["polygon", ["E","F","G","H"], {"fillColor":"none"}],
+                    ["fillSquares", [], {"width":6,"height":3,"qty":"${:num}","left":1,"top":5,"scaleX":2,"scaleY":1,"allLines":true}]
+                ]
+            }
+        },{
+            "name":"Découpe en huitièmes",
+            "vars":{
+                "num":"9_24"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{8}}$$ d’unité${:num%8==0?', soit $$\\color{red}{'+:num/8+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{8}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [5, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["text",[3,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [1, 5], {"name":"E","face":"", "label":{"visible":false}}],
+                    ["point", [13, 5], {"name":"F","face":"", "label":{"visible":false}}],
+                    ["point", [13, 8], {"name":"G","face":"", "label":{"visible":false}}],
+                    ["point", [1, 8], {"name":"H","face":"", "label":{"visible":false}}],
+                    ["polygon", ["E","F","G","H"], {"fillColor":"none"}],
+                    ["fillSquares", [], {"width":12,"height":2,"qty":"${:num}","left":1,"top":5,"scaleX":1,"scaleY":1.5,"allLines":true}]
+                ]
+            }
+        },{
+            "name":"Découpe en douzièmes",
+            "vars":{
+                "num":"13_36"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{12}}$$ d’unité${:num%12==0?', soit $$\\color{red}{'+:num/12+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{12}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9,14,0],
+                "axis":false,
+                "content":[
+                    ["point", [1, 1], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["point", [5, 1], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["point", [5, 4], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["point", [1, 4], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["polygon", ["A","B","C","D"], {"fillColor":"none"}],
+                    ["text",[3,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [1, 5], {"name":"E","face":"", "label":{"visible":false}}],
+                    ["point", [13, 5], {"name":"F","face":"", "label":{"visible":false}}],
+                    ["point", [13, 8], {"name":"G","face":"", "label":{"visible":false}}],
+                    ["point", [1, 8], {"name":"H","face":"", "label":{"visible":false}}],
+                    ["polygon", ["E","F","G","H"], {"fillColor":"none"}],
+                    ["fillSquares", [], {"width":12,"height":3,"qty":"${:num}","left":1,"top":5,"scaleX":1,"scaleY":1,"allLines":true}]
+                ]
+            }
+        }
+    ]
+}

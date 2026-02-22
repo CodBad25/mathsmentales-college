@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+            @page{
+                size:A4 portrait;
+                margin:0.8cm;
+            }
+        </style>
+        <title>J'ai qui a ? générés par MathsMentales</title>
+        <link rel="stylesheet" href="css/jaiquia-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script src="js/libs/chartjs/Chart.bundle.min.js" defer></script>
+        <script type="module" src="js/lib.jaiquia-2.3.176.js" id="mmscriptid"></script>
+    </head>  
+    <body size="A4">
+        <button onclick="document.getElementById('creator-menu').classList.toggle('hidden')" class="noprint" style="position: absolute;left:0;top:0;width:90pt;height:18pt;">🛠 Mise en page</button>
+        <button onclick="window.print();" class="noprint" title="Imprimer ou enregistrer en pdf"style="position: absolute;left:92pt;top:0;width:70pt;height:18pt;">🖨️ Imprimer</button>
+        <div id="creator-container">
+            <section id="creator-menu" class="noprint hidden">
+                <button id="pageOrientation" title="Change l'orientation de la page">paysage</button>
+                | Cartes : 
+                <input type="number" id="nbCartes" value="28" title="Nombre de cartes à générer\nSi 1 seule activité" size="3" min="2" max="180">
+                <button id="btnnodoublon" title="Supprime les doublons">No doublon</button> <button id="btnshuffle">Mélanger</button> <button id="btneditcontent" title="Modifier le contenu des cartes">Éditer</button>
+                <span id="infoErrorDouble"></span>
+                <br>Mise en forme : <!--<button id="btnedit" title="Remplacer la barre par un titre">Éditer</button> -->
+                <input type="file" id="file" name="myImage" accept="image/x-png,image/gif,image/jpeg" />
+                <label for="file">
+                    <span class="glow-on-hover">Image</span>
+                </label>
+                <button id="deleteImg" title="Supprime l'image de fond">X</button>
+                Largeur :
+                <input id="inputwidth" value="55" title="Largeur carte" type="number" size="3" min="60" max="180">
+                  Hauteur :
+                <input id="inputheight" value="55" title="Hauteur carte" type="number" size="3" min="30" max="180">
+                | Police :
+            </section>
+            <section id="tab-accueil" class="noprint"></section>
+            <section id="creator-content">
+            </section>
+            </div>
+    <script src="bridge.js"></script>
+</body>
+</html>

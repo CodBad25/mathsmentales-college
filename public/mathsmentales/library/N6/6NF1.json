@@ -1,0 +1,33 @@
+{
+    "title":"Rendre la monnaie",
+    "ID":"6NF1",
+    "textSize":"small",
+    "type":"text",
+    "keys":["_","_","_","€"],
+    "dest":["7NF","6NF","5NC","4NC","3NB"],
+    "consts":{"billets":[5,10,20,50,100],"pieces":[1,2,5,10,20,50]},
+    "options":[{
+        "name":"En euros, sur un billet",
+        "vars":{"b":"0_4","d":"1_${:billets[:b]}","don":"${:billets[:b]}","r":"${:billets[:b]-:d}"},
+        "question":["Si je donne un billet de ${:don} € pour payer $$${:d}$$ €, combien me rend-on ?",
+            "Je donne un billet de ${:billets[:b]} € pour payer $$${:d}$$ €. Combien me rend-on ?",
+            "Je dois payer ${:d} €. Je donne un billet de ${:billets[:b]} €. Combien me rend-on ?"]
+        },{
+        "name":"En euros et cents, sur un billet",
+        "vars":{"b":"0_4","d":"d1_${:billets[:b]}_2","don":"${:billets[:b]}","r":"${MMmath.round(:billets[:b]-:d,2)}"},
+        "question":["Si je donne un billet de ${:don} € pour payer $$${:d}$$ €, combien me rend-on ?",
+            "Je donne un billet de ${:billets[:b]} € pour payer $$${:d}$$ €. Combien me rend-on ?",
+            "Je dois payer $$${:d}$$ €. Je donne un billet de ${:billets[:b]} €. Combien me rend-on ?"]
+    },{
+        "name":"En euros, sur plusieurs billets",
+        "vars":{"nb":"2_5","b":"0_4_${:nb}","don":"${MMmath.montant(:b,true,true)}","d":"${MMmath.montant(:b,true,false)}","r":"${MMmath.round(MMmath.montant(:b,true,true)-:d,2)}"},
+        "question":"Si je donne ${MMmath.listeBillets(:b)} pour payer $$${:d}$$ €, combien me rend-on ?"
+    },{
+        "name":"En euros et cents, sur plusieurs billets",
+        "vars":{"nb":"2_5","b":"0_4_${:nb}","don":"${MMmath.montant(:b,false,true)}","d":"${MMmath.montant(:b,false,false)}","r":"${MMmath.round(MMmath.montant(:b,false,true)-:d,2)}"},
+        "question":"Si je donne ${MMmath.listeBillets(:b)} pour payer $$${:d}$$ €, combien me rend-on ?"
+    }
+    ],
+    "answer":"On me rend $$${:don}-${:d}=\\color{red}{${:r}}$$ €",
+    "value":["${MMmath.round(:don-:d,2)}€","${MMmath.round(:don-:d,2)}"]
+}

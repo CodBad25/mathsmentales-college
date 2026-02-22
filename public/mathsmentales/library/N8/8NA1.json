@@ -1,0 +1,70 @@
+{
+    "title":"Encadrer des entiers",
+    "ID":"8NA1",
+    "type":"text",
+    "dest":["8NA","7NA","6NA"],
+    "valueType":"liste",
+    "consts":{
+        "dix":[1,10,100,1000,10000]
+    },
+    "options":[{
+        "name":"Encadrer à la dizaine",
+        "vars":{
+            "p":"1_3",
+            "u":"1_9",
+            "d":"${:dix[:p]}_${:dix[:p+1]}",
+            "n":"${:d*10+:u}",
+            "inf":"${Math.floor(:n/10)*10}",
+            "sup":"${Math.ceil(:n/10)*10}",
+            "precision":"dizaines"
+        }
+    },{
+        "name":"Encadrer à la centaine",
+        "vars":{
+            "p":"1_3",
+            "u":"1_99",
+            "d":"${:dix[:p]}_${:dix[:p+1]}",
+            "n":"${:d*100+:u}",
+            "inf":"${Math.floor(:n/100)*100}",
+            "sup":"${Math.ceil(:n/100)*100}",
+            "precision":"centaines"
+        }
+    },{
+        "name":"Encadrer à l’unité de mille",
+        "vars":{
+            "p":"1_3",
+            "u":"1_999",
+            "d":"${:dix[:p]}_${:dix[:p+1]}",
+            "n":"${:d*1000+:u}",
+            "inf":"${Math.floor(:n/1000)*1000}",
+            "sup":"${Math.ceil(:n/1000)*1000}",
+            "precision":"unités de mille"
+        }
+    },{
+        "name":"Encadrer à la dizaine de mille",
+        "vars":{
+            "p":"1_3",
+            "u":"1_9999",
+            "d":"${:dix[:p]}_${:dix[:p+1]}",
+            "n":"${:d*10000+:u}",
+            "inf":"${Math.floor(:n/10000)*10000}",
+            "sup":"${Math.ceil(:n/10000)*10000}",
+            "precision":"dizaines de mille"
+        }
+    },{
+        "name":"Encadrer à la centaine de mille",
+        "vars":{
+            "p":"1_3",
+            "u":"1_99999",
+            "d":"${:dix[:p]}_${:dix[:p+1]}",
+            "n":"${:d*100000+:u}",
+            "inf":"${Math.floor(:n/100000)*100000}",
+            "sup":"${Math.ceil(:n/100000)*100000}",
+            "precision":"centaines de mille"
+        }
+    }],
+    "question":"Encadrer $$${:n}$$ entre deux ${:precision} consécutives.",
+    "shortq":"Entre deux ${:precision} $$\\colorbox{#ECECEC}{\\quad \\quad}\\lt${:n}\\lt\\colorbox{#ECECEC}{\\quad \\quad}$$",
+    "answer":"$$\\color{red}{${:inf}}\\lt${:n}\\lt\\color{red}{${:sup}}$$",
+    "value":"${:inf};${:sup}"
+}

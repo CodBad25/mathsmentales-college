@@ -1,0 +1,49 @@
+{
+    "title":"Équations",
+    "type":"text",
+    "ID":"3LN1",
+    "description":"16 questions de leçon sur les équations",
+    "dest":["3LN","4LN"],
+    "vars":{"a":"-9_9_4_^0,-1,1", "pos":"2_99", "neg":"-99_-2"},
+    "options":[
+        {
+            "name":"Vocabulaire",
+            "question":[
+                "Comment s’appelle ce type d’égalité : $$${:a[0]}x${MMmath.signedNumber(:a[1])}=${:a[2]}$$ ?",
+                "Comment s’appellent les lettres dans une équation ?",
+                "Qu’est-ce qu’une solution d’une équation ?",
+                "Dans l’équation $$${:a[0]}x${MMmath.signedNumber(:a[1])}=${:a[2]}x${MMmath.signedNumber(:a[3])}$$, comment s’appelle $$${:a[0]}x${MMmath.signedNumber(:a[1])}$$ ?",
+                "Dans l’équation $$${:a[0]}x${MMmath.signedNumber(:a[1])}=${:a[2]}x${MMmath.signedNumber(:a[3])}$$, comment s’appelle $$${:a[2]}x${MMmath.signedNumber(:a[3])}$$ ?",
+                "Que veut dire résoudre une équation ?"
+            ],
+            "answer":[
+                "$$${:a[0]}x${MMmath.signedNumber(:a[1])}=${:a[2]}$$ est une <b>équation</b>.",
+                "Les lettres dans une équations s’appellent les <b>inconnues</b>?",
+                "Une solution est un nombre qui rend vraie l’égalité entre les deux membres de l’équation.",
+                "Dans l’équation $$${:a[0]}x${MMmath.signedNumber(:a[1])}=${:a[2]}x${MMmath.signedNumber(:a[3])}$$, $$${:a[0]}x${MMmath.signedNumber(:a[1])}$$ est le <b>membre de gauche</b> ou premier membre.",
+                "Dans l’équation $$${:a[0]}x${MMmath.signedNumber(:a[1])}=${:a[2]}x${MMmath.signedNumber(:a[3])}$$, $$${:a[2]}x${MMmath.signedNumber(:a[3])}$$ est le <b>membre de droite</b> ou deuxième membre.",
+                "Résoudre une équation veut dire <b>trouver toutes ses solutions</b>."
+            ]
+        },{
+            "name":"Propriétés",
+            "question":[
+                "Que se passe-t-il quand on ajoute ou retranche une même expression aux deux membres d’une équation ?",
+                "Que se passe-t-il quand on multiplie ou divise les deux membres d’une équation par une même expression non nulle ?",
+                "Quel objectif essayer d’atteindre avec les opérations sur les équations ?",
+                "Quelle propriété permet de résoudre une équation produit nul ?",
+                "Quelles sont les solutions d’une équation de type $$x^2=${:pos}$$",
+                "Quelles sont les solutions d’une équation de type $$x^2=0$$",
+                "Quelles sont les solutions d’une équation de type $$x^2=${:neg}$$"
+            ],
+            "answer":[
+                "On obtient une équation équivalente (aux mêmes solutions)",
+                "On obtient une équation équivalente (aux mêmes solutions)",
+                "On essaie de parvenir à une équation de type $$x=a$$ dont la solution est simplement $$a$$",
+                "Un produit de facteurs est nul si et seulement si l’un au moins de ses facteurs est nul.",
+                "Les solutions de $$x^2=a$$ avec $$a>0$$ sont $$\\colors{red}{sqrt{${:pos}}}$$ et $$\\colors{red}{-sqrt{${:pos}}}$$",
+                "Il n’y a qu’une seule solution : zéro.",
+                "Ces équations n’ont pas de solution."
+            ]
+        }
+    ]
+}

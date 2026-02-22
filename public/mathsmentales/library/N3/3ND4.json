@@ -1,0 +1,43 @@
+{
+    "title":"Réduire avec des parenthèses",
+    "description":"Réduire des expressions comportant des parenthèses.",
+    "type":"latex",
+    "ID":"3ND4",
+    "textSize":"medium",
+    "dest":["3ND","2N3"],
+    "keys":["-","+","a","b","c","x","y","z"],
+    "consts":{"lettres":["a","b","c","x","y","z"]},
+    "consigne":"Réduire",
+    "options":[{
+        "name":"Supprimer les parenthèses et réduire(1)",
+        "vars":{"a":"-9_9_3_^0","l":"0_5","x":"${:lettres[:l]}","posx":"1_2","s":"${:a[0]+:a[1]+:a[2]}","sm":"${:a[0]-:a[1]-:a[2]}","sx":"${:a[0]+:a[:posx]}","smx":"${:a[0]-:a[:posx]}"},
+        "question":[
+            "${MMmath.signIfOne(:a[0])}${:x}-(${(:posx==1)?MMmath.signIfOne(:a[1])+:x::a[1]}${(:posx==2)?MMmath.signedNumberButOne(:a[2])+:x:MMmath.signedNumber(:a[2])})",
+            "${MMmath.signIfOne(:a[0])}${:x}+(${(:posx==1)?MMmath.signIfOne(:a[1])+:x::a[1]}${(:posx==2)?MMmath.signedNumberButOne(:a[2])+:x:MMmath.signedNumber(:a[2])})"],
+        "answer":[
+            ":question=\\color{red}{${MMmath.signIfOne(:smx)}${:x}${MMmath.signedNumber(:sm-:smx)}}",
+            ":question=\\color{red}{${MMmath.signIfOne(:sx)}${:x}${MMmath.signedNumber(:s-:sx)}}"],
+        "value":[
+            "${MMmath.signIfOne(:smx)}${:x}${MMmath.signedNumber(:sm-:smx)}",
+            "${MMmath.signIfOne(:sx)}${:x}${MMmath.signedNumber(:s-:sx)}"]
+    },{
+        "name":"Supprimer les parenthèses et réduire(2)",
+        "vars":{"a":"-9_9_4_^0","l":"0_5","x":"${:lettres[:l]}"},
+        "question":[
+            "(${MMmath.signIfOne(:a[0])+:x+MMmath.signedNumber(:a[1])})-(${MMmath.signIfOne(:a[2])+:x+MMmath.signedNumber(:a[3])})",
+            "-(${MMmath.signIfOne(:a[0])+:x+MMmath.signedNumber(:a[1])})+(${MMmath.signIfOne(:a[2])+:x+MMmath.signedNumber(:a[3])})",
+            "-(${MMmath.signIfOne(:a[0])+:x+MMmath.signedNumber(:a[1])})-(${MMmath.signIfOne(:a[2])+:x+MMmath.signedNumber(:a[3])})"
+        ],
+        "answer":[
+            ":question=\\color{red}{${MMmath.signIfOne(:a[0]-:a[2])+:x+MMmath.signedNumber(:a[1]-:a[3])}}",
+            ":question=\\color{red}{${MMmath.signIfOne(-:a[0]+:a[2])+:x+MMmath.signedNumber(-:a[1]+:a[3])}}",
+            ":question=\\color{red}{${MMmath.signIfOne(-:a[0]-:a[2])+:x+MMmath.signedNumber(-:a[1]-:a[3])}}"
+        ],
+        "value":[
+            "${MMmath.signIfOne(:a[0]-:a[2])+:x+MMmath.signedNumber(:a[1]-:a[3])}",
+            "${MMmath.signIfOne(-:a[0]+:a[2])+:x+MMmath.signedNumber(-:a[1]+:a[3])}",
+            "${MMmath.signIfOne(-:a[0]-:a[2])+:x+MMmath.signedNumber(-:a[1]-:a[3])}"
+        ]
+    }
+    ]
+}

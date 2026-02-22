@@ -1,0 +1,59 @@
+{
+    "title": "Décompositions en dizaines et unités",
+    "type": "text",
+    "ID": "11NB3",
+    "description": "Écriture dizaines + unités",
+    "dest": ["11NB", "10NB"],
+    "options": [{
+        "name": "Nombre de dizaines",
+        "vars": {"d0": "1_9", "d": "${:d0*10}", "u": "0_9"},
+        "question": "Combien de dizaines contient le nombre <b>${:d+:u}</b> ?",
+        "shortq": "Combien de dizaines dans <b>${:u+:d}</b> ?",
+        "audio": "Combien de dizaines contient le nombre ${:d+:u} ?",
+        "answer": "Le nombre <b>${:d+:u}</b> contient <span class='red'>${:d0}</span> dizaines",
+        "value": "${:d0}"
+    }, {
+        "name": "Nombre d'unités",
+        "vars": {"d0": "1_9", "d": "${:d0*10}", "u": "0_9"},
+        "question": "Combien y'a-t-il d'unités dans le nombre <b>${:d+:u}</b> ?",
+        "shortq": "Combien d'unités dans <b>${:u+:d}</b> ?",
+        "audio": "Combien y'a-t-il d'unités dans le nombre ${:d+:u} ?",
+        "answer": "Le nombre <b>${:d+:u}</b> contient <span class='red'>${:d+:u}</span> unités",
+        "value": "${:d+:u}"
+    }, {
+        "name": "Nombre de dizaines et unités",
+        "vars": {"d0": "1_9", "d": "${:d0*10}", "u": "0_9"},
+        "question": "Combien de dizaines et d'unités contient le nombre <b>${:d+:u}</b> ?",
+        "audio": "Combien de dizaines et d'unités contient le nombre ${:d+:u} ?",
+        "shortq": "Combien de dizaines et d'unités dans <b>${:u+:d}</b> ?",
+        "answer": "Le nombre <b>${:d+:u}</b> contient <span class='red'>${:d0}</span> dizaines et <span class='red'>${:u}</span> unités",
+        "value": "${:d+:u}"
+    }, {
+        "name": "Écrire en dizaines + unités",
+        "vars": {"d0": "1_9", "d": "${:d0*10}", "u": "0_9"},
+        "question": "Écrire <b>${:d+:u}</b> en dizaines + unités",
+        "audio": "Écrire ${:d+:u} en dizaines pluss unités",
+        "shortq": "Écrire <b>${:u+:d}</b> en dizaines + unités",
+        "answer": "$$${:u+:d}=\\color{red}{${:d}+${:u}}$$",
+        "value": "${:d}+${:u}"
+    },
+     {
+        "name": "Chiffre des unités",
+        "vars": {"d0": "1_9", "d": "${:d0*10}", "u": "0_9"},
+        "question": "Quel est le chiffre des unités de <b>${:u+:d}</b> ?",
+        "audio": "Quel est le chiffre des unités du nombre ${:u+:d} ?",
+        "shortq": "Quel est le chiffre des unités de <b>${:u+:d}</b> ?",
+        "answer": "Le chiffre des unités de <b>${:u+:d}</b> est <span class='red'>${:u}</span>",
+        "value": "${:u}"
+    }, {
+        "name": "Chiffre des dizaines",
+        "vars": {"d0": "1_9", "d": "${:d0*10}", "u": "0_9"},
+        "question": "Quel est le chiffre des dizaines de <b>${:u+:d}</b> ?",
+        "audio": "Quel est le chiffre des dizaines du nombre ${:u+:d} ?",
+        "shortq": "Quel est le chiffre des dizaines de <b>${:u+:d}</b> ?",
+        "answer": "Le chiffre des dizaines de <b>${:u+:d}</b> est <span class='red'>${:d0}</span>",
+        "value": "${:d0}"
+    }],
+    "textSize": "medium",
+    "speech": 1
+}

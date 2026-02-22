@@ -1,0 +1,56 @@
+{
+    "title":"Factoriser avec les identités remarquables",
+    "description":"Utiliser les identités remarquables pour factoriser des expressions.",
+    "dest":["3ND","2N3"],
+    "ID":"3ND1",
+    "textSize":"medium",
+    "keys":["x²","-","+","(","u","t","x","y"],
+    "vars":{"k":"1_10", "b":"1_10", "c":["u","t","x", "y"]},
+    "options":[
+        {
+            "name":"$$ax^2+2abx+b^2$$",
+            "question":["\\text{Factoriser }${MMmath.signIfOne(:k*:k)+:c}^2+${(2*:k*:b)+:c}+${:b*:b}",
+                "\\text{Factoriser }${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}+${(2*:k*:b)+:c}",
+                "\\text{Factoriser }${(2*:k*:b)+:c}+${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}"],
+            "shortq":["${MMmath.signIfOne(:k*:k)+:c}^2+${(2*:k*:b)+:c}+${:b*:b}",
+                "${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}+${(2*:k*:b)+:c}",
+                "${(2*:k*:b)+:c}+${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}"],
+            "answer":":question|-18=\\color{red}{(${MMmath.signIfOne(:k)+:c}+${:b})^2}",
+            "value":"(${MMmath.signIfOne(:k)+:c}+${:b})^2"
+        },
+        {
+            "name":"$$a^2-2abx+b^2$$",
+            "question":["\\text{Factoriser }${MMmath.signIfOne(:k*:k)+:c}^2-${(2*:k*:b)+:c}+${:b*:b}",
+                "\\text{Factoriser }${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}-${(2*:k*:b)+:c}",
+                "\\text{Factoriser }-${(2*:k*:b)+:c}+${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}"],
+            "shortq":["${MMmath.signIfOne(:k*:k)+:c}^2-${(2*:k*:b)+:c}+${:b*:b}",
+                "${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}-${(2*:k*:b)+:c}",
+                "-${(2*:k*:b)+:c}+${MMmath.signIfOne(:k*:k)+:c}^2+${:b*:b}"],
+            "answer":":question|-18=\\color{red}{(${MMmath.signIfOne(:k)+:c}-${:b})^2}",
+            "value":"(${MMmath.signIfOne(:k)+:c}-${:b})^2"
+        },
+        {
+            "name":"$$a^2-b^2$$",
+            "question":["\\text{Factoriser }${MMmath.signIfOne(:k*:k)+:c}^2-${:b*:b}", "\\text{Factoriser }${:b*:b}-${MMmath.signIfOne(:k*:k)+:c}^2"],
+            "shortq":["${MMmath.signIfOne(:k*:k)+:c}^2-${:b*:b}", "${:b*:b}-${MMmath.signIfOne(:k*:k)+:c}^2"],
+            "answer":[":question|-18=\\color{red}{(${MMmath.signIfOne(:k)+:c}+${:b})(${MMmath.signIfOne(:k)+:c}-${:b})}",":question|-18=\\color{red}{(${:b}+${MMmath.signIfOne(:k)+:c})(${:b}-${MMmath.signIfOne(:k)+:c})}"],
+            "value":["(${MMmath.signIfOne(:k)+:c}+${:b})(${:k+:c}-${:b})","(${:b}+${MMmath.signIfOne(:k)+:c})(${:b}-${MMmath.signIfOne(:k)+:c})"]
+        },
+        {
+            "name":"$$(ax+b)^2-c^2$$",
+            "vars":{"a":"1_10", "b":"-10_10_^0", "c":["u","v","t","x", "y", "z"], "d":"1_10"},
+            "question":"\\text{Factoriser }(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b)})^2-${:d*:d}",
+            "shortq":"(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b)})^2-${:d*:d}",
+            "answer":":question|-18=\\color{red}{(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b+:d)})(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b-:d)})}",
+            "value":"(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b+:d)})(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b-:d)})"
+        }, {
+            "name":"$$(ax+b)^2-cx^2$$",
+            "vars":{"a":"1_10", "b":"-10_10_^0", "c":["u","v","t","x", "y", "z"], "d":"1_10"},
+            "question":"\\text{Factoriser }(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b)})^2-${:d*:d}${:c}^2",
+            "shortq":"(${MMmath.signIfOne(:a)+:c}${MMmath.signedNumber(:b)})^2-${:d*:d}${:c}^2",
+            "answer":":question|-18=\\color{red}{(${MMmath.signIfOne(:a+:d)+:c}${MMmath.signedNumber(:b)})(${MMmath.signIfOne(:a-:d)+:c}${MMmath.signedNumber(:b)})}",
+            "value":"(${MMmath.signIfOne(:a+:d)+:c}${MMmath.signedNumber(:b)})(${MMmath.signIfOne(:a-:d)+:c}${MMmath.signedNumber(:b)})"
+        }
+
+    ]
+}

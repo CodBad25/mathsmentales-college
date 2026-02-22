@@ -1,0 +1,34 @@
+{
+    "title":"Logarithmes de différentes bases",
+    "type":"latex",
+    "ID":"HPL1",
+    "description":"Donner le logarithme d'un nombre dans une base donnée.",
+    "dest":["HPL"],
+    "consts":{"lettres":["a","b","c","d","u","v","t","x","y","z"]},
+    "consigne":"Donner l'entier ou la fraction ?",
+    "options":[{
+        "name":"Logarithme décimal (log)",
+        "vars":{"a":"-5_5"},
+        "question": "\\log${MMmath.round(10**:a,6)}",
+        "answer":":question=\\color{red}{${:a}}",
+        "value":"${:a}"
+    },{
+        "name":"Logarithme en d'autres bases (\\log_n)",
+        "vars":{"a":"2_5", "b":"2_${:a==2?9:4}"},
+        "question": "\\log_${:b}(${:b**:a})",
+        "answer":":question=\\color{red}{${:a}}",
+        "value":"${:a}"
+    },{
+        "name":"Logarithme décimal de fraction",
+        "vars":{"a":"1_5"},
+        "question": "\\log\\left(\\dfrac1{${10**:a}}\\right)",
+        "answer":":question=\\color{red}{-${:a}}",
+        "value":"-${:a}"
+    },{
+        "name":"Logarithme décimal avec des racines carrées",
+        "vars":{"a":"0_5"},
+        "question": "\\log\\left(${:a>0?10**:a:''}\\sqrt{${10}}\\right)",
+        "answer":":question=\\color{green}{${:a>0?:a:''}\\frac12}=\\color{red}{${:a+0.5}}",
+        "value":["${:a+0.5}", "\\dfrac{:a*2+1}2", "${:a>0?:a:''}\\frac12"]
+    }]
+}

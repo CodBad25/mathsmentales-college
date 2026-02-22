@@ -55,8 +55,8 @@ export default function SessionPage() {
           studentId: user.id
         }))
 
-        // Rediriger vers l'exercice
-        router.push(`/exercices/play?file=${encodeURIComponent(data.session.exercise_file)}&n=${data.session.nb_questions}&session=${code}`)
+        // Rediriger vers le player (iframe original)
+        router.push(`/play?session=${code}`)
       }
 
       setLoading(false)
@@ -76,7 +76,7 @@ export default function SessionPage() {
 
   const handlePlayAsGuest = () => {
     if (session) {
-      router.push(`/exercices/play?file=${encodeURIComponent(session.exercise_file)}&n=${session.nb_questions}`)
+      router.push(`/play`)
     }
   }
 

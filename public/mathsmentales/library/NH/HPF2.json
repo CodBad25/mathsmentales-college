@@ -1,0 +1,34 @@
+{
+    "title":"Puissances de coefficient 1/n",
+    "type":"latex",
+    "ID":"HPF2",
+    "description":"Donner une fraction correspondant à la puissance de type 1/n",
+    "dest":["HPF"],
+    "consigne":"Donner sous forme d'entier ou de fraction",
+    "options":[{
+        "name":"Puissance d'un entier",
+        "vars":{"p":[2,2,2,2,2,2,3,3,3,4], "a":"2_10${:p==4?'_^6,7,8,9':''}"},
+        "question": "${:a**:p}^{^1/_${:p}}",
+        "answer":":question=\\color{red}{${:a}}",
+        "value":"${:a}"
+    },{
+        "name":"Puissance d'une fraction",
+        "vars":{"p":[2,2,2,2,2,2,3,3,3,4], "a":"2_10${:p==4?'_^6,7,8,9':''}", "b":"2_10_^${:a+(:p==4?'_^6,7,8,9':'')}"},
+        "question": "\\left(\\dfrac{${:a**:p}}{${:b**:p}}\\right)^{^1/_${:p}}",
+        "answer":":question=\\color{red}{\\dfrac{${:a}}{${:b}}}",
+        "value":"${\\dfrac{${:a}}{${:b}}}"
+    },{
+        "name":"Puissance négative d'un entier",
+        "vars":{"p":[2,2,2,2,2,2,3,3,3,4], "a":"2_10${:p==4?'_^6,7,8,9':''}"},
+        "question": "${:a**:p}^{^{-1}/_${:p}}",
+        "answer":":question=\\color{red}{\\dfrac1{${:a}}}",
+        "value":"${\\dfrac1{${:a}}}"
+    },{
+        "name":"Puissance négative d'une fraction",
+        "vars":{"p":[2,2,2,2,2,2,3,3,3,4], "a":"2_10${:p==4?'_^6,7,8,9':''}", "b":"2_10_^${:a+(:p==4?'_^6,7,8,9':'')}"},
+        "question": "\\left(\\dfrac{${:a**:p}}{${:b**:p}}\\right)^{^{-1}/_${:p}}",
+        "answer":":question=\\color{red}{\\dfrac{${:b}}{${:a}}}",
+        "value":"${\\dfrac{${:b}}{${:a}}}"
+    }
+]
+}

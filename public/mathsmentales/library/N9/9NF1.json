@@ -1,0 +1,14 @@
+{
+    "title":"Tables de Multiplications",
+    "speech":1,
+    "ID":"9NF1",
+    "keys":["_","_","_","_","_","_","_","_"],
+    "options":[
+        {"name":"Petites", "vars":{"a":"1_4", "b":"1_4"}},
+        {"name": "Moyennes", "vars":{"a":"5_7", "b":"5_7"}}
+    ],
+    "question":["\\bold{${:a}}\\times${:b}", "${:b}\\times\\bold{${:a}}"],
+    "audio":["${:a} × ${:b}","${:b} × ${:a}"],
+    "answer":":question=\\color{red}{${:a*:b}}",
+    "value":"${:a*:b}"
+}

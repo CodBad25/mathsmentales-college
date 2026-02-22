@@ -1,0 +1,50 @@
+{
+    "title":"Addition de relatifs (entiers)",
+    "ID":"5NC1",
+    "textSize":"medium",
+    "dest":["5NC","4NC","3NB"],
+    "options":[{
+        "name":"Notation avec parenthèses",
+        "vars":{"n":"-20_20_2_^0"},
+        "question": "(${(:n[0]>0)?'+'+:n[0]::n[0]})+(${(:n[1]>0)?'+'+:n[1]::n[1]})",
+        "answer":":question=\\color{red}{${:n[0]+:n[1]}}",
+        "value":"${:n[0]+:n[1]}"
+    },{
+        "name":"Notation sans parenthèses",
+        "vars":{"n":"-20_20_2_^0"},
+        "question":"${:n[0]}${(:n[1]>0)?'+'+:n[1]::n[1]}",
+        "answer":":question=\\color{red}{${:n[0]+:n[1]}}",
+        "value":"${:n[0]+:n[1]}"
+    },{
+        "name":"Somme algébrique de 3 termes",
+        "vars":{"n":"-20_20_3_^0"},
+        "question":"${:n[0]}${(:n[1]>0)?'+'+:n[1]::n[1]}${(:n[2]>0)?'+'+:n[2]::n[2]}",
+        "answer":":question=\\color{red}{${:n[0]+:n[1]+:n[2]}}",
+        "value":"${:n[0]+:n[1]+:n[2]}"
+    },{
+        "name":"Somme algébrique de 4 termes",
+        "vars":{"n":"-20_20_4_^0"},
+        "question":"${:n[0]}${(:n[1]>0)?'+'+:n[1]::n[1]}${(:n[2]>0)?'+'+:n[2]::n[2]}${(:n[3]>0)?'+'+:n[3]::n[3]}",
+        "answer":":question=\\color{red}{${:n[0]+:n[1]+:n[2]+:n[3]}}",
+        "value":"${:n[0]+:n[1]+:n[2]+:n[3]}"
+    },{
+        "name":"Somme algébrique de 5 termes",
+        "vars":{"n":"-20_20_5_^0"},
+        "question":"${:n[0]}${(:n[1]>0)?'+'+:n[1]::n[1]}${(:n[2]>0)?'+'+:n[2]::n[2]}${(:n[3]>0)?'+'+:n[3]::n[3]}${(:n[4]>0)?'+'+:n[4]::n[4]}",
+        "answer":":question=\\color{red}{${:n[0]+:n[1]+:n[2]+:n[3]+:n[4]}}",
+        "value":"${:n[0]+:n[1]+:n[2]+:n[3]+:n[4]}"
+    },{
+        "name":"Notation mixte avec parenthèses autour des négatifs",
+        "vars":{"n":"-20_20_^0","n2":"${:n>0?'-20_-1':'-20_20_^0'}"},
+        "question": "${:n<0?'('+:n+')'::n}+${:n2<0?'('+:n2+')'::n2}",
+        "answer":":question=\\color{red}{${:n+:n2}}",
+        "value":"${:n+:n2}"
+    },{
+        "name":"Notation mixte avec parenthèses sur le 2e terme si négatif",
+        "vars":{"n":"-20_20_^0","n2":"${:n>0?'-20_-1':'-20_20_^0'}"},
+        "question": "${:n}+${:n2<0?'('+:n2+')'::n2}",
+        "answer":":question=\\color{red}{${:n+:n2}}",
+        "value":"${:n+:n2}"
+    }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "title":"CE1 Procédures -> produit d'un nmbe enre 11 et 19 x nombre inférieur à 10",
+    "auteur":"Xavier Levet",
+    "dest":["10ND"],
+    "options":[
+        {
+        "name":"multiplicateur < 6",
+        "vars":{"a":"11_19","b":"1_5",
+         "qte":"${:a*:b}"  }  
+        },{
+        "name":"multiplicateur > 5",
+        "vars":{"a":"11_19","b":"6_9",
+         "qte":"${:a*:b}"  }  
+        }
+    ],
+
+    "question":"${:a} \\times ${:b}",
+    "answer":":question =${:a*:b}",
+    "value":"${:a*:b}"
+}

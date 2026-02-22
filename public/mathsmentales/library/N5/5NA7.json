@@ -1,0 +1,67 @@
+{
+    "title": "Pourcentages et décimaux",
+    "ID":"5NA7",
+    "dest":["5NA","4NA","3NA"],
+    "type":"text",
+    "description":"Changement d'écriture entre pourcentages et écriture décimale.",
+    "options":[
+        {
+            "name": "Décimaux à deux chiffres",
+            "vars":{
+                "u":"1_9",
+                "d":"1_9",
+                "x":"${MMmath.round((:u+:d*10)/100,3)}",
+                "p":"${:u+:d*10}"
+            }
+        },{
+            "name":"Décimaux à un chiffre",
+            "vars":{
+                "d":"1_9",
+                "x":"${MMmath.round(:d/10,1)}",
+                "p":"${:d*10}"
+            }
+        },{
+            "name":"Centièmes",
+            "vars":{
+                "u":"1_9",
+                "x":"${MMmath.round(:u/100,2)}",
+                "p":"${:u}"
+            }
+        },{
+            "name":"Millièmes",
+            "vars":{
+                "dx":"1_9",
+                "u":"1_99",
+                "x":"${MMmath.round(:u/100+:dx/1000,3)}",
+                "p":"${MMmath.round(:u+:dx/10,1)}"
+            }
+        },{
+            "name":"Pourcentages supérieurs à 1",
+            "vars":{
+                "c":"1_5",
+                "d":"1_9",
+                "u":"1_9",
+                "dx":"0_3",
+                "n":"${:dx==0?0::dx==1?:d*10::dx==2?:u::d*10+:u}",
+                "x":"${MMmath.round(:n/100+:c,2)}",
+                "p":"${MMmath.round(:n+:c*100,0)}"
+            }
+        }
+    ],
+    "question":[
+        "Quel pourcentage correspond au nombre décimal $$${:x}$$ ?",
+        "Quel nombre décimal correspond au pourcentage $$${:p}\\%$$ ?"
+    ],
+    "shortq":[
+        "$$${:x}=\\colorbox{#ECECEC}{\\quad\\quad}\\%$$",
+        "$$${:p}\\%=\\colorbox{#ECECEC}{\\quad\\quad}$$"
+    ],
+    "answer":[
+        "$$${:x}=\\color{red}{${:p}\\%}$$",
+        "$$${:p}\\%=\\color{red}{${:x}}$$"
+    ],
+    "value":[
+        "${:p}",
+        "${:x}"
+    ]
+}

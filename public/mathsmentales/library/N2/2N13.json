@@ -1,0 +1,34 @@
+{
+  "title": "Calculs mêlés de fractions",
+  "type": "latex",
+  "auteur":"Sandrine GOURDIN",
+  "textSize": "medium",
+  "dest": [
+    "3NB","2N1"
+  ],
+  "consigne": "Calculer, puis réduire si possible",
+  "options": [
+    {
+      "name": "Addition et multiplication",
+      "vars": {
+        "nums": "1_5_3_^0",
+        "dens": "2_8_2_^&,${:nums}"
+      },
+      "question": " \\dfrac{${:nums[0]}}{${:dens[0]}}+\\dfrac{${:nums[1]}}{${:dens[0]}} \\times \\dfrac{${:nums[2]}}{${:dens[1]}}",
+      "answer": ":question = \\color{red}{\\displaystyle${MMmath.calc('(' + :nums[0]+')/(' + :dens[0] + ') + ((' + :nums[1] + ')/(' + :dens[0] + '))*(' + :nums[2] + ')/(' + :dens[1] + ')', false)}}",
+      "value": "${MMmath.calc('(' + :nums[0]+')/(' + :dens[0] + ') + ((' + :nums[1] + ')/(' + :dens[0] + '))*(' + :nums[2] + ')/(' + :dens[1] + ')')}"
+    },
+   {
+      "name": "avec des parenthèses",
+      "vars": {
+        "nums": "-5_5_3_^0",           
+        "dens": "2_8_2_^&,${:nums}",             
+        "mult": "2_3_1_^0",              
+        "f": "${:dens[1] * :mult[0]}"
+      },
+      "question": "\\dfrac{${:nums[0]}}{${:dens[0]}} \\times \\left( \\dfrac{${:nums[1]}}{${:dens[1]}} + \\dfrac{${:nums[2]}}{${:f}} \\right)",
+      "answer": ":question = \\color{red}{\\displaystyle${MMmath.calc('(' + :nums[0] + ')/(' + :dens[0] + ')*((' + :nums[1] + ')/(' + :dens[1] + ')+(' + :nums[2] + ')/(' + :f + '))', false)}}",
+      "value": "${MMmath.calc('(' + :nums[0] + ')/(' + :dens[0] + ')*((' + :nums[1] + ')/(' + :dens[1] + ')+(' + :nums[2] + ')/(' + :f + '))')}"
+    }
+  ]
+}

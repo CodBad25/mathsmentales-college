@@ -1,0 +1,52 @@
+{
+    "title":"Valeur décimale de fraction simple",
+    "type":"text",
+    "description":"Donner l'écriture décimale d'une fraction, donner une fraction égale à une écriture décimale",
+    "dest":["8NB"],    
+    "options":[{
+        "name":"Fractions courantes",
+        "vars":{"den":[2,5,10], "num":1},
+        "value":"${:num/:den}",
+       "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"Décimaux courants",
+         "vars":{"den":[2,5,10], "num":1},
+        "value":"${:num/:den}",
+       "question":"Donne une fraction simple égale à $$${MMmath.round(:num/:den,4)}$$.",
+        "answer":"$$${:num/:den}=\\color{red}{\\dfrac{:num}{:den}}$$"
+    },{
+        "name":"Fractions décimales (dixièmes)",
+        "vars":{"den":10,"num":"1_10"},
+        "value":"${:num/:den}",
+        "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"Dixièmes",
+         "vars":{"den":10, "num":"1_10"},
+        "value":"${:num/:den}",
+       "question":"Donne une fraction de dénominateur $$10$$ égale à $$${MMmath.round(:num/:den,2)}$$.",
+        "answer":"$$${:num/:den}=\\color{red}{\\dfrac{:num}{:den}}$$"
+    },{
+        "name":"Fractions décimales (de 1 à 9 centièmes)",
+        "vars":{"den":100,"num":"1_9"},
+        "value":"${:num/:den}",
+        "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"Fractions décimales (centièmes)",
+        "vars":{"den":100,"num":"1_99"},
+        "value":"${:num/:den}",
+        "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"Centièmes",
+         "vars":{"den":100, "num":"1_99"},
+        "value":"${:num/:den}",
+       "question":"Donne une fraction de dénominateur $$100$$ égale à $$${MMmath.round(:num/:den,2)}$$.",
+        "answer":"$$${MMmath.round(:num/:den,2)}=\\color{red}{\\dfrac{:num}{:den}}$$"
+    }  
+    ]
+   
+}
+

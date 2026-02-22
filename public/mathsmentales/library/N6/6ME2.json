@@ -1,0 +1,117 @@
+{
+    "ID":"6ME2",
+    "description":"Lire la mesure d'un angle à l’aide d’un rapporteur simplifié dont la ligne des zéros est horizontale.",
+    "title":"Lecture du rapporteur simplifié, bien placé horizontalement",
+    "type":"text",
+    "dest":["6ME"],
+    "consts":{
+        "rapporteurdirect":"<svg id='rapporteurdirect' width='160' height='88.613' version='1.1' viewBox='0 0 354.8 196.5' xmlns='http://www.w3.org/2000/svg'><style>#rapporteurdirect text{fill:#0000FF}</style><g transform='translate(177.4 177.4)' fill='none' stroke='#000000' stroke-linecap='round' stroke-width='.5'><circle r='1.5'/><path d='m-5.2 0h3.7m3 0h3.7m-5.2-5.2v3.7m0 3v3.7'/><path d='m-8.7 0a8.7 8.7 0 0117.4 0'/><path d='m-176.7 0a176.7 176.7 0 01353.4 0v18.5h-353.4z' stroke-width='1' style='fill-opacity:.3992;fill:#e0f6ff'/><path d='m8.7 0h124.1m26.9 0h17'/><g fill='#000000' font-family=''Noto Sans', sans-serif' font-size='10px' stroke='none' text-anchor='middle'><g transform='rotate(-90)'><text y='-143.6'>180</text></g><g transform='rotate(-80)'><text y='-143.6'>170</text></g><g transform='rotate(-70)'><text y='-143.6'>160</text></g><g transform='rotate(-60)'><text y='-143.6'>150</text></g><g transform='rotate(-50)'><text y='-143.6'>140</text></g><g transform='rotate(-40)'><text y='-143.6'>130</text></g><g transform='rotate(-30)'><text y='-143.6'>120</text></g><g transform='rotate(-20)'><text y='-143.6'>110</text></g><g transform='rotate(-10)'><text y='-143.6'>100</text></g><g><text y='-143.6'>90</text></g><g transform='rotate(10)'><text y='-143.6'>80</text></g><g transform='rotate(20)'><text y='-143.6'>70</text></g><g transform='rotate(30)'><text y='-143.6'>60</text></g><g transform='rotate(40)'><text y='-143.6'>50</text></g><g transform='rotate(50)'><text y='-143.6'>40</text></g><g transform='rotate(60)'><text y='-143.6'>30</text></g><g transform='rotate(70)'><text y='-143.6'>20</text></g><g transform='rotate(80)'><text y='-143.6'>10</text></g><g transform='rotate(90)'><text y='-143.6'>0</text></g></g><path d='m8.571-1.519 122.2-21.55m26.49-4.671 16.74-2.952'/><path d='m8.18-2.992 116.6-42.44m25.28-9.2 15.97-5.814'/><path d='m7.539-4.374 107.5-62.05m23.3-13.45 14.72-8.5'/><path d='m6.668-5.625 95.07-79.77m20.61-17.29 13.02-10.93'/><path d='m5.593-6.705 79.77-95.07m17.29-20.61 10.93-13.02'/><path d='m4.347-7.582 62.05-107.5m13.45-23.3 8.5-14.72'/><path d='m2.967-8.23 42.44-116.6m9.2-25.28 5.814-15.97'/><path d='m1.496-8.628 21.55-122.2m4.671-26.49 2.952-16.74'/><path d='m-.02196-8.764 4.14e-6-124.1m-7.12e-6-26.9-4.6e-7-17'/><path d='m-1.541-8.635-21.55-122.2m-4.671-26.49-2.952-16.74'/><path d='m-3.014-8.244-42.44-116.6m-9.2-25.28-5.814-15.97'/><path d='m-4.396-7.604-62.05-107.5m-13.45-23.3-8.5-14.72'/><path d='m-5.647-6.733-79.77-95.07m-17.29-20.61-10.93-13.02'/><path d='m-6.727-5.658-95.07-79.77m-20.61-17.29-13.02-10.93'/><path d='m-7.604-4.411-107.5-62.05m-23.3-13.45-14.72-8.5'/><path d='m-8.252-3.032-116.6-42.44m-25.28-9.2-15.97-5.814'/><path d='m-8.65-1.56-122.2-21.55m-26.49-4.671-16.74-2.952'/><path d='m-8.786-.04248-124.1-5.1e-6m-26.9 9.09e-6-17 4.4e-6'/></g></svg>",
+        "rapporteurindirect":"<svg width='160' height='88.613' version='1.1' viewBox='0 0 354.8 196.5' xmlns='http://www.w3.org/2000/svg'><g transform='translate(177.4 177.4)' fill='none' stroke='#000000' stroke-linecap='round' stroke-width='.5'><circle r='1.5'/><path d='m-5.2 0h3.7m3 0h3.7m-5.2-5.2v3.7m0 3v3.7'/><path d='m-8.7 0a8.7 8.7 0 0117.4 0'/><path d='m-176.7 0a176.7 176.7 0 01353.4 0v18.5h-353.4z' stroke-width='1' style='fill-opacity:.3992;fill:#e0f6ff'/><path d='m8.7 0h124.1m26.9 0h17'/><g fill='#000000' font-family=''Noto Sans', sans-serif' font-size='10px' stroke='none' text-anchor='middle'><g transform='rotate(-90)'><text y='-143.6'>0</text></g><g transform='rotate(-80)'><text y='-143.6'>10</text></g><g transform='rotate(-70)'><text y='-143.6'>20</text></g><g transform='rotate(-60)'><text y='-143.6'>30</text></g><g transform='rotate(-50)'><text y='-143.6'>40</text></g><g transform='rotate(-40)'><text y='-143.6'>50</text></g><g transform='rotate(-30)'><text y='-143.6'>60</text></g><g transform='rotate(-20)'><text y='-143.6'>70</text></g><g transform='rotate(-10)'><text y='-143.6'>80</text></g><g><text y='-143.6'>90</text></g><g transform='rotate(10)'><text y='-143.6'>100</text></g><g transform='rotate(20)'><text y='-143.6'>110</text></g><g transform='rotate(30)'><text y='-143.6'>120</text></g><g transform='rotate(40)'><text y='-143.6'>130</text></g><g transform='rotate(50)'><text y='-143.6'>140</text></g><g transform='rotate(60)'><text y='-143.6'>150</text></g><g transform='rotate(70)'><text y='-143.6'>160</text></g><g transform='rotate(80)'><text y='-143.6'>170</text></g><g transform='rotate(90)'><text y='-143.6'>180</text></g></g><path d='m8.571-1.519 122.2-21.55m26.49-4.671 16.74-2.952'/><path d='m8.18-2.992 116.6-42.44m25.28-9.2 15.97-5.814'/><path d='m7.539-4.374 107.5-62.05m23.3-13.45 14.72-8.5'/><path d='m6.668-5.625 95.07-79.77m20.61-17.29 13.02-10.93'/><path d='m5.593-6.705 79.77-95.07m17.29-20.61 10.93-13.02'/><path d='m4.347-7.582 62.05-107.5m13.45-23.3 8.5-14.72'/><path d='m2.967-8.23 42.44-116.6m9.2-25.28 5.814-15.97'/><path d='m1.496-8.628 21.55-122.2m4.671-26.49 2.952-16.74'/><path d='m-.02196-8.764 4.14e-6-124.1m-7.12e-6-26.9-4.6e-7-17'/><path d='m-1.541-8.635-21.55-122.2m-4.671-26.49-2.952-16.74'/><path d='m-3.014-8.244-42.44-116.6m-9.2-25.28-5.814-15.97'/><path d='m-4.396-7.604-62.05-107.5m-13.45-23.3-8.5-14.72'/><path d='m-5.647-6.733-79.77-95.07m-17.29-20.61-10.93-13.02'/><path d='m-6.727-5.658-95.07-79.77m-20.61-17.29-13.02-10.93'/><path d='m-7.604-4.411-107.5-62.05m-23.3-13.45-14.72-8.5'/><path d='m-8.252-3.032-116.6-42.44m-25.28-9.2-15.97-5.814'/><path d='m-8.65-1.56-122.2-21.55m-26.49-4.671-16.74-2.952'/><path d='m-8.786-.04248-124.1-5.1e-6m-26.9 9.09e-6-17 4.4e-6'/></g></svg>",
+        "rapporteur":"<svg width='160' height='88.613' version='1.1' viewBox='0 0 354.8 196.5' xmlns='http://www.w3.org/2000/svg'><style>text:nth-of-type(2) {fill: #0000FF;}</style><g transform='translate(177.4 177.4)' fill='none' stroke='#000000' stroke-linecap='round' stroke-width='.5'><circle r='1.5'/><path d='m-5.2 0h3.7m3 0h3.7m-5.2-5.2v3.7m0 3v3.7'/><path d='m-8.7 0a8.7 8.7 0 0117.4 0'/><path d='m-176.7 0a176.7 176.7 0 01353.4 0v18.5h-353.4z' stroke-width='1' style='fill-opacity:.3992;fill:#e0f6ff'/><path d='m8.7 0h124.1m26.9 0h17'/><g fill='#000000' font-family=''Noto Sans', sans-serif' font-size='10px' stroke='none' text-anchor='middle'><g transform='rotate(-90)'><text y='-150.7'>0</text><text y='-136.5'>180</text></g><g transform='rotate(-80)'><text y='-150.7'>10</text><text y='-136.5'>170</text></g><g transform='rotate(-70)'><text y='-150.7'>20</text><text y='-136.5'>160</text></g><g transform='rotate(-60)'><text y='-150.7'>30</text><text y='-136.5'>150</text></g><g transform='rotate(-50)'><text y='-150.7'>40</text><text y='-136.5'>140</text></g><g transform='rotate(-40)'><text y='-150.7'>50</text><text y='-136.5'>130</text></g><g transform='rotate(-30)'><text y='-150.7'>60</text><text y='-136.5'>120</text></g><g transform='rotate(-20)'><text y='-150.7'>70</text><text y='-136.5'>110</text></g><g transform='rotate(-10)'><text y='-150.7'>80</text><text y='-136.5'>100</text></g><g><text y='-150.7'>90</text><text y='-136.5'>90</text></g><g transform='rotate(10)'><text y='-150.7'>100</text><text y='-136.5'>80</text></g><g transform='rotate(20)'><text y='-150.7'>110</text><text y='-136.5'>70</text></g><g transform='rotate(30)'><text y='-150.7'>120</text><text y='-136.5'>60</text></g><g transform='rotate(40)'><text y='-150.7'>130</text><text y='-136.5'>50</text></g><g transform='rotate(50)'><text y='-150.7'>140</text><text y='-136.5'>40</text></g><g transform='rotate(60)'><text y='-150.7'>150</text><text y='-136.5'>30</text></g><g transform='rotate(70)'><text y='-150.7'>160</text><text y='-136.5'>20</text></g><g transform='rotate(80)'><text y='-150.7'>170</text><text y='-136.5'>10</text></g><g transform='rotate(90)'><text y='-150.7'>180</text><text y='-136.5'>0</text></g></g><path d='m8.571-1.519 122.2-21.55m26.49-4.671 16.74-2.952'/><path d='m8.18-2.992 116.6-42.44m25.28-9.2 15.97-5.814'/><path d='m7.539-4.374 107.5-62.05m23.3-13.45 14.72-8.5'/><path d='m6.668-5.625 95.07-79.77m20.61-17.29 13.02-10.93'/><path d='m5.593-6.705 79.77-95.07m17.29-20.61 10.93-13.02'/><path d='m4.347-7.582 62.05-107.5m13.45-23.3 8.5-14.72'/><path d='m2.967-8.23 42.44-116.6m9.2-25.28 5.814-15.97'/><path d='m1.496-8.628 21.55-122.2m4.671-26.49 2.952-16.74'/><path d='m-.02196-8.764 4.14e-6-124.1m-7.12e-6-26.9-4.6e-7-17'/><path d='m-1.541-8.635-21.55-122.2m-4.671-26.49-2.952-16.74'/><path d='m-3.014-8.244-42.44-116.6m-9.2-25.28-5.814-15.97'/><path d='m-4.396-7.604-62.05-107.5m-13.45-23.3-8.5-14.72'/><path d='m-5.647-6.733-79.77-95.07m-17.29-20.61-10.93-13.02'/><path d='m-6.727-5.658-95.07-79.77m-20.61-17.29-13.02-10.93'/><path d='m-7.604-4.411-107.5-62.05m-23.3-13.45-14.72-8.5'/><path d='m-8.252-3.032-116.6-42.44m-25.28-9.2-15.97-5.814'/><path d='m-8.65-1.56-122.2-21.55m-26.49-4.671-16.74-2.952'/><path d='m-8.786-.04248-124.1-5.1e-6m-26.9 9.09e-6-17 4.4e-6'/></g></svg>",
+        "rapporteursansnombre":"<svg width='160' height='88.613' version='1.1' viewBox='0 0 354.8 196.5' xmlns='http://www.w3.org/2000/svg'><style>text:nth-of-type(2) {fill: #0000FF;}</style><g transform='translate(177.4 177.4)' fill='none' stroke='#000000' stroke-linecap='round' stroke-width='.5'><circle r='1.5'/><path d='m-5.2 0h3.7m3 0h3.7m-5.2-5.2v3.7m0 3v3.7'/><path d='m-8.7 0a8.7 8.7 0 0117.4 0'/><path d='m-176.7 0a176.7 176.7 0 01353.4 0v18.5h-353.4z' stroke-width='1' style='fill-opacity:.3992;fill:#e0f6ff'/><path d='m8.7 0h124.1m26.9 0h17'/><path d='m8.571-1.519 122.2-21.55m26.49-4.671 16.74-2.952'/><path d='m8.18-2.992 116.6-42.44m25.28-9.2 15.97-5.814'/><path d='m7.539-4.374 107.5-62.05m23.3-13.45 14.72-8.5'/><path d='m6.668-5.625 95.07-79.77m20.61-17.29 13.02-10.93'/><path d='m5.593-6.705 79.77-95.07m17.29-20.61 10.93-13.02'/><path d='m4.347-7.582 62.05-107.5m13.45-23.3 8.5-14.72'/><path d='m2.967-8.23 42.44-116.6m9.2-25.28 5.814-15.97'/><path d='m1.496-8.628 21.55-122.2m4.671-26.49 2.952-16.74'/><path d='m-.02196-8.764 4.14e-6-124.1m-7.12e-6-26.9-4.6e-7-17'/><path d='m-1.541-8.635-21.55-122.2m-4.671-26.49-2.952-16.74'/><path d='m-3.014-8.244-42.44-116.6m-9.2-25.28-5.814-15.97'/><path d='m-4.396-7.604-62.05-107.5m-13.45-23.3-8.5-14.72'/><path d='m-5.647-6.733-79.77-95.07m-17.29-20.61-10.93-13.02'/><path d='m-6.727-5.658-95.07-79.77m-20.61-17.29-13.02-10.93'/><path d='m-7.604-4.411-107.5-62.05m-23.3-13.45-14.72-8.5'/><path d='m-8.252-3.032-116.6-42.44m-25.28-9.2-15.97-5.814'/><path d='m-8.65-1.56-122.2-21.55m-26.49-4.671-16.74-2.952'/><path d='m-8.786-.04248-124.1-5.1e-6m-26.9 9.09e-6-17 4.4e-6'/></g></svg>"
+    },
+    "options":[
+        {
+            "name":"Lecture sens direct (multiple de 10°)",
+            "vars":{
+                "dizang":"1_18",
+                "angle":"${:dizang*10}"
+            },
+            "figure":{
+            "type":"graph",
+            "axis":false,
+            "boundingbox":[-10,10,10,-2],
+            "content":[
+                ["line",[[0,0],[1,0]],{"straightFirst":false, "strokeWidth":1}],
+                ["line",[[0,0],["${Math.cos((:angle)/180*Math.PI)}","${Math.sin((:angle)/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                ["foreignobject",["${:rapporteurdirect}",[-8,-0.83]],{"layer":10}]
+            ]}
+        },{
+            "name":"Lecture sens indirect (multiple de 10°)",
+            "vars":{
+                "dizang":"1_18",
+                "angle":"${:dizang*10}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,10,10,-2],
+                "content":[
+                    ["line",[[0,0],[-1,0]],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",[[0,0],["${Math.cos((180-:angle)/180*Math.PI)}","${Math.sin((180-:angle)/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                    ["foreignobject",["${:rapporteurindirect}",[-8,-0.83]],{"layer":10}]
+            ]}
+        },{
+            "name":"Lecture sens direct - double graduation (multiple de 10°)",
+            "vars":{
+                "dizang":"1_18",
+                "angle":"${:dizang*10}"
+            },
+            "figure":{
+            "type":"graph",
+            "axis":false,
+            "boundingbox":[-10,10,10,-2],
+            "content":[
+                ["line",[[0,0],[1,0]],{"straightFirst":false, "strokeWidth":1}],
+                ["line",[[0,0],["${Math.cos((:angle)/180*Math.PI)}","${Math.sin((:angle)/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                ["foreignobject",["${:rapporteur}",[-8,-0.83]],{"layer":10}]
+            ]}
+        },{
+            "name":"Lecture sens indirect double graduation (multiple de 10°)",
+            "vars":{
+                "dizang":"1_18",
+                "angle":"${:dizang*10}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,10,10,-2],
+                "content":[
+                    ["line",[[0,0],[-1,0]],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",[[0,0],["${Math.cos((180-:angle)/180*Math.PI)}","${Math.sin((180-:angle)/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                    ["foreignobject",["${:rapporteur}",[-8,-0.83]],{"layer":10}]
+            ]}
+        },
+        {
+            "name":"Lecture sans nombre (multiple de 10°)",
+            "vars":{
+                "dizang0":"1_17",
+                "angle0":"${:dizang0*10}",
+                "dizang":"1_${Math.round(180-:angle0)/10}",
+                "angle":"${:dizang*10}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,10,10,-2],
+                "content":[
+                    ["line",[[0,0],["${Math.cos(:angle0/180*Math.PI)}","${Math.sin(:angle0/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",[[0,0],["${Math.cos((:angle0+:angle)/180*Math.PI)}","${Math.sin((:angle0+:angle)/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                    ["foreignobject",["${:rapporteursansnombre}",[-8,-0.83]],{"layer":10}]
+            ]},
+            "answer":"En comptant les graduations, on trouve une mesure de ${:angle}°"
+        },
+        {
+            "name":"Lecture zéro non aligné (multiple de 10°)",
+            "vars":{
+                "dizang0":"1_17",
+                "angle0":"${:dizang0*10}",
+                "dizang":"1_${Math.round(180-:angle0)/10}",
+                "angle":"${:dizang*10}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-10,10,10,-2],
+                "content":[
+                    ["line",[[0,0],["${Math.cos(:angle0/180*Math.PI)}","${Math.sin(:angle0/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",[[0,0],["${Math.cos((:angle0+:angle)/180*Math.PI)}","${Math.sin((:angle0+:angle)/180*Math.PI)}"]],{"straightFirst":false, "strokeWidth":1}],
+                    ["foreignobject",["${:rapporteur}",[-8,-0.83]],{"layer":10}]
+            ]},
+            "answer":"En comptant les graduations, on trouve une mesure de ${:angle}°"
+        }
+    ],
+    "question":"Quelle est la mesure de l’angle ?",
+    "answer":"L’angle mesure ${:angle}°",
+    "value":["${:angle}","${:angle}°"]
+}

@@ -1,0 +1,92 @@
+{
+    "ID":"3DD9",
+    "dest":["3DD","2F2","Ko4"],
+    "title":"Calcul d'antécédent par une fonction affine",
+    "description":"Calculer l'antécédent d'un nombre par une fonction affine en utilisant son expression algébrique.",
+    "type":"text",
+    "textSize":"medium",
+    "vars":{
+        "choixdeca":"0_1",
+        "a0":"-10_10_^0",
+        "a0f":"${MMmath.signIfOne(:a0)}",
+        "a":"${:choixdeca?:a0:MMmath.round(:a0/10,1)}",
+        "af":"${MMmath.signIfOne(:a)}",
+        "choixdecx":"0_1",
+        "x0":"-10_10",
+        "x":"${:choixdecx?:x0:MMmath.round(:x0/10,1)}"
+    },
+    "options":[
+        {
+            "name":"Antécédent par une fonction linéaire (entiers relatifs)",
+            "question":[
+                "Quel est l'antécédent de $$${:a0*:x0}$$ par la fonction $$f(x)=${:a0f}x$$ ?",
+                "Quel est l'antécédent de $$${:a0*:x0}$$ par la fonction $$f : x\\mapsto${:a0f}x$$ ?",
+                "$$\\begin{aligned}f:~&x\\mapsto${:a0f}x \\\\ &? \\mapsto${:a0*:x0}\\end{aligned}$$"
+            ],
+            "answer":"$$\\color{red}{${:x0}}$$ car $$f(${:x0})=${:a0*:x0}$$ pour $$f(x)=${:a0f}x$$",
+            "value":"${:x0}"
+        },{
+            "name":"Antécédent par une fonction affine (entiers relatifs)",
+            "vars":{
+                "b":"-10_10_^0",
+                "bf":"${MMmath.signedNumber(:b)}"
+            },
+            "question":[
+                "Quel est l'antécédent de $$${:a0*:x0+:b}$$ par la fonction $$f(x)=${:a0f}x${:bf}$$ ?",
+                "Quel est l'antécédent de $$${:a0*:x0+:b}$$ par la fonction $$f : x\\mapsto${:a0f}x${:bf}$$ ?",
+                "$$\\begin{aligned}f:~&x\\mapsto${:a0f}x${:bf} \\\\ &? \\mapsto${:a0*:x0+:b}\\end{aligned}$$"
+            ],
+            "answer":"$$\\color{red}{${:x0}}$$ car $$f(${:x0})=${:a0*:x0+:b}$$ pour $$f(x)=${:a0f}x${:bf}$$",
+            "value":"${:x0}"
+        },{
+            "name":"Antécédent par une fonction linéaire (décimal simple)",
+            "question":[
+                "Quel est l'antécédent de $$${MMmath.round(:a*:x,2)}$$ par la fonction $$f(x)=${:af}x$$ ?",
+                "Quel est l'antécédent de $$${MMmath.round(:a*:x,2)}$$ par la fonction $$f : x\\mapsto${:af}x$$ ?",
+                "$$\\begin{aligned}f:~&x\\mapsto${:af}x \\\\ &?\\mapsto ${MMmath.round(:a*:x,2)}\\end{aligned}$$"
+            ],
+            "answer":"$$\\color{red}{${:x}}$$ car $$f(${:x})=${MMmath.round(:a*:x,2)}$$ pour $$f(x)=${:af}x$$",
+            "value":"${:x}"
+        },{
+            "name":"Antécédent par une fonction affine (décimal simple)",
+            "vars":{
+                "choixdecb":"0_1",
+                "b0":"-10_10_^0",
+                "b":"${:choixdecb?:b0:MMmath.round(:b0/10,1)}",
+                "bf":"${MMmath.signedNumber(:b)}"
+            },
+            "question":[
+                "Quel est l'antécédent de $$${MMmath.round(:a*:x+:b,2)}$$ par la fonction $$f(x)=${:a}x${:bf}$$ ?",
+                "Quel est l'antécédent de $$${MMmath.round(:a*:x+:b,2)}$$ par la fonction $$f : x\\mapsto${:a}x${:bf}$$ ?",
+                "$$\\begin{aligned}f:~&x\\mapsto${:a}x${:bf} \\\\ &? \\mapsto ${MMmath.round(:a*:x+:b,2)}\\end{aligned}$$"
+            ],
+            "answer":"$$\\color{red}{${:x}}$$ car $$f(${:x})=${MMmath.round(:a*:x+:b,2)}$$ pour $$f(x)=${:a}x${:bf}$$",
+            "value":"${:x}"
+        },{
+            "name":"Antécédent par une fonction linéaire (réponse pouvant être fractionnaire)",
+            "vars":{"x0":"-20_20","rep":"${MMmath.fractionSimplifiee(:x0,:a0)}"},
+            "question":[
+                "Quel est l'antécédent de $$${:x0}$$ par la fonction $$f(x)=${:a0f}x$$ ?",
+                "Quel est l'antécédent de $$${:x0}$$ par la fonction $$f : x\\mapsto${:a0f}x$$ ?",
+                "$$\\begin{aligned}f:~&x\\mapsto${:a0f}x \\\\ &? \\mapsto${:x0}\\end{aligned}$$"
+            ],
+            "answer":"$$\\color{red}{${:rep}}$$ car $$${:x0}\\div${:a0}=${:rep}$$",
+            "value":"${:rep}"
+        },{
+            "name":"Antécédent par une fonction affine (réponse pouvant être fractionnaire)",
+            "vars":{
+                "x0":"-20_20",
+                "b":"-10_10_^0",
+                "bf":"${MMmath.signedNumber(:b)}",
+                "rep":"${MMmath.calc('('+:x0+'-('+:b+'))/('+:a0+')')}"
+            },
+            "question":[
+                "Quel est l'antécédent de $$${:x0}$$ par la fonction $$f(x)=${:a0f}x${:bf}$$ ?",
+                "Quel est l'antécédent de $$${:x0}$$ par la fonction $$f : x\\mapsto${:a0f}x${:bf}$$ ?",
+                "$$\\begin{aligned}f:~&x\\mapsto${:a0}x${:bf} \\\\ &? \\mapsto${:x0}\\end{aligned}$$"
+            ],
+            "answer":"$$\\color{red}{${:rep}}$$ car $$(${:x0}${MMmath.signedNumber(-:b)})\\div${Number(:a0)>0?:a0:'('+:a0+')'}=${:rep}$$",
+            "value":"${:rep}"
+        }
+    ]
+}

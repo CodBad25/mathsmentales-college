@@ -1,329 +1,155 @@
-# 📋 Résumé du projet MathsMentales Collège
+# MathsMentales Collège
 
-## ✅ Ce qui a été créé
+Plateforme de calcul mental pour le collège basée sur [MathsMentales.net](https://mathsmentales.net) (Sébastien Cogez), avec suivi des élèves via Google Classroom et Supabase.
 
-Votre projet **MathsMentales Collège** est maintenant prêt ! C'est une plateforme complète d'exercices de calcul mental pour collégiens avec :
+## Stack technique
 
-### 🎯 Fonctionnalités principales
+- **Frontend** : Next.js 14, React 18, TypeScript, Tailwind CSS
+- **Auth** : Supabase Auth + Google OAuth (compatible Classroom)
+- **BDD** : Supabase PostgreSQL (project `ewyelltfbkfrocygnydd`)
+- **Moteur d'exercices** : Site original MathsMentales intégré en sous-dossier statique (`public/mathsmentales/`)
+- **Déploiement** : Vercel
 
-#### Pour les professeurs :
-- ✅ Création et gestion de classes
-- ✅ Création de sessions d'exercices personnalisées (par niveau : 6ème → 3ème)
-- ✅ Suivi en temps réel des résultats de chaque élève
-- ✅ Statistiques et historiques détaillés
-- ✅ Dashboard complet avec vue d'ensemble
-- ✅ Codes de classe uniques pour faciliter l'inscription
-
-#### Pour les élèves :
-- ✅ Connexion simple avec Google (compatible Google Classroom)
-- ✅ Rejoindre des classes avec un code
-- ✅ Faire des exercices de calcul mental adaptés au niveau
-- ✅ Voir son historique personnel et sa progression
-- ✅ Interface intuitive et adaptée aux collégiens
-
-### 🛠️ Technologies utilisées
-
-**Frontend :**
-- Next.js 14 (React framework moderne)
-- TypeScript (typage fort pour moins d'erreurs)
-- Tailwind CSS (design moderne et responsive)
-- KaTeX (rendu mathématique de qualité)
-
-**Backend & Base de données :**
-- Supabase (PostgreSQL géré)
-- Row Level Security (sécurité au niveau ligne)
-- API REST serverless (Next.js API routes)
-
-**Authentification :**
-- Supabase Auth
-- Google OAuth 2.0
-- Compatible Google Classroom
-
-**Hébergement :**
-- Vercel (gratuit, déploiement automatique)
-- 100% serverless, scalable automatiquement
-
----
-
-## 📁 Structure créée
+## Architecture
 
 ```
 mathsmentales-college/
-│
-├── 📄 Fichiers de configuration
-│   ├── package.json              # Dépendances du projet
-│   ├── tsconfig.json             # Configuration TypeScript
-│   ├── next.config.js            # Configuration Next.js
-│   ├── tailwind.config.ts        # Configuration Tailwind CSS
-│   ├── .env.local.example        # Template variables d'environnement
-│   └── .gitignore
-│
-├── 📱 Application (app/)
-│   ├── page.tsx                  # Page d'accueil publique
-│   ├── layout.tsx                # Layout principal
-│   ├── globals.css               # Styles globaux
-│   │
-│   ├── auth/                     # Authentification
-│   │   ├── login/page.tsx        # Page de connexion Google
-│   │   ├── callback/route.ts     # Callback OAuth
-│   │   └── logout/route.ts       # Déconnexion
-│   │
-│   └── dashboard/                # Espace utilisateur
-│       └── page.tsx              # Dashboard (prof/élève)
-│
-├── 🔧 Utilitaires (lib/)
-│   ├── supabase.ts               # Client Supabase (browser + server)
-│   └── exercises.ts              # Générateur d'exercices mathématiques
-│
-├── 🗃️ Base de données (supabase/)
-│   └── schema.sql                # Schéma complet de la BDD
-│       ├── Tables : profiles, classes, class_students,
-│       │            exercise_sessions, student_results
-│       ├── Row Level Security (RLS)
-│       ├── Fonctions et triggers
-│       └── Vue pour statistiques
-│
-├── 📐 Types TypeScript (types/)
-│   └── database.ts               # Types pour la BDD
-│
-├── 🎨 Assets publics (public/)
-│   ├── js/
-│   ├── css/
-│   └── img/
-│
-├── 📚 Documentation
-│   ├── README.md                 # Documentation complète
-│   ├── CONFIGURATION.md          # Guide de configuration détaillé
-│   ├── QUICKSTART.md             # Guide de démarrage rapide
-│   └── RESUME.md                 # Ce fichier
-│
-└── middleware.ts                 # Middleware d'authentification
+├── app/
+│   ├── page.tsx                    # Page d'accueil
+│   ├── layout.tsx                  # Layout principal
+│   ├── auth/
+│   │   ├── login/page.tsx          # Connexion Google
+│   │   └── callback/route.ts       # Callback OAuth
+│   ├── dashboard/
+│   │   ├── page.tsx                # Dashboard prof/élève
+│   │   └── sessions/new/page.tsx   # Création de session
+│   ├── exercices/
+│   │   ├── page.tsx                # Catalogue d'exercices
+│   │   └── play/page.tsx           # Player React (exercices JSON)
+│   ├── play/page.tsx               # Wrapper iframe MathsMentales
+│   ├── s/[code]/page.tsx           # Accès session par code
+│   └── api/
+│       ├── results/route.ts        # Sauvegarde résultats (exercice libre)
+│       └── sessions/
+│           ├── route.ts            # CRUD sessions
+│           └── results/route.ts    # Résultats de session
+├── components/
+│   └── RedirectCheck.tsx           # Redirect post-login vers exercice partagé
+├── lib/
+│   ├── supabase-browser.ts         # Client Supabase (browser)
+│   └── exercises.ts                # Générateur d'exercices
+├── public/
+│   ├── mathsmentales/              # Site original intégré (voir section dédiée)
+│   ├── sounds/                     # Sons du diaporama (17 mp3)
+│   └── library/                    # Exercices JSON (224 fichiers)
+├── supabase/
+│   └── setup-final.sql             # Schéma complet BDD
+└── middleware.ts                    # Protection routes /dashboard/*
 ```
 
----
+## Intégration du site original MathsMentales
 
-## 🗄️ Base de données créée
+Le site original (vanilla JS, build Gulp/Rollup) est intégré comme sous-dossier statique dans `public/mathsmentales/`. Cela permet d'avoir 100% des exercices et modes originaux (diaporama, ceinture, exercices, duel, puzzle, wall, dominos, etc.).
 
-Votre base de données Supabase contient 5 tables principales :
+### Source et build
 
-### 1. **profiles**
-Profils utilisateurs (élèves et professeurs)
-- id, email, full_name, avatar_url, role, created_at
+- Repo original : `git@forge.apps.education.fr:mathsmentales/mathsmentales.forge.apps.education.fr.git`
+- Clone dans `/tmp/mathsmentales-original/`, puis `npm install && npm run build` (Gulp)
+- Les fichiers buildés sont copiés dans `public/mathsmentales/`
+- Les bundles JS sont des IIFE (`type="module"`) — les variables internes ne sont PAS accessibles globalement
 
-### 2. **classes**
-Classes créées par les professeurs
-- id, name, description, teacher_id, google_classroom_id, join_code, created_at
+### Modifications apportées à l'original
 
-### 3. **class_students**
-Relation élèves ↔ classes
-- id, class_id, student_id, joined_at
+- **Suppression lycée** : `"grille-lycee"` retiré de `library.ordre` dans les 15 bundles JS, menu lycée retiré de `index.html`
+- **Chemins relatifs** : `/brevet-2025.html` → `brevet-2025.html`, `/favicon/...` → `favicon/...`
+- **Spritesheet** : `spritesheetrev.webp` + `.png` copiés dans `css/` (icônes restart, pause, stop, etc.)
+- **Valeurs par défaut** : 5 questions (au lieu de 10), 30 secondes (au lieu de 8) — modifié dans `index.html` (sliders) et fallbacks JS
+- **Attribution** : section crédit Sébastien Cogez ajoutée dans `index.html`
 
-### 4. **exercise_sessions**
-Sessions d'exercices créées par les profs
-- id, class_id, teacher_id, title, exercise_type, config (JSON), created_at, expires_at, is_active
+### bridge.js — Script d'injection
 
-### 5. **student_results**
-Résultats des élèves
-- id, session_id, student_id, answers (JSON), score, total_questions, time_spent, completed_at
+Fichier `public/mathsmentales/bridge.js`, injecté dans les 17 pages HTML via `<script src="bridge.js">`.
 
-**Sécurité** : Toutes les tables ont des politiques RLS (Row Level Security) pour protéger les données.
+**Rôle** : Détecter la fin d'une activité et permettre au prof de récupérer un lien partageable.
 
----
+**Fonctionnement** :
+1. Ignore la page d'accueil (`index.html`)
+2. Surveille `#tab-content` (MutationObserver sur l'attribut `class`) — quand il perd la classe `hidden`, le diaporama est terminé
+3. Affiche un **bouton flottant "Partager"** (bas droite, violet) qui ouvre une modale avec :
+   - Le lien partageable au format `/play?mode=diaporama&...` (passe par la gate d'auth)
+   - Un bouton "Copier"
+   - Instructions pour coller dans Pronote/Classroom/cahier de texte
+4. En mode interactif (`o=yes`), détecte aussi le score (`<section class="score">X/Y</section>`) et l'affiche
+5. En iframe (via `/play`) : envoie un `postMessage` au parent Next.js + monkey-patch de `postMessage` pour intercepter `nbBonnesReponses`
+6. Le bouton disparaît quand le diaporama est relancé (tab-content redevient hidden)
 
-## 🎓 Exercices disponibles
+**Important** : Le mode diaporama classique (non interactif) n'a PAS de score natif — seul le mode interactif (`o=yes`) en produit un.
 
-Le générateur d'exercices (`lib/exercises.ts`) supporte :
+### Fichiers JS modifiés (15 bundles)
 
-### Par type :
-- ✅ Addition
-- ✅ Soustraction
-- ✅ Multiplication
-- ✅ Division
-- ✅ Fractions
-- ✅ Décimaux (à implémenter)
-- ✅ Pourcentages (à implémenter)
-- ✅ Puissances (à implémenter)
-- ✅ Équations (à implémenter)
+Tous dans `public/mathsmentales/js/lib.*.js` :
+- `lib.mathsmentales-2.3.176.js` (page principale)
+- `lib.diaporama-2.3.176.js`
+- `lib.ceinture-2.3.176.js`
+- `lib.exercices-2.3.176.js`
+- `lib.duel-2.3.176.js`
+- `lib.wall-2.3.176.js`
+- `lib.puzzle-2.3.176.js`
+- `lib.cartesflash-2.3.176.js`
+- `lib.courseauxnombres-2.3.176.js`
+- `lib.dominos-2.3.176.js`
+- `lib.jaiquia-2.3.176.js`
+- `lib.fichememo-2.3.176.js`
+- `lib.exam-2.3.176.js`
+- `lib.editor-2.3.176.js`
+- `lib.editoryaml-2.3.176.js`
 
-### Par niveau :
-- **6ème** : Opérations de base, fractions simples
-- **5ème** : Nombres relatifs, fractions avancées
-- **4ème** : Puissances, pourcentages
-- **3ème** : Équations, calcul littéral
+## Page /play — Wrapper iframe
 
-**Facilement extensible** : Ajoutez vos propres types d'exercices dans `lib/exercises.ts`
+`app/play/page.tsx` : page plein écran avec iframe qui charge le site MathsMentales.
 
----
+- Écoute les `postMessage` de type `mathsmentales-result` depuis bridge.js
+- Auth gate : si lien partagé et pas connecté → prompt Google login
+- Sauvegarde les résultats dans Supabase (exercice libre ou session)
+- Overlay de résultat avec score et lien de partage
+- `makeShareableUrl()` : convertit l'URL iframe en URL `/play?mode=...&params`
+- Redirige les params d'URL vers l'iframe (`mode`, `c`, `n`, `u`, etc.)
 
-## 💰 Coûts (GRATUIT !)
+## Flux de partage (prof → élève)
 
-### Supabase (Free tier)
-- ✅ 500 Mo de stockage
-- ✅ 50 000 utilisateurs actifs/mois
-- ✅ 2 Go de bande passante/mois
-- ✅ Authentification Google incluse
-- **→ Largement suffisant pour un collège**
+1. Le prof lance un diaporama en classe depuis `/mathsmentales/`
+2. A la fin, le bouton "Partager" apparaît (bridge.js)
+3. Le prof copie le lien (`/play?mode=diaporama&c=...`)
+4. Le prof colle le lien dans Pronote, Google Classroom, ou son cahier de texte
+5. L'élève ouvre le lien → `/play` avec auth gate
+6. L'élève se connecte avec Google → résultats sauvegardés dans Supabase
+7. Le prof voit les résultats dans le dashboard
 
-### Vercel (Hobby - Free)
-- ✅ Déploiements illimités
-- ✅ 100 Go de bande passante/mois
-- ✅ Domaine personnalisé
-- ✅ HTTPS automatique
-- **→ Parfait pour l'éducation**
+## Base de données (Supabase)
 
-### Google Cloud Platform
-- ✅ OAuth gratuit
-- ✅ Google Classroom API gratuite
-- ✅ Pas de coût si < 10 000 requêtes/jour
+Tables principales (voir `supabase/setup-final.sql`) :
+- `profiles` : id, email, full_name, avatar_url, role
+- `classes` : id, name, teacher_id, google_classroom_id, join_code
+- `class_students` : class_id, student_id
+- `sessions` : id, class_id, teacher_id, title, exercise_config, code (6 chars)
+- `session_results` : session_id, student_id, score, total_questions, time_spent
+- `student_results` : exercice libre (hors session)
 
-**Total : 0 €/mois** ✨
+RLS activé sur toutes les tables.
 
----
-
-## 🚀 Prochaines étapes
-
-### Pour commencer (MAINTENANT) :
-
-1. **Lisez le QUICKSTART.md** (15 min)
-   - Guide de configuration étape par étape
-   - Lancement en local
-   - Premier test
-
-2. **Configurez Supabase** (5 min)
-   - Créez un projet
-   - Exécutez `supabase/schema.sql`
-
-3. **Configurez Google OAuth** (5 min)
-   - Google Cloud Console
-   - Activez dans Supabase
-
-4. **Lancez en local** (2 min)
-   ```bash
-   cd mathsmentales-college
-   npm install
-   npm run dev
-   ```
-
-5. **Testez** (2 min)
-   - Connectez-vous avec Google
-   - Passez en mode professeur
-   - Créez une classe
-
-6. **Déployez sur Vercel** (5 min)
-   - Push sur GitHub
-   - Import dans Vercel
-   - Configurez les variables d'environnement
-
-### Pour aller plus loin :
-
-7. **Personnalisez les exercices**
-   - Éditez `lib/exercises.ts`
-   - Ajoutez vos propres types d'exercices
-
-8. **Intégrez Google Classroom**
-   - Activez l'API Classroom
-   - Importez automatiquement vos classes
-
-9. **Développez l'interface professeur**
-   - Page de statistiques détaillées
-   - Export CSV/Excel
-   - Graphiques de progression
-
-10. **Ajoutez des fonctionnalités**
-    - Mode compétition entre classes
-    - Badges et récompenses
-    - Notifications par email
-    - Mode hors ligne (PWA)
-
----
-
-## 📖 Documentation disponible
-
-### 1. **README.md** - Documentation générale
-- Vue d'ensemble du projet
-- Stack technique
-- Structure détaillée
-- Contribution
-
-### 2. **QUICKSTART.md** - Démarrage rapide
-- Installation en 15 minutes
-- Configuration minimale
-- Premier test
-- Checklist
-
-### 3. **CONFIGURATION.md** - Configuration complète
-- Guide détaillé étape par étape
-- Supabase : création projet, schéma SQL, auth
-- Google Cloud : OAuth, Classroom API
-- Déploiement Vercel
-- Dépannage des erreurs courantes
-
-### 4. **RESUME.md** - Ce fichier
-- Résumé global
-- Architecture
-- Fonctionnalités
-- Prochaines étapes
-
----
-
-## 🎯 Objectifs atteints
-
-✅ **Copie de MathsMentales.net** adaptée au collège
-✅ **Connexion Google Classroom** pour les élèves
-✅ **Système de classes** avec codes d'accès
-✅ **Suivi des sessions** et historiques personnalisés
-✅ **Dashboard professeur** pour gérer les classes
-✅ **Dashboard élève** pour faire les exercices
-✅ **Base de données sécurisée** avec RLS
-✅ **Hébergement gratuit** (Vercel + Supabase)
-✅ **Open source** et personnalisable
-
----
-
-## 🎉 Félicitations !
-
-Votre plateforme **MathsMentales Collège** est prête à être utilisée !
-
-### Ce que vous pouvez faire maintenant :
-
-1. **Tester en local** : Suivez le QUICKSTART.md
-2. **Déployer en ligne** : Push sur GitHub → Vercel
-3. **Inviter vos collègues** : Partagez le lien
-4. **Inviter vos élèves** : Créez des classes et partagez les codes
-5. **Personnaliser** : Ajoutez vos propres exercices
-
-### Support :
-
-- 📧 Questions : Ouvrez une issue sur GitHub
-- 📚 Docs : Consultez README.md et CONFIGURATION.md
-- 🌐 Original : [MathsMentales.net](https://mathsmentales.net)
-
----
-
-**Bon enseignement avec MathsMentales Collège ! 🧮📚**
-
----
-
-## 📝 Commandes utiles
+## Commandes
 
 ```bash
-# Développement local
-npm run dev              # Lance le serveur de développement
-npm run build            # Compile pour la production
-npm run start            # Lance la version production
-npm run lint             # Vérifie le code
+# Développement
+npm run dev              # Serveur de dev (port 3000)
+npm run build            # Build production
+npm run lint             # Linter
 
-# Git
-git add .
-git commit -m "message"
-git push
-
-# Vérifier les dépendances
-npm outdated             # Voir les packages à mettre à jour
-npm update               # Mettre à jour les packages
+# Si port bloqué
+lsof -ti :3001 | xargs kill -9; rm -rf .next; npx next dev -p 3001
 ```
 
----
+## Crédits
 
-*Projet créé le 19 décembre 2025*
-*Basé sur MathsMentales.net (Licence Apache 2.0)*
+- **MathsMentales** : Sébastien Cogez — [mathsmentales.net](https://mathsmentales.net) (Licence Apache 2.0)
+- **Intégration Next.js et suivi élèves** : Mohamed Belhaj

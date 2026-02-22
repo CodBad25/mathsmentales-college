@@ -1,0 +1,33 @@
+{
+    "title":"Ajouter des unités, dizaines ... à un entier",
+    "ID":"8NA3",
+    "speech":1,
+    "type":"text",
+    "description":"Somme d'un nombre entier avec des unités, dizaines, centaines...",
+    "dest":["8NA", "7NA", "6NA"],
+    "keys":["_","_","_","_","_","_","_","_"],
+    "options":[{
+            "name":"Ajouter des unité",
+            "vars":{"a":[99,999,9999],"t1":"1_${:a}", "u":[0,1,2,3], "d":[0,1,2,3], "c":[0,1,2], "b":"${:u+10*:d+100*:c}", "t2":"${:b}", "ajout":"unités"}
+        },{
+            "name":"Ajouter des dizaines",
+            "vars":{"a":[9,99,999,9999],"t1":"1_${:a}", "u":[0,1,2,3], "d":[0,1,2,3], "c":[0,1,2], "b":"${:u+10*:d+100*:c}", "t2":"${:b*10}", "ajout":"dizaines"}
+        },{
+            "name":"Ajouter des centaines",
+            "vars":{"a":[9,99,999,9999,99999],"t1":"1_${:a}", "u":[0,1,2,3], "d":[0,1,2,3], "c":[0,1,2], "b":"${:u+10*:d+100*:c}", "t2":"${:b*100}", "ajout":"centaines"}
+        },{
+            "name":"Ajouter des milliers",
+            "vars":{"a":[9,99,999,9999,99999,999999,99999,999999],"t1":"1_${:a}","u":[0,1,2,3], "d":[0,1,2,3], "c":[0,1,2], "b":"${:u+10*:d+100*:c}", "t2":"${:b*1000}", "ajout":"unités de mille"}
+        },{
+            "name":"Ajouter des dizaines de mille",
+            "vars":{"a":[9,99,999,9999,99999,999999,999999,999999],"t1":"1_${:a}", "u":[0,1,2,3], "d":[0,1,2,3], "c":[0,1,2], "b":"${:u+10*:d+100*:c}", "t2":"${:b*10000}", "ajout":"dizaines de mille"}
+        },{
+            "name":"Ajouter des centaines de mille",
+            "vars":{"a":[9,99,999,9999,99999,999999,9999999,999999,9999999],"t1":"1_${:a}", "u":[0,1,2,3], "d":[0,1,2,3], "c":[0,1,2], "b":"${:u+10*:d+100*:c}", "t2":"${:b*100000}", "ajout":"centaines de mille"}
+        }
+    ],
+    "question": "Quel nombre obtient-on si l'on ajoute <b>${:b} ${:ajout}</b> à $$${:t1}$$ ?",
+    "audio":"Quel nombre obtient-on si l'on ajoute ${:b} ${:ajout} à ${:t1} ?",
+    "answer":"$$${:t1}+${:t2}=\\color{red}{${:t1+:t2}}$$",
+    "value":"${:t1+:t2}"
+}

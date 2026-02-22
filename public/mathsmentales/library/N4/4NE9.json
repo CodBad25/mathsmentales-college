@@ -1,0 +1,31 @@
+{
+    "title":"Résoudre une équation du premier degré",
+    "type":"latex",
+    "ID":"4NE9",
+    "dest":["4NE", "3ND", "2N3"],
+    "keys":["_","_","/","-","_","_","_","_"],
+    "textSize":"medium",
+    "consts":{"lettres":["u","v","t","x", "y", "z"]},
+    "options":[{
+        "name":"ax + b = 0",
+        "vars":{"a":"-10_10_^0","b":"-10_10", "l":"0_5","x":"${:lettres[:l]}"},
+        "question": "\\text{Résoudre } ${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=0",
+        "shortq":"${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=0",
+        "answer":"${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=0 \\text{ pour } \\color{red}{${:x}=${MMmath.calc('-('+:b+')/('+:a+')')}}",
+        "value":"${MMmath.calc('-('+:b+')/('+:a+')')}"
+    },{
+        "name":"ax + b = c",
+        "vars":{"a":"-10_10_^0","b":"-10_10", "c":"-10_10_^0", "l":"0_5","x":"${:lettres[:l]}"},
+        "question": "\\text{Résoudre } ${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=${:c}",
+        "shortq":"${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=${:c}",
+        "answer":"${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=${:c} \\text{ pour } \\color{red}{${:x}=${MMmath.calc('('+:c+'-('+:b+'))/('+:a+')')}}",
+        "value":"${MMmath.calc('('+:c+'-('+:b+'))/('+:a+')')}"
+    },{
+        "name":"ax + b = cx + d",
+        "vars":{"a":"-10_10_^0","b":"-10_10", "c":"-10_10_^0", "d":"-10_10", "l":"0_5","x":"${:lettres[:l]}"},
+        "question": "\\text{Résoudre } ${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=${MMmath.signIfOne(:c)}${:x}${MMmath.signedNumber(:d)}",
+        "shortq":"${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=${MMmath.signIfOne(:c)}${:x}${MMmath.signedNumber(:d)}",
+        "answer":"${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}=${MMmath.signIfOne(:c)}${:x}${MMmath.signedNumber(:d)} \\text{ pour } \\color{red}{${:a-:c==0?'\\text{pas de solution}'::x+'='+MMmath.calc('('+:d+'-('+:b+'))/(('+:a+')-('+:c+'))')}}",
+        "value":"${:a-:c==0?'pas de solution':MMmath.calc('('+:d+'-('+:b+'))/(('+:a+')-('+:c+'))')}"
+    }]
+}

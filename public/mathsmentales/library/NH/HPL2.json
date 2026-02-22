@@ -1,0 +1,242 @@
+{
+  "title": "Calculs avec logarithmes de base 10, 5, 2",
+  "dest": [
+    "HPL"
+  ],
+  "consigne": "Simplifier",
+  "options": [
+    {
+      "name": "Somme de logarithmes de base 10",
+      "consts": {
+        "duos": [
+          [
+            1,
+            10
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            1,
+            100
+          ],
+          [
+            2,
+            50
+          ],
+          [
+            4,
+            25
+          ],
+          [
+            5,
+            20
+          ],
+          [
+            10,
+            10
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            25,
+            4
+          ],
+          [
+            50,
+            2
+          ],
+          [
+            100,
+            1
+          ],
+          [
+            1,
+            1000
+          ],
+          [
+            2,
+            500
+          ],
+          [
+            4,
+            250
+          ],
+          [
+            5,
+            200
+          ],
+          [
+            8,
+            125
+          ],
+          [
+            10,
+            100
+          ],
+          [
+            20,
+            50
+          ],
+          [
+            25,
+            40
+          ],
+          [
+            40,
+            25
+          ],
+          [
+            50,
+            20
+          ],
+          [
+            100,
+            10
+          ],
+          [
+            125,
+            8
+          ],
+          [
+            200,
+            5
+          ],
+          [
+            250,
+            4
+          ],
+          [
+            500,
+            2
+          ],
+          [
+            1000,
+            1
+          ]
+        ]
+      },
+      "vars": {
+        "simplifiable": [
+          true,
+          false
+        ],
+        "choix": "0_${:duos.length-1}",
+        "n1": "${:simplifiable?:duos[:choix][0]:'1_10'}",
+        "n2": "${:simplifiable?:duos[:choix][1]:'1_10'}"
+      },
+      "question": "\\log_{10}(:n1)+\\log_{10}(:n2)",
+      "answer": ":question=\\color{green}{\\log_{10}(:n1\\times:n2)}=\\color{${[10,100,1000].includes(:n1*:n2)?'green':'red'}}{\\log_{10}(${:n1*:n2})}${[10,100,1000].includes(:n1*:n2)?'=\\color{red}{'+(:n1*:n2==10 ? 1 : :n1*:n2==100 ? 2 : 3)+'}':''}",
+      "value":"${[10,100,1000].includes(:n1*:n2)?(:n1*:n2==10 ? 1 : :n1*:n2==100 ? 2 : 3):`\\log_{10}(${:n1*:n2})`}"
+    },
+    {
+      "name": "Différence de logarithmes",
+      "vars": {
+        "logSimplifiable": [
+          true,
+          false
+        ],
+        "log": [
+          10,
+          100
+        ],
+        "fractionSimplifiable": [
+          true,
+          false
+        ],
+        "n2": "1_10",
+        "k": "1_99_^9",
+        "n1": "${:logSimplifiable?:log*:n2::fractionSimplifiable?:n2*:k:'1_10'}"
+      },
+      "question": "\\log_{10}(:n1)-\\log_{10}(:n2)",
+      "answer": ":question=\\color{green}{\\log_{10}\\left(\\dfrac{:n1}{:n2}\\right)}${:n1%:n2==0?'=\\log_{10}('+MMmath.fractionSimplifiee(:n1,:n2)+')':''}${:logSimplifiable?'='+(:log==10?1:2):''}",
+      "value":"${!:logSimplifiable?'\\log_{10}('+MMmath.fractionSimplifiee(:n1,:n2)+')'::log==10?1:2}"
+    },{
+        "name":"Logarithme en base de 2 de puissances de 2",
+        "vars":{
+            "p1":"1_10",
+            "p2":"1_10",
+            "n1":"${2**:p1}",
+            "n2":"${2**:p2}",
+            "sig":["+","-"]
+        },
+        "question":"\\log_2(:n1):sig \\log_2(:n2)",
+        "answer":":question=\\color{green}{:p1:sig:p2}=\\color{red}{${:sig=='+'?:p1+:p2::p1-:p2}}",
+        "value":"${:sig=='+'?:p1+:p2::p1-:p2}"
+    },
+    {
+      "name": "Sommes de logarithmes de variables",
+      "consts": {
+        "lettres": "abcdghmnxyz"
+      },
+      "vars": {
+        "log": [
+          10,
+          2,
+          5
+        ],
+        "l": "0_${:lettres.length-1}_2",
+        "x": "${:lettres[:l[0]]}",
+        "y": "${:lettres[:l[1]]}",
+        "a": "1_4_2"
+      },
+      "question": "${MMmath.signIfOne(:a[0])}\\log_{:log}(:x)+${MMmath.signIfOne(:a[1])}\\log_{:log}(:y)",
+      "answer": ":question=\\color{red}{\\log_{:log}(${:l[0]!=:l[1]?:x+(:a[0]>1?'^'+:a[0]:'')+:y+(:a[1]>1?'^'+:a[1]:'')::x+'^'+(:a[0]+:a[1])})}",
+      "value":"\\log_{:log}(${:l[0]!=:l[1]?:x+(:a[0]>1?'^'+:a[0]:'')+:y+(:a[1]>1?'^'+:a[1]:'')::x+'^'+(:a[0]+:a[1])})"
+    },
+    {
+      "name": "Différence de logarithmes de variables",
+      "consts": {
+        "lettres": "abcdghmnxyz"
+      },
+      "vars": {
+        "log": [
+          10,
+          2,
+          5
+        ],
+        "l": "0_${:lettres.length-1}_2",
+        "x": "${:lettres[:l[0]]}",
+        "y": "${:lettres[:l[1]]}",
+        "a": "1_4_2"
+      },
+      "question": "${MMmath.signIfOne(:a[0])}\\log_{:log}(:x)-${MMmath.signIfOne(:a[1])}\\log_{:log}(:y)",
+      "answer": ":question=\\color{red}{\\log_{:log}\\left(${:l[0]!=:l[1]?'\\dfrac{'+:x+(:a[0]>1?'^'+:a[0]:'')+'}{'+:y+(:a[1]>1?'^'+:a[1]:'')+'}'::a[0]-:a[1]>1?:x+'^'+(:a[0]-:a[1])::a[0]-:a[1]==1?:x::a[0]-:a[1]<-1?'\\dfrac 1{'+:x+'^'+(:a[1]-:a[0])+'}'::a[0]-:a[1]==-1?'\\dfrac 1{'+:x+'}':1}\\right)}",
+      "value":"\\log_{:log}\\left(${:l[0]!=:l[1]?'\\dfrac{'+:x+(:a[0]>1?'^'+:a[0]:'')+'}{'+:y+(:a[1]>1?'^'+:a[1]:'')+'}'::a[0]-:a[1]>1?:x+'^'+(:a[0]-:a[1])::a[0]-:a[1]==1?:x::a[0]-:a[1]<-1?'\\dfrac 1{'+:x+'^'+(:a[1]-:a[0])+'}'::a[0]-:a[1]==-1?'\\dfrac 1{'+:x+'}':1}\\right)"
+    },
+    {
+      "name": "Somme algébrique de logarithmes de variables",
+      "consts": {
+        "lettres": "abcdghmnxyz"
+      },
+      "vars": {
+        "log": [
+          2,
+          5,
+          10
+        ],
+        "l": "0_${:lettres.length-1}_3",
+        "x": "${:lettres[:l[0]]}",
+        "y": "${:lettres[:l[1]]}",
+        "z": "${:lettres[:l[2]]}",
+        "a": "-4_4_^0",
+        "b": "-4_4_^0",
+        "c": "-4_4_^0"
+      },
+      "question": "${MMmath.signIfOne(:a)}\\log_{:log}(:x)${MMmath.signedNumberButOne(:b)}\\log_{:log}(:y)${MMmath.signedNumberButOne(:c)}\\log_{:log}(:z)",
+      "answer": ":question=\\color{red}{\\log_{:log}\\left(${MMmath.parse('1'+(:a>0?'*':'/')+'('+:x+'^'+Math.abs(:a)+')'+(:b>0?'*':'/')+'('+:y+'^'+Math.abs(:b)+')'+(:c>0?'*':'/')+'('+:z+'^'+Math.abs(:c)+')')}\\right)}",
+      "value":"\\log_{:log}\\left(${MMmath.parse('1'+(:a>0?'*':'/')+'('+:x+'^'+Math.abs(:a)+')'+(:b>0?'*':'/')+'('+:y+'^'+Math.abs(:b)+')'+(:c>0?'*':'/')+'('+:z+'^'+Math.abs(:c)+')')}\\right)"
+    }
+  ]
+}

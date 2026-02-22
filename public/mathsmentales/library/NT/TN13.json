@@ -1,0 +1,43 @@
+{
+  "type": "texte",
+  "title": "Somme des termes d'une suite arithmétique ou géométrique",
+  "ID": "TN13",
+  "dest": [
+    "TN1"
+  ],
+  "options": [
+    {
+      "name": "suite arithmétique",
+      "vars": {
+        "a": "-5_5_^0,1",
+        "diff": "3_10",
+        "r": "-5_5_^0,1,-1",
+        "b": "1_10",
+        "c": "${:b + :diff}",
+        "u_b": "${:a + :r * :b}",
+        "u_c": "${:a + :r * :c}",
+        "S": "${(:diff+1) * (:u_b + :u_c) / 2}"
+      },
+      "question": [
+        "On considère la suite $$(u_n)$$ définie sur $$ \\mathbb{N} $$ par $$u_n = ${:a} ${MMmath.signedNumber(:r)} n$$. Calculer la somme   $$S= u_{${:b}} $$+ ...+ $$u_{${:c}} $$ ."
+      ],
+      "answer": "$$S =  ${:diff+1 } \\times  \\frac{  ${:u_b}  ${MMmath.signedNumber(:u_c)}   }{2} = ${:S} $$ "
+    },
+    {
+      "name": "suite géométrique",
+      "vars": {
+        "a": "2_9",
+        "diff": "3_10",
+        "q": "2_5",
+        "qpow": "${:q^(:diff+1)}",
+        "num": "${1 - :q^(:diff+1)}",
+        "den": "${1 - :q}",
+        "S": "${:a * (1 - :q**(:diff+1))/(1-:q)}"
+      },
+      "question": [
+        "On considère la suite $$(u_n)$$ définie sur $$ \\mathbb{N} $$ par $$u_n = ${:a} \\times ${MMmath.nP(:q)}^n$$. Calculer la somme  $$S= u_0 $$+ ...+ $$u_{${:diff}} $$"
+      ],
+      "answer": "$$S =  ${:a} \\times  \\frac{ 1- ${MMmath.nP(:q)}^{${:diff +1}} } {1 - ${:q}} =${:S}$$ "
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+title: Tables de multiplication classiques (sans 0 et 1)
+dest: # chapitres où sera intégrée l'activité
+  - 6ND
+  - 7ND
+  - 8ND
+description: Connaitre les tables de multiplications de 2 à 12, sous plusieurs formes
+type: latex # pas obligatoire, c'est la valeur par défaut
+options:
+  - name: Table de 2
+    vars:
+      m: '2_10'
+      n: 2
+      r: ${2*:m}
+  - name: Table de 3
+    vars:
+      m: '2_10'
+      n: 3
+      r: ${3*:m}
+  - name: Table de 4
+    vars:
+      m: '2_10'
+      n: 4
+      r: ${4*:m}
+  - name: Table de 5
+    vars:
+      m: '2_10'
+      n: 5
+      r: ${5*:m}
+  - name: Table de 6
+    vars:
+      m: '2_10'
+      n: 6
+      r: ${6*:m}
+  - name: Table de 7
+    vars:
+      m: '2_10'
+      n: 7
+      r: ${7*:m}
+  - name: Table de 8
+    vars:
+      m: '2_10'
+      n: 8
+      r: ${8*:m}
+  - name: Table de 9
+    vars:
+      m: '2_10'
+      n: 9
+      r: ${9*:m}
+  - name: Table de 10
+    vars:
+      m: '2_10'
+      n: 10
+      r: ${10*:m}
+  - name: Table de 11
+    vars:
+      m: '2_10'
+      n: 11
+      r: ${11*:m}
+  - name: Table de 12
+    vars:
+      m: '2_10'
+      n: 12
+      r: ${12*:m}
+question: # forme de question commune à toutes les options
+  - :n\times:m=?
+  - :m\times:n=?
+  - :r = :n\times ?
+  - :r\div:n=?
+shortq:
+  - :n\times:m
+  - :m\times:n
+  - :r = :n\times ?
+  - :r\div:n
+answer: # à chaque question sa réponse
+  - :n\times:m=\color{red}{:r}
+  - :m\times:n=\color{red}{:r}
+  - :r = :n\times \color{red}{:m}
+  - :r\div:n=\color{red}{:m}
+value: # à chaque question la valeur attendue pour évaluation ou pour les réponses courtes dans les ceintures
+  - :r
+  - :r
+  - :m
+  - :m

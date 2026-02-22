@@ -1,0 +1,72 @@
+{
+    "ID":"3DD6",
+    "dest":["3DD","2F2","Ko4"],
+    "title":"Lectures graphiques d'images et d'antécédents",
+    "description":"Utilisation de la représentation graphique pour lire des images et des antécédents<br>pas de correction en ligne",
+    "type":"text",
+    "repeat":2,
+    "keys":["L","A","_","_","_","_","_","_"],
+    "textSize":"small",
+    "options":[
+        {
+        "name":"Lecture d'image",
+        "consts":{"delt":"MMmath.sqrt(${:a})"},
+        "vars":{"cfs":"0_4_3_^$","sig0":"-1_1_^0","a":"${:cfs[0]*:sig0}","b":"${:cfs[1]*:sig0**2}","c":"${:cfs[2]*:sig0**3}","d":"0_${(:sig0**5)*3}",
+        "x0":"-5_5",
+        "im0":"${MMmath.round(:a*:x0**3/125+:b*:x0**2/25+:c*:x0/5+:d,1)}",
+        "x1":"${Math.abs(:im0)>5?'-4_4':0}",
+        "im1":"${Math.abs(:im0)>5?MMmath.round(:a*:x1**3/125+:b*:x1**2/25+:c*:x1/5+:d,1):0}",
+        "x2":"${Math.abs(:im1)>5?'-3_3':0}",
+        "im2":"${Math.abs(:im1)>5?MMmath.round(:a*:x2**3/125+:b*:x2**2/25+:c*:x2/5+:d,1):0}",
+        "x3":"${Math.abs(:im2)>5?'-2_2':0}",
+        "im3":"${Math.abs(:im2)>5?MMmath.round(:a*:x3**3/125+:b*:x3**2/25+:c*:x3/5+:d,1):0}",
+        "x":"${Math.abs(:im0)<=5?:x0:Math.abs(:im1)<=5?:x1:Math.abs(:im2)<=5?:x2::x3}",        
+        "image":"${Math.abs(:im0)<=5?:im0:Math.abs(:im1)<=5?:im1:Math.abs(:im2)<=5?:im2::im3}",
+        "arr":"${0.5*MMmath.round(2*:a*:x**3/125+2*:b*:x**2/25+2*:c*:x/5+2*:d,0)}"},
+        "figure":{  
+            "type":"graph",
+            "scale":3,
+            "boundingbox":[-6,6,6,-6],
+            "keepAspect": false,
+            "axis":true,
+            "grid":true,
+            "content" :[
+                ["functiongraph", "${:a}*x**3/125+${:b}*x**2/25+${:c}*x/5+${:d};"]]   
+            },
+        "question":"À 0,2 près, lire l'image de $$${:x}$$",
+        "answer":"L’image de $$${:x}$$ est $$\\color{red}{:image}$$ (accepté autour de $$:arr$$)"
+        },
+        {
+        "name":"Lecture d'antécédents",
+        "vars":{"cfs":"0_5_2_^&", "cfc":"0_3","sig0":"-1_1_^0","a":"${:cfs[0]*:sig0}","b":"${:cfs[1]*:sig0**2}","c":"${:cfc*:sig0**3}",
+        "x0":"d-5_5_1",
+        "im0":"${MMmath.round(:a*:x0**2/25+:b*:x0/5+:c,1)}",
+        "x1":"${Math.abs(:im0)>5?'d-4_4_1':0}",
+        "im1":"${Math.abs(:im0)>5?MMmath.round(:a*:x1**2/25+:b*:x1/5+:c,1):0}",
+        "x2":"${Math.abs(:im1)>5?'d-3_3_1':0}",
+        "im2":"${Math.abs(:im1)>5?MMmath.round(:a*:x2**2/25+:b*:x2/5+:c,1):0}",
+        "x3":"${Math.abs(:im2)>5?'-d2_2_1':0}",
+        "im3":"${Math.abs(:im2)>5?MMmath.round(:a*:x3**2/25+:b*:x3/5+:c,1):0}",
+        "x":"${Math.abs(:im0)<=5?:x0:Math.abs(:im1)<=5?:x1:Math.abs(:im2)<=5?:x2::x3}",        
+        "image":"${Math.abs(:im0)<=5?:im0:Math.abs(:im1)<=5?:im1:Math.abs(:im2)<=5?:im2::im3}",
+        "delta":"${(:b*:b-4*:a*(:c-:image))/25}",
+        "s1":"${(-:b/5+Math.sqrt(:delta))/(2*:a/25)}",
+        "s2":"${(-:b/5-Math.sqrt(:delta))/(2*:a/25)}",
+        "sol2":"${Math.abs(:x-:s1)>0.1?MMmath.round(:s1,1):MMmath.round(:s2,1)}"
+    },
+        "figure":{   
+            "type":"graph",
+            "scale":3,
+            "boundingbox":[-6,6,6,-6],
+            "keepAspect": false,
+            "axis":true,
+            "grid":true,
+            "content" : [
+                    ["functiongraph", ":a*x**2/25+:b*x/5+:c;"]  
+                ]               
+            },
+        "question":"Lire le ou les antécédents de $$${:image}$$ (à $$0.2$$ près).",
+        "answer":"${(Math.abs(:sol2)>5.6||Math.abs(:delta)<0.01||Math.abs(:delta-:b*:b/25)<0.01)&&:sol2!=NaN?'L’antécédent de $$'+:image+'$$ est $$\\color{red}{'+:x+'}$$':'Les antécédents de $$'+:image+'$$ sont $$\\color{red}{'+:x+'\\text{ et } '+:sol2+'}$$'} environ."
+        }
+    ]
+}

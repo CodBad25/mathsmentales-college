@@ -1,0 +1,88 @@
+{
+    "ID": "6GD7",
+    "title":"Distances et inégalités",
+    "description":"",
+    "type":"text",
+    "dest":["6GD","5GB"],
+    "consts":{
+        "lettres":"ABCDEFGHJKLMNPQRSTUVW"
+    },
+    "vars":{"l":"0_${:lettres.length-1}_6_^&",
+            "A":"${:lettres[:l[0]]}",
+            "B":"${:lettres[:l[1]]}",
+            "C":"${:lettres[:l[2]]}",
+            "D":"${:lettres[:l[3]]}",
+            "E":"${:lettres[:l[4]]}",
+            "F":"${:lettres[:l[5]]}",
+            "xA":"d-4_-2.5_1",
+            "xB":"d2.5_4_1",
+            "yA":"d-2_2_1",
+            "yB":"d-2_2_1",
+            "penteAB":"${(:yB-:yA)/(:xB-:xA)}",
+            "ordonneOrigine":"${:yA-:penteAB*:xA}",
+            "xE":"d-3_3_1",
+            "yE":"d3.5_4_1",
+            "xF":"d-3_3_1",
+            "yF":"d-3.5_-4_1",
+            "xC":"d${:xA+1}_0_1",
+            "yC":"${:ordonneOrigine+:penteAB*:xC}",
+            "xD":"d${:xC+1}_${:xB-1}_1",
+            "yD":"${:ordonneOrigine+:penteAB*:xD}"
+        },
+    "options":[{
+        "name":"Point n’appartenant pas à la droite",
+        "consts":{
+            "sommesExt":[
+                ["${:A+:E}+${:E+:C}","${:A+:E}+${:E+:D}","${:A+:E}+${:E+:B}","${:C+:E}+${:E+:D}","${:C+:E}+${:E+:B}","${:D+:E}+${:E+:B}"],
+                ["${:A+:F}+${:F+:C}","${:A+:F}+${:F+:D}","${:A+:F}+${:F+:B}","${:C+:F}+${:F+:D}","${:C+:F}+${:F+:B}","${:D+:F}+${:F+:B}"]],
+            "seulesExt":["${:A+:C}","${:A+:D}","${:A+:B}","${:C+:D}","${:C+:B}","${:D+:B}"]
+        },
+        "vars":{
+            "choixP":"0_1",
+            "somme":"0_${:sommesExt[:choixP].length-1}"
+        },
+        "question":"Comparer $$${:sommesExt[:choixP][:somme]}$$ et $$${:seulesExt[:somme]}$$.",
+        "answer":"$$${:sommesExt[:choixP][:somme]} \\color{red}{>} ${:seulesExt[:somme]}$$",
+        "value":">"
+        },{
+            "name":"Point appartenant au segment",
+            "consts":{
+                "sommes":["${:A+:C}+${:C+:D}","${:A+:C}+${:C+:B}","${:A+:D}+${:D+:B}","${:C+:D}+${:D+:B}"],
+                "seules":["${:A+:D}","${:A+:B}","${:A+:B}","${:C+:B}"]
+            },
+            "vars":{
+                 "somme":"0_${:sommes.length-1}"
+            },
+            "question":"Comparer $$${:sommes[:somme]}$$ et $$${:seules[:somme]}$$.",
+            "answer":"$$${:sommes[:somme]} \\color{red}{=} ${:seules[:somme]}$$",
+            "value":"="
+        },{
+            "name":"Point appartenant à la droite mais pas au segment",
+            "consts":{
+                "sommes":["${:C+:A}+${:A+:D}","${:C+:A}+${:A+:B}","${:D+:A}+${:A+:B}","${:D+:C}+${:C+:B}","${:A+:D}+${:D+:C}","${:A+:B}+${:B+:C}","${:A+:B}+${:B+:D}","${:C+:B}+${:B+:D}"],
+                "seules":["${:C+:D}","${:C+:B}","${:D+:B}","${:D+:B}","${:A+:C}","${:A+:C}","${:A+:D}","${:C+:D}"]
+            },
+            "vars":{
+                 "somme":"0_${:sommes.length-1}"
+            },
+            "question":"Comparer $$${:sommes[:somme]}$$ et $$${:seules[:somme]}$$.",
+            "answer":"$$${:sommes[:somme]} \\color{red}{>} ${:seules[:somme]}$$",
+            "value":">"
+        }
+    ],
+    "figure":{
+        "type":"graph",
+        "boundingbox":[-6,5,6,-5],
+        "axis":false,
+        "grid":false,
+        "content":[
+            ["point", ["${:xA}", "${:yA}"], {"name":"${:A}", "size":3, "face":"x", "label":{"offset":[0,"${:penteAB<0?10:-10}"]}}],
+            ["point", ["${:xB}", "${:yB}"], {"name":"${:B}", "size":3, "face":"x", "label":{"offset":[0,"${:penteAB<0?10:-10}"]}}],
+            ["point", ["${:xC}", "${:yC}"], {"name":"${:C}", "size":3, "face":"x", "label":{"offset":[0,"${:penteAB<0?10:-10}"]}}],
+            ["point", ["${:xD}", "${:yD}"], {"name":"${:D}", "size":3, "face":"x", "label":{"offset":[0,"${:penteAB<0?10:-10}"]}}],
+            ["point", ["${:xE}", "${:yE}"], {"name":"${:E}", "size":3, "face":"x", "label":{"offset":[8,3]}}],
+            ["point", ["${:xF}", "${:yF}"], {"name":"${:F}", "size":3, "face":"x", "label":{"offset":[8,3]}}],
+            ["line", ["${:A}", "${:B}"]]
+        ]
+    }
+}

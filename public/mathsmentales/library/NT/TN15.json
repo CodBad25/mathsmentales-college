@@ -1,0 +1,41 @@
+{
+  "ID": "",
+  "title": "Limite de suites géométriques",
+  "type": "text",
+  "dest": [
+    "TN1"
+  ],
+  "options": [
+    {
+      "name": "q>1",
+      "vars": {
+        "a": "-5_5_^0,1",
+        "q": "1.1_5_0.1",
+        "f": "$$  ${:a} \\times ${:q}^{n} $$",
+        "lim": "${:a > 0 ? '+\\infty' : '-\\infty'}"
+      }
+    },
+    {
+      "name": "q strictement compris entre -1 et 1",
+      "vars": {
+        "a": "-5_5_^0,1",
+        "q": "-9_9_^0",
+        "f": "$$  ${:a} \\times ${MMmath.nP(:q / 10)}^{n} $$",
+        "lim": "0"
+      }
+    },
+    {
+      "name": "q <=-1",
+      "vars": {
+        "a": "-5_5_^0,1",
+        "q": "-5_-1.1_0.1",
+        "f": "$$  ${:a} \\times (${:q})^{n} $$",
+        "lim": "\\text{ pas de limite }",
+        "set": "\\mathbb{N}"
+      }
+    }
+  ],
+  "question": "Déterminer la limite éventuelle de la suite définie sur $$ \\mathbb{N} $$ par $$u_n =$$ ${:f} lorsque $$n$$ tend vers $$+\\infty$$",
+  "answer": "$$ \\color{red}{${:lim}}$$",
+  "value": "${:lim}"
+}

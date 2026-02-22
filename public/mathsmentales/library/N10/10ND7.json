@@ -1,0 +1,20 @@
+{
+    "title":"CE1 Procédures -> Soustraire un nombre <9",
+    "auteur":"Xavier Levet",
+    "dest":["10ND"],
+    "options":[
+        {
+        "name":"Soustraire un nombre < 9 sans changement de dizaine",
+        "vars":{"a":"0_9","b":"1_8","c":"0_${:b}",
+         "qte":"${(:a*10+:b)-:c}"}
+        },{
+        "name":"Soustraire un nombre < 9 avec changement de dizaine",
+        "vars":{"a":"1_9","b":"0_8","c":"${:b+1}_9",
+         "qte":"${(:a*10+:b)-:c}"}
+        }
+    ],
+
+    "question":"${(:a*10+:b)}-${:c}",
+    "answer":":question = \\color{red}{${(:a*10+:b)-:c}}",
+    "value":"${(:a*10+:b)-:c}"
+}

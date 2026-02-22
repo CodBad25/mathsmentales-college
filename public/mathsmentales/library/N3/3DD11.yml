@@ -1,0 +1,65 @@
+title: Lectures graphiques d'images avec les fonctions usuelles
+dest: 
+  - 3DD
+  - 2F2
+  - Ko4
+keys: ["L","A","_","_","_","_","_","_"]
+repeat: 2
+description: >
+  Utilisation de la représentation graphique pour lire des images et des antécédents.
+textSize: small
+type: text
+consts:
+  fonctions:
+    racine: '(:a)*Math.sqrt(x-(:b)+5)+(:c)'
+  formules:
+    racine: '(:a)*sqrt(:x-(:b)+5)+(:c)'
+options:
+  - name: Lecture d'image sur une fonction affine
+    vars:
+      a: [-0.5, 1, 0.5, -1]
+      b: [0, -1, 1]
+      c: ${:a>0 ? '-4_2':'-2_4'}
+      x: '-4_4'
+      f: :a*(x-(:b))+(:c)
+      i: ${(:a)*(:x-(:b))+(:c)}
+  - name: Lecture d'image sur une fonction quadratique
+    vars:
+      a: [-1, 1]
+      b: [0, -1, -2, 1, 2]
+      c: ${:a>0 ? '-4_-1':'1_4'}
+      d: [0.25, 0.5, 1]
+      e: ${:d == 1 ? 2 ::d == 0.5 ? 3 :4}
+      minX: ${Math.max(-:e+:b, -4)}
+      maxX: ${Math.min(:e+:b, 4)}
+      x: '${:minX}_${:maxX}'
+      f: :a*:d*(x-(:b))**2+(:c)
+      i: ${(:a)*:d*(:x-(:b))**2+(:c)}
+  - name: Lecture d'image sur une fonction cubique
+    vars:
+      a: [-1, 1]
+      b: '-1_1'
+      c: ${:a>0 ? '-4_-1':'1_4'}
+      x: '-4_4'
+      f: :a*(x/2-(:b))**3+(:c)*x/2
+      i: ${(:a)*(:x/2-(:b))**3+(:c)*:x/2}
+  - name: Lecture d'image sur une fonction sinusoïdale
+    vars:
+      a: '-3_3_^0'
+      b: '-1_1'
+      c: ${:a>0 ? '-3_-1':'1_3'}
+      x: '-4_4'
+      f: :a*Math.sin((x-(:b)))+(:c)
+      i: ${Math.round((:a)*Math.sin((:x-(:b)))+(:c),1)}
+figure:
+  type: graph
+  scale: 3
+  boundingbox: [-5, 5, 5, -5]
+  keepAspect: false
+  axis: true
+  grid: {theme: 3}
+  content:
+    - - functiongraph
+      - :f
+question: À 0,2 près, quelle est l'image de $$:x$$ ?
+answer: L'image de $$:x$$ est $$\color{red}{:i}$$ environ.

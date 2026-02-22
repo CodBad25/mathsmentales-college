@@ -1,0 +1,49 @@
+{
+    "title":"Dérivée de fonction composée / g(ax²+bx+c)",
+    "repeat":true,
+    "type":"latex",
+    "ID":"GA15",
+    "description":"Trouver la dérivée de fonctions composées avec un polynome de degré 2, en utilisant $$g(ax²+bx+c)'=(2ax+b)g'(ax²+bx+c)$$",
+    "dest":["GA1"],
+    "textSize":"medium",
+    "keys":["x²","/","+","-","x","y","z","t"],
+    "consts":{"lettres":["x","y","z","t"]},
+    "vars":{
+        "a":"-3_3_^0",
+        "b":"-9_9",
+        "c":"-9_9",
+        "cx":"0_3",
+        "x":"${:lettres[:cx]}",
+        "f":"${MMmath.signIfOne(:a)+:x}^2${:b!=0?MMmath.signedNumberButOne(:b)+:x:''}${MMmath.signedNumber(:c)}",
+        "df":"${2*:a+:x}${MMmath.signedNumber(:b)}",
+        "mdf":"${-2*:a+:x}${MMmath.signedNumber(-:b)}"
+        },
+    "consigne":"Donner la fonction dérivée.",
+    "options":[{
+        "name": "Exponentielle",
+        "question":["\\left(e^{${:f}}\\right)'","\\dfrac{d}{d${:x}} e^{${:f}}"],
+        "answer":":question=\\color{red}{${:b!=0?'('+:df+')'::df} e^{${:f}}}",
+        "value":"${:b!=0?'('+:df+')'::df} e^{${:f}}"
+    },{
+        "name":"Logarithme népérien",
+        "question":["\\left(\\ln(${:f})\\right)'","\\dfrac{d}{d${:x}} \\ln(${:f})"],
+        "answer":":question=\\color{red}{\\dfrac{${:df}}{${:f}}}",
+        "value":"\\dfrac{${:df}}{${:f}}"
+    },{
+        "name":"Fonction sinus",
+        "question":["\\left(\\sin(${:f})\\right)'","\\dfrac{d}{d${:x}} \\sin(${:f})"],
+        "answer":":question=\\color{red}{${:b!=0?'('+:df+')'::df}\\cos(${:f})}",
+        "value":"${:b!=0?'('+:df+')'::df}\\cos(${:f})"
+    },{
+        "name":"Fonction cosinus",
+        "question":["\\left(\\cos(${:f})\\right)'","\\dfrac{d}{d${:x}} \\cos(${:f})"],
+        "answer":":question=\\color{red}{${:b!=0?'('+:mdf+')'::mdf}\\sin(${:f})}",
+        "value":"${:b!=0?'('+:mdf+')'::mdf}\\sin(${:f})"
+    },{
+        "name":"Fonction tangente",
+        "question":["\\left(\\tan(${:f})\\right)'","\\dfrac{d}{d${:x}} \\tan(${:f})"],
+        "answer":":question=\\color{red}{${:b!=0?'('+:df+')'::df}(1+\\tan^2(${:f})}",
+        "value":"${:b!=0?'('+:df+')'::df}(1+\\tan^2(${:f})"
+    }
+    ]
+}

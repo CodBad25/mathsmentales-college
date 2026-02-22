@@ -1,0 +1,25 @@
+{
+    "title":"Conversions classiques de base",
+    "type":"latex",
+    "ID":"9MA1",
+    "description":"Éviter d'utiliser en mode online, les corrections ne seront pas correctes et le clavier virtuel n'est pas adapté.",
+    "dest":["9MA","8MA","7MA"],
+    "consts":{"L":[["hL",2],["daL",1],["L",0],["dL",-1],["cL",-2],["mL",-3]],
+        "m":[["km",3],["hm",2],["dam",1],["m",0],["dm",-1],["cm",-2],["mm",-3]],
+        "g":[["t",6],["q",5],["kg",3],["hg",2],["dag",1],["g",0],["dg",-1],["cg",-2],["mg",-3]],
+        "W":[["hL",-1],["daL",-2],["L",-3],["dL",-4],["cL",-5],["mL",-6]]
+    },
+    "options":[{
+        "name":"Lien entre kilomètres et mètres",
+        "vars":{"b":[1,10,100,1000],"c":"1_${:b}"},
+        "question": "${:c}\\text{ km}=...\\text{ m}",
+        "answer":"${:c}\\text{ km}=\\color{red}{${:c*1000}}\\text{ m}",
+        "value":["${:c*1000}","${:c*1000} m"]
+    },{
+        "name":"Lien entre mètres et kilomètres",
+        "vars":{"b":[1,10,100,1000],"c":"1_${:b}"},
+        "question": "${:c*1000}\\text{ m}=...\\text{ km}",
+        "answer":"${:c*1000}\\text{ m}=\\color{red}{${:c}}\\text{ km}",
+        "value":["${:c}","${:c} km"]
+    }]
+}

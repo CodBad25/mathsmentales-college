@@ -1,0 +1,130 @@
+{
+    "ID":"6MD3",
+    "dest":["6MD"],
+    "type":"text",
+    "title":"Volume en cm³ par comptage de cubes",
+    "description":"Dénombrer les cubes pour trouver le volume",
+    "options":[
+        {
+            "name":"Cube complet (taille 2 à 5)",
+            "vars":{
+                "a":"2_5"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#00b3b3","#abbdc2","#4d7ee6","#c6dae0","#4470cc","#00ebeb"]},
+                    {"cube":"${:a}"}
+                ]
+            },
+            "answer":"Ce cube a un volume de $$${:a}\\times${:a}\\times${:a}=\\color{red}{${:a**3}}$$ cm³",
+            "value":"${:a**3}"
+        },{
+            "name":"Mur de cubes (jusqu’à 6 colonnes de 1 à 6 cubes)",
+            "vars":{
+                "a":"2_6",
+                "h0":"1_6",
+                "h1":"1_6",
+                "h2":"${:a>2?'1_6':0}",
+                "h3":"${:a>3?'1_6':0}",
+                "h4":"${:a>4?'1_6':0}",
+                "h5":"${:a>5?'1_6':0}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#00b3b3","#abbdc2","#4d7ee6","#c6dae0","#4470cc","#00ebeb"]},
+                    {"mur":["${:h0}","${:h1}","${:h2}","${:h3}","${:h4}","${:h5}"]}
+                ]
+            },
+            "answer":"Ce solide a un volume de $$${:h0}+${:h1}${:h2>0?'+'+:h2:''}${:h3>0?'+'+:h3:''}${:h4>0?'+'+:h4:''}${:h5>0?'+'+:h5:''}=\\color{red}{${:h0+:h1+:h2+:h3+:h4+:h5}}$$ cm³",
+            "value":"${:h0+:h1+:h2+:h3+:h4+:h5}"
+        },{
+            "name":"Cubes sur deux murs (jusqu'à 11 colonnes de 1 à 6 cubes)",
+            "vars":{
+                "a":"2_5",
+                "b":"1_4",
+                "ah0":"1_5",
+                "ah1":"1_${:ah0}",
+                "ah2":"${:a>2?'1_5':0}",
+                "ah3":"${:a>3?'1_5':0}",
+                "ah4":"${:a>4?'1_5':0}",
+                "bh1":"1_${:ah0}",
+                "bh2":"${:b>1?'1_5':0}",
+                "bh3":"${:b>2?'1_5':0}",
+                "bh4":"${:b>3?'1_5':0}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#00b3b3","#abbdc2","#4d7ee6","#c6dae0","#4470cc","#00ebeb"]},
+                    {"doublemur":[["${:ah0}","${:ah1}","${:ah2}","${:ah3}","${:ah4}"],["${:bh1}","${:bh2}","${:bh3}","${:bh4}"]]}
+                ]
+            },
+            "answer":"Le volume de ce solide est $$${:ah0}+${:ah1}${:ah2>0?'+'+:ah2:''}${:ah3>0?'+'+:ah3:''}${:ah4>0?'+'+:ah4:''}+${:bh1}${:bh2>0?'+'+:bh2:''}${:bh3>0?'+'+:bh3:''}${:bh4>0?'+'+:bh4:''}=\\color{red}{${:ah0+:ah1+:ah2+:ah3+:ah4+:bh1+:bh2+:bh3+:bh4}}$$ cm³",
+            "value":"${:ah0+:ah1+:ah2+:ah3+:ah4+:bh1+:bh2+:bh3+:bh4}"
+        },{
+            "name":"Pyramides (6 cas)",
+            "vars":{
+                "type":[
+                    [4,[[2,1,1,1],[1,2,1,1],[1,1,2,1],[2,2,1,0],[2,1,2,0]],5],
+                    [5,[
+                        [3,2,1,2,2,1,1,1,1],
+                        [1,2,3,1,2,2,1,1,1],[1,1,1,2,2,1,3,2,1],[3,3,3,2,2,0,1,0,0],[3,2,1,3,2,0,3,0,0]],14],
+                    [7,[[4,3,2,1,3,3,2,1,2,2,2,1,1,1,1,1],[1,2,3,4,1,2,3,3,1,2,2,2,1,1,1,1],[1,1,1,1,2,2,2,1,3,3,2,1,4,3,2,1],[4,4,4,4,3,3,3,0,2,2,0,0,1,0,0,0],[4,3,2,1,4,3,2,0,4,3,0,0,4,0,0,0]],30],
+                    [9,[[5,4,3,2,1,4,4,3,2,1,3,3,3,2,1,2,2,2,2,1,1,1,1,1,1],[1,2,3,4,5,1,2,3,4,4,1,2,3,3,3,1,2,2,2,2,1,1,1,1,1],[1,1,1,1,1,2,2,2,2,1,3,3,3,2,1,4,4,3,2,1,5,4,3,2,1],[5,5,5,5,5,4,4,4,4,0,3,3,3,0,0,2,2,0,0,0,1,0,0,0,0],[5,4,3,2,1,5,4,3,2,0,5,4,3,0,0,5,4,0,0,0,5,0,0,0,0]],55],
+                    [5,[[1,1,1,1,2,1,1,1,1]],10],
+                    [6,[[1,1,1,1,1,1,2,2,2,1,1,2,3,2,1,1,2,2,2,1,1,1,1,1,1]],35]],
+                "cols":"0_${:type[1].length-1}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#00b3b3","#abbdc2","#4d7ee6","#c6dae0","#4470cc","#00ebeb"]},
+                    {"cubeincomplet":"${:type[1][:cols]}"}
+                ]
+            },
+            "question":"Combien de cubes comporte cette pyramide ?",
+            "answer":"Cette pyramide a un volume de <span class='red'>${:type[2]} cm³</red>",
+            "value":"${:type[2]}"
+        },{
+            "name":"Extrait de pavé droit (de base 3x3)",
+            "vars":{
+                "ah0":"2_5",
+                "bh2":"1_${:ah0}",
+                "bh1":"${:bh2}_${:ah0}",
+                "bh3":"${:bh2}_${:ah0}",
+                "ch1":"0_${:bh1}",
+                "ch2":"0_${:bh2}",
+                "ch3":"0_${:bh2}",
+                "ch4":"0_${:bh2}",
+                "ch5":"0_${:bh3}"
+            },
+            "figure":{
+                "type":"graph3Dcubes",
+                "boundingbox":[-5,8,5,0],
+                "axis":false,
+                "grid":false,
+                "content":[
+                    {"colors":["#00b3b3","#abbdc2","#4d7ee6","#c6dae0","#4470cc","#00ebeb"]},
+                    {"cubeincomplet":["${:ah0}","${:bh1}","${:ch1}","${:bh3}","${:bh2}","${:ch2}","${:ch5}","${:ch4}","${:ch3}"]}
+                ]
+            },
+            "answer":"Ce solide a un volume de $$${:ah0}+${:bh1}${:ch1>0?'+'+:ch1:''}+${:bh3}+${:bh2}${:ch2>0?'+'+:ch2:''}${:ch5>0?'+'+:ch5:''}${:ch4>0?'+'+:ch4:''}${:ch3>0?'+'+:ch3:''}=\\color{red}{${:ah0+:bh1+:bh2+:bh3+:ch1+:ch2+:ch3+:ch4+:ch5}}$$ cm³",
+            "value":"${:ah0+:bh1+:bh2+:bh3+:ch1+:ch2+:ch3+:ch4+:ch5}"
+        }
+    ],
+    "question":"Un petit cube a pour volume 1 cm³. Quel est le volume de ce solide (aucune colonne cachée) ?"
+}

@@ -1,0 +1,47 @@
+{
+    "title": "Écrire en chiffres jusqu'a 100",
+    "type": "text",
+    "speech": 1,
+    "ID": "11NB2",
+    "description": "Écriture en chiffres des nombres inférieurs à 100",
+    "dest": ["11NB", "10NB"],
+    "options": [{
+        "name": "Écriture en chiffres des nombres de 1 à 9",
+        "vars": {"n": "0_10"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 10 à 19",
+        "vars": {"n": "10_19"}
+    }, {
+        "name": "Écriture en chiffres des dizaines",
+        "vars": {"n0": "1_9", "n": "${:n0*10}"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 21 à 30",
+        "vars": {"n": "21_30"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 31 à 40",
+        "vars": {"n": "31_40"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 41 à 50",
+        "vars": {"n": "41_50"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 51 à 60",
+        "vars": {"n": "51_60"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 61 à 70",
+        "vars": {"n": "61_70"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 71 à 80",
+        "vars": {"n": "71_80"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 81 à 90",
+        "vars": {"n": "81_90"}
+    }, {
+        "name": "Écriture en chiffres des nombres de 91 à 100",
+        "vars": {"n": "91_100"}
+    }],
+    "question": "Écris en chiffres le nombre <b>${MMmath.NumberToLetter(:n)}</b>.",
+    "shortq": "<b>${MMmath.NumberToLetter(:n)}</b> en chiffres ?",
+    "audio": "Écris en chiffres le nombre ${MMmath.NumberToLetter(:n)}",
+    "answer": "${MMmath.NumberToLetter(:n)} s'écrit $$\\color{red}{${:n}}$$",
+    "value": "${:n}"
+}

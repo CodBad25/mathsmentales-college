@@ -1,0 +1,23 @@
+{
+    "title":"Décomposition de fraction en entier + fraction inférieure à 1",
+    "ID":"6NB4",
+    "speech":1,
+    "keys":["_","_","/","+"],
+    "description":"Écrire une fraction en utilisant la décomposition qui correspond aux notations anglo saxones.",
+    "dest":["7NB","6NB","5NA","4NA","3NA"],
+    "consigne":"Décomposer en entier + fraction inférieure à 1",
+    "question":"\\dfrac{${:num}}{${:den}}~=~ ... + \\dfrac{...}{...}",
+    "shortq":"\\dfrac{${:num}}{${:den}}~=~ \\colorbox{#ECECEC}{\\quad} + \\dfrac{\\colorbox{#ECECEC}{\\quad}}{\\colorbox{#ECECEC}{\\quad}}",
+    "audio":"Décomposer ${:num} ${MMmath.NumberToFraction(:den)} en un entier plusse une fraction plus petite que 1.",
+    "options":[{
+        "name":"Dénominateur entre 2 et 11",
+        "vars":{"den":"2_11", "num":"12_${:den*10}","entier":"${Math.floor(:num/:den)}", "reste":"${:num%:den}"},
+        "answer":"\\dfrac{${:num}}{${:den}} = \\color{red}{${:entier}${(:reste>0)?'+\\dfrac{'+:reste+'}{'+:den+'}':''}}",
+        "value":"${(:entier>0)?:entier:''}${(:reste>0)?'+'+:reste+'/'+:den:''}"
+    },{
+        "name":"Dénominateur entre 12 et 17",
+        "vars":{"den":"12_17", "num":"12_100","entier":"${Math.floor(:num/:den)}", "reste":"${:num%:den}"},
+        "answer":"\\dfrac{${:num}}{${:den}} = \\color{red}{${(:entier>0)?:entier:''}${(:entier>0 && :reste>0)?'+':''}${(:reste>0)?'\\dfrac{'+:reste+'}{'+:den+'}':''}}",
+        "value":"${(:entier>0)?:entier:''}${(:entier>0 && :reste>0)?'+':''}${(:reste>0)?:reste+'/'+:den:''}"
+    }]
+}

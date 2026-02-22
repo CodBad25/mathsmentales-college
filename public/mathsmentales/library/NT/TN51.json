@@ -1,0 +1,48 @@
+{
+  "title": "logarithme néperien d'exponentielle et ses puissances",
+  "dest": [
+    "TN5"
+  ],
+  "consigne": "Calculer",
+  "options": [
+    {
+      "name": "ln(exp) nombres positifs",
+      "vars": {
+        "n": "0_20"
+      },
+      "question": "ln(e^{${:n}})",
+      "answer": ":question=\\color{red}{${:n}}"
+    },
+    {
+      "name": "ln(1/exp), nombres positifs",
+      "vars": {
+        "n": "0_20"
+      },
+      "question": "ln\\left(\\dfrac1{e^{${:n}}}\\right)",
+      "answer": ":question=\\color{red}{${:n>0?-:n:0}}"
+    },
+    {
+      "name": "ln √e^n",
+      "vars": {
+        "n": "0_10"
+      },
+      "question": "ln\\left(\\sqrt e${:n!=1?'^{'+:n+'}':''}\\right)",
+      "answer": ":question\\color{green}{${:n>0&&:n%2==0?'=\\dfrac{'+(:n)+'}2':''}}=\\color{red}{${MMmath.fractionSimplifiee(:n,2)}}"
+    },
+    {
+      "name": "ln 1/√e^n",
+      "vars": {
+        "n": "0_10"
+      },
+      "question": "ln\\left(\\dfrac 1{\\sqrt e${:n!=1?'^{'+:n+'}':''}}\\right)",
+      "answer": ":question\\color{green}{${:n>0&&:n%2==0?'=\\dfrac{'+(-:n)+'}2':''}}=\\color{red}{${MMmath.fractionSimplifiee(-:n,2)}}"
+    },{
+      "name":"ln d’une racine nième de e (hors programme)",
+      "vars":{
+        "n":"3_10"
+      },
+      "question":"ln \\sqrt[${:n}]{e}",
+      "answer":":question=\\color{red}{\\dfrac1${:n}}"
+    }
+  ]
+}

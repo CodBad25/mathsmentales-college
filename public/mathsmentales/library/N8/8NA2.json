@@ -1,0 +1,34 @@
+{
+    "title":"Ajouter une unité, une dizaine ... à un entier",
+    "ID":"8NA2",
+    "speech":1,
+    "type":"text",
+    "description":"Somme d'un nombre entier avec une unité, une dizaine, une centaine, sans retenue.",
+    "dest":["8NA", "7NA", "6NA"],
+    "keys":["_","_","_","_","_","_","_","_"],
+    "options":[{
+            "name":"Ajouter une unité",
+            "vars":{"a":[9,99,999],"b":"1_${:a}","u":"0_8","t1":"${:b*10+:u}", "t2":"1", "ajout":"unité", "spc":"\\quad"}
+        },{
+            "name":"Ajouter une dizaine",
+            "vars":{"a":[9,99,999],"b":"1_${:a}","d":"0_8","u":"0_9","t1":"${:b*100+:d*10+:u}", "t2":"10", "ajout":"dizaine", "spc":"\\quad"}
+        },{
+            "name":"Ajouter une centaine",
+            "vars":{"a":[9,99,999],"b":"1_${:a}","c":"0_8","k":[9,99,99,99],"u":"1_${:k}","t1":"${:b*1000+:c*100+:u}", "t2":"100", "ajout":"centaine", "spc":"\\quad\\quad"}
+        },{
+            "name":"Ajouter un millier",
+            "vars":{"a":[9,99,999],"b":"1_${:a}","m":"0_8","k":[9,99,999,999,999],"u":"1_${:k}","t1":"${:b*10000+:m*1000+:u}", "t2":"1000", "ajout":"unité de mille", "spc":"\\quad\\quad\\quad"}
+        },{
+            "name":"Ajouter une dizaine de mille",
+            "vars":{"a":[9,99,999],"b":"1_${:a}","m":"0_8","k":[9,99,999,9999,9999,9999,9999],"u":"1_${:k}","t1":"${:b*100000+:m*10000+:u}", "t2":"10000", "ajout":"dizaine de mille", "spc":"\\quad\\quad\\quad"}
+        },{
+            "name":"Ajouter une centaine de mille",
+            "vars":{"a":[9,99,999],"b":"1_${:a}","m":"0_8","k":[9,99,999,9999,99999,99999,99999,99999,99999],"u":"1_${:k}","t1":"${:b*1000000+:m*100000+:u}", "t2":"100000", "ajout":"centaine de mille", "spc":"\\quad\\quad\\quad\\quad"}
+        }
+    ],
+    "question": "Quel nombre obtient-on si l'on ajoute une <b>${:ajout}</b> à $$${:t1}$$ ?",
+    "shortq": "$$${:t1}+$$une <b>${:ajout}</b> $$=\\colorbox{#ECECEC}{${:spc}}$$",
+    "audio":"Quel nombre obtient-on si l'on ajoute une ${:ajout} à ${:t1} ?",
+    "answer":"$$${:t1}+${:t2}=\\color{red}{${:t1+:t2}}$$",
+    "value":"${:t1+:t2}"
+}

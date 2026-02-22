@@ -1,0 +1,56 @@
+title: Repérage dans le plan avec les relatifs
+dest:
+  - 5GR
+  - 4GR
+  - 3GR
+type: text
+textSize: medium
+description: >
+  Lire les coordonnées d'un point, placer un point.
+options:
+  - name: Lire les coordonnées
+    vars:
+      sX: [-1, 1]
+      sY: [-1, 1]
+      x: ${:sX>0 ? '0_5':'-5_0'}
+      y: ${:sY>0 ? '0_5':'-5_0'}
+    figure:
+      type: graph
+      scale: 3
+      boundingbox: [-6, 6, 6, -6]
+      keepAspect: false
+      axis: true
+      grid: true
+      content:
+        - - point
+          - [:x, :y]
+          - { face: "x", size: 3 }
+    question: Quelles sont les coordonnées du point A ?
+    answer: Les coordonnées du point A sont ( :x ; :y ).
+    value: (:x, :y)
+  - name: Placer un point
+    vars:
+      sX: [-1, 1]
+      sY: [-1, 1]
+      x: ${:sX>0 ? '0_5':'-5_0'}
+      y: ${:sY>0 ? '0_5':'-5_0'}
+    figure:
+      type: graph
+      scale: 3
+      boundingbox: [-6, 6, 6, -6]
+      keepAspect: false
+      axis: true
+      grid: true
+    question: Placer le point de coordonnées ( :x ; :y )
+    answer: ""
+    figureCorrection:
+      type: graph
+      scale: 3
+      boundingbox: [-6, 6, 6, -6]
+      keepAspect: false
+      axis: true
+      grid: true
+      content:
+        - - point
+          - [:x, :y]
+          - { face: "x", size: 3 }

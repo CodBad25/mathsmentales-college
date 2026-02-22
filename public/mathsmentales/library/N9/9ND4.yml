@@ -1,0 +1,31 @@
+title: CE2 Procédures -> Produit d'un nombre entre 11 et 99 par un nombre <10
+dest: [9ND, 8ND] # on pourrait le présenter autrement :
+# dest:
+#   - 9ND
+#   - 8ND
+auteur: Xavier Levet
+consigne: Calculer
+options: # options étant une liste, on commence chaque entrée par un - et on indente l'objet
+    - name: Produit d'un nombre <30 par un nombre <6
+      vars: # vars étant un objet, on ne met pas de tirets
+        a: '1_29' # le _ ne passant pas, il faut le mettre entre guillemets
+        b: '1_5'
+        qte: ${:a*:b}
+    - name: Produit d'un nombre <30 par un nombre <10
+      vars:
+        a: '1_29'
+        b: '1_9'
+        qte: ${:a*:b}
+    - name: "Produit d'un nombre <100 par un nombre <6 "
+      vars:
+        a: '1_99'
+        b: '1_5'
+        qte: ${:a*:b}
+    - name: "Produit d'un nombre <100 par un nombre <10 "
+      vars:
+        a: '1_99'
+        b: '1_9'
+        qte: ${:a*:b}
+question: :a \times :b
+answer: :question = \color{red}{${:a*:b}}
+value: ${:a*:b}

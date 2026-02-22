@@ -1,0 +1,27 @@
+{
+    "ID":"11ND1",
+    "dest":["11ND","10ND","9ND"],
+    "title":"Compléments à 10",
+    "description":"ajouter pour avoir 10",
+    "type":"text",
+    "speech":1,
+    "options":[
+        {
+            "name":"Phrase",
+            "vars":{"k":"1_9", "r":"${10-:k}"},
+            "question":"Combien faut-il ajouter à ${:k} pour avoir 10 ?",
+            "audio":"Combien faut-il ajouter à ${:k} pour avoir 10 ?",
+            "answer":"Il faut ajouter <span class='red'>${:r}</span> à ${:k} pour avoir 10.",
+            "value":"${:r}"
+        },
+        {
+            "name":"Addition à trou",
+            "vars":{"k":"1_9", "r":"${10-:k}"},
+            "question":"Complète<br>$$${:k} + ... = 10$$",
+            "shortq":"$$${:k} + \\colorbox{#ECECEC}{\\quad} = 10$$",
+            "audio":"${:k} pluss combien est égal à 10 ?",
+            "answer":"$$${:k} + \\color{red}{${:r}} = 10$$",
+            "value":"${:r}"
+        }
+    ]
+}

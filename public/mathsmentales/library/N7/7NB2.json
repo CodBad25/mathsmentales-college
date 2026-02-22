@@ -1,0 +1,35 @@
+{
+    "title":"CM2 mémoriser -> Connaître l'écriture décimale de fractions usuelles",
+    "auteur":"Xavier Levet",
+    "type":"text",
+    "dest":["7NB"],    
+    "options":[{
+        "name":"Fractions décimales",
+        "vars":{"den":[10,100,1000], "num":1},
+        "value":"${:num/:den}",
+       "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"quarts et demis",
+        "vars":{"den":[2,4], "num":1},
+        "value":"${:num/:den}",
+       "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"3/4, 3/2",
+        "vars":{"num":3, "den":[2,4]},
+        "value":"${:num/:den}",
+       "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    },{
+        "name":"4/2, 5/2",
+        "vars":{"den":2, "num":[5,4]},
+        "value":"${:num/:den}",
+       "question":"Quelle est l'écriture décimale de $$\\dfrac{:num}{:den}$$ ?",
+        "answer":"$$\\dfrac{${:num}}{${:den}}=\\color{red}{${MMmath.round(:num/:den,4)}}$$"
+    }
+    ]
+   
+}
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Cartes Flash MathsMentales</title>
+        <style>
+            /*MMentales*/
+            @page{
+                size:A4 portrait;
+                margin:1cm;
+            }
+        </style>
+        <link rel="stylesheet" href="css/cartesflash-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script type="module" src="js/lib.cartesflash-2.3.176.js" id="mmscriptid"></script>
+    </head>  
+    <body size="A4">
+        <section id="creator-menu">
+                <button onclick="window.print();">Imprimer</button> pour imprimer ou faire un pdf.
+                <button id="btnPageOrientation" title="Change l'orientation de la page">paysage</button>
+                <button id="btnRectoVerso" title="Change le type d'impression">Recto</button>
+                <br>
+                Taille texte : <span id="fontSize"></span> Fond de Q :
+                <input type="color" id="inputCoinColor" title="Couleur du coin Q">
+                Texte <input type="text" id="identifiant" size="15" title="Entrée pour valider" placeholder="Multiplications...">
+                <button id="btnValidateText"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg></button>
+                <input type="color" id="inputDecoColor" title="Couleur du texte décoratif">
+                | Bord du verso
+                <input type="color" id="inputcolorborder" title="Couleur de la bordure des réponses"><br>
+                Numéroter :
+                <input type="radio" id="radioNo" name="num" value="no" checked><label for="radioQ">non</label>
+                <input type="radio" id="radioQ" name="num" value="Q"><label for="radioQ">avec Q</label>
+                <input type="radio" id="radioText" name="num" value="text"><label for="radioText">avec le texte</label>
+                | Taille de la carte :
+                L<input id="inputwidth" value="55" title="Taille cartes" type="number" size="4" min="30" max="100"> mm
+                H<input id="inputheight" value="55" title="Taille cartes" type="number" size="3" min="30" max="180"> mm<br>
+                Réponse : <input type="radio" name="anstype" id="radioAnsTypeNorm" value="normal" checked> <label for="radioAnsTypeNorm">Normale</label>
+                <input type="radio" name="anstype" id="radioAnsTypeShort" value="value"> <label for="radioAnsTypeShort">Courte</label>
+            </section>
+        <div id="creator-container"><section id="creator-content"></section>
+        </div>
+    <script src="bridge.js"></script>
+</body>
+</html>

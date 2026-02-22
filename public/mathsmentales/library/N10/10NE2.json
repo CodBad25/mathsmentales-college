@@ -1,0 +1,31 @@
+{
+    "title":"CE1 Connaissances -> Multiplier par 10",
+    "dest":["10NE"],
+    "auteur":"Xavier Levet",
+    "options":[
+        {
+        "name":"Multiplier par 10 un nombre <10",
+        "vars":{"a":"0_9",
+         "qte":"${:a*10}"  }  
+        },{
+        "name":"Multiplier par 10 un nombre de dizaines <10",
+        "vars":{"a":[10,20,30,40,50,60,70,80,90],
+         "qte":"${:a*10}"  }  
+        },{
+        "name":"Multiplier par 10 un nombre <30",
+        "vars":{"a":"1_29",
+         "qte":"${:a*10}"  }  
+        },{
+        "name":"Multiplier par 10 un nombre <50",
+        "vars":{"a":"1_50",
+         "qte":"${:a*10}"  }  
+        },{
+        "name":"Multiplier par 10 un nombre <100",
+        "vars":{"a":"1_99",
+         "qte":"${:a*10}"  }  
+        }
+    ],
+    "question":"${:a} \\times 10",
+    "answer":":question =\\color{red}{${:a*10}}",
+    "value":"${:a*10}"
+}

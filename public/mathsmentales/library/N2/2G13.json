@@ -1,0 +1,26 @@
+{
+    "title":"Produit d'un vecteur par un nombre",
+    "description":"Calculer les coordonnées d'un produit d'un vecteur par un nombre.",
+    "type":"text",
+    "ID":"2G13",
+    "dest":["2G1"],
+    "textSize":"medium",
+    "keys":["(",";","-","_","_","_","_","_"],
+    "consts":{"vecteurs":["u", "v", "w", "u'", "v'", "w'"]},
+    "options":[{
+        "name":"Produit par un positif",
+        "vars":{"k":"0_10","x":"-12_12_2","v":"0_5"}
+    },{
+        "name":"Produit par un négatif",
+        "vars":{"k":"-10_-1","x":"-12_12_2","v":"0_5"}
+    },{
+        "name":"Linéarité",
+        "vars":{"k":"-10_10_2_^0","v":"0_5","x":"-10_10_2"},
+        "question":"Si $$\\vec{${:vecteurs[:v]}}(${:x[0]};${:x[1]})$$, alors $$${MMmath.signIfOne(:k[0])}\\vec{${:vecteurs[:v]}}${MMmath.signedNumberButOne(:k[1])}\\vec{${:vecteurs[:v]}}(?;?)$$",
+        "answer":"$$\\vec{${:vecteurs[:v]}}(${:x[0]};${:x[1]})$$, donc $$${MMmath.signIfOne(:k[0])}\\vec{${:vecteurs[:v]}}${MMmath.signedNumberButOne(:k[1])}\\vec{${:vecteurs[:v]}}\\color{red}{(${(:k[0]+:k[1])*:x[0]};${(:k[0]+:k[1])*:x[1]})}$$",
+        "value":"(${(:k[0]+:k[1])*:x[0]};${(:k[0]+:k[1])*:x[1]})"
+    }],
+    "question": "Si $$\\vec{${:vecteurs[:v]}}(${:x[0]};${:x[1]})$$, alors $$${:k==0?:k+'\\times '::k}\\vec{${:vecteurs[:v]}} (?;?)$$",
+    "answer":"$$\\vec{${:vecteurs[:v]}}(${:x[0]};${:x[1]})$$, donc $$${:k}\\vec{${:vecteurs[:v]}} \\color{red}{(${:k*:x[0]};${:k*:x[1]})}$$",
+    "value":"\\left(${:k*:x[0]};${:k*:x[1]}\\right)"
+}

@@ -1,0 +1,70 @@
+{
+    "title":"Inverse d'un nombre",
+    "type":"text",
+    "ID":"4NA2",
+    "textSize":"medium",
+    "keys":["_","_","-","/","_","_","_","_"],
+    "dest":["4NA","3NA"],
+    "consts":{
+        "d":[0.5, 0.25, 0.125, 0.2, 0.1, 0.01, 0.001, 2, 4, 8, 5, 10, 100, 1000, 2.5, 40, 20, 0.05]
+    },
+    "options":[{
+        "name":"Inverses de décimaux classiques",
+        "vars":{"n":"0_17"},
+        "question": ["Quel est l'inverse de $$${:d[:n]}$$ ?", "$$${:d[:n]}^{-1}$$"],
+        "answer":["l'inverse de $$${:d[:n]}$$ est <span class='red'>$$${MMmath.round(1/:d[:n],4)}$$</span>",
+            "$$${:d[:n]}^{-1} =\\color{red}{${MMmath.round(1/:d[:n],4)}}$$"],
+        "value":"${MMmath.round(1/:d[:n],4)}"
+    },{
+        "name":"Inverses de décimaux classiques avec négatifs",
+        "vars":{"n":"0_17", "s":"-1_1_^0"},
+        "question": ["Quel est l'inverse de $$${:s*:d[:n]}$$ ?",
+            "$$${(:s>0)?:d[:n]:'('+(:s*:d[:n])+')'}^{-1}$$"],
+        "answer":["L'inverse de $$${:s*:d[:n]}$$ est <span class='red'>$$${:s*MMmath.round(1/:d[:n],4)}$$</span>",
+            "$$${(:s>0)?:d[:n]:'('+(:s*:d[:n])+')'}^{-1}=\\color{red}{${MMmath.round(:s*1/:d[:n],4)}}$$"],
+        "value":"${MMmath.round(:s*1/:d[:n],4)}"
+    },{
+        "name":"Inverse d'entier",
+        "vars":{"n":"1_50"},
+        "question":["Quel est l'inverse de $$${:n}$$ ?",
+            "$$${:n}^{-1}$$"],
+        "answer":["L'inverse de $$${:n}$$ est <span class='red'>$$\\displaystyle${MMmath.inverse(:n)}$$</span>",
+            "$$${:n}^{-1}=\\color{red}{\\displaystyle${MMmath.inverse(:n)}}$$"],
+        "value":"${MMmath.inverse(:n)}"
+    },{
+        "name":"Inverse d'entier relatif",
+        "vars":{"n":"1_50", "s":"-1_1_^0"},
+        "question":[
+            "Quel est l'inverse de $$${:s*:n}$$ ?",
+            "$$${(:s>0)?:n:('(-'+:n+')')}^{-1}$$"
+        ],
+        "answer":[
+            "L'inverse de $$${:s*:n}$$ est <span class='red'>$$\\displaystyle${MMmath.inverse(:s*:n)}$$</span>",
+            "$$${(:s>0)?:n:('(-'+:n+')')}^{-1}=\\color{red}{\\displaystyle${MMmath.inverse(:s*:n)}}$$"
+        ],
+        "value":"${MMmath.inverse(:s*:n)}"
+    },{
+        "name":"Inverse de fraction",
+        "vars":{"num":"1_20","den":"2_20_^${:num}"},
+        "question" :[
+            "Quel est l'inverse de $$\\dfrac{${:num}}{${:den}}$$ ?",
+            "$$\\left(\\dfrac{${:num}}{${:den}}\\right)^{-1}$$"],
+        "answer":[
+            "L'inverse de $$\\dfrac{${:num}}{${:den}}$$ est <span class='red'>$$\\displaystyle${MMmath.inverse(:num+'/'+:den)}$$</span>",
+            "$$\\left(\\dfrac{${:num}}{${:den}}\\right)^{-1}=\\color{red}{\\displaystyle${MMmath.inverse(:num+'/'+:den)}}$$"
+        ],
+        "value":"${MMmath.inverse(:num+'/'+:den)}"
+    },{
+        "name":"Inverse de fraction avec relatifs",
+        "vars":{"num":"-20_20_^0","den":"-20_20_^${:num},0"},
+        "question" :[
+            "Quel est l'inverse de $$\\dfrac{${:num}}{${:den}}$$ ?",
+            "$$\\left(\\dfrac{${:num}}{${:den}}\\right)^{-1}$$"],
+        "answer":[
+            "L'inverse de $$\\dfrac{${:num}}{${:den}}$$ est <span class='red'>$$\\displaystyle${MMmath.inverse(:num+'/('+:den+')')}$$</span>",
+            "$$\\left(\\dfrac{${:num}}{${:den}}\\right)^{-1}=\\color{red}{\\displaystyle${MMmath.inverse(:num+'/('+:den+')')}}$$"
+        ],
+        "value":"${MMmath.inverse(:num+'/('+:den+')')}"
+    }
+    ]
+}

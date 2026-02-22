@@ -1,0 +1,38 @@
+{
+    "title":"CM Procédures -> Diviser un nombre par 4 ou par 8",
+    "auteur":"Xavier Levet",
+    "dest":["7NE","6NE"],
+    "consigne":"Calculer",
+    "speech":1,
+    "keys":["_","_","_","_","_","_","_","_"],
+    "options":[{
+        "name":"Diviser par 4, résultat entier",
+        "vars":{"a":"1_25","c":"${MMmath.round(:a*4)}"},
+        "question": "${:c}\\div 4",
+        "audio": "${String(:c).replace('.',',')} divisé par 4",
+        "answer":":question=\\color{red}{${MMmath.round(:c/4)}}",
+        "value":"${MMmath.round(:c/4)}"
+    },{
+        "name":"Diviser par 4, résultat décimal",
+        "vars":{"a":"1_50","c":"${MMmath.round(:a*2)}"},
+        "question": "${:c}\\div 4",
+        "audio": "${String(:c).replace('.',',')} divisé par 4",
+        "answer":":question=\\color{red}{${MMmath.round(:c/4,1)}}",
+        "value":"${MMmath.round(:c/4,1)}"
+    },{
+        "name":"Diviser par 8, résultat entier",
+        "vars":{"a":"1_12","c":"${MMmath.round(:a*8)}"},
+        "question": "${:c}\\div 8",
+        "audio": "${String(:c).replace('.',',')} divisé par 8",
+        "answer":":question=\\color{red}{${MMmath.round(:c/8)}}",
+        "value":"${MMmath.round(:c/8)}"
+    },{
+        "name":"Diviser par 8, résultat décimal",
+        "vars":{"a":"1_25","c":"${MMmath.round(:a*4)}"},
+        "question": "${:c}\\div 8",
+        "audio": "${String(:c).replace('.',',')} divisé par 8",
+        "answer":":question=\\color{red}{${MMmath.round(:c/8,1)}}",
+        "value":"${MMmath.round(:c/8,1)}"
+    }
+]
+}

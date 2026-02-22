@@ -1,0 +1,46 @@
+{
+    "title":"CE2 Procédures -> Ajouter 8,9,18,19,28,29,38,39 à un nombre",
+    "dest":["9ND"],
+    "auteur":"Xavier Levet",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Ajouter 9 à un nombre inférieur à 90",
+        "vars":{"a":9,"b":"1_89"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 8 à un nombre inférieur à 90",
+        "vars":{"a":8,"b":"1_89"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 19 à un nombre inférieur à 80",
+        "vars":{"a":19,"b":"1_79"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 18 à un nombre inférieur à 80",
+        "vars":{"a":18,"b":"1_79"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 9, 19, 29, 39 à un nombre inférieur à 60",
+        "vars":{"a":[9,19,29,39],"b":"1_59"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 8, 18, 28, 38 à un nombre inférieur à 60",
+        "vars":{"a":[8,18,28,38],"b":"1_59"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 8, 9, 18, 19, 28, 29, 38, 39 à un nombre entre 60 et 100",
+        "vars":{"a":[8,9,18,19,28,29,38,39],"b":"60_100"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 8, 9, 18, 19, 28, 29, 38, 39 à un nombre jusqu'à 260",
+        "vars":{"a":[8,9,18,19,28,29,38,39],"b":"0_260"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           },{
+        "name":"Ajouter 8, 9, 18, 19... 98, 99 à un nombre jusqu'à 1000",
+        "vars":{"a":[8,9,18,19,28,29,38,39,48,49,58,59,68,69,78,79,88,89,98,99],"b":"0_1000"},
+        "question": ["${:a}+${:b}", "${:b}+${:a}"]
+           }
+    ],
+    "answer":":question=\\color{red}{${:a+:b}}",
+    "value":"${:a+:b}"
+}

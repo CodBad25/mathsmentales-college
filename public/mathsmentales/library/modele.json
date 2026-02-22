@@ -1,0 +1,21 @@
+{
+    "title":"",
+    "type":"latex",
+    "ID":"",
+    "description":"",
+    "dest":[""],
+    "consts":{},
+    "vars":{"a":"", "b":"", "c":["u","v","t","x", "y", "z"]},
+    "options":[{
+        "name":"",
+        "vars":{},
+        "consts":{},
+        "question": ["", ""],
+        "answer":"",
+        "value":""
+    }
+    ],
+    "question":"",
+    "answer":"",
+    "value":""
+}

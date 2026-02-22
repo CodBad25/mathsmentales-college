@@ -1,0 +1,113 @@
+{
+    "dest": [
+        "8NE",
+        "7NE",
+        "6NE"
+    ],
+    "title": "Résoudre des problèmes multiplicatifs avec des décimaux",
+    "type": "text",
+    "consts":{
+        "prenoms": [
+            "Alexandre", "Pierre", "Jean", "Paul", "Théo",
+            "Luc", "Guillaume", "Hugo", "Clément", "Jules",
+            "Marie", "Anne", "Sophie", "Alice", "Chloé",
+            "Émilie", "Léa", "Manon", "Sarah", "Camille",
+            "Lina","Fatima","Amina","Amira","Samira",
+            "Rayan","Aaron","Leo","Liam",
+            "Ava","Emma","Mia"
+        ]
+    },
+
+    "options": [
+        {
+            "name":"Résolution par multiplication (CM)",
+            "consts": {
+                "phrases": [
+                    [
+                        "Des feuilles ont une épaisseur de $$${:n2}~mm$$. Quelle est l’épaisseur d’un tas de ${:n1} de ces mêmes feuilles ?",
+                        "Le tas mesure $$${:n1}\\times${:n2}=\\color{red}{${:produit}~mm}$$."
+                    ],[
+                        "Un fabriquant de cosmétiques verse $$${:n2}~L$$ d'un principe actif pour 1L. Combien doit-il verser pour $$${:n1}~L$$ ?",
+                        "Il doit verser $$${:n1}\\times${:n2}=\\color{red}{${:produit}~L}$$."
+                    ],[
+                        "Pour faire un sirop dans 1 L d’eau, ${:paul} utilise $$${:n2}~kg$$ de sucre. Quelle quantité de sucre est nécessaire pour ${:n1} L de sirop ?",
+                        "Il faut $$${:n1}\\times${:n2}=\\color{red}{${:produit}~kg}$$ de sucre."
+                    ],[
+                        "Pour une vinaigrette de 1 dL, ${:paul} utilise $$${:n2}~cL$$ de son ingrédient secret. Quelle quantité de cet ingrédient serait nécessaire pour ${:n1} dL de vinaigrette ?",
+                        "Il faudrait $$${:n1}\\times${:n2}=\\color{red}{${:produit}~cL}$$"
+                    ]
+                ]
+            },
+            "vars": {
+                "situation": "0_${:phrases.length-1}",
+                "pren":"0_${:prenoms.length-1}",
+                "paul":"${:prenoms[:pren]}",
+                "n1": "2_10",
+                "ne2":"2_10",
+                "d":[10,100,1000],
+                "n2": "${MMmath.round(:ne2/:d,3)}",
+                "produit": "${MMmath.round(:n1*:n2,3)}"
+            }
+        },{
+            "name":"Résolution par division (CM)",
+            "consts":{
+                "phrases":[
+                    [
+                        "Un tas de ${:n1} feuilles identiques a une épaisseur de $$${MMmath.round(:n1*:n2,3)}~mm$$. Combien mesure une feuille ?",
+                        "Le tas mesure $$${:produit}\\div${:n1}=\\color{red}{${:n2}~mm}$$."
+                    ],[
+                        "Un fabriquant de cosmétiques a préparé ${:n1} L de champoing avec $$${MMmath.round(:n1*:n2,3)}~L$$ de principe actif. Combien en faut-il pour 1 L ?",
+                        "Il faut $$${:produit}\\div${:n1}=\\color{red}{${:n2}~L}$$."
+                    ],[
+                        "Sachant que ${:paul} a préparé ${:n1} L de sirop en utilisant $$${MMmath.round(:n1*:n2,3)}~kg$$ de sucre, combien faut-il de sucre pour 1 L d’eau ?",
+                        "Il faut $$${:produit}\\div${:n1}=\\color{red}{${:n2}~kg}$$ de sucre."
+                    ],[
+                        "Dans les ${:n1} dL de vinaigrette que ${:paul} a préparés, il y a $$${MMmath.round(:n1*:n2,3)}~cL$$ d’un ingrédient secret. Quelle quantité de cet ingrédient y a-t-il dans 1 dL?",
+                        "Il y a $$${:produit}\\div${:n1}=\\color{red}{${:n2}~cL}$$ de cet ingrédient."
+                    ]
+                ]
+            },
+            "vars": {
+                "situation": "0_${:phrases.length-1}",
+                "pren":"0_${:prenoms.length-1}_2_^&",
+                "paul":"${:prenoms[:pren[0]]}",
+                "pierre":"${:prenoms[:pren[1]]}",
+                "n1": "2_10",
+                "ne2":"2_10",
+                "d":[10,100,1000],
+                "n2": "${MMmath.round(:ne2/:d,3)}",
+                "produit": "${MMmath.round(:n1*:n2,3)}"
+            }
+        },{
+            "name":"Résolution par multiplication (6e)",
+            "consts": {
+                "phrases": [
+                    [
+                        "Un fabriquant de cosmétiques verse $$${:n2}~L$$ d'un principe actif pour 1L. Combien doit-il verser pour $$${:n1}~L$$ ?",
+                        "Il doit verser $$${:n1}\\times${:n2}=\\color{red}{${:produit}~L}$$."
+                    ],[
+                        "Pour faire un sirop dans 1 L d’eau, ${:paul} utilise $$${:n2}~kg$$ de sucre. Quelle quantité de sucre est nécessaire pour $$${:n1}~L$$ de sirop ?",
+                        "Il faut $$${:n1}\\times${:n2}=\\color{red}{${:produit}~kg}$$ de sucre."
+                    ],[
+                        "Pour une vinaigrette de 1 dL, ${:paul} utilise $$${:n2}~cL$$ de son ingrédient secret. Quelle quantité de cet ingrédient serait nécessaire pour $$${:n1}~dL$$ de vinaigrette ?",
+                        "Il faudrait $$${:n1}\\times${:n2}=\\color{red}{${:produit}~cL}$$"
+                    ]
+                ]
+            },
+            "vars": {
+                "situation": "0_${:phrases.length-1}",
+                "pren":"0_${:prenoms.length-1}",
+                "paul":"${:prenoms[:pren]}",
+                "ne1": "2_10",
+                "ne2":"2_10",
+                "da":[10,100],
+                "db":"${:da==100?10:MMmath.aleaInt(0,1)?10:100}",
+                "n1":"${MMmath.round(:ne1/:da,2)}",
+                "n2": "${MMmath.round(:ne2/:db,2)}",
+                "produit": "${MMmath.round(:n1*:n2,3)}"
+            }
+        }
+    ],
+    "question": "${:phrases[:situation][0]}",
+    "answer": "${:phrases[:situation][1]}"
+}

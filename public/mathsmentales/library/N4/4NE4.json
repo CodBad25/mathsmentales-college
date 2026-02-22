@@ -1,0 +1,53 @@
+{
+    "title":"Développer à l'aide de la distributivité",
+    "type":"latex",
+    "ID":"4NE4",
+    "textSize":"medium",
+    "dest":["4NE","3ND","2N3"],
+    "consts":{"lettres":["a","b","t","x", "y"]},
+    "keys":["x²","+","-","a","b","t","x","y"],
+    "options":[{
+        "name":"Simple distributivité coeffs positifs",
+        "vars":{"l":"0_4","x":"${:lettres[:l]}", "a":"2_10","b":"1_10","c":"1_10"},
+        "question": ["\\begin{array}{c} \\text{Développer}\\\\${:a}\\times(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})\\end{array}","\\begin{array}{c} \\text{Développer}\\\\${:a}\\times(${:c}${MMmath.signedNumberButOne(:b)}${:x})\\end{array}"],
+        "shortq": ["${:a}\\times(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})","${:a}\\times(${:c}${MMmath.signedNumberButOne(:b)}${:x})"],
+        "answer":["${:a}\\times(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})=\\color{red}{${MMmath.signIfOne(:a*:b)}${:x}${MMmath.signedNumber(:a*:c)}}","${:a}\\times(${:c}${MMmath.signedNumberButOne(:b)}${:x})=\\color{red}{${:a*:c}${MMmath.signedNumberButOne(:a*:b)}${:x}}"],
+        "value":"${MMmath.calc(:a+'*('+:b+:x+')+('+:a+')*('+:c+')')}"
+    },{
+        "name":"Simple distributivité",
+        "vars":{"l":"0_4","x":"${:lettres[:l]}", "a":"-10_10_^0,1","b":"-10_10_^0","c":"-10_10_^0"},
+        "question": ["\\begin{array}{c} \\text{Développer}\\\\${:a}\\times(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})\\end{array}","\\begin{array}{c} \\text{Développer}\\\\${:a}\\times(${:c}${MMmath.signedNumberButOne(:b)}${:x})\\end{array}"],
+        "shortq":["${:a}\\times(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})","${:a}\\times(${:c}${MMmath.signedNumberButOne(:b)}${:x})"],
+        "answer":["${:a}\\times(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})=\\color{red}{${MMmath.signIfOne(:a*:b)}${:x}${MMmath.signedNumber(:a*:c)}}","${:a}\\times(${:c}${MMmath.signedNumberButOne(:b)}${:x})=\\color{red}{${:a*:c}${MMmath.signedNumberButOne(:a*:b)}${:x}}"],
+        "value":"${MMmath.calc(:a+'*('+:b+:x+')+('+:a+')*('+:c+')')}"
+    },{
+        "name":"Double distributivité simple coeffs positifs",
+        "vars":{"l":"0_4","x":"${:lettres[:l]}", "a":"1_10","b":"1_10"},
+        "question": "\\begin{array}{c} \\text{Développer et réduire}\\\\(${:x}+${:a})(${:x}+${:b})\\end{array}",
+        "shortq": "(${:x}+${:a})(${:x}+${:b})",
+        "answer":"(${:x}+${:a})(${:x}+${:b})=\\color{red}{${:x}^2+${:a+:b}${:x}+${:a*:b}}",
+        "value":"${:x}^2+${:a+:b}${:x}+${:a*:b}"
+    },{
+        "name":"Double distributivité simple coeffs relatifs",
+        "vars":{"l":"0_4","x":"${:lettres[:l]}", "a":"-10_10_^0","b":"-10_10_^0"},
+        "question": "\\begin{array}{c} \\text{Développer et réduire}\\\\(${:x}${MMmath.signedNumber(:a)})(${:x}${MMmath.signedNumber(:b)})\\end{array}",
+        "shortq": "(${:x}${MMmath.signedNumber(:a)})(${:x}${MMmath.signedNumber(:b)})",
+        "answer":"(${:x}${MMmath.signedNumber(:a)})(${:x}${MMmath.signedNumber(:b)})=\\color{red}{${:x}^2${(:a+:b!=0)?MMmath.signedNumberButOne(:a+:b)+:x:''}${MMmath.signedNumber(:a*:b)}}",
+        "value":"${:x}^2${(:a+:b!=0)?MMmath.signedNumberButOne(:a+:b)+:x:''}${MMmath.signedNumber(:a*:b)}"
+    },{
+        "name":"Double distributivité coeffs relatifs",
+        "vars":{"l":"0_4","x":"${:lettres[:l]}", "a":"-10_10_^0","b":"-10_10_^0","c":"-10_10_^0","d":"-10_10_^0,${-:b*:c/:a}"},
+        "question": "\\begin{array}{c} \\text{Développer et réduire}\\\\(${MMmath.signIfOne(:a)+:x}${MMmath.signedNumber(:b)})(${MMmath.signIfOne(:c)+:x}${MMmath.signedNumber(:d)})\\end{array}",
+        "shortq": "(${MMmath.signIfOne(:a)+:x}${MMmath.signedNumber(:b)})(${MMmath.signIfOne(:c)+:x}${MMmath.signedNumber(:d)})",
+        "answer":"(${MMmath.signIfOne(:a)+:x}${MMmath.signedNumber(:b)})(${MMmath.signIfOne(:c)+:x}${MMmath.signedNumber(:d)})=\\color{red}{${MMmath.signIfOne(:a*:c)+:x}^2${(:a*:d+:b*:c!=0)?MMmath.signedNumberButOne(:a*:d+:b*:c)+:x:''}${MMmath.signedNumber(:b*:d)}}",
+        "value":"${MMmath.signIfOne(:a*:c)+:x}^2${(:a*:d+:b*:c!=0)?MMmath.signedNumberButOne(:a*:d+:b*:c)+:x:''}${MMmath.signedNumber(:b*:d)}"
+    },{
+        "name":"Simple distributivité, variable en plus",
+        "vars":{"l":"0_4","x":"${:lettres[:l]}", "a":"-10_10_^0","b":"-10_10_^0","c":"-10_10_^0"},
+        "question": ["\\begin{array}{c} \\text{Développer}\\\\${MMmath.signIfOne(:a)}${:x}(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})\\end{array}","\\begin{array}{c} \\text{Développer}\\\\${MMmath.signIfOne(:a)}${:x}(${:c}${MMmath.signedNumberButOne(:b)}${:x})\\end{array}"],
+        "shortq":["${MMmath.signIfOne(:a)}${:x}(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})","${MMmath.signIfOne(:a)}(${:c}${MMmath.signedNumberButOne(:b)}${:x})"],
+        "answer":["${MMmath.signIfOne(:a)}${:x}(${MMmath.signIfOne(:b)}${:x}${MMmath.signedNumber(:c)})=\\color{red}{${MMmath.signIfOne(:a*:b)}${:x}^2${MMmath.signedNumber(:a*:c)}${:x}}","${MMmath.signIfOne(:a)}${:x}(${:c}${MMmath.signedNumberButOne(:b)}${:x})=\\color{red}{${:a*:c}${:x}${MMmath.signedNumberButOne(:a*:b)}${:x}^2}"],
+        "value":"${MMmath.calc(:a+'*'+:x+'*('+:b+')*'+:x+'+('+:a+')*('+:c+')*'+:x)}"
+    }
+    ]
+}

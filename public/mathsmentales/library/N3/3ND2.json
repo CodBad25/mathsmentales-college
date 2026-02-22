@@ -1,0 +1,38 @@
+{
+    "title":"Développer une identité remarquable",
+    "description":"Utiliser les identités remarquable pour développer des expression.",
+    "ID":"3ND2",
+    "dest":["3ND","2N3"],
+    "keys":["x²","-","+","u","v","t","x","y"],
+    "vars":{"a":"1_10", "b":"2_10", "c":["u","v","t","x", "y"]},
+    "options":[{
+        "name":"$$(ax+b)^2$$",
+        "question": ["\\text{Développer }(${MMmath.signIfOne(:a)}${:c}+${:b})^2", "\\text{Développer }(${:b}+${MMmath.signIfOne(:a)}${:c})^2"],
+        "shortq": ["(${MMmath.signIfOne(:a)}${:c}+${:b})^2", "(${:b}+${MMmath.signIfOne(:a)}${:c})^2"],
+        "answer":":question|-18=\\color{red}{${MMmath.signIfOne(:a*:a)}${:c}^2+${2*:a*:b}${:c}+${:b*:b}}",
+        "value":"${MMmath.signIfOne(:a*:a)}${:c}^2+${2*:a*:b}${:c}+${:b*:b}"    
+    },
+    {
+        "name":"$$(ax-b)^2$$",
+        "question": ["\\text{Développer }(${MMmath.signIfOne(:a)}${:c}-${:b})^2", "\\text{Développer }(${:b}-${MMmath.signIfOne(:a)}${:c})^2"],
+        "shortq": ["(${MMmath.signIfOne(:a)}${:c}-${:b})^2", "(${:b}-${MMmath.signIfOne(:a)}${:c})^2"],
+        "answer":":question|-18=\\color{red}{${MMmath.signIfOne(:a*:a)}${:c}^2-${2*:a*:b}${:c}+${:b*:b}}",
+        "value":"${MMmath.signIfOne(:a*:a)}${:c}^2-${2*:a*:b}${:c}+${:b*:b}"    
+    },
+    {
+        "name":"$$(ax-b)(ax+b)$$",
+        "question": [
+            "\\text{Développer }(${MMmath.signIfOne(:a)}${:c}-${:b})(${MMmath.signIfOne(:a)}${:c}+${:b})",
+            "\\text{Développer }(${MMmath.signIfOne(:a)}${:c}-${:b})(${:b}+${MMmath.signIfOne(:a)}${:c})",
+            "\\text{Développer }(${MMmath.signIfOne(:a)}${:c}+${:b})(${MMmath.signIfOne(:a)}${:c}-${:b})",
+            "\\text{Développer }(${:b}+${MMmath.signIfOne(:a)}${:c})(${MMmath.signIfOne(:a)}${:c}-${:b})"],
+        "shortq": [
+            "(${MMmath.signIfOne(:a)}${:c}-${:b})(${MMmath.signIfOne(:a)}${:c}+${:b})",
+            "(${MMmath.signIfOne(:a)}${:c}-${:b})(${:b}+${MMmath.signIfOne(:a)}${:c})",
+            "(${MMmath.signIfOne(:a)}${:c}+${:b})(${MMmath.signIfOne(:a)}${:c}-${:b})",
+            "(${:b}+${MMmath.signIfOne(:a)}${:c})(${MMmath.signIfOne(:a)}${:c}-${:b})"],
+        "answer":":question|-18=\\color{red}{${MMmath.signIfOne(:a*:a)}${:c}^2-${:b*:b}}",
+        "value":"${MMmath.signIfOne(:a*:a)}${:c}^2-${:b*:b}"    
+    }
+    ]
+}

@@ -1,0 +1,81 @@
+{
+    "title":"Multiplier un entier par 4 ou par 8",
+    "dest":["8ND","7ND","6ND"],
+    "ID":"8ND3",
+    "type":"text",
+    "options":[
+        {
+            "name":"Multiplier par 4 des nombres inférieurs à 10",
+            "vars":{
+                "nom":"quadruple",
+                "m":4,
+                "n":"1_9",
+                "ci":"${:n*2}\\times 2",
+                "r":"${4*:n}"
+            }
+        },{
+            "name":"Multiplier par 4 des multiples de 10",
+            "vars":{
+                "nom":"quadruple",
+                "m":4,
+                "n0":"1_9",
+                "n":"${:n0*10}",
+                "ci":"${:n*2}\\times 2",
+                "r":"${4*:n}"
+            }
+        },{
+            "name":"Multiplier par 4 un nombre entre 10 et 100",
+            "vars":{
+                "nom":"quadruple",
+                "m":4,
+                "u":"1_9",
+                "d":"1_9",
+                "n":"${:d*10+:u}",
+                "ci":"${:n*2}\\times 2",
+                "r":"${4*:n}"
+            }
+        },{
+            "name":"Multiplier par 8 des nombres inférieurs à 10",
+            "vars":{
+                "nom":"produit par 8",
+                "m":8,
+                "n":"1_9",
+                "ci":"${:n*2}\\times 4=${:n*4}\\times 2",
+                "r":"${8*:n}"
+            }
+        },{
+            "name":"Multiplier par 8 des multiples de 10",
+            "vars":{
+                "nom":"produit par 8",
+                "m":8,
+                "n0":"1_9",
+                "n":"${:n0*10}",
+                "ci":"${:n*2}\\times 4=${:n*4}\\times 2",
+                "r":"${8*:n}"
+            }
+        },{
+            "name":"Multiplier par 8 un nombre entre 10 et 100",
+            "vars":{
+                "nom":"produit par 8",
+                "m":8,
+                "u":"1_9",
+                "d":"1_9",
+                "n":"${:d*10+:u}",
+                "ci":"${:n*2}\\times 4=${:n*4}\\times 2",
+                "r":"${8*:n}"
+            }
+        }
+    ],
+    "question":[
+        "$$${:n}\\times ${:m}$$",
+        "Multiplie ${:n} par ${:m}",
+        "Quel est le ${:nom} de ${:n} ?"
+    ],
+    "shortq":["$$${:n}\\times ${:m}$$","$$${:n}\\times ${:m}$$","$$${:n}\\times ${:m}$$"],
+    "answer":[
+        "$$${:n}\\times ${:m}=${:ci}=\\color{red}{${:r}}$$",
+        "$$${:n}\\times ${:m}=${:ci}=\\color{red}{${:r}}$$",
+        "Le ${:nom} de ${:n} est $$${:ci}=\\color{red}{${:r}}$$"
+        ],
+    "value":"${:r}"
+}

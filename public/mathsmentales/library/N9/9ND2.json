@@ -1,0 +1,30 @@
+{
+    "title":"CE1 Procédures -> Soustraire 9, 19, 29, 39 à un nombre",
+    "dest":["9ND"],
+    "auteur":"Xavier Levet",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Soustraire 9 à un nombre dont l'unité est 9",
+        "vars":{"a":-9,"b":[9,19,29,39,49,59,69,79,89,99]},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 19 à un nombre dont l'unité est 9",
+        "vars":{"a":-19,"b":[19,29,39,49,59,69,79,89,99]},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 19 à un nombre inférieur à 50",
+        "vars":{"a":-19,"b":"19_49"},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 19, 29, 39 à un nombre inférieur à 60",
+        "vars":{"a":[-9,-19,-29,-39],"b":"39_59"},
+        "question": "${:b}${:a}"
+           },{
+        "name":"Soustraire 19, 29, 39 à un nombre inférieur à 140",
+        "vars":{"a":[-9,-19,-29,-39],"b":"39_139"},
+        "question": "${:b}${:a}"
+           }
+    ],
+    "answer":":question=\\color{red}{${:a+:b}}",
+    "value":"${:a+:b}"
+}

@@ -1,0 +1,41 @@
+{
+    "ID":"3DD10",
+    "dest":["3DD","2F2"],
+    "title":"Différencier fonction affine, linéaire par son expression algébrique",
+    "description":"Reconnaitre une fonction linéaire d'une fonction affine non linéaire.",
+    "type":"text",
+    "repeat":2,
+    "keys":["L","A","_","_","_","_","_","_"],
+    "consts":{"vocab":["linéaire", "affine non linéaire"]},
+    "options":[
+        {
+            "name":"Fonctions sous forme canonique ax+b ou ax",
+            "vars":{
+                "a":"-10_10_^0", "b":"-10_10_^0","choix":"0_1", "type":"${:vocab[:choix]}"
+            },
+            "question":[
+                "La fonction $$f: x \\mapsto ${MMmath.signIfOne(:a)} x ${:choix==0?'':MMmath.signedNumber(:b)}$$ est elle linéaire (L) ou affine non linéaire (A) ?",
+                "La fonction $$f: x \\mapsto ${:choix==0?''::b} ${:choix==0?MMmath.signIfOne(:a):MMmath.signedNumberButOne(:a)} x $$ est elle linéaire (L) ou affine non linéaire (A) ?"
+            ]
+        },{
+            "name":"Fonctions sous forme canonique ax+b ou ax avec fractions",
+            "vars":{
+                "a":"1_10", "b":"2_10_^${:a}", "c":"1_10","d":"2_10_^${:c}","choix":"0_1","sign0":["","-"], "sign1":["+","-"], "type":"${:vocab[:choix]}"
+            },
+            "question":"La fonction $$f: x \\mapsto ${:sign0}\\dfrac{${:a}}{${:b}} x ${:choix==0?''::sign1+'\\dfrac{'+:c+'}{'+:d+'}'}$$ est elle linéaire (L) ou affine non linéaire (A) ?"
+        },{
+            "name":"Fonction sous forme non canonique",
+            "vars":{
+                "a":"-10_10_^0", "b":"-10_10_^0","choix":"0_1", "c":"-10_10_^0", "d":"-10_10_^0,${:b}", "type":"${:vocab[:choix]}","formes":["c(ax+b)","c(ax+b)-cb","(ax+b)-(cx+d)"]
+            },
+            "question":[
+                "La fonction $$f: x \\mapsto ${MMmath.signIfOne(:c)}(${MMmath.signIfOne(:a)} x ${:choix==0?'':MMmath.signedNumber(:b)})$$ est elle linéaire (L) ou affine non linéaire (A) ?",
+                "La fonction $$f: x \\mapsto ${MMmath.signIfOne(:c)}(${MMmath.signIfOne(:a)} x ${MMmath.signedNumber(:b)})${:choix==0?MMmath.signedNumber(-:c*:b):MMmath.signedNumber(:c*:d)}$$ est elle linéaire (L) ou affine non linéaire (A) ?",
+                "La fonction $$f: x \\mapsto ${MMmath.signIfOne(:c)}(${MMmath.signIfOne(:a)} x ${MMmath.signedNumber(:b)})${:choix==0?'':MMmath.signedNumber(-:c*:b)}$$ est elle linéaire (L) ou affine non linéaire (A) ?",
+                "La fonction $$f: x \\mapsto ${MMmath.signIfOne(:c)}(${MMmath.signIfOne(:a)} x ${MMmath.signedNumber(:b)})-(${MMmath.signIfOne(:c)} x ${:choix==0?MMmath.signedNumber(:c*:b):MMmath.signedNumber(:c*:d)})$$ est elle linéaire (L) ou affine non linéaire (A) ?"
+            ]
+        }
+    ],
+    "answer":"La fonction est <span class='red'>${:type}</span>",
+    "value":"${:type}"
+}

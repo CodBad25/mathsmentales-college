@@ -1,0 +1,45 @@
+{
+    "title": "Trouver le n<sup>e</sup> terme d’une suite",
+    "dest": [
+        "HN1"
+    ],
+    "type": "text",
+    "options": [
+        {
+            "name": "Suite quadratique",
+            "consts": {
+                "quest": "Soit la suite définie par $$u_n=n^2${MMmath.signedNumber(:b)}$$<br>"
+            },
+            "vars": {
+                "n": "2_20",
+                "b": "0_10"
+            },
+            "answer": "$$u_{${:n}}=${:n}^2${MMmath.signedNumber(:b)}=\\color{red}{${:n**2+:b}}$$"
+        },
+        {
+            "name": "Suite alternante",
+            "consts": {
+                "quest": "Soit la suite définie par $$u_n=(-1)^{n${MMmath.signedNumber(:b)}}\\times n$$<br>"
+            },
+            "vars": {
+                "n": "2_99",
+                "b": "-10_10"
+            },
+            "answer": "$$u_{${:n}}=(-1)^{${:n}${MMmath.signedNumber(:b)}}\\times ${:n}=\\color{red}{${(-1)**(:n+:b)*:n}}$$"
+        },
+        {
+            "name": "Suite 'triangulaire'",
+            "consts": {
+                "quest": "Soit la suite définie par $$u_n=\\dfrac{n(n+1)}2$$<br>"
+            },
+            "vars": {
+                "n": "2_20"
+            },
+            "answer": "$$u_{${:n}}=\\dfrac{${:n}\\times${:n+1}}2=\\color{red}{${:n*(:n+1)/2}}$$"
+        }
+    ],
+    "question": [
+        "${:quest}Calculer $$u_{${:n}}$$",
+        "${:quest}Quel est le ${:n}<sup>e</sup> terme ?"
+    ]
+}

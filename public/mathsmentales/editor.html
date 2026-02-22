@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="js/libs/jsoneditor-9.5.3/dist/jsoneditor.min.css">
+    <script src="js/libs/jsoneditor-9.5.3/dist/jsoneditor.min.js"></script>
+    <link rel="stylesheet" href="css/editor-2.3.176.css" />
+    <script src="js/lib.editor-2.3.176.js" type="module" defer></script>
+    <style>
+    </style>
+</head>
+<body>
+    <head>
+        <h1>Éditeur d'activité pour MathsMentales.</h1>
+    </head>
+    <section id="affichage">
+        <div id="display">
+            <div id="param-title-act"></div>
+            <div id="activityTitle"></div>
+            <div id="voix"></div>
+            <div id="activityDescription"></div>
+            <div id="activityConsigne"></div>
+            <div id="activityOptions"></div>
+            <div id="phantom"></div>
+            <div id="divparams"></div>
+            <div id="errors"></div>
+        </div>
+    <div id="ide">
+        <button id="testBtn" title="Affiche l'activité">Visualiser</button> 
+        <button id="saveBtn" title="Charge le fichier json sur l'ordinateur">Télécharger</button> 
+        <button title="Charge une activité au hasard" id="randomBtn">Au hasard</button>
+        <input type="text" placeholder="ID d'activité" id="actIDImport" size="8" title="Importe une activité existante par son ID">
+        <input type="file" id="openFileInput" title="Importe un fichier json dans l'éditeur">
+    </div>
+</section>
+<script src="bridge.js"></script>
+</body>
+</html>

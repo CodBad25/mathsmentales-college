@@ -1,0 +1,51 @@
+{
+    "title":"Leçon : Aires et périmètres",
+    "type":"text",
+    "ID":"5LM1",
+    "description":"11 questions",
+    "dest":["5LM","4LM"],
+    "options":[
+        {
+            "name":"Définitions",
+            "question":[
+                "Qu’est-ce que le périmètre d’une figure ?",
+                "Qu’est-ce que l’aire d’une figure ?"
+            ],
+            "answer":[
+                "Le périmètre est la longueur du contour de la figure.",
+                "L’aire est la mesure de l’intérieur de la figure."
+            ]
+        },
+        {
+            "name":"Formules de périmètres",
+            "question":[
+                "Quelle formule permet de calculer le périmètre d’un carré ?",
+                "Quelle formule permet de calculer le périmètre d’un rectangle ?",
+                "Quelle formule permet de calculer le périmètre d’un triangle ?",
+                "Quelle formule permet de calculer la longueur d’un cercle ?"
+            ],
+            "answer":[
+                "P = 4 × c",
+                "P = 2 × (L + l)",
+                "P = a + b + c",
+                "P = 2 × π × R = π × D"
+            ]
+        },{
+            "name":"Formules d’aires",
+            "question":[
+                "Quelle formule permet de calculer l’aire d’un carré ?",
+                "Quelle formule permet de calculer l’aire d’un rectangle ?",
+                "Quelle formule permet de calculer l’aire d’un parallélogramme ?",
+                "Quelle formule permet de calculer l’aire d’un triangle ?",
+                "Quelle formule permet de calculer l’aire d’un disque ?"
+            ],
+            "answer":[
+                "A = c × c",
+                "A = L × l",
+                "A = b × h",
+                "A = (b × h) / 2",
+                "A = π × R²"
+            ]
+        }
+    ]
+}

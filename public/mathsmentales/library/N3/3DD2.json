@@ -1,0 +1,28 @@
+{
+    "title":"Vocabulaire image, antécédent",
+    "description":"Différencier image et antécédent dans les écritures de fonctions",
+    "type":"text",
+    "ID":"3DD2",
+    "dest":["3DD","2F1"],
+    "textSize":"medium",
+    "vars":{"a":"-30_30", "b":"-30_30_^${:a}"},
+    "options":[{
+        "name":"Image d'un nombre",
+        "question":[
+            "Dans l'écriture $$f:${:a}\\mapsto${:b}$$, quel nombre est l'<b>image</b> ?",
+            "Dans l'écriture $$f(${:a})=${:b}$$, quel nombre est l'<b>image</b> ?",
+            "Dans le tableau <table class='inline-table'><tr><td>$$x$$</td><td>${:a}</td></tr><tr><td>$$f(x)$$</td><td>${:b}</td></tr></table><br>quel nombre est l'<b>image</b> ?"
+        ],
+        "answer":"L'image est $$\\color{red}{${:b}}$$",
+        "value":"${:b}"
+    },{
+        "name":"Antécédent d'un nombre",
+        "question":[
+            "Dans l'écriture $$f:${:a}\\mapsto${:b}$$, quel nombre est un <b>antécédent</b> ?",
+            "Dans l'écriture $$f(${:a})=${:b}$$, quel nombre est un <b>antécédent</b> ?",
+            "Dans le tableau <table class='inline-table'><tr><td>$$x$$</td><td>${:a}</td></tr><tr><td>$$f(x)$$</td><td>${:b}</td></tr></table><br>quel nombre est un <b>antécédent</b> ?"
+        ],
+        "answer":"L'antécédent est $$\\color{red}{${:a}}$$",
+        "value":"${:a}"
+    }]
+}

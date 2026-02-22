@@ -1,0 +1,29 @@
+{
+    "title":"Ajouter 8, 18, 28, 38, 48",
+    "type":"latex",
+    "ID":"8ND2",
+    "speech":1,
+    "keys":["_","_","_","_","_","_","_","_"],
+    "dest":["8ND","7ND","6ND"],
+    "options":[{
+        "name":"Ajouter 8",
+        "vars":{"a":"8","b":"11_1000"}
+    },{
+        "name":"Ajouter 18",
+        "vars":{"a":"18","b":"11_1000"}
+    },{
+        "name":"Ajouter 28",
+        "vars":{"a":"28","b":"11_1000"}
+    },{
+        "name":"Ajouter 38",
+        "vars":{"a":"38","b":"11_1000"}
+    },{
+        "name":"Ajouter 48",
+        "vars":{"a":"48","b":"11_1000"}
+        
+    }],
+    "question": ["${:a}+${:b}", "${:b}+${:a}"],
+    "audio":["${:a} plusse ${:b}","${:b} plusse ${:a}"],
+    "answer":":question=\\color{red}{${:a+:b}}",
+    "value":"${:a+:b}"
+}

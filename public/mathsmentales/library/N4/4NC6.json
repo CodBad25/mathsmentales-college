@@ -1,0 +1,83 @@
+{
+    "title":"Enchainements d'opérations avec des carrés",
+    "ID":"4NC6",
+    "dest":["4NC","3NB"],
+    "description":"Enchainement d'opérations avec des carrés comportant des sommes ou des différences. Carrés des nombres jusqu'à 20.",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Somme simple",
+        "vars":{"x":"1_10","y":"1_99"},
+        "question": ["${:x}^2+${:y}","${:y}+${:x}^2"],
+        "answer":":question = \\color{red}{${:x*:x+:y}}",
+        "value":"${:x*:x+:y}"
+    },{
+        "name":"Différence simple",
+        "vars":{"x":"1_10","y":"1_99"},
+        "question": ["${:x}^2-${:y}","-${:y}+${:x}^2"],
+        "answer":":question = \\color{red}{${:x*:x-:y}}",
+        "value":"${:x*:x-:y}"
+    },{
+        "name":"Différence simple 2",
+        "vars":{"x":"1_10","y":"1_99"},
+        "question": ["-${:x}^2+${:y}","${:y}-${:x}^2"],
+        "answer":":question = \\color{red}{${-:x*:x+:y}}",
+        "value":"${-:x*:x+:y}"
+    },{
+        "name":"Somme avec le carré d'une somme",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["(${:x}+${:y})^2+${:z}","${:z}+(${:x}+${:y})^2"],
+        "answer":":question = \\color{red}{${(:x+:y)**2+:z}}",
+        "value":"${(:x+:y)**2+:z}"
+    },{
+        "name":"Somme avec le carré d'une différence",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["(${:x}-${:y})^2+${:z}","${:z}+(${:x}-${:y})^2"],
+        "answer":":question = \\color{red}{${(:x-:y)**2+:z}}",
+        "value":"${(:x-:y)**2+:z}"
+    },{
+        "name":"Différence avec le carré d'une somme",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["(${:x}+${:y})^2-${:z}","-${:z}+(${:x}+${:y})^2"],
+        "answer":":question = \\color{red}{${(:x+:y)**2-:z}}",
+        "value":"${(:x+:y)**2-:z}"
+    },{
+        "name":"Différence avec le carré d'une somme 2",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["-(${:x}+${:y})^2+${:z}","${:z}-(${:x}+${:y})^2"],
+        "answer":":question = \\color{red}{${:z-(:x+:y)**2}}",
+        "value":"${:z-(:x+:y)**2}"
+    },{
+        "name":"Différence avec le carré d'une différence",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["(${:x}-${:y})^2-${:z}","-${:z}+(${:x}-${:y})^2"],
+        "answer":":question = \\color{red}{${(:x-:y)**2-:z}}",
+        "value":"${(:x-:y)**2-:z}"
+    },{
+        "name":"Différence avec le carré d'une déifférence 2",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["-(${:x}-${:y})^2+${:z}","${:z}-(${:x}-${:y})^2"],
+        "answer":":question = \\color{red}{${:z-(:x-:y)**2}}",
+        "value":"${:z-(:x-:y)**2}"
+    },{
+        "name":"Somme avec un carré",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["(${:x}+${:y}^2)+${:z}","(${:y}^2+${:x})+${:z}",
+            "${:z}+(${:x}+${:y}^2)","${:z}+(${:y}^2+${:x})"],
+        "answer":":question = \\color{red}{${(:x+:y**2)+:z}}",
+        "value":"${(:x+:y**2)+:z}"
+    },{
+        "name":"Différence avec un carré",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["(${:x}+${:y}^2)-${:z}","(${:y}^2+${:x})-${:z}",
+            "-${:z}+(${:x}+${:y}^2)","-${:z}+(${:y}^2+${:x})"],
+        "answer":":question = \\color{red}{${(:x+:y**2)-:z}}",
+        "value":"${(:x+:y**2)-:z}"
+    },{
+        "name":"Différence avec un carré 2",
+        "vars":{"x":"1_10","y":"1_10", "z":"1_50"},
+        "question": ["${:z}-(${:x}+${:y}^2)","${:z}-(${:y}^2+${:x})",
+        "-(${:x}+${:y}^2)+${:z}","-(${:y}^2+${:x})+${:z}"],
+        "answer":":question = \\color{red}{${-(:x+:y**2)+:z}}",
+        "value":"${-(:x+:y**2)+:z}"
+    }]
+}

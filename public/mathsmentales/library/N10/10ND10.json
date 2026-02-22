@@ -1,0 +1,29 @@
+{
+    "title":"CE1 Faits numériques -> Déterminer des doubles",
+    "dest":["10ND"],
+    "type":"text",
+    "auteur":"Xavier Levet",
+    "options":[{
+        "name":"Double des nombres de 1 à 15",
+         "vars": {
+                "a":"1_15",
+                "qte": "${:a}"
+                  }
+                },{
+        "name":"Double des multiples de 5 de 20 à 50",
+         "vars": {
+                "a":[20,25,30,35,40,45,50],
+                "qte": "${:a}"
+                  }
+                },{
+        "name":"Double des nombres 100, 150, 200, 250, 300 et 500",
+         "vars": {
+                "a":[100,150,200,250,300,500],
+                "qte": "${:a}"
+                  }
+                }
+              ],
+    "question": "Quel est le double de ${:qte}",
+  "answer":"Le double de ${:qte} est <span class='red'>${:qte*2}</span>",
+  "value":"${:qte*2}"
+}

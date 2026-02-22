@@ -1,0 +1,45 @@
+title: Somme de relatifs (décimaux)
+dest:
+  - 5NC
+  - 4NC
+  - 3NB
+options:
+  - name: Deux termes avec parenthèses
+    vars:
+      n1: 'd-20_20_1_^0'
+      n2: 'd-20_20_1_^0'
+    question: (${MMmath.signedNumber(:n1)}) + (${MMmath.signedNumber(:n2)})
+    answer: :question = \color{red}{${MMmath.round(:n1+:n2,1)}}
+    value: ${MMmath.round(:n1+:n2,1)}
+  - name: Trois termes avec parenthèses
+    vars:
+      n1: 'd-15_15_1_^0'
+      n2: 'd-15_15_1_^0'
+      n3: 'd-15_15_1_^0'
+    question: (${MMmath.signedNumber(:n1)}) + (${MMmath.signedNumber(:n2)}) + (${MMmath.signedNumber(:n3)})
+    answer: :question = \color{red}{${MMmath.round(:n1+:n2+:n3,1)}}
+    value: ${MMmath.round(:n1+:n2+:n3,1)}
+  - name: Deux termes sans parenthèses
+    vars:
+      n1: 'd-20_20_1_^0'
+      n2: 'd-20_20_1_^0'
+    question: :n1 ${MMmath.signedNumber(:n2)}
+    answer: :question = \color{red}{${MMmath.round(:n1+:n2,1)}}
+    value: ${MMmath.round(:n1+:n2,1)}
+  - name: Trois termes sans parenthèses
+    vars:
+      n1: 'd-15_15_1_^0'
+      n2: 'd-15_15_1_^0'
+      n3: 'd-15_15_1_^0'
+    question: :n1 ${MMmath.signedNumber(:n2)} ${MMmath.signedNumber(:n3)}
+    answer: :question = \color{red}{${MMmath.round(:n1+:n2+:n3,1)}}
+    value: ${MMmath.round(:n1+:n2+:n3,1)}
+  - name: Quatre termes sans parenthèses
+    vars:
+      n1: 'd-10_10_1_^0'
+      n2: 'd-10_10_1_^0'
+      n3: 'd-10_10_1_^0'
+      n4: 'd-10_10_1_^0'
+    question: :n1 ${MMmath.signedNumber(:n2)} ${MMmath.signedNumber(:n3)} ${MMmath.signedNumber(:n4)}
+    answer: :question = \color{red}{${MMmath.round(:n1+:n2+:n3+:n4,1)}}
+    value: ${MMmath.round(:n1+:n2+:n3+:n4,1)}

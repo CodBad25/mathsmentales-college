@@ -1,0 +1,62 @@
+{
+    "title":"Réduire une somme",
+    "type":"latex",
+    "ID":"5NE1",
+    "textSize":"medium",
+    "dest":["5NE","4NE","3ND","2N3"],
+    "keys":["+","-","x²","a","b","c","x","y"],
+    "consigne":"Réduire, si possible",
+    "consts":{"lettres":["a","b","c","x","y"]},
+    "options":[{
+        "name":"Réduire une somme ax+x",
+        "vars":{"l":"0_4","a":"2_9","x":"${:lettres[:l]}"},
+        "question": ["${:x}+${:a}${:x}", "${:a}${:x}+${:x}"],
+        "answer":":question=\\color{red}{${:a+1}${:x}}",
+        "value":"${:a+1}${:x}"
+    },{
+        "name":"Réduire une somme ax+bx",
+        "vars":{"l":"0_4","a":"2_9","b":"2_9","x":"${:lettres[:l]}"},
+        "question": "${:a}${:x}+${:b}${:x}",
+        "answer":":question=\\color{red}{${:a+:b}${:x}}",
+        "value":"${:a+:b}${:x}"
+    },{
+        "name":"Réduire une différence (niveau 5e)",
+        "vars":{"l":"0_4","a":"2_9","b":"1_${:a}","x":"${:lettres[:l]}"},
+        "question": "${:a}${:x}-${(:b>1)?:b:''}${:x}",
+        "answer":":question=\\color{red}{${MMmath.calc((:a-:b)+:x)}}",
+        "value":"${MMmath.calc((:a-:b)+:x)}"
+    },{
+        "name":"Réduire une différence (niveau 4e)",
+        "vars":{"l":"0_4","a":"1_9","b":"1_9","x":"${:lettres[:l]}"},
+        "question": "${(:a>1)?:a:''}${:x}-${(:b>1)?:b:''}${:x}",
+        "answer":":question=\\color{red}{${MMmath.calc((:a-:b)+:x)}}",
+        "value":"${MMmath.calc((:a-:b)+:x)}"
+    },{
+        "name":"Somme irréductible",
+        "vars":{"l":"0_4","a":"-9_9_^0","b":"-9_9_^0","x":"${:lettres[:l]}"},
+        "question": [
+            "${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumber(:b)}",
+            "${MMmath.signIfOne(:a)}${:x}${MMmath.signedNumberButOne(:b)}${:x}^2",
+            "${:a}${MMmath.signedNumberButOne(:b)}${:x}",
+            "${MMmath.signIfOne(:a)}${:x}^2${MMmath.signedNumberButOne(:b)}${:x}"],
+        "answer":[
+            ":question=\\color{red}{${MMmath.calc('('+:a+'*'+:x+')+('+:b+')')}}",
+            ":question=\\color{red}{${MMmath.calc('('+:a+'*'+:x+')+('+:b+'*'+:x+'^2)')}}",
+            ":question=\\color{red}{${MMmath.calc('('+:a+')+('+:b+'*'+:x+')')}}",
+            ":question=\\color{red}{${MMmath.calc('('+:a+'*'+:x+'^2)+('+:b+'*'+:x+')')}}"
+        ],
+        "value":[
+            "${MMmath.calc('('+:a+'*'+:x+')+('+:b+')')}",
+            "${MMmath.calc('('+:a+'*'+:x+')+('+:b+'*'+:x+'^2)')}",
+            "${MMmath.calc('('+:a+')+('+:b+'*'+:x+')')}",
+            "${MMmath.calc('('+:a+'*'+:x+'^2)+('+:b+'*'+:x+')')}"
+        ]
+    },{
+        "name":"Réduire une différence ax-x",
+        "vars":{"l":"0_4","a":"2_9","x":"${:lettres[:l]}"},
+        "question": "${:a}${:x}-${:x}",
+        "answer":":question=\\color{red}{${MMmath.calc((:a-1)+:x)}}",
+        "value":"${MMmath.calc((:a-1)+:x)}"
+    }
+    ]
+}

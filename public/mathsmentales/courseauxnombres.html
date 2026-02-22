@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style>
+            @page{
+                size:A4 portrait;
+                margin:0.8cm;
+            }
+        </style>
+        <title>Course aux nombres avec MathsMentales</title>
+        <link rel="stylesheet" href="css/courseauxnombres-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script type="module" src="js/lib.courseauxnombres-2.3.176.js" id="mmscriptid"></script>
+    </head>  
+    <body size="A4">
+        <button onclick="document.getElementById('creator-menu').classList.toggle('hidden')" class="noprint" style="position: absolute;left:0;top:0;" title="Afficher le menu">🛠 Mise en page</button>
+        <button onclick="window.print();" class="noprint" style="position: absolute;left:110px;top:0;" title="Imprimer ou enregistrer en pdf">🖨️ Imprimer</button>
+        <div id="creator-container">
+            <section id="creator-menu" class="noprint hidden">
+                <button id="pageOrientation" title="Change l'orientation de la page">paysage</button>
+                | Énoncés : 
+                <input type="number" min="1" id="nbFiches" size="3">
+                | Entête : <button id="btnedit" title="Modifier l'entête des courses">éditer</button> <button id="btncopy" title="Copier les modifications dans toutes les courses">copier</button>
+                | <button title="Mélanger les lignes de questions" id="btnshuffle">Mélanger</button>
+                <button id="btneditcontent" title="Modifier le contenu d'une course">Éditer</button>
+                | Police :
+            </section>
+            <section id="tab-accueil" class="noprint"></section>
+            <section id="creator-content">
+            
+            </section>
+            </div>
+    <script src="bridge.js"></script>
+</body>
+</html>

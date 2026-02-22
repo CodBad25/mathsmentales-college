@@ -1,0 +1,78 @@
+{
+    "ID":"10MC1",
+    "dest":["10MC","9MC","8MC"],
+    "title":"Durées en jour, en mois",
+    "description":"Déterminer une date à partir d'une durée",
+    "type":"text",
+    "speech":1,
+    "consts":{
+        "mois":["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
+    },
+    "options":[{
+        "name":"Durée en jour",
+        "vars":{
+            "j0":"1_25",
+            "nbj":"1_${28-:j0}",
+            "rep":"${:j0+:nbj}"
+        },
+        "question":[
+            "Je pars en vacances le ${:j0}${:j0==1?'er':''} pour ${:nbj} jours. Quel jour serai-je de retour ?",
+            "Je suis revenu de vacances le ${:rep}. J'étais parti ${:nbj} jours. Quel jour suis-je parti ?",
+            "Je suis revenu de vacances le ${:rep}. J'étais parti le ${:j0}. Combien de jours suis-je parti ?"
+        ],
+        "answer":[
+            "$$${:j0}+${:nbj} = \\color{red}{${:rep}}$$",
+            "$$${:rep}-${:nbj} = \\color{red}{${:j0}}$$",
+            "$$${:rep}-${:j0} = \\color{red}{${:nbj}}$$"
+        ],
+        "value":[
+            "${:rep}",
+            "${:j0}",
+            "${:nbj}"
+        ]
+    },{
+        "name":"Durée en mois, sans chevauchement d'année",
+        "vars":{
+            "m0":"0_10",
+            "nbm":"1_${11-:m0}",
+            "rep":"${:m0+:nbm}"
+        },
+        "question":[
+            "Je pars en voyage en ${:mois[:m0]} pour ${:nbm} mois. Quel mois serai-je de retour ?",
+            "Je suis revenu de voyage en ${:mois[:rep]}. J'étais parti ${:nbm} mois. Quel mois suis-je parti ?",
+            "Je suis revenu de voyage en ${:mois[:rep]}. J'étais parti au mois de ${:mois[:m0]}. Combien de mois suis-je parti ?"
+        ],
+        "answer":[
+            "${:mois[:m0]} et $$${:nbm}$$ mois donne <span class='red'>${:mois[:rep]}</span>",
+            "${:mois[:rep]} moins $$${:nbm}$$ mois donne <span class='red'>${:mois[:m0]}</span>",
+            "De ${:mois[:m0]} à ${:mois[:rep]} il y a $$\\color{red}{${:nbm}}$$ mois."
+        ],
+        "value":[
+            "${:mois[:rep]}",
+            "${:mois[:m0]}",
+            "${:nbm}"
+        ]
+    },{
+        "name":"Durée en mois, avec chevauchement d'année",
+        "vars":{
+            "m0":"1_11",
+            "nbm":"${12-:m0}_11",
+            "rep":"${:m0+:nbm}"
+        },
+        "question":[
+            "Je pars en long voyage en ${:mois[:m0]} pour ${:nbm} mois. Quel mois serai-je de retour ?",
+            "Je suis revenu d'un long voyage en ${:mois[:rep%12]}. J'étais parti ${:nbm} mois. Quel mois suis-je parti ?",
+            "Je suis revenu de long voyage en ${:mois[:rep%12]}. J'étais parti au mois de ${:mois[:m0]}. Combien de mois suis-je parti ?"
+        ],
+        "answer":[
+            "${utils.capitalize(:mois[:m0])} et $$${:nbm}$$ mois donne <span class='red'>${:mois[:rep%12]}</span>",
+            "${utils.capitalize(:mois[:rep%12])} moins $$${:nbm}$$ mois donne <span class='red'>${:mois[:m0]}</span>",
+            "De ${:mois[:m0]} à ${:mois[:rep%12]} l'année suivante il y a $$\\color{red}{${:nbm}}$$ mois."
+        ],
+        "value":[
+            "${:mois[:rep%12]}",
+            "${:mois[:m0]}",
+            "${:nbm}"
+        ]
+    }]
+}

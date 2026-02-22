@@ -1,0 +1,28 @@
+{
+    "title":"Réduire une somme de produits",
+    "type":"latex",
+    "ID":"4NE1",
+    "dest":["4NE","3ND","2N3"],
+    "consts":{"lettres":["a","b","c","x","y"]},
+    "keys":["+","-","x²","a","b","c","x","y"],
+    "options":[{
+        "name":"Réduction possible, 1 variable",
+        "vars":{"a":"-9_9_4_^0","l":"0_4","x":"${:lettres[:l]}"},
+        "question": ["${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(:a[1])}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(:a[3])}","${:a[0]}\\times ${MMmath.nP(MMmath.calc(:a[1]+:x))}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(:a[3])}","${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(:a[1])}+${MMmath.nP(:a[2])}\\times ${MMmath.nP(MMmath.calc(:a[3]+:x))}","${:a[0]}\\times ${MMmath.nP(MMmath.calc(:a[1]+:x))}+${MMmath.nP(:a[2])}\\times ${MMmath.nP(MMmath.calc(:a[3]+:x))}"],
+        "answer":":question=\\color{red}{${MMmath.calc('('+:a[0]+'*('+:a[1]+')+('+:a[2]+')*('+:a[3]+'))'+:x)}}",
+        "value":"${MMmath.calc('('+:a[0]+'*('+:a[1]+')+('+:a[2]+')*('+:a[3]+'))'+:x)}"
+    },{
+        "name":"Réduction possible, 2 variables",
+        "vars":{"a":"-9_9_4_^0","l":"0_4","l2":"0_4_^{:l}","x":"${:lettres[:l]}","y":"${:lettres[:l2]}"},
+        "question": ["${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(MMmath.calc(:a[1]+:y))}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(MMmath.calc(:a[3]+:y))}","${MMmath.calc(:a[0]+:y)}\\times ${MMmath.nP(MMmath.calc(:a[1]+:x))}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(MMmath.calc(:a[3]+:y))}","${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(MMmath.calc(:a[1]+:y))}+${MMmath.nP(MMmath.calc(:a[2]+:y))}\\times ${MMmath.nP(MMmath.calc(:a[3]+:x))}","${MMmath.calc(:a[0]+:y)}\\times ${MMmath.nP(MMmath.calc(:a[1]+:x))}+${MMmath.nP(MMmath.calc(:a[2]+:y))}\\times ${MMmath.nP(MMmath.calc(:a[3]+:x))}"],
+        "answer":":question=\\color{red}{${MMmath.calc('('+:a[0]+'*('+:a[1]+')+('+:a[2]+')*('+:a[3]+'))'+:x+'*'+:y)}}",
+        "value":"${MMmath.calc('('+:a[0]+'*('+:a[1]+')+('+:a[2]+')*('+:a[3]+'))'+:x+'*'+:y)}"
+    },{
+        "name":"Réduction impossible",
+        "vars":{"a":"-9_9_4_^0","l":"0_4","l2":"0_4_^{:l}","x":"${:lettres[:l]}", "y":"${:lettres[:l2]}"},
+        "question": ["${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(MMmath.calc(:a[1]+:x))}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(:a[3])}","${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(:a[1])}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(MMmath.calc(:a[3]+:x))}","${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(MMmath.calc(:a[1]+:y))}+${MMmath.nP(MMmath.calc(:a[2]+:x))}\\times ${MMmath.nP(:a[3])}","${MMmath.calc(:a[0]+:x)}\\times ${MMmath.nP(:a[1])}+${MMmath.nP(:a[2])}\\times ${MMmath.nP(:a[3])}"],
+        "answer":[":question=\\color{red}{${MMmath.calc('('+:a[0]+'*('+:a[1]+'))'+:x+'^2+(('+:a[2]+')*('+:a[3]+'))'+:x)}}",":question=\\color{red}{${MMmath.calc('('+:a[0]+'*('+:a[1]+'))'+:x+'+(('+:a[2]+')*('+:a[3]+'))'+:x+'^2')}}",":question=\\color{red}{${MMmath.calc('('+:a[0]+'*('+:a[1]+'))'+:x+:y+'+(('+:a[2]+')*('+:a[3]+'))'+:x)}}",":question=\\color{red}{${MMmath.calc('('+:a[0]+'*('+:a[1]+'))'+:x+'+(('+:a[2]+')*('+:a[3]+'))')}}"],
+        "value":"${MMmath.calc('('+:a[0]+'*('+:a[1]+'))'+:x+'^2+(('+:a[2]+')*('+:a[3]+'))'+:x)}"
+    }
+    ]
+}

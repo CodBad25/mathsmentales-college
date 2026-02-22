@@ -1,0 +1,45 @@
+{
+    "title":"Réduire un produit de monomes",
+    "type":"latex",
+    "ID":"5NE11",
+    "dest":["5NE","4NE","3ND","2N3"],
+    "consts":{"lettres":["a","b","c","x","y","z"]},
+    "keys":["-","^","a","b","c","x","y","z"],
+    "options":[{
+        "name":"Produit de deux monomes à coefficients positifs",
+        "vars":{"l":"0_5","a":"1_9", "b":"1_9", "wl":"0_1_2", "x":"${:wl[0]==1?:lettres[:l]:''}", "y":"${:wl[0]==0?:lettres[:l]::wl[1]==1?:lettres[:l]:''}"},
+        "question": "\\text{Réduire }${:x!=''?MMmath.signIfOne(:a)::a}${:x}\\times ${:y!=''?MMmath.signIfOne(:b)::b}${:y}",
+        "shortq":":question|-15",
+        "answer":":question|-15=\\color{red}{${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*'+:b+'*'+(:y!==''?:y:1),false,true)}}",
+        "value":"${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*'+:b+'*'+(:y!==''?:y:1),false,true)}"
+    },{
+        "name":"Produit de trois monomes à coefficients positifs",
+        "vars":{"l":"0_5","a":"1_5", "b":"1_5","c":"1_5", "wl":"0_1_3", "x":"${:wl[0]==1?:lettres[:l]:''}", "y":"${:wl[0]==0?:lettres[:l]::wl[1]==1?:lettres[:l]:''}", "z":"${:wl[0]==0&&:wl[1]==0?:lettres[:l]::wl[2]==1?:lettres[:l]:''}"},
+        "question": "\\text{Réduire }${:x!=''?MMmath.signIfOne(:a)::a}${:x}\\times ${:y!=''?MMmath.signIfOne(:b)::b}${:y} \\times ${:z!=''?MMmath.signIfOne(:c)::c}${:z}",
+        "shortq":":question|-15",
+        "answer":":question|-15=\\color{red}{${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*'+:b+'*'+(:y!==''?:y:1)+'*'+:c+'*'+(:z!==''?:z:1),false,true)}}",
+        "value":"${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*'+:b+'*'+(:y!==''?:y:1)+'*'+:c+'*'+(:z!==''?:z:1),false,true)}"
+    },{
+        "name":"Produit de deux monomes à coefficients relatifs",
+        "vars":{"l":"0_5","a":"-9_9_^0", "b":"-9_${:a>0?0:9}_^0", "wl":"0_1_2", "x":"${:wl[0]==1?:lettres[:l]:''}", "y":"${:wl[0]==0?:lettres[:l]::wl[1]==1?:lettres[:l]:''}"},
+        "question": "\\text{Réduire }${:x!=''?MMmath.signIfOne(:a)::a}${:x}\\times ${:b<0?'(':''}${:y!=''?MMmath.signIfOne(:b)::b}${:y}${:b<0?')':''}",
+        "shortq":":question|-15",
+        "answer":":question|-15=\\color{red}{${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*('+:b+')*'+(:y!==''?:y:1),false,true)}}",
+        "value":"${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*('+:b+')*'+(:y!==''?:y:1),false,true)}"
+    },{
+        "name":"Produit de trois monomes à coefficients relatifs",
+        "vars":{"l":"0_5","a":"-5_5_^0", "b":"-5_5_^0","c":"-5_${:a>0&&:b>0?0:5}_^0", "wl":"0_1_3", "x":"${:wl[0]==1?:lettres[:l]:''}", "y":"${:wl[0]==0?:lettres[:l]::wl[1]==1?:lettres[:l]:''}", "z":"${:wl[0]==0&&:wl[1]==0?:lettres[:l]::wl[2]==1?:lettres[:l]:''}"},
+        "question": "\\text{Réduire }${:x!=''?MMmath.signIfOne(:a)::a}${:x}\\times ${:b<0?'(':''}${:y!=''?MMmath.signIfOne(:b)::b}${:y}${:b<0?')':''} \\times ${:c<0?'(':''}${:z!=''?MMmath.signIfOne(:c)::c}${:z}${:c<0?')':''}",
+        "shortq":":question|-15",
+        "answer":":question|-15=\\color{red}{${MMmath.calc(:a+'\\times '+(:x!==''?:x:1)+'\\times('+:b+')\\times '+(:y!==''?:y:1)+'\\times('+:c+')\\times '+(:z!==''?:z:1),false,true)}}",
+        "value":"${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*('+:b+')*'+(:y!==''?:y:1)+'*('+:c+')*'+(:z!==''?:z:1),false,true)}"
+    },{
+        "name":"Produit de trois monomes à coefficients relatifs, plusieurs lettres",
+        "vars":{"l":"0_5_3","a":"-5_5_^0", "b":"-5_5_^0","c":"-5_${:a>0&&:b>0?0:5}_^0", "wl":"0_1_3", "x":"${:wl[0]==1?:lettres[:l[0]]:''}", "y":"${:wl[0]==0?:lettres[:l[1]]::wl[1]==1?:lettres[:l[1]]:''}", "z":"${:wl[0]==0&&:wl[1]==0?:lettres[:l[2]]::wl[2]==1?:lettres[:l[2]]:''}"},
+        "question": "\\text{Réduire }${:x!=''?MMmath.signIfOne(:a)::a}${:x}\\times ${:b<0?'(':''}${:y!=''?MMmath.signIfOne(:b)::b}${:y}${:b<0?')':''} \\times ${:c<0?'(':''}${:z!=''?MMmath.signIfOne(:c)::c}${:z}${:c<0?')':''}",
+        "shortq":":question|-15",
+        "answer":":question|-15=\\color{red}{${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*('+:b+')*'+(:y!==''?:y:1)+'*('+:c+')*'+(:z!==''?:z:1),false,true)}}",
+        "value":"${MMmath.calc(:a+'*'+(:x!==''?:x:1)+'*('+:b+')*'+(:y!==''?:y:1)+'*('+:c+')*'+(:z!==''?:z:1),false,true)}"
+    }
+    ]
+}

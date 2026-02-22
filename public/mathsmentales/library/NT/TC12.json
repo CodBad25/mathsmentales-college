@@ -1,0 +1,41 @@
+{
+    "title":"Calculs simples avec des complexes",
+    "type":"latex",
+    "ID":"TC12",
+    "description":"Somme, produit, quotient",
+    "keys":["+","-","/","i","_","_","_","_"],
+    "dest":["TC1"],
+    "options":[{
+        "name":"Somme de deux complexes",
+        "vars":{"a":"-20_20_2","b":"-20_20_2_^${:a}","pr":"${:a[0]+:a[1]}","pi":"${:b[0]+:b[1]}"},
+        "question":"${:a[0]!=0?:a[0]:''}${:b[0]!=0?:a[0]==0?MMmath.signIfOne(:b[0])+'i':MMmath.signedNumberButOne(:b[0])+'i':''}${:a[1]!=0?MMmath.signedNumber(:a[1]):''}${:b[1]!=0?MMmath.signedNumberButOne(:b[1])+'i':''}",
+        "answer":":question=\\color{red}{${:pr!=0?:pr:''}${:pi!=0?:pr==0?MMmath.signIfOne(:pi)+'i':MMmath.signedNumber(:pi)+'i':''}}",
+        "value":"${:pr!=0?:pr:''}${:pi!=0?:pr==0?MMmath.signIfOne(:pi)+'i':MMmath.signedNumber(:pi)+'i':''}"
+    
+    },{
+        "name":"Différence de deux complexes",
+        "vars":{"a":"-20_20_2","b":"-20_20_2_^${:a}","pr":"${:a[0]-:a[1]}","pi":"${:b[0]-:b[1]}"},
+        "question":"${:a[0]!=0?:a[0]:''}${:b[0]!=0?:a[0]==0?MMmath.signIfOne(:b[0])+'i':MMmath.signedNumberButOne(:b[0])+'i':''}-(${:a[1]!=0?MMmath.signIfOne(:a[1]):''}${:b[1]!=0?:a[1]==0?MMmath.signIfOne(:b[1])+'i':MMmath.signedNumberButOne(:b[1])+'i':''})",
+        "answer":":question=\\color{red}{${:pr!=0?:pr:''}${:pi!=0?:pr==0?MMmath.signIfOne(:pi)+'i':MMmath.signedNumber(:pi)+'i':''}}",
+        "value":"${:pr!=0?:pr:''}${:pi!=0?:pr==0?MMmath.signIfOne(:pi)+'i':MMmath.signedNumber(:pi)+'i':''}"
+    
+    },{
+        "name":"Produit de deux complexes",
+        "vars":{"a":"-10_10_2","b":"-10_10_2_^${:a}", "reponse":"${MMmath.box(['Multiply',['Complex',:a[0],:b[0]],['Complex',:a[1],:b[1]]])}"},
+        "question":"(${MMmath.box(['Complex',:a[0],:b[0]])})\\times(${MMmath.box(['Complex',:a[1],:b[1]])})",
+        "answer":":question=\\color{red}{${:reponse}}",
+        "value":"${:reponse}"
+    },{
+        "name":"Produit d'un complexe par son conjugué",
+        "vars":{"a":"-10_10","b":"-10_10_^${:a}", "reponse":"${MMmath.box(['Multiply',['Complex',:a,:b],['Complex',:a,-:b]])}"},
+        "question":"(${MMmath.box(['Complex',:a,:b])})\\times(${MMmath.box(['Complex',:a,-:b])})",
+        "answer":":question=\\color{red}{${:reponse}}",
+        "value":"${:reponse}"
+    },{
+        "name":"Quotient de deux complexes",
+        "vars":{"a":"-10_10_2","b":"-10_10_2_^${:a}", "reponse":"${MMmath.box(['Rational',:a[0]*:a[1]+:b[0]*:b[1],:a[1]**2+:b[1]**2])}+${MMmath.box(['Rational',-:a[0]*:b[1]+:a[1]*:b[0],:a[1]**2+:b[1]**2])}i"},
+        "question":"\\dfrac{${MMmath.box(['Complex',:a[0],:b[0]])}}{${MMmath.box(['Complex',:a[1],:b[1]])}}",
+        "answer":":question=\\color{red}{${:reponse}}",
+        "value":"${:reponse}"
+    }]
+}

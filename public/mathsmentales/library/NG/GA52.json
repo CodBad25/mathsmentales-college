@@ -1,0 +1,12 @@
+{
+    "title":"Mettre sous forme canonique",
+    "type":"latex",
+    "ID":"GA52",
+    "description":"",
+    "dest":["GA5"],
+    "vars":{"a":"-10_10_^0", "b":"-10_10_^0", "c":"-10_10_^0","alpha":"${MMmath.calc('|\\frac{'+:b+'}{2\\times('+:a+')}|')}","alphadec":"${-:b/2/:a}","beta":"${MMmath.calc('|\\frac{4\\times('+:a+')\\times('+:c+')-'+:b+'\\times'+:b+'}{4\\times('+:a+')}|')}","alphasign":"${MMmath.sign(-:alphadec)}","betasign":"${MMmath.sign((4*:a*:c-:b*:b)*:a)}"},
+    "question":["\\text{Mettre }${MMmath.signIfOne(:a)}x^2${MMmath.signedNumber(:b)}x${MMmath.signedNumber(:c)}\\text{ sous forme canonique}"
+	],
+    "answer":"${MMmath.signIfOne(:a)}x^2${MMmath.signedNumber(:b)}x${MMmath.signedNumber(:c)}=\\color{red}{${MMmath.signIfOne(:a)}\\left(x${:alphasign}${:alpha}\\right)^2${:betasign}${:beta}}",
+    "value":"${MMmath.signIfOne(:a)}\\left(x${:alphasign}${:alpha}\\right)^2${:betasign}${:beta}"
+}

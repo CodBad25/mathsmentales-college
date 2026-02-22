@@ -1,0 +1,43 @@
+{
+    "ID":"11ND2",
+    "dest":["11ND","10ND","9ND"],
+    "title":"Décomposition additive des nombres inférieurs ou égaux à 10",
+    "description":"Sommes inférieures ou égales à 10",
+    "type":"text",
+    "speech":1,
+    "options":[
+        {
+            "name":"Phrase",
+            "vars":{"a":"2_9", "b":"1_${Math.min(:a, 10-:a)}", "s":"${:a+:b}"},
+            "question":"Combien font ${:a} et ${:b} ?",
+            "audio":"Combien font ${:a} et ${:b} ?",
+            "answer":"${:a} et ${:b} font <span class='red'>${:s}</span>",
+            "value":"${:s}"
+        },
+        {
+            "name":"Addition",
+            "vars":{"a":"2_9", "b":"1_${Math.min(:a, 10-:a)}", "s":"${:a+:b}"},
+            "question":"Complète <br>$$${:a} + ${:b} = ...$$",
+            "shortq":"$$${:a} + ${:b} = \\colorbox{#ECECEC}{\\quad}$$",
+            "audio":"À combien est égal : ${:a} pluss ${:b} ?",
+            "answer":"$$${:a} + ${:b} = \\color{red}{${:s}}$$",
+            "value":"${:s}"
+        },{
+            "name":"Soustraction",
+            "vars":{"a":"2_10", "b":"1_${:a-1}", "s":"${:a-:b}"},
+            "question":"$$${:a} - ${:b} = ...$$",
+            "shortq":"$$${:a} - ${:b} = \\colorbox{#ECECEC}{\\quad}$$",
+            "audio":"À combien est égal : ${:a} moins ${:b} ?",
+            "answer":"$$${:a} - ${:b} = \\color{red}{${:s}}$$",
+            "value":"${:s}"
+        },{
+            "name":"Addition à trou",
+            "vars":{"a":"2_10", "b":"1_${:a-1}", "s":"${:a-:b}"},
+            "question":"$$${:b} + ... = ${:a}$$",
+            "shortq":"$$${:b} + \\colorbox{#ECECEC}{\\quad} = ${:a}$$",
+            "audio":"Combien faut-il ajouter à ${:b} pour avoir ${:a} ?",
+            "answer":"$$${:b} + \\color{red}{${:s}} = ${:a}$$",
+            "value":"${:s}"
+        }
+    ]
+}

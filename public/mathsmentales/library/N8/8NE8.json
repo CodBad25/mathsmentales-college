@@ -1,0 +1,42 @@
+{
+    "title":"Ajouter deux décimaux à une décimale",
+    "description":"Somme de deux nombres",
+    "dest":["8NE","7NE","6NE"],
+    "consigne":"Calculer",
+    "options":[
+        {
+            "name":"Somme sans retenue",
+            "vars":{
+                "dec1":"1_8",
+                "dec2":"1_${10-:dec1-1}",
+                "ent1":"1_8",
+                "ent2":"1_${10-:ent1-1}",
+                "nb1":"${MMmath.round(:ent1+:dec1/10,1)}",
+                "nb2":"${MMmath.round(:ent2+:dec2/10,1)}"
+            }
+        },{
+            "name":"Nombres qui se marient bien",
+            "vars":{
+                "dec1":"1_9",
+                "dec2":"${10-:dec1}",
+                "ent1":"1_8",
+                "ent2":"1_${10-:ent1}",
+                "nb1":"${MMmath.round(:ent1+:dec1/10,1)}",
+                "nb2":"${MMmath.round(:ent2+:dec2/10,1)}"
+            }
+        },{
+            "name":"Somme avec retenue",
+            "vars":{
+                "dec1":"2_9",
+                "dec2":"${10-:dec1+1}_9",
+                "ent1":"2_9",
+                "ent2":"${10-:ent1+1}_9",
+                "nb1":"${MMmath.round(:ent1+:dec1/10,1)}",
+                "nb2":"${MMmath.round(:ent2+:dec2/10,1)}"
+            }
+        }
+    ],
+    "question":":nb1+:nb2",
+    "answer":":question=\\color{red}{${MMmath.round(:nb1+:nb2,1)}}",
+    "value":"${MMmath.round(:nb1+:nb2,1)}"
+}

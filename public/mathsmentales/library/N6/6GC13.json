@@ -1,0 +1,124 @@
+{
+    "ID":"6GC13",
+    "title":"Reconnaitre une bissectrice",
+    "dest":["6GC"],
+    "type":"text",
+    "repeat":4,
+    "consts":{
+        "colors":["blue","red","green","brown","black","orange","purple"]
+    },
+    "vars":{
+        "estBissectrice":[true, false]
+    },
+    "options":[
+        {
+            "name":"À partir des codages",
+            "vars":{
+                "ang1":"10_90",
+                "ang2":"${:estBissectrice?:ang1:'10_90_^'+:ang1}",
+                "rotation":"-90_90",
+                "ang1rad":"${:ang1*Math.PI/180}",
+                "ang2rad":"${:ang2*Math.PI/180}",
+                "rotationrad":"${:rotation*Math.PI/180}",
+                "color1c":"0_${:colors.length-1}",
+                "color1":"${:colors[:color1c]}",
+                "color2c":"0_${:colors.length-1}_^:color1c",
+                "color2":"${:colors[:color2c]}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-5,5,5,-5],
+                "content":[
+                    ["point",[0,0],{"name":"O","visible":false}],
+                    ["point",["${Math.cos(:rotationrad)}","${Math.sin(:rotationrad)}"],{"name":"A","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad)}","${Math.sin(:rotationrad+:ang1rad)}"],{"name":"B","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad)}","${Math.sin(:rotationrad+:ang1rad+:ang2rad)}"],{"name":"C","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad/2)*1.9}","${Math.sin(:rotationrad+:ang1rad/2)*1.9}"],{"name":"D","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad/2)*2.5}","${Math.sin(:rotationrad+:ang1rad/2)*2.5}"],{"name":"E","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad/2)*1.6}","${Math.sin(:rotationrad+:ang1rad+:ang2rad/2)*1.6}"],{"name":"F","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad/2)*2.4}","${Math.sin(:rotationrad+:ang1rad+:ang2rad/2)*2.4}"],{"name":"G","visible":false}],
+                    ["segment",["D","E"],{"strokeWidth":1,"visible":"${:estBissectrice?1:0}"}],
+                    ["segment",["F","G"],{"strokeWidth":1,"visible":"${:estBissectrice?1:0}"}],
+                    ["line",["O","A"],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",["O","B"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"red"}],
+                    ["line",["O","C"],{"straightFirst":false, "strokeWidth":1}],
+                    ["angle",["A","O","B"],{"orthoType":"sector","radius":2.2,"label":{"visible":false},"fillColor":"transparent","strokeColor":"${:color1}"}],
+                    ["angle",["B","O","C"],{"orthoType":"sector","radius":2,"label":{"visible":false},"fillColor":"transparent","strokeColor":"${:estBissectrice?:color1::color2}"}]
+                ]
+            },
+            "question":"La droite rouge est-elle la bissectrice de l'angle ?",
+            "answer":"${:estBissectrice?'Oui, car les codages indiquent que les angles ont la même mesure.':'Non, car les angles n’ont pas un codage indiquant une même mesure.'}"
+        },{
+            "name":"À partir des mesures",
+            "vars":{
+                "ang1":"20_90",
+                "ang2":"${:estBissectrice?:ang1:'20_90_^'+:ang1}",
+                "rotation":"-90_90",
+                "ang1rad":"${:ang1*Math.PI/180}",
+                "ang2rad":"${:ang2*Math.PI/180}",
+                "rotationrad":"${:rotation*Math.PI/180}",
+                "color1c":"0_${:colors.length-1}",
+                "color1":"${:colors[:color1c]}",
+                "color2c":"0_${:colors.length-1}_^:color1c",
+                "color2":"${:colors[:color2c]}"
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-5,5,5,-5],
+                "content":[
+                    ["point",[0,0],{"name":"O","visible":false}],
+                    ["point",["${Math.cos(:rotationrad)}","${Math.sin(:rotationrad)}"],{"name":"A","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad)}","${Math.sin(:rotationrad+:ang1rad)}"],{"name":"B","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad)}","${Math.sin(:rotationrad+:ang1rad+:ang2rad)}"],{"name":"C","visible":false}],
+                    ["line",["O","A"],{"straightFirst":false, "strokeWidth":1}],
+                    ["line",["O","B"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"red"}],
+                    ["line",["O","C"],{"straightFirst":false, "strokeWidth":1}],
+                    ["angle",["A","O","B"],{"orthoType":"sector","radius":2,"name":"${:ang1}°","fillColor":"transparent","strokeColor":"${:color1}"}],
+                    ["angle",["B","O","C"],{"orthoType":"sector","radius":2.3,"name":"${:ang2}°","fillColor":"transparent","strokeColor":"${:estBissectrice?:color1::color2}"}]
+                ]
+            },
+            "question":"La droite rouge est-elle la bissectrice de l'angle ?",
+            "answer":"${:estBissectrice?'Oui, car elle partage l’angle en deux angles de même mesure.':'Non, car les angles n’ont pas la même mesure.'}"
+        },{
+            "name":"À partir de la position",
+            "vars":{
+                "ang1":"20_90",
+                "ang2":"${:ang1}",
+                "rotation":"-90_90",
+                "ang1rad":"${:ang1*Math.PI/180}",
+                "ang2rad":"${:ang2*Math.PI/180}",
+                "rotationrad":"${:rotation*Math.PI/180}",
+                "color1c":"0_${:colors.length-1}",
+                "color1":"${:colors[:color1c]}",
+                "d1ord2":[true,false],
+                "angleoucodage":[true,false]
+            },
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[-5,5,5,-5],
+                "content":[
+                    ["point",[0,0],{"name":"O","visible":false}],
+                    ["point",["${Math.cos(:rotationrad)}","${Math.sin(:rotationrad)}"],{"name":"A","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad)}","${Math.sin(:rotationrad+:ang1rad)}"],{"name":"B","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad)}","${Math.sin(:rotationrad+:ang1rad+:ang2rad)}"],{"name":"C","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad/2)*1.7}","${Math.sin(:rotationrad+:ang1rad/2)*1.7}"],{"name":"D","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad/2)*2.3}","${Math.sin(:rotationrad+:ang1rad/2)*2.3}"],{"name":"E","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad/2)*2}","${Math.sin(:rotationrad+:ang1rad+:ang2rad/2)*2}"],{"name":"F","visible":false}],
+                    ["point",["${Math.cos(:rotationrad+:ang1rad+:ang2rad/2)*2.7}","${Math.sin(:rotationrad+:ang1rad+:ang2rad/2)*2.7}"],{"name":"G","visible":false}],
+                    ["segment",["D","E"],{"strokeWidth":1,"visible":"${:angleoucodage?0:1}"}],
+                    ["segment",["F","G"],{"strokeWidth":1,"visible":"${:angleoucodage?0:1}"}],
+                    ["line",["O","A"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"${:estBissectrice?'#0072b2'::d1ord2?'red':'#0072b2'}"}],
+                    ["line",["O","B"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"${:estBissectrice?'red':'#0072b2'}"}],
+                    ["line",["O","C"],{"straightFirst":false, "strokeWidth":1, "strokeColor":"${:estBissectrice?'#0072b2'::d1ord2?'#0072b2':'red'}"}],
+                    ["angle",["A","O","B"],{"orthoType":"sector","radius":2,"name":"${:ang1}°","fillColor":"transparent","strokeColor":"${:color1}","withLabel":"${:angleoucodage?1:0}"}],
+                    ["angle",["B","O","C"],{"orthoType":"sector","radius":2.3,"name":"${:ang1}°","fillColor":"transparent","strokeColor":"${:color1}","withLabel":"${:angleoucodage?1:0}"}]
+                ]
+            },
+            "question":"La droite rouge est-elle la bissectrice de l'angle ?",
+            "answer":"${:estBissectrice?'Oui, car elle partage l’angle en deux angles de même mesure.':'Non, car la droite ne partage pas l’angle.'}"
+        }
+    ]
+}

@@ -56,7 +56,7 @@ export default async function Home() {
 
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
           <Link
-            href="/exercices"
+            href="/play"
             className="btn-primary text-lg px-8 py-4"
           >
             Essayer les exercices

@@ -1,0 +1,78 @@
+{
+    "title":"Lien entre aire d'un carré et côté",
+    "description":"Pas encore compatible avec la saisie en ligne",
+    "type":"text",
+    "speech":1,
+    "textSize":"medium",
+    "ID":"6GD1",
+    "dest":["6GD", "5MA", "4MA", "3MA"],
+    "consts":{"uv":{"mm":"millimètres","cm":"centimètres","dm":"décimètres","m":"mètres","dam":"décamètres","hm":"hectomètres","km":"kilomètres"}},
+    "vars":{"a":"1_10",
+        "b":"${:a*:a}",
+        "c":["mm","cm","dm","m", "dam", "hm", "km"]
+    },
+    "options":[{
+        "name":"Aire du carré",
+        "question": "Quelle est l'aire d'un carré de côté ${:a} ${:c} ?",
+        "audio": "Quelle est l'aire d'un carré de côté ${:a} ${:uv[:c]} ?",
+        "answer":"$$${:a}\\text{ :c }\\times ${:a}\\text{ :c }=\\color{red}{${:b}\\text{ :c}^2}$$",
+        "figure":{
+            "type":"graph",
+            "axis":false,
+            "boundingbox":[0,10,10,0],
+            "content":[
+                ["point",[2,2],{"name":"A","size":0,"label":{"offset":[-6,-8]}}],
+                ["point",[2,8],{"name":"B","size":0,"label":{"offset":[-6,6]}}],
+                ["point",[8,8],{"name":"C","size":0,"label":{"offset":[0,6]}}],
+                ["point",[8,2],{"name":"D","size":0,"label":{"offset":[0,-8]}}],
+                ["segment",["A","B"]],
+                ["segment",["B","C"]],
+                ["segment",["C","D"]],
+                ["segment",["D","A"]],
+                ["angle",["A","B","C"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["B","C","D"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["C","D","A"],{"radius":1,"label":{"visible":false}}],
+                ["angle",["D","A","B"],{"radius":1,"label":{"visible":false}}],
+                ["text", [4.8,8,"//"]],
+                ["text", [2,5,"//"],{"rotate":90}],
+                ["text", [4.6,2,"//"]],
+                ["text", [8,5,"//"],{"rotate":90}],
+                ["text", [5,1,"${:a} ${:c}"], {"anchorX":"middle", "fontSize":13}]
+            ]
+        },
+        "value":["${:b} ${:c}^2", "${:b}${:c}^2"]
+        },
+        {
+            "name":"Côté du carré",
+            "question": "Quel est le côté d'un carré d'aire ${:b} ${:c}² ?",
+            "audio": "Quel est le côté d'un carré d'aire ${:b} ${:uv[:c]} carré ?",
+            "answer":"$$\\color{red}{${:a}\\text{ :c }}\\times ${:a}\\text{ :c }=${:b}\\text{ :c}^2$$",
+            "figure":{
+                "type":"graph",
+                "axis":false,
+                "boundingbox":[0,10,10,0],
+                "content":[
+                    ["point",[2,2],{"name":"A","size":0,"label":{"offset":[-6,-8]}}],
+                    ["point",[2,8],{"name":"B","size":0,"label":{"offset":[-6,6]}}],
+                    ["point",[8,8],{"name":"C","size":0,"label":{"offset":[0,6]}}],
+                    ["point",[8,2],{"name":"D","size":0,"label":{"offset":[0,-8]}}],
+                    ["segment",["A","B"]],
+                    ["segment",["B","C"]],
+                    ["segment",["C","D"]],
+                    ["segment",["D","A"]],
+                    ["angle",["A","B","C"],{"radius":1,"label":{"visible":false}}],
+                    ["angle",["B","C","D"],{"radius":1,"label":{"visible":false}}],
+                    ["angle",["C","D","A"],{"radius":1,"label":{"visible":false}}],
+                    ["angle",["D","A","B"],{"radius":1,"label":{"visible":false}}],
+                    ["text", [4.8,8,"//"]],
+                    ["text", [2,5,"//"],{"rotate":90}],
+                    ["text", [4.6,2,"//"]],
+                    ["text", [8,5,"//"],{"rotate":90}],
+                    ["text", [5,5,"${:b} ${:c}²"], {"anchorX":"middle", "fontSize":13}]
+                ]
+            },
+            "value":["${:a} ${:c}", "${:a}${:c}"]
+    
+        }
+    ]
+}

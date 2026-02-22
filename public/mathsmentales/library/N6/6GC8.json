@@ -1,0 +1,73 @@
+{
+    "ID":"6GC8",
+    "title":"Dessiner un schéma de triangle à main levée connaissant des longueurs",
+    "type":"text",
+    "dest":["6GC","5GB"],
+    "consts":{
+        "schemas":{
+            "quelconques":[
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>text{font-size:12px; text-align:center;text-anchor:middle;}path{stroke:black;fill:none;stroke-linecap:round}</style><path d='M32 118 C32 118 47.43 115.9 53.43 115.86 C57.69 115.43 70.57 115.74 74.86 115.71 C79.14 115.69 92.05 116.19 96.29 115.57 C100.62 115.54 113.38 112.46 117.71 112.43 C121.95 111.81 134.86 112.31 139.14 112.29 C143.43 112.26 156.31 112.57 160.57 112.14 M160.57 112.14 C164.88 112.11 177.71 110.43 182 110 ' /><path d='M182 110 C182 110 167.67 98.61 163.6 94.2 C159.93 91.05 150.58 79.86 147.2 76.4 C143.83 72.74 133.68 61.72 129.8 58.6 C126.5 55.22 114.6 47.27 111.4 43.8 M111.4 43.8 C107.63 40.77 98.28 29.56 95 26 '/><path d='M95 26 C95 26 87.09 40.67 83.4 45.4 C81.13 49.19 72.43 59.25 69.8 62.8 C66.98 66.41 58.48 77.23 56.2 81.2 C53.68 84.62 48.12 96.18 45.6 99.6 M45.6 99.6 C43.32 103.57 34.72 114.32 32 118 '/><text x='24' y='128'>${:A}</text><text x='190' y='120'>${:B}</text><text x='92' y='23'>${:C}</text><text x='-18.38545' y='86.45488' transform='rotate(-52.965834)'>${:CA} ${:u}</text><text x='137.81169' y='-58.535625' transform='rotate(45.688137)'>${:BC} ${:u}</text><text x='101.60002' y='130.22336' transform='rotate(-1.68696)'>${:AB} ${:u}</text></svg>",
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}text{text-align:center;text-anchor:middle;font-size:12px;}</style><path d='m32 118s15-2.1 21-2.1c4.3-0.43 17-0.12 21-0.15 4.3-0.02 17 0.48 21-0.14 4.3-0.03 17-3.1 21-3.1 4.2-0.62 17-0.12 21-0.14 4.3-0.03 17 0.28 21-0.15m0 0c4.3-0.03 17-1.7 21-2.1'/><path d='m182 110s-15-9.3-20-13c-3.9-2.6-14-12-18-15-3.6-3.1-15-13-19-15-3.6-2.9-16-9.2-20-12-4-2.4-14-12-18-15m0 0c-3.5-3-14-12-18-15'/><path d='m71 24s-4.9 14-7.5 19c-1.4 3.9-6.9 15-8.6 19s-7.4 15-8.6 19c-1.6 3.5-4 15-5.6 19m0 0c-1.2 3.9-6.9 15-8.6 19'/><text x='24.088577' y='127.71269'>${:A}</text><text x='188.78688' y='117.97327'>${:B}</text><text x='70.293449' y='20.285078'>${:C}</text><text transform='rotate(-65)' x='-42.92556' y='69.857925'>${:CA} ${:u}</text><text transform='rotate(34)' x='142.81081' y='-20.467461'>${:BC} ${:u}</text><text transform='rotate(-3.7)' x='92.98539' y='133.47635'>${:AB} ${:u}</text></svg>",
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}text{text-align:center;text-anchor:middle;font-size:12px;}</style><path d='m31 117s16-1.3 22-1.4c4.3-0.43 17-0.12 21-0.15 4.3-0.02 17 0.48 21-0.14 4.3-0.03 17-3.1 21-3.1 4.2-0.62 17-0.12 21-0.14 4.3-0.03 17 0.28 21-0.15m0 0c4.3-0.03 17-1.7 21-2.1'/><path d='m182 110s-8.9-16-11-22c-2.2-4.2-7.4-17-9.2-22s-6.9-17-9.2-22m0 0c-2-4.6-9.8-17-12-22'/><path d='m140 24s-11 13-16 16c-3.5 3.4-15 12-19 15-3.7 2.8-15 11-18 15-3.8 3.1-13 15-17 18-3.4 3.5-15 12-19 15m0 0c-3.8 2.9-15 12-19 15'/><text x='21.46497' y='124.3363'>${:A}</text><text x='188.26794' y='119.47884'>${:B}</text><text x='139.61639' y='19.973274'>${:C}</text><text transform='rotate(66)' x='124.53655' y='-127.10403'>${:BC} ${:u}</text><text transform='rotate(-3.2)' x='102.39602' y='133.42999'>${:AB} ${:u}</text><text transform='rotate(-43)' x='17.746309' y='104.71513'>${:CA} ${:u}</text></svg>"
+            ],
+            "isoceles":[
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}line{stroke:#000}text{font-size:12px;text-align:center;text-anchor:middle}</style><path d='m34 112s17-1.5 23-1.3c4.6-0.27 18 0.53 23 0.66 4.6 0.14 18 1.1 23 0.67 4.6 0.13 18-2.5 23-2.3 4.6-0.47 18 0.53 23 0.66m0 0c4.6 0.14 18 0.54 23 0.67'/><path d='m34 112s8.4-13 12-18c2.5-3.5 12-12 14-16 3-3.2 12-13 14-17 2.8-3.2 8.6-15 11-18m0 0c2.3-3.6 12-13 14-16'/><line x1='63' x2='67' y1='72' y2='75'/><line x1='65' x2='70' y1='68' y2='72'/><path d='m171 111s-11-11-15-16c-3-3.1-10-14-13-17-2.5-3.3-9.9-13-13-16-2.8-3.5-13-12-16-15m0 0c-3.1-3-10-14-13-17'/><line x1='136' x2='141' y1='74' y2='70'/><line x1='134' x2='138' y1='71' y2='67'/><text x='26.193254' y='121.29844'>${:A}</text><text x='177.42384' y='121.27171'>${:B}</text><text x='100.7478' y='23.129175'>${:C}</text><text x='99.856949' y='125.19599'>${:AB} ${:u}</text><text transform='rotate(48)' x='144.41795' y='-63.171021'>${:BC} ${:u}</text><text transform='rotate(-52)' x='-13.158298' y='88.387894'>${:CA} ${:u}</text></svg>",
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}line{stroke:#000}text{font-size:12px;text-align:center;text-anchor:middle}</style><path d='m176 29s-18 1.6-24 1.5c-4.8 0.3-19-0.4-24-0.5s-19-1-24-0.5c-4.8-0.1-19 2.6-24 2.5-4.8 0.5-19-0.4-24-0.5m0 0c-4.8-0.1-19-0.4-24-0.5'/><path d='m176 29s-8.8 13-13 17c-2.6 3.4-12 12-15 15-3.1 3.1-13 12-15 16-2.9 3-9.1 14-12 17m0 0c-2.5 3.5-12 12-15 15'/><line x1='146' x2='141' y1='68' y2='64'/><line x1='143' x2='139' y1='71' y2='67'/><path d='m32 32s12 9.9 16 14c3.2 2.9 11 13 14 16 2.6 3.2 11 13 14 15 2.9 3.3 14 11 17 14m0 0c3.2 2.8 11 13 14 16'/><line x1='68' x2='64' y1='66' y2='70'/><line x1='71' x2='67' y1='69' y2='73'/><text x='183.15317' y='25.672606'>${:A}</text><text x='23.020725' y='29.895323'>${:B}</text><text x='103.96828' y='122.25835'>${:C}</text><text x='105.69628' y='24.591297'>${:AB} ${:u}</text><g transform='translate(96 10)'><text transform='rotate(-52)' x='-13.158298' y='88.387894'>${:CA} ${:u}</text></g><text transform='rotate(48)' x='95.540932' y='13.267457'>${:BC} ${:u}</text></svg>",
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}line{stroke:#000}text{font-size:12px;text-align:center;text-anchor:middle}</style><path d='m36 120s14-1.1 20-0.75c4-0.15 16 1 20 1.2s16 1.6 20 1.2m0 0c4.1 0.25 16-1.4 20-1.8'/><path d='m36 120s4.8-14 7.4-20c1.5-4.1 7.5-16 9.3-20 1.9-4 8-16 9.4-20 1.8-3.8 4.6-16 6.4-20m0 0c1.3-4.2 7.5-16 9.4-20'/><line x1='53' x2='58' y1='73' y2='75'/><line x1='54' x2='60' y1='69' y2='71'/><path d='m117 121s-6.9-14-8.8-20c-1.7-3.9-5.5-16-6.9-20-1.4-4-5-16-6.8-20-1.4-4.2-8.4-16-9.8-20m0 0c-1.9-3.8-5.5-16-6.8-20'/><line x1='96' x2='102' y1='76' y2='73'/><line x1='95' x2='100' y1='72' y2='70'/><text x='21.922049' y='124.80178'>${:A}</text><text x='127.3214' y='125.64588'>${:B}</text><text x='79.242226' y='15.830735'>${:C}</text><text x='77.587151' y='133.38194'>${:AB} ${:u}</text><text transform='rotate(-66)' x='-40.334507' y='72.829048'>${:CA} ${:u}</text><text transform='rotate(65)' x='105.91127' y='-68.413185'>${:BC} ${:u}</text></svg>",
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}line{stroke:#000}text{font-size:12px;text-align:center;text-anchor:middle}</style><path d='m128 27s-13 1.3-19 1c-3.8 0.2-15-0.8-19-1s-15-1.4-19-1m0 0c-3.8-0.2-15 1.6-19 2'/><path d='m128 27s-5.8 16-8.4 21c-1.7 4.4-8.3 17-10 21-2.1 4.3-8.8 17-10 21m0 0c-2 4.1-5.9 17-7.4 21'/><line x1='114' x2='108' y1='67' y2='65'/><line x1='112' x2='107' y1='71' y2='69'/><path d='m53 27s8.2 16 10 21c2 4.1 6.7 17 8.4 21 1.7 4.3 6.2 17 8.4 21m0 0c1.8 4.5 9.1 17 11 21'/><line x1='73' x2='67' y1='65' y2='67'/><line x1='74' x2='69' y1='69' y2='71'/><text x='137.98613' y='29.884188'>${:A}</text><text x='43.786873' y='29.572384'>${:B}</text><text x='87.409264' y='127.20713'>${:C}</text><text x='92.783142' y='21.929829'>${:AB} ${:u}</text><text transform='rotate(-66)' x='-15.336958' y='144.81078'>${:CA} ${:u}</text><text transform='rotate(65)' x='91.220116' y='-17.555748'>${:BC} ${:u}</text></svg>"
+            ],
+            "equilateraux":[
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}line{stroke:#000}text{font-size:12px;text-align:center;text-anchor:middle}</style><path d='m42 116s17-0.52 23 0c4.7 0 19 1.6 23 2s19 2.2 23 2c4.6 0.4 19-1.4 23-1m0 0c4.6-0.2 19 1.6 23 2'/><line x1='96' x2='96' y1='115' y2='121'/><line x1='100' x2='100' y1='116' y2='121'/><path d='m42 116s8-16 11-21c2.2-4 11-15 13-19 2.8-3.8 11-15 13-20 2.5-3.7 8-16 10-20m0 0c2.2-4.2 11-16 13-20'/><line x1='68' x2='74' y1='69' y2='72'/><line x1='71' x2='76' y1='65' y2='69'/><path d='m158 121s-9.2-15-12-21c-2.3-4-7.8-16-9.7-21-1.9-4.1-7.3-17-9.7-21-2.1-4.4-11-16-13-21m0 0c-2.4-3.9-7.8-16-9.7-21'/><line x1='130' x2='136' y1='74' y2='72'/><line x1='129' x2='134' y1='71' y2='68'/><text x='34.271206' y='123.58352'>${:A}</text><text x='166.18999' y='130.59688'>${:B}</text><text x='101.09746' y='13.830735'>${:C}</text><text x='96.732201' y='133.25168'>${:AB} ${:u}</text></svg>",
+                "<svg width='15em' height='10em' version='1.1' viewBox='0 0 210 140' xmlns='http://www.w3.org/2000/svg'><style>path{fill:none;stroke-linecap:round;stroke:#000}line{stroke:#000}text{font-size:12px;text-align:center;text-anchor:middle}</style><path d='m33 27s11 12 14 18c2.9 3.6 9.5 16 12 20 2.3 3.8 9.2 15 12 19 2.6 4 12 15 15 19m0 0c2.8 3.4 9.6 15 12 19'/><line x1='66' x2='61' y1='69' y2='72'/><line x1='68' x2='63' y1='72' y2='75'/><path d='m33 27s17-2.7 23-3c4.5-0.59 18-0.76 23-0.96 4.5-0.19 18-0.17 23-0.95 4.6-0.2 18-3.8 23-4m0 0c4.5-0.78 18-0.77 23-0.96'/><line x1='85' x2='86' y1='19' y2='25'/><line x1='89' x2='90' y1='19' y2='25'/><path d='m98 120s5.9-15 8.6-21c1.8-4.3 8.5-16 11-21 2.1-4.1 9-16 11-21 2-3.9 5.6-17 7.6-21m0 0c1.6-4.3 8.5-16 11-21'/><line x1='118' x2='123' y1='71' y2='73'/><line x1='119' x2='125' y1='67' y2='70'/><text x='23.556284' y='25.231627'>${:A}</text><text x='95.78688' y='132.63474'>${:B}</text><text x='153.99501' y='15.986637'>${:C}</text><text x='80.834366' y='13.969917'>${:AB} ${:u}</text></svg>"
+                ]
+        },
+        "lettres":"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    },
+    "vars":{
+        "l":"0_${:lettres.length-1}_3_^&",
+        "A":"${:lettres[:l[0]]}",
+        "B":"${:lettres[:l[1]]}",
+        "C":"${:lettres[:l[2]]}",
+        "cAB":["${:A+:B}","${:B+:A}"],
+        "cBC":["${:B+:C}","${:C+:B}"],
+        "cCA":["${:C+:A}","${:A+:C}"],
+        "ABC":["${:A+:B+:C}","${:B+:C+:A}","${:C+:A+:B}","${:A+:C+:B}","${:B+:A+:C}","${:C+:B+:A}"],
+        "u":["cm","m","mm"]
+    },
+    "options":[
+        {
+            "name":"Triangle quelconque",
+            "vars":{
+                "AB":"d3_20_1",
+                "CA":"d3.1_${:AB-0.5}_1",
+                "BC":"d${MMmath.round(:AB-:CA+0.4,1)}_${:AB-0.5}_1_^:CA",
+                "longueurs":["${:cAB} = ${:AB}~${:u}, ${:cBC} = ${:BC}~${:u}, ${:cCA} = ${:CA}~${:u}", "${:cBC} = ${:BC}~${:u}, ${:cCA} = ${:CA}~${:u}, ${:cAB} = ${:AB}~${:u}", "${:cCA} = ${:CA}~${:u}, ${:cAB} = ${:AB}~${:u}, ${:cBC} = ${:BC}~${:u}"],
+                "sample":"${:CA/:BC>.87&&:CA/:BC<1.15?0::CA<:BC?1:2}"
+            },
+            "question":"Faire un schéma d’un triangle ${:ABC} quelconque de côtés $$${:longueurs}$$",
+            "answer":"${:schemas.quelconques[:sample]}"
+        },
+        {
+            "name":"Triangle isocèle",
+            "vars":{
+                "AB":"d3_20_1",
+                "BC":"d${MMmath.round(:AB/2+0.5,1)}_${MMmath.round(:AB*2,1)}_1",
+                "CA":"${:BC}",
+               "sample":"${:BC<:AB?'0_1':'2_3'}",
+               "longueurs":["${:cAB}=${:AB}~${:u} \\text{ et } ${:cBC}=${:BC}~${:u}","${:cAB}=${:AB}~${:u} \\text{ et } ${:cCA}=${:CA}~${:u}","${:cBC}=${:BC}~${:u} \\text{ et } ${:cAB}=${:AB}~${:u}", "${:cCA}=${:CA}~${:u} \\text{ et } ${:cAB}=${:AB}~${:u}"]
+            },
+            "question":"Faire un schéma de triangle ${:ABC} isocèle en ${:C} tel que $$${:longueurs}$$",
+            "answer":"${:schemas.isoceles[:sample]}"
+        },{
+            "name":"Triangle équilatéral",
+            "vars":{
+                "AB":"d3_20_1",
+                "BC":"${:AB}",
+                "CA":"${:AB}",
+               "sample":"0_1"
+            },
+            "question":"Faire un schéma codé de triangle ${:ABC} équilatéral de côté $$${:cAB}=${:AB}~${:u}$$",
+            "answer":"${:schemas.equilateraux[:sample]}"
+        }
+    ]
+}

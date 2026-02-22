@@ -1,0 +1,42 @@
+{
+    "title":"Repérer le chiffre des unités",
+    "description":"Trouver les unités dans un entier, dans un décimal.",
+    "ID":"8NC1",
+    "dest": ["8NC","7NC","6NC","5NA"],
+    "type":"text",
+    "options":[
+        {
+            "name":"Nombres entiers < 1000",
+            "vars":{
+                "u":"0_9",
+                "ns":"1_9_2_^&,0,${:u}",
+                "nb":"${:ns[0]*100+:ns[1]*10+:u}"
+            }
+        },
+        {
+            "name":"Nombres entiers < 1 000 000",
+            "vars":{
+                "u":"0_9",
+                "ns":"0_9_5_^&,${:u}",
+                "nb":"${:ns[0]*100000+:ns[1]*10000+:ns[2]*1000+:ns[3]*100+:ns[4]*10+:u}"
+            }
+        },{
+            "name":"Petits nombres décimaux",
+            "vars":{
+                "u":"0_9",
+                "ns":"0_9_4_^&,${:u}",
+                "nb":"${MMmath.round(:ns[0]*100+:ns[1]*10+:u+:ns[2]/10+:ns[3]/100,2)}"
+            }
+        },{
+            "name":"Nombres décimaux",
+            "vars":{
+                "u":"0_9",
+                "ns":"0_9_10_^${:u}",
+                "nb":"${MMmath.round(:ns[0]*100000+:ns[1]*10000+:ns[2]*1000+:ns[3]*100+:ns[4]*10+:u+:ns[5]/10+:ns[6]/100+:ns[7]/1000+:ns[8]/10000+:ns[9]/100000,6)}"
+            }
+        }
+    ],
+    "question":"Dans le nombre $$${:nb}$$ quel est le chiffre des unités ?",
+    "answer":"Le chiffre des unités de $$${:nb}$$ est $$\\color{red}{${:u}}$$.",
+    "value":"${:u}"
+}

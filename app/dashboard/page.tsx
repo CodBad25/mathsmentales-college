@@ -2,6 +2,7 @@ import { createServerSupabaseClient } from '@/lib/supabase'
 import { createClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import RedirectCheck from '@/components/RedirectCheck'
 
 // Client admin pour fusionner les profils
 const supabaseAdmin = createClient(
@@ -189,6 +190,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <RedirectCheck />
       {/* Header avec dégradé */}
       <header className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">

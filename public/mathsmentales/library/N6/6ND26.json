@@ -1,0 +1,42 @@
+{
+    "title":"Multiplier par 0,2, 0,02, 0,05, 0,4, 0,04",
+    "dest":["6ND","7ND","5NC","4NC","3NB"],
+    "options":[{
+        "name":"Entier par 0,2",
+        "vars":{"a":0.2,"c":"11_100"}
+    },{
+        "name":"Entier par 0,02",
+        "vars":{"a":0.02,"c":"11_100"}
+    },{
+        "name":"Entier 0,05",
+        "vars":{"a":0.05,"c":"11_100"}
+    },{
+        "name":"Entier 0,4",
+        "vars":{"a":0.4,"c":"11_100"}
+    },{
+        "name":"Entier 0,04",
+        "vars":{"a":0.04,"c":"13_50"}
+    },{
+        "name":"Dixièmes par 0,2",
+        "vars":{"a":0.2,"c":"d1.1_9.9_1_^2,3,4,5,6,7,8,9"}
+    },{
+        "name":"Dixièmes par 0,02",
+        "vars":{"a":0.02,"c":"d1.1_9.9_1_^2,3,4,5,6,7,8,9"}
+    },{
+        "name":"Dixièmes par 0,5",
+        "vars":{"a":0.5,"c":"d1.1_9.9_1_^2,3,4,5,6,7,8,9"}
+    },{
+        "name":"Dixièmes par 0,05",
+        "vars":{"a":0.05,"c":"d1.1_9.9_1_^2,3,4,5,6,7,8,9"}
+    },{
+        "name":"Dixièmes par 0,4",
+        "vars":{"a":0.4,"c":"d1.1_9.9_1_^2,3,4,5,6,7,8,9"}
+    },{
+        "name":"Dixièmes par 0,04",
+        "vars":{"a":0.04,"c":"d1.1_9.9_1_^2,3,4,5,6,7,8,9"}
+    }
+    ],
+    "question": [":a\\times :c", ":c\\times :a"],
+    "answer":":question = \\color{red}{${MMmath.round(:a*:c,3)}}",
+    "value":"${MMmath.round(:a*:c,3)}"
+}

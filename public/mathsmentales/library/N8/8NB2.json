@@ -1,0 +1,213 @@
+{
+    "ID":"8NB2",
+    "title": "Fraction (supérieure à 1) d’un disque unité",
+    "dest": ["8NB", "7NB", "6NB"],
+    "type":"text",
+    "options":[
+        {
+            "name":"Découpe en demis",
+            "vars":{
+                "num":"3_6"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{2}}$$ d’unité${:num%2==0?', soit $$\\color{red}{'+:num/2+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{2}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9.1,15.1,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["text",[2.5,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [2.5, 7], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["circle", ["B",2], {"strokeWidth":1}],
+                    ["point", [7.5, 7], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["circle", ["C",2], {"strokeWidth":1}],
+                    ["point", [12.5, 7], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["circle", ["D",2], {"strokeWidth":1}],
+                    ["segment",[[0.5,7],[4.5,7]], {"strokeWidth":1}],
+                    ["segment",[[5.5,7],[9.5,7]], {"strokeWidth":1}],
+                    ["segment",[[10.5,7],[14.5,7]], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,7],[7.5,7],[12.5,7]], "radius":"2","unitCut":2,"qty":"${:num}"}]
+                ]
+            }
+        },{
+            "name":"Découpe en tiers",
+            "vars":{
+                "num":"4_9"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{3}}$$ d’unité${:num%3==0?', soit $$\\color{red}{'+:num/3+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{3}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9.1,15.1,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["text",[2.5,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [2.5, 7], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["circle", ["B",2], {"strokeWidth":1}],
+                    ["point", [7.5, 7], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["circle", ["C",2], {"strokeWidth":1}],
+                    ["point", [12.5, 7], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["circle", ["D",2], {"strokeWidth":1}],
+                    ["segment",["B",[4.5,7]], {"strokeWidth":1}],
+                    ["segment",["B",[1.5,5.27]], {"strokeWidth":1}],
+                    ["segment",["B",[1.5,8.73]], {"strokeWidth":1}],
+                    ["segment",["C",[9.5,7]], {"strokeWidth":1}],
+                    ["segment",["C",[6.5,5.27]], {"strokeWidth":1}],
+                    ["segment",["C",[6.5,8.73]], {"strokeWidth":1}],
+                    ["segment",["D",[14.5,7]], {"strokeWidth":1}],
+                    ["segment",["D",[11.5,5.27]], {"strokeWidth":1}],
+                    ["segment",["D",[11.5,8.73]], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,7],[7.5,7],[12.5,7]], "radius":"2","unitCut":3,"qty":"${:num}"}]
+                ]
+            }
+        },{
+            "name":"Découpe en quarts",
+            "vars":{
+                "num":"5_12"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{4}}$$ d’unité${:num%4==0?', soit $$\\color{red}{'+:num/4+'}$$ unités':''}.",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9.1,15.1,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["text",[2.5,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [2.5, 7], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["circle", ["B",2], {"strokeWidth":1}],
+                    ["point", [7.5, 7], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["circle", ["C",2], {"strokeWidth":1}],
+                    ["point", [12.5, 7], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["circle", ["D",2], {"strokeWidth":1}],
+                    ["segment",[[2.5,5],[2.5,9]], {"strokeWidth":1}],
+                    ["segment",[[0.5,7],[4.5,7]], {"strokeWidth":1}],
+                    ["segment",[[7.5,5],[7.5,9]], {"strokeWidth":1}],
+                    ["segment",[[5.5,7],[9.5,7]], {"strokeWidth":1}],
+                    ["segment",[[12.5,5],[12.5,9]], {"strokeWidth":1}],
+                    ["segment",[[10.5,7],[14.5,7]], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,7],[7.5,7],[12.5,7]], "radius":"2","unitCut":4,"qty":"${:num}"}]
+                ]
+            }
+        },{
+            "name":"Découpe en cinquièmes",
+            "vars":{
+                "num":"6_15"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{5}}$$ d’unité${:num%5==0?', soit $$\\color{red}{'+:num/5+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{5}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9.1,15.1,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["text",[2.5,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [2.5, 7], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["circle", ["B",2], {"strokeWidth":1}],
+                    ["point", [7.5, 7], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["circle", ["C",2], {"strokeWidth":1}],
+                    ["point", [12.5, 7], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["circle", ["D",2], {"strokeWidth":1}],
+                    ["segment",["B",[4.5,7]], {"strokeWidth":1}],
+                    ["segment",["B",[3.118,5.098]], {"strokeWidth":1}],
+                    ["segment",["B",[0.882,5.824]], {"strokeWidth":1}],
+                    ["segment",["B",[3.118,8.902]], {"strokeWidth":1}],
+                    ["segment",["B",[0.882,8.176]], {"strokeWidth":1}],
+                    ["segment",["C",[9.5,7]], {"strokeWidth":1}],
+                    ["segment",["C",[8.118,5.098]], {"strokeWidth":1}],
+                    ["segment",["C",[5.882,5.824]], {"strokeWidth":1}],
+                    ["segment",["C",[8.118,8.902]], {"strokeWidth":1}],
+                    ["segment",["C",[5.882,8.176]], {"strokeWidth":1}],
+                    ["segment",["D",[14.5,7]], {"strokeWidth":1}],
+                    ["segment",["D",[13.118,5.098]], {"strokeWidth":1}],
+                    ["segment",["D",[10.882,5.824]], {"strokeWidth":1}],
+                    ["segment",["D",[13.118,8.902]], {"strokeWidth":1}],
+                    ["segment",["D",[10.882,8.176]], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,7],[7.5,7],[12.5,7]], "radius":"2","unitCut":5,"qty":"${:num}"}]
+                ]
+            }
+        },{
+            "name":"Découpe en sixièmes",
+            "vars":{
+                "num":"7_18"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{6}}$$ d’unité${:num%6==0?', soit $$\\color{red}{'+:num/6+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{6}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9.1,15.1,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["text",[2.5,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [2.5, 7], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["circle", ["B",2], {"strokeWidth":1}],
+                    ["point", [7.5, 7], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["circle", ["C",2], {"strokeWidth":1}],
+                    ["point", [12.5, 7], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["circle", ["D",2], {"strokeWidth":1}],
+                    ["segment",[[0.5,7],[4.5,7]], {"strokeWidth":1}],
+                    ["segment",[[1.5,5.27],[3.5,8.73]], {"strokeWidth":1}],
+                    ["segment",[[1.5,8.73],[3.5,5.27]], {"strokeWidth":1}],
+                    ["segment",[[5.5,7],[9.5,7]], {"strokeWidth":1}],
+                    ["segment",[[8.5,8.73],[6.5,5.27]], {"strokeWidth":1}],
+                    ["segment",[[8.5,5.27],[6.5,8.73]], {"strokeWidth":1}],
+                    ["segment",[[10.5,7],[14.5,7]], {"strokeWidth":1}],
+                    ["segment",[[13.5,8.73],[11.5,5.27]], {"strokeWidth":1}],
+                    ["segment",[[13.5,5.27],[11.5,8.73]], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,7],[7.5,7],[12.5,7]], "radius":"2","unitCut":6,"qty":"${:num}"}]
+                ]
+            }
+        },{
+            "name":"Découpe en huitièmes",
+            "vars":{
+                "num":"9_24"
+            },
+            "question":"Quelle fraction d’unité est colorée ?",
+            "answer":"On a coloré $$\\color{red}{\\dfrac{${:num}}{8}}$$ d’unité${:num%8==0?', soit $$\\color{red}{'+:num/8+'}$$ unités':''}.",
+            "value":"\\dfrac{${:num}}{8}",
+            "figure":{
+                "type":"graph",
+                "boundingbox":[0,9.1,15.1,0],
+                "axis":false,
+                "content":[
+                    ["point", [2.5, 2.5], {"name":"A","face":"", "label":{"visible":false}}],
+                    ["circle", ["A",2], {"strokeWidth":1}],
+                    ["text",[2.5,2.5,"1 unité"],{"anchorX":"middle"}],
+                    ["point", [2.5, 7], {"name":"B","face":"", "label":{"visible":false}}],
+                    ["circle", ["B",2], {"strokeWidth":1}],
+                    ["point", [7.5, 7], {"name":"C","face":"", "label":{"visible":false}}],
+                    ["circle", ["C",2], {"strokeWidth":1}],
+                    ["point", [12.5, 7], {"name":"D","face":"", "label":{"visible":false}}],
+                    ["circle", ["D",2], {"strokeWidth":1}],
+                    ["segment",[[2.5,5],[2.5,9]], {"strokeWidth":1}],
+                    ["segment",[[0.5,7],[4.5,7]], {"strokeWidth":1}],
+                    ["segment",[[1.086,5.586],[3.914,8.414]], {"strokeWidth":1}],
+                    ["segment",[[1.086,8.414],[3.914,5.586]], {"strokeWidth":1}],
+                    ["segment",[[2.5,5],[2.5,9]], {"strokeWidth":1}],
+                    ["segment",[[7.5,5],[7.5,9]], {"strokeWidth":1}],
+                    ["segment",[[6.086,5.586],[8.914,8.414]], {"strokeWidth":1}],
+                    ["segment",[[6.086,8.414],[8.914,5.586]], {"strokeWidth":1}],
+                    ["segment",[[5.5,7],[9.5,7]], {"strokeWidth":1}],
+                    ["segment",[[12.5,5],[12.5,9]], {"strokeWidth":1}],
+                    ["segment",[[10.5,7],[14.5,7]], {"strokeWidth":1}],
+                    ["segment",[[11.086,5.586],[13.914,8.414]], {"strokeWidth":1}],
+                    ["segment",[[11.086,8.414],[13.914,5.586]], {"strokeWidth":1}],
+                    ["fillSectors",[],{"centers":[[2.5,7],[7.5,7],[12.5,7]], "radius":"2","unitCut":8,"qty":"${:num}"}]
+                ]
+            }
+        }
+    ]
+}

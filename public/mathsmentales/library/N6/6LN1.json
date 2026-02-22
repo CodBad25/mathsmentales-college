@@ -1,0 +1,73 @@
+{
+    "title":"Leçon : Nombres entiers et décimaux",
+    "type":"text",
+    "description":"15 questions sur la numération. Ne pas utiliser en mode interactif",
+    "dest":["6LN"],
+    "options":[
+        {
+            "name":"Nombres entiers naturels",
+            "consts":{"unites":["unités","dizaines","centaines","milliers","dizaines de mille", "centaines de mille","millions","dizaines de millions","centaines de millions"]},
+            "vars":{
+                "nb":"100000_100000000",
+                "chi":"0_9",
+                "un":"0_${:unites.length-1}_2"
+            },
+            "question":[
+                "Qu’est-ce qu’un <b>chiffre</b> ?",
+                "Quelle est la <b>valeur</b> d’un chiffre ?",
+                "Qu’appelle-t-on un <b>entier naturel</b> ?",
+                "Comment <b>bien écrire</b> un grand nombre entier ?"
+            ],
+            "answer":[
+                "Un chiffre est un dessin qui représente une quantité.",
+                "La valeur d’un chiffre dépend de sa position dans l’écriture du nombre. Par exemple $$:chi$$ ${:unites[:un[0]]} ou ${:unites[:un[1]]}.",
+                "Un entier naturel est un nombre qui représente une quantité exacte d’objets ou d’unités.",
+                "Pour bien écrire un nombre entier, on regroupe les chiffres par paquets de 3 en partant des unités. Exemple : $$:nb$$"
+            ]
+        },{
+            "name":"Nombres décimaux",
+            "vars":{
+                "ent":"100_999",
+                "dec":"1_999",
+                "pc":"1_99",
+                "nb":"${MMmath.round(:ent+:dec/1000,3)}"
+            },
+            "question":[
+                "Qu’appelle-t-on l’<b>écriture décimale</b> ?",
+                "Qu’appelle-t-on un <b>nombre décimal</b> ?",
+                "Quelle est la <b>partie entière</b> de $$:nb$$ ?",
+                "Quelle est la <b>partie décimale</b> de $$:nb$$ ?",
+                "Que signifie l’écriture $$:pc \\%$$ ?"
+            ],
+            "answer":[
+                "L’écriture <b>déci</b>male est une façon d’écrire un nombre en n’utilisant que les <b>dix</b> chiffres et éventuellement la virgule.",
+                "Un nombre décimal est un nombre qui peut s’écrire sous la forme d’une fraction décimale (une fraction dont le dénominateur est 1, 10, 100, 1000...).",
+                "La partie entière de $$:nb$$ est $$\\color{red}{:ent}$$.",
+                "La partie décimale de $$:nb$$ est $$\\color{red}{${MMmath.round(:dec/1000,3)}}$$.",
+                "$$:pc \\%$$ se lit $$:pc$$ pourcents. C’est égal à $$\\dfrac{:pc}{100}=${MMmath.round(:pc/100,2)}$$"
+            ]
+        },{
+            "name":"Connaissances",
+            "vars":{
+                "nb":"1000001_8999999_^2000000,3000000,4000000,5000000,6000000,7000000,8000000",
+                "odg":"${Math.round(:nb/1000000)*1000000}"
+            },
+            "question":[
+                "Que veut dire <b>comparer</b> deux nombres ?",
+                "Que veut dire <b>encadrer</b> un nombre ?",
+                "Qu’est-ce que la <b>précision</b> d’un encadrement ?",
+                "Que veut dire <b>intercaler</b> un nombre entre deux autres ?",
+                "Qu’est-ce qu’un <b>ordre de grandeur</b> d’un nombre ?",
+                "Que veut dire <b>arrondir</b> un nombre ?"
+            ],
+            "answer":[
+                "Comparer signifie trouver lequel des deux nombres est le plus grand ou si les deux nombres sont égaux. On utilise les symboles < > et =",
+                "Encadrer un nombre, c’est donner un nombre plus petit et un nombre plus grand.<br>Exemple pour $$:nb$$ : $$${Math.floor(:nb/1000000)*1000000}<:nb<${Math.ceil(:nb/1000000)*1000000}$$",
+                "La précision d’un encadrement est l’écart entre les deux nombres qui encadrent.<br>Exemple : dans $$${Math.floor(:nb/1000000)*1000000}<:nb<${Math.ceil(:nb/1000000)*1000000}$$<br>$$:nb$$ est encadré au million près.",
+                "Intercaler un nombre veut dire trouver un nombre entre deux autres, pas obligatoirement au “milieu”.",
+                "Un ordre de grandeur d’un nombre est un nombre proche facile à utiliser en calcul mental. Exemple $$:odg$$ pour $$:nb$$.",
+                "Arrondir un nombre avec une précision donnée, c’est donner la valeur la plus proche du nombre dans un encadrement à cette précision.<br>Exemple : l’arrondi au millions près de $$:nb$$ est $$${MMmath.round(:nb,-6)}$$."
+            ]
+        }
+    ]
+}

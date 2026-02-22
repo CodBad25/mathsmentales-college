@@ -1,0 +1,42 @@
+{
+    "title":"Doubles de décimaux dans des cas simples",
+    "ID":"7NC2",
+    "dest":["7NC","6NC"],
+    "type":"text",
+    "options":[{
+        "name":"Nombres à deux chiffres",
+        "vars":{
+            "u":"1_9",
+            "dx":"1_9",
+            "n":"${MMmath.round(:u+:dx/10,1)}",
+            "double":"${MMmath.round(2*:n,1)}"
+        }
+    },{
+        "name":"Nombres à partie décimale > 10",
+        "vars":{
+            "u":"10_50",
+            "dx":"1_9",
+            "n":"${MMmath.round(:u+:dx/10,1)}",
+            "double":"${MMmath.round(2*:n,1)}"
+        }
+    },{
+        "name":"Nombres avec des centièmes",
+        "vars":{
+            "u":"1_9",
+            "dx":"0_9",
+            "cm":"1_9",
+            "n":"${MMmath.round(:u+:dx/10+:cm/100,2)}",
+            "double":"${MMmath.round(2*:n,2)}"
+        }
+    }
+    ],
+    "question":[
+        "Quel est le double de $$${:n}$$ ?",
+        "$$${:n}\\times 2$$"
+    ],
+    "answer":[
+        "Le double de $$${:n}$$ est $$\\color{red}{${:double}}$$.",
+        "$$${:n} \\times 2 = \\color{red}{${:double}}$$"
+    ],
+    "value":"${:double}"
+}

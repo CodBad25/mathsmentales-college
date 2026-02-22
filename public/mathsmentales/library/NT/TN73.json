@@ -1,0 +1,66 @@
+{
+    "ID":"TN73",
+    "title":"Primitives avec les fonctions trigonométriques",
+    "dest":["TN7"],
+    "type":"text",
+    "options":[{
+        "name":"Primitive de $$f'(x)\\cos(f(x))$$",
+        "vars":{
+            "a":"-10_10_^0",
+            "bz":"0_1",
+            "b":"${:bz==0?0:'-10_10'}",
+            "F":"\\sin(${MMmath.box(['Add',['Multiply',:a,'x'],:b])}) + C",
+            "f":"${:a}\\cos(${MMmath.box(['Add',['Multiply',:a,'x'],:b])})"
+        }
+    },{
+        "name":"Primitive de $$f'(x)\\sin(f(x))$$",
+        "vars":{
+            "a":"-10_10_^0",
+            "bz":"0_1",
+            "b":"${:bz==0?0:'-10_10'}",
+            "F":"-\\cos(${MMmath.box(['Add',['Multiply',:a,'x'],:b])}) + C",
+            "f":"${:a}\\sin(${MMmath.box(['Add',['Multiply',:a,'x'],:b])})"
+        }
+    },{
+        "name":"Primitive de $$\\cos(f(x))$$",
+        "vars":{
+            "a":"-10_10_^0",
+            "bz":"0_1",
+            "b":"${:bz==0?0:'-10_10'}",
+            "F":"${MMmath.box(['Divide',1,:a])}\\sin(${MMmath.box(['Add',['Multiply',:a,'x'],:b])}) + C",
+            "f":"\\cos(${MMmath.box(['Add',['Multiply',:a,'x'],:b])})"
+        }
+    },{
+        "name":"Primitive de $$\\sin(f(x))$$",
+        "vars":{
+            "a":"-10_10_^0",
+            "bz":"0_1",
+            "b":"${:bz==0?0:'-10_10'}",
+            "F":"${MMmath.box(['Divide',-1,:a])}\\cos(${MMmath.box(['Add',['Multiply',:a,'x'],:b])}) + C",
+            "f":"\\sin(${MMmath.box(['Add',['Multiply',:a,'x'],:b])})"
+        }
+    },{
+        "name":"Primitive de $$a\\cos(f(x))$$",
+        "vars":{
+            "a":"-10_10_^0",
+            "bz":"0_1",
+            "b":"${:bz==0?0:'-10_10'}",
+            "c":"-10_10_^0",
+            "F":"${MMmath.box(['Divide',:c,:a])}\\sin(${MMmath.box(['Add',['Multiply',:a,'x'],:b])}) + C",
+            "f":"${:c}\\cos(${MMmath.box(['Add',['Multiply',:a,'x'],:b])})"
+        }
+    },{
+        "name":"Primitive de $$a\\sin(f(x))$$",
+        "vars":{
+            "a":"-10_10_^0",
+            "bz":"0_1",
+            "b":"${:bz==0?0:'-10_10'}",
+            "c":"-10_10_^0",
+            "F":"${MMmath.box(['Divide',-:c,:a])}\\cos(${MMmath.box(['Add',['Multiply',:a,'x'],:b])}) + C",
+            "f":"${:c}\\sin(${MMmath.box(['Add',['Multiply',:a,'x'],:b])})"
+        }
+    }],
+    "question": "Donner une primitive de la fonction<br> $$f(x)=${:f}$$",
+    "answer":"$$\\int\\!${:f}\\,\\operatorname{d}x = \\color{red}{${:F}}$$",
+    "value":"${:F}"
+}

@@ -1,0 +1,25 @@
+{
+    "title":"CM Procédures -> Multiplier un multiple de 10, 100, 1000 par un multiple de 10, 100, 1000",
+    "auteur":"Xavier Levet",
+    "dest":["7ND"],
+    "options":[{
+        "name":"Un multiple de 10 par un multiple de 10",
+        "vars":{"a":"2_9","m":"10","b":"${:a*:m}","c":"2_9","n":"10","d":"${:c*:n}"}
+    },{
+        "name":"Un multiple de 10 par un multiple de 100",
+        "vars":{"a":"2_9","m":"10","b":"${:a*:m}","c":"2_9","n":"100","d":"${:c*:n}"}
+    },{
+        "name":"Un multiple de 100 par un multiple de 100",
+        "vars":{"a":"2_9","m":"100","b":"${:a*:m}","c":"2_9","n":"100","d":"${:c*:n}"}
+    },{
+        "name":"Un multiple de 10 par un multiple de 1000",
+        "vars":{"a":"2_9","m":"10","b":"${:a*:m}","c":"2_9","n":"1000","d":"${:c*:n}"}
+    },{
+        "name":"Un multiple de 10, 100 ou 1000 par un multiple de 10, 100 ou 1000",
+        "vars":{"a":"2_9","m":[10,100,1000],"b":"${:a*:m}","c":"2_9","n":[10,100,1000],"d":"${:c*:n}"}
+    }
+    ],
+    "question": ["${:b}\\times ${:d}"],
+    "answer":":question=\\color{green}{${:a}\\times${:c}\\times${:m}\\times${:n}}=\\color{red}{${:b*:d}}",
+    "value":"${:b*:d}"
+}

@@ -1,0 +1,32 @@
+{
+    "title":"Comprendre une suite d'\"avancer\"",
+    "description":"Scratch, Estimer le résultat d'un script comportant deux 'avancer'",
+    "ID":"5AA1",
+    "type":"text",
+    "dest":["5AA","4AA", "3AA"],
+    "speech":1,
+    "options":[
+        {
+            "name":"Avancer deux fois",
+            "vars":{"x":"2_10","y":"2_10"}
+        },{
+            "name":"Avancer puis reculer (6e)",
+            "vars":{"x":"2_10","y":"0_-${:x}"}
+        },{
+            "name":"Avancer deux fois (nombres relatifs - 5e)",
+            "vars":{"x":"-10_10_^0", "y":"-10_${:x>0?0:10}_^0"}
+        }
+    ],
+    "figure": {
+        "type":"scratch",
+        "content":[
+            "Quand @greenFlag est cliqué",
+            "avancer de (${:x}) pas",
+            "avancer de (${:y}) pas"
+        ]
+    },
+    "question":"De combien de pas a avancé le lutin ?",
+    "answer":"Le lutin a avancé de <span class='red'>${:x+:y} pas</span>.",
+    "audio":"Quand le drapeau vert est cliqué, avancer de ${:x} pas, puis avancer de ${:y} pas. De combien avance le lutin ?",
+    "value":"${:x+:y}"
+}

@@ -1,0 +1,33 @@
+{
+    "title":"Dérivée de fonction composée / g(sin(x))",
+    "repeat":true,
+    "type":"latex",
+    "ID":"GA16",
+    "description":"Trouver la dérivée de fonctions composées avec une fonction trigonometrique, en utilisant $$g(\\sin(x))'=\\cos(x)g'(\\sin(x))$$",
+    "dest":["GA1"],
+    "textSize":"medium",
+    "keys":["x²","/","+","-","x","y","z","t"],
+    "consts":{"lettres":["x","y","z","t"]},
+    "options":[{
+        "name": "Sinus",
+        "vars":{"f":"sin", "df":"cos", "cx":"0_3", "x":"${:lettres[:cx]}", "a":"1_9"},
+        "question":["\\left(e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}\\right)'",
+        "\\dfrac{d}{d${:x}} e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}"],
+        "answer":":question=\\color{red}{${MMmath.signIfOne(:a)}\\${:df}(${:x}) e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}}",
+        "value":"${MMmath.signIfOne(:a)}\\${:df}(${:x}) e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}"
+    },{
+        "name": "Cosinus",
+        "vars":{"f":"cos", "df":"sin", "cx":"0_3", "x":"${:lettres[:cx]}", "a":"1_9"},
+        "question":["\\left(e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}\\right)'",
+        "\\dfrac{d}{d${:x}} e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}"],
+        "answer":":question=\\color{red}{${MMmath.signIfOne(-:a)}\\${:df}(${:x}) e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}}",
+        "value":"${MMmath.signIfOne(-:a)}\\${:df}(${:x}) e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}"
+    },{
+        "name": "Tangente",
+        "vars":{"f":"tan", "a":"1_9", "df":"${:a}${MMmath.signedNumberButOne(:a)}\\tan^2", "cx":"0_3", "x":"${:lettres[:cx]}"},
+        "question":["\\left(e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}\\right)'",
+        "\\dfrac{d}{d${:x}} e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}"],
+        "answer":":question=\\color{red}{\\left(${:df}${:x}\\right) e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}}",
+        "value":"\\left(${:df}${:x}\\right) e^{${MMmath.signIfOne(:a)}\\${:f}(${:x})}"
+    }]
+}

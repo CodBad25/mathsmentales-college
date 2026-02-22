@@ -1,0 +1,79 @@
+{
+    "title":"CM Connaissances -> Diviser un décimal (simple) par 10, 100, 1000",
+    "dest":["7NE"],
+    "auteur":"Xavier Levet",
+    "consigne":"Calculer",
+    "options":[{
+        "name":"Nombre à une décimale par 10",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"1_9",
+            "n":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10,2)}"
+        },
+        "question":"${:n}\\div 10",
+        "answer":":question=\\color{red}{${MMmath.round(:n/10,3)}}",
+        "value":"${MMmath.round(:n/10,3)}"
+    },{
+        "name":"Nombre à deux décimales par 10",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"1_9",
+            "n":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}"
+        },
+        "question":"${:n}\\div 10",
+        "answer":":question=\\color{red}{${MMmath.round(:n/10,3)}}",
+        "value":"${MMmath.round(:n/10,3)}"
+    },{
+        "name":"Nombre à une décimale par 100",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+            "n":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10,2)}"
+        },
+        "question":"${:n}\\div 100",
+        "answer":":question=\\color{red}{${MMmath.round(:n/100,3)}}",
+        "value":"${MMmath.round(:n/100,3)}"
+    },{
+        "name":"Nombre à deux décimales par 100",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"1_9",
+            "n":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}"
+        },
+        "question":"${:n}\\div 100",
+        "answer":":question=\\color{red}{${MMmath.round(:n/100,4)}}",
+        "value":"${MMmath.round(:n/100,4)}"
+    },{
+        "name":"Nombre à une décimale par 1000",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+
+            "n":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10,1)}"
+        },
+        "question":"${:n}\\div 1000",
+        "answer":":question=\\color{red}{${MMmath.round(:n/1000,6)}}",
+        "value":"${MMmath.round(:n/1000,6)}"
+    },{
+        "name":"Nombre à deux décimales par 1000",
+        "vars":{
+            "unites":"0_9",
+            "dizaines":"0_9",
+            "dixiemes":"0_9",
+            "centiemes":"0_9",
+            
+            "n":"${MMmath.round(:dizaines*10+:unites+:dixiemes/10+:centiemes/100,2)}"
+        },
+        "question":"${:n}\\div 1000",
+        "answer":":question=\\color{red}{${MMmath.round(:n/1000,5)}}",
+        "value":"${MMmath.round(:n/1000,5)}"
+    }
+    ]
+}

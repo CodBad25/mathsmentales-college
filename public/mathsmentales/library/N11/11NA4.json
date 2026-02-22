@@ -1,0 +1,36 @@
+{
+    "ID": "11NA4",
+    "title": "Nombre d'éléments qui précèdent",
+    "description": "Nombre d'éléments avant ou après dans une liste",
+    "type": "text",
+    "speech": 1,
+    "dest": ["11NA", "10NA"],
+    "options": [
+        {
+            "name": "Nombre d'éléments qui précèdent",
+            "vars": {
+                "l": "10_30",
+                "n": "2_${:l-1}",
+                "contexte": ["nombres","coureurs","cyclistes","joueurs", "élèves"]
+            },
+            "question": "Dans une liste de ${:l} ${:contexte}, combien de ${:contexte} précèdent le ${:n}<sup>e</sup> ?",
+            "shortq": "Combien de ${:contexte} avant le ${:n}<sup>e</sup> ${:contexte} ?",
+            "audio": "Dans une liste de ${:l} ${:contexte}, combien de ${:contexte} y a-t-il avant le ${:n}<sup>e</sup> ${:contexte} ?",
+            "answer": "Il y a <span class='red'>${:n-1}</span> ${:contexte} avant le ${:n}<sup>e</sup>.",
+            "value": "${:n-1}"
+        },
+        {
+            "name": "Nombre d'éléments qui suivent",
+            "vars": {
+                "l": "10_30",
+                "n": "2_${:l-1}",
+                "contexte": ["nombres","coureurs","cyclistes","joueurs", "élèves"]
+            },
+            "question": "Dans une liste de ${:l} ${:contexte}, combien de ${:contexte} suivent le ${:n}<sup>e</sup> ?",
+            "shortq": "Combien de ${:contexte} apres le ${:n}<sup>e</sup> ${:contexte} ?",
+            "audio": "Dans une liste de ${:l} ${:contexte}, combien de ${:contexte} y a-t-il apres le ${:n}<sup>e</sup> ${:contexte} ?",
+            "answer": "Il y a <span class='red'>${:l - :n}</span> ${:contexte} après le ${:n}<sup>e</sup>.",
+            "value": "${:l - :n}"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "title": "Lire un nombre inférieur à 100",
+    "description": "Lecture de nombre écrit en chiffres",
+    "ID": "11NA4",
+    "type": "text",
+    "dest": ["11NB", "10NB"],
+    "options": [{
+        "name": "Lecture des nombres de 0 à 9",
+        "vars": {"n": "0_10"}
+    }, {
+        "name": "Lecture des nombres de 10 à 19",
+        "vars": {"n": "10_19"}
+    }, {
+        "name": "Lecture des dizaines",
+        "vars": {"n0": "1_9", "n": "${:n0*10}"}
+    }, {
+        "name": "Lecture des nombres de 21 à 30",
+        "vars": {"n": "21_30"}
+    }, {
+        "name": "Lecture des nombres de 31 à 40",
+        "vars": {"n": "31_40"}
+    }, {
+        "name": "Lecture des nombres de 41 à 50",
+        "vars": {"n": "41_50"}
+    }, {
+        "name": "Lecture des nombres de 51 à 60",
+        "vars": {"n": "51_60"}
+    }, {
+        "name": "Lecture des nombres de 61 à 70",
+        "vars": {"n": "61_70"}
+    }, {
+        "name": "Lecture des nombres de 71 à 80",
+        "vars": {"n": "71_80"}
+    }, {
+        "name": "Lecture des nombres de 81 à 90",
+        "vars": {"n": "81_90"}
+    }, {
+        "name": "Lecture des nombres de 91 à 100",
+        "vars": {"n": "91_100"}
+    }],
+    "question": "Lis le nombre <b>${:n}</b>.",
+    "shortq": "Lis <b>${:n}</b> ?",
+    "answer": "${:n} se lit <span class='red'>${MMmath.NumberToLetter(:n)}</span>",
+    "value": "${MMmath.NumberToLetter(:n)}"
+}

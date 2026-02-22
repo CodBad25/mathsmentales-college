@@ -1,0 +1,601 @@
+{
+    "11":{
+        "nom":"CP",
+        "themes":{
+            "11N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "11NA":"Comprendre et utiliser des entiers",
+                    "11NB":"Nommer, lire, écrire, représenter des entiers",
+                    "11NC":"Résoudre les problèmes",
+                    "11ND":"Calculer avec des entiers"
+                }
+            },
+            "11M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "11MA":"Comparer, estimer, lexique des longueurs",
+                    "11MB":"Comparer, estimer, lexique des masses",
+                    "11MC":"Comparer, estimer, lexique des dates et durées",
+                    "11MD":"Résoudre des problèmes"
+                }
+            },
+            "11G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "11GA":"Se repérer, se déplacer",
+                    "11GB":"Reconnaitre, nommer, décrire des solides",
+                    "11GC":"Figures géométriques"
+                }
+            }
+        }
+    },"10":{
+        "nom":"CE1",
+        "themes":{
+            "10N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "10NA":"Comprendre et utiliser les nombres entiers",
+                    "10NB":"Nommer, lire, écrire, représenter des entiers",
+                    "10NC":"Résoudre des problèmes avec des entiers",
+                    "10ND":"Calculer avec des entiers : faits numériques",
+                    "10NE":"Calculer avec des entiers : calcul mental",
+                    "10NF":"Calculer avec des entiers : calcul en ligne",
+                    "10NG":"Calculer avec des entiers : calcul en posé"
+                }
+            },
+            "10M":{
+                "nom": "Grandeurs et mesures",
+                "chapitres":{
+                    "10MA":"Longueurs",
+                    "10MB":"Masses",
+                    "10MC":"Dates et durées",
+                    "10MD":"Contenances",
+                    "10ME":"Résoudre des problèmes"
+                }
+            },
+            "10G":{
+                "nom": "Espace et géométrie",
+                "chapitres":{
+                    "10GA":"Se repérer et se déplacer",
+                    "10GB":"Reconnaitre, nommer, décrire, etc. des solides",
+                    "10GC":"Reconnaitre, nommer, décrire, etc. des figures planes"
+                }
+            }
+        }
+    },
+    "9":{
+        "nom":"CE2",
+        "themes":{
+            "9N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "9NA":"Comprendre et utiliser les nombres entiers",
+                    "9NB":"Nommer, lire, écrire, représenter des entiers",
+                    "9NC":"Utiliser et représenter les nombres décimaux",
+                    "9ND":"Calculer avec des entiers : faits numériques",
+                    "9NE":"Calculer avec des entiers : calcul mental",
+                    "9NF":"Calculer avec des entiers : calcul en ligne",
+                    "9NG":"Calculer avec des entiers : calcul en posé",
+                    "9NH":"Résoudre des problèmes"
+                }
+            },
+            "9M":{
+                "nom": "Grandeurs et mesures",
+                "chapitres":{
+                    "9MA":"Longueurs",
+                    "9MB":"Masses",
+                    "9MC":"Dates et durées",
+                    "9MD":"Contenances",
+                    "9ME":"Résoudre des problèmes"
+                }
+            },
+            "9G":{
+                "nom": "Espace et géométrie",
+                "chapitres":{
+                    "9GA":"Se repérer et se déplacer",
+                    "9GB":"Reconnaitre, nommer, décrire, etc. des solides",
+                    "9GC":"Reconnaitre, nommer, décrire, etc. des figures planes"
+                }
+            }
+        }
+    },
+    "8":{
+        "nom":"CM1",
+        "themes":{
+            "8N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "8NA":"Utiliser et représenter les grands nombres entiers",
+                    "8NB":"Utiliser et représenter des fractions simples",
+                    "8NC":"Utiliser et représenter les nombres décimaux",
+                    "8ND":"Calculer avec des nombres entiers",
+                    "8NE":"Calculer avec des nombres décimaux",
+                    "8NF":"Résoudre des problèmes avec des calculs",
+                    "8NG":"Organisation et gestion de données",
+                    "8NH":"Problèmes de proportionnalité",
+                    "8NN":"Faits numériques"
+                }
+            },
+            "8M":{
+                "nom": "Grandeurs et mesures",
+                "chapitres":{
+                    "8MA":"Longueurs et périmètres",
+                    "8MB":"Aires",
+                    "8MC":"Temps, durées",
+                    "8MD":"Volumes et contenances",
+                    "8ME":"Angles",
+                    "8MF":"Résoudre des problèmes impliquant des grandeurs",
+                    "8MG":"Proportionnalité"
+                }
+            },
+            "8G":{
+                "nom": "Espace et géométrie",
+                "chapitres":{
+                    "8GA":"Se repérer et se déplacer dans l'espace",
+                    "8GB":"Reconnaitre, nommer, décrire, etc. des solides",
+                    "8GC":"Reconnaitre, nommer, décrire, etc. des figures planes",
+                    "8GD":"Utiliser quelques relations géométriques"
+                }
+            }
+        }
+    },
+    "7":{
+        "nom":"CM2",
+        "themes":{
+            "7N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "7NA":"Utiliser et représenter les grands nombres entiers",
+                    "7NB":"Utiliser et représenter des fractions simples",
+                    "7NC":"Utiliser et représenter les nombres décimaux",
+                    "7ND":"Calculer avec des nombres entiers",
+                    "7NE":"Calculer avec des nombres décimaux",
+                    "7NF":"Résoudre des problèmes avec des calculs",
+                    "7NG":"Organisation et gestion de données",
+                    "7NH":"Problèmes de proportionnalité",
+                    "7NN":"Faits numériques"
+                }
+            },
+            "7M":{
+                "nom": "Grandeurs et mesures",
+                "chapitres":{
+                    "7MA":"Longueurs et périmètres",
+                    "7MB":"Aires",
+                    "7MC":"Temps, durées",
+                    "7MD":"Volumes et contenances",
+                    "7ME":"Angles",
+                    "7MF":"Résoudre des problèmes impliquant des grandeurs",
+                    "7MG":"Proportionnalité"
+                }
+            },
+            "7G":{
+                "nom": "Espace et géométrie",
+                "chapitres":{
+                    "7GA":"Se repérer et se déplacer dans l'espace",
+                    "7GB":"Reconnaitre, nommer, décrire, etc. des solides",
+                    "7GC":"Reconnaitre, nommer, décrire, etc. des figures planes",
+                    "7GD":"Utiliser quelques relations géométriques"
+                }
+            }
+        }
+    },"6":{
+        "nom":"6e",
+        "themes":{
+            "6N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "6NA":"Utiliser et représenter les grands nombres entiers",
+                    "6NB":"Utiliser et représenter des fractions simples",
+                    "6NC":"Utiliser et représenter les nombres décimaux",
+                    "6ND":"Calculer avec des nombres entiers",
+                    "6NE":"Calculer avec des nombres décimaux",
+                    "6NF":"Résoudre des problèmes avec des calculs",
+                    "6NN":"Faits numériques"
+                }
+            },
+            "6D":{
+                "nom":"Organisation et gestion de données, probabilités",
+                "chapitres":{
+                    "6DA":"Gestion de données et probabilités"
+                }
+            },
+            "6M":{
+                "nom": "Grandeurs et mesures",
+                "chapitres":{
+                    "6MA":"Longueurs, masses",
+                    "6MB":"Temps, durées",
+                    "6MC":"Aires",
+                    "6MD":"Contenances et volumes",
+                    "6ME":"Angles",
+                    "6MF":"Résoudre des problèmes"
+                }
+            },
+            "6G":{
+                "nom": "Espace et géométrie",
+                "chapitres":{
+                    "6GA":"Se repérer et se déplacer dans l'espace",
+                    "6GB":"Reconnaitre, nommer, décrire, etc. des solides",
+                    "6GC":"Reconnaitre, nommer, décrire, etc. des figures planes",
+                    "6GD":"Utiliser quelques relations géométriques"
+                }
+            },
+            "6L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "6LN":"Nombres et calculs",
+                    "6LM":"Grandeurs et mesures",
+                    "6LG":"Espace et Géométrie",
+                    "6LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    },
+    "5":{
+        "nom": "5e",
+        "themes":{
+            "5N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "5NA":"Connaissance des nombres",
+                    "5NB":"Comparaison des nombres",
+                    "5NC":"Calculer avec les nombres",
+                    "5ND":"Notion de divisibilité et nombres premiers",
+                    "5NE":"Utiliser le calcul littéral"
+                }
+            },
+            "5D":{
+                "nom":"Organisation et gestion de données, fonctions",
+                "chapitres":{
+                    "5DA":"Interpréter, représenter et traiter des données",
+                    "5DB":"Notions de probabilités",
+                    "5DC":"Problèmes de proportionnalité",
+                    "5DD":"Notion de fonction"
+                }
+            },
+            "5M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "5MA":"Calculs de grandeurs",
+                    "5MB":"Effet des transformations"
+                }
+            },
+            "5G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "5GA":"Représenter l'espace",
+                    "5GB":"Notions de géométrie pour démontrer",
+                    "5GT":"transformations",
+                    "5GR": "Se repérer sur une droite, dans le plan"
+                }
+            },
+            "5A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "5AA":"Ecrire, mettre au point, exécuter un programme"
+                }
+            },
+            "5L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "5LN":"Nombres et calculs",
+                    "5LM":"Grandeurs et mesures",
+                    "5LG":"Espace et Géométrie",
+                    "5LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    },
+    "4":{
+        "nom":"4e",
+        "themes":{
+            "4N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "4NA":"Connaissance des nombres",
+                    "4NB":"Comparaison des nombres",
+                    "4NC":"Calculer avec les nombres",
+                    "4ND":"Notion de divisibilité et nombres premiers",
+                    "4NE":"Utiliser le calcul littéral"
+                }
+            },
+            "4D":{
+                "nom":"Organisation et gestion de données, fonctions",
+                "chapitres":{
+                    "4DA":"Interpréter, représenter et traiter des données",
+                    "4DB":"Notions de probabilités",
+                    "4DC":"Problèmes de proportionnalité",
+                    "4DD":"Notion de fonction"
+                }
+            },
+            "4M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "4MA":"Calculs de grandeurs",
+                    "4MB":"Effet des transformations"
+                }
+            },
+            "4G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "4GA":"Représenter l'espace",
+                    "4GB":"Notions de géométrie pour démontrer",
+                    "4GR": "Repérage sur une droite et dans le plan"
+                }
+            },
+            "4A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "4AA":"Ecrire, mettre au point, exécuter un programme"
+                }
+            },
+            "4L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "4LN":"Nombres et calculs",
+                    "4LM":"Grandeurs et mesures",
+                    "4LG":"Espace et Géométrie",
+                    "4LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    },
+    "3":{
+        "nom":"3e",
+        "themes":{
+            "3N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "3NA":"Connaissance des nombres",
+                    "3NB":"Calculer avec les nombres",
+                    "3NC":"Notion de divisibilité et nombres premiers",
+                    "3ND":"Utiliser le calcul littéral"
+                }
+            },
+            "3D":{
+                "nom":"Organisation et gestion de données, fonctions",
+                "chapitres":{
+                    "3DA":"Interpréter, représenter et traiter des données",
+                    "3DB":"Notions de probabilités",
+                    "3DC":"Problèmes de proportionnalité",
+                    "3DD":"Notion de fonction"
+                }
+            },
+            "3M":{
+                "nom":"Grandeurs et mesures",
+                "chapitres":{
+                    "3MA":"Calculs de grandeurs",
+                    "3MB":"Effet des transformations"
+                }
+            },
+            "3G":{
+                "nom":"Espace et géométrie",
+                "chapitres":{
+                    "3GA":"Représenter l'espace",
+                    "3GB":"Notions de géométrie pour démontrer",
+                    "3GR": "Repérage sur une droite et dans le plan"
+                }
+            },
+            "3A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "3AA":"Ecrire, mettre au point, exécuter un programme"
+                }
+            },
+            "3L":{
+                "nom":"Leçons",
+                "chapitres":{
+                    "3LN":"Nombres et calculs",
+                    "3LM":"Grandeurs et mesures",
+                    "3LG":"Espace et Géométrie",
+                    "3LD":"Organisation et gestion de données"
+                }
+            }
+        }
+    },
+    "2":{
+        "nom":"2nde",
+        "themes":{
+            "2N":{
+                "nom":"Nombres et calculs",
+                "chapitres":{
+                    "2N1":"Manipuler les nombres réels",
+                    "2N2":"Utiliser les notions de multiple, diviseur et de nombre premier",
+                    "2N3":"Utiliser le calcul littéral"
+                }
+            },
+            "2D":{
+                "nom":"Statistiques et probabilités",
+                "chapitres":{
+                    "2D1":"Utiliser l’information chiffrée et statistique descriptive",
+                    "2D2":"Modéliser le hasard, calculer des probabilités",
+                    "2D3":"Échantillonnage"
+                }
+            },
+            "2G":{
+                "nom":"Géométrie",
+                "chapitres":{
+                    "2G1":"Manipuler les vecteurs du plan",
+                    "2G2":"Résoudre des problèmes de géométrie",
+                    "2G3":"Représenter et caractériser les droites du plan"
+                }
+            },
+            "2F":{
+                "nom":"Fonctions",
+                "chapitres":{
+                    "2F1":"Répertoire de fonctions de référence",
+                    "2F2":"Représenter algébriquement et graphiquement les fonctions",
+                    "2F3":"Etudier les variations et les extremums d'une fonction"
+                }
+            },
+            "2A":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "2A1":"Utiliser les variables et les instructions élémentaires",
+                    "2A2":"Notion de fonction"
+                }
+            }
+        }
+    },
+    "G":{
+        "nom":"1re Gén",
+        "themes":{
+            "GL":{
+                "nom":"Algèbre",
+                "chapitres":{
+                    "GL1":"Suites, modèles discrets",
+                    "GL2":"Équations, fonctions polynomes du second degré"
+                }
+            },
+            "GA":{
+                "nom":"Analyse",
+                "chapitres":{
+                    "GA1":"Dérivation",
+                    "GA2":"Variations et courbes",
+                    "GA3":"Exponentielle",
+                    "GA4":"Fonctions trigonométriques",
+					"GA5":"Second degré"
+                }
+            },
+            "GG":{
+                "nom":"Géométrie",
+                "chapitres":{
+                    "GG1":"Calcul vectoriel et produit scalaire",
+                    "GG2":"Géométrie repérée"
+                }
+            },
+            "GS":{
+                "nom":"Probabilités et statistiques",
+                "chapitres":{
+                    "GS1": "Probabilités conditionnelles et indépendance",
+                    "GS2":"Variables aléatoires réelles"
+                }
+            },
+            "GP":{
+                "nom":"Algorithmique et programmation",
+                "chapitres":{
+                    "GP1":"Contenu"
+                }
+            },
+            "GE":{
+                "nom":"Vocabulaire ensembliste et logique",
+                "chapitres":{
+                    "GE1":"Contenu"
+                }
+            }
+        }
+    },
+    "K": {
+        "nom":"1/T Tech",
+        "themes": {
+            "KL":{
+            "nom":"Algèbre",
+            "chapitres":{
+                "KL1":"Suites, modèles discrets",
+                "KL2":"Équations, fonctions polynomes du second degré"
+                }
+            },
+            "KA":{
+            "nom":"Analyse",
+            "chapitres":{
+                "KA1":"Dérivation",
+                "KA2":"Variations et courbes",
+                "KA5":"Second degré"
+                }
+            },
+            "Ko":{
+            "nom":"Automatismes",
+            "chapitres":{
+                "Ko1":"Calculs numériques",
+                "Ko2":"Calcul littéral",
+                "Ko3":"Calcul de probabilité",
+                "Ko4":"Fonctions"
+            }
+        },
+        "KS":{
+            "nom":"Probabilités et statistiques",
+            "chapitres":{
+                "KS1":"Tableaux de probabilités et probabilités conditionnelles",
+                "KS2":"Variables aléatoires réelles",
+                "KS3":"Arbres de probabilités"
+            }
+        }
+    }},
+    "T":{
+        "nom":"Tale",
+        "themes":{
+            "TC":{
+                "nom":"Nombres complexes",
+                "chapitres":{
+                    "TC1":"Point de vue algébrique",
+                    "TC2":"Point de vue géométrique",
+                    "TC3":"Trigonométrie",
+                    "TC4":"Equations polynomiales"
+                }
+            },
+            "TA":{
+                "nom":"Arithmétique",
+                "chapitres":{
+                    "TA1":"Contenu"
+                }
+            },
+            "TM":{
+                "nom":"Graphes et matrices",
+                "chapitres":{
+                    "TMG":"Graphes",
+                    "TMM":"Matrices"
+                }
+            },
+            "TG":{
+                "nom":"Albègre et géométrie",
+                "chapitres":{
+                    "TGC":"Combinatoire et dénombrement",
+                    "TGV":"Manipuler les vecteurs, droites et plans",
+                    "TGO":"Orthogonalité et distances",
+                    "TGR":"Représentations paramétriques et équations cartésiennes"
+                }
+            },
+            "TN":{
+                "nom":"Analyse",
+                "chapitres":{
+                    "TN1":"Suites",
+                    "TN2":"Limites",
+                    "TN3":"Dérivation",
+                    "TN4":"Continuité",
+                    "TN5":"Fonction logarithme",
+                    "TN6":"Fonctions sinus et cosinus",
+                    "TN7":"Primitives, équations différentielles",
+                    "TN8":"Calcul intégral"
+                }
+            },
+            "TP":{
+                "nom":"Probabilités",
+                "chapitres":{
+                    "TP1":"Épreuves indépendantes, Bernouilli",
+                    "TP2":"Sommes de variables aléatoires",
+                    "TP3":"Concentration, loi des grands nombres"
+                }
+            }
+        }
+    },
+    "H":{
+        "nom":"Hors Prog.",
+        "themes":{
+            "HN":{
+                "nom":"Analyse",
+                "chapitres":{
+                    "HN1":"Suites",
+                    "HN2":"Limites",
+                    "HN3":"Dérivation"
+                }
+            },
+            "HP":{
+                "nom":"Puissances",
+                "chapitres":{
+                    "HPF":"Puissances",
+                    "HPL":"Logarithmes"
+                }
+            }
+        }
+    }
+}

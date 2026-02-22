@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr" id="thehtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Ceinture MathsMentales</title>
+        <link rel="stylesheet" href="css/ceinture-2.3.176.css" type="text/css" />
+        <link rel="stylesheet" href="js/libs/JSXGraph1.11.1/jsxgraph.css" type="text/css" />
+        <script type="module" src="js/lib.ceinture-2.3.176.js" id="mmscriptid"></script>
+    </head>
+    <body size="A4">
+        <button onclick="document.getElementById('creator-menu').classList.toggle('hidden')" class="noprint" style="position: absolute;left:0;top:0;" title="Afficher le menu">🛠 Mise en page</button>
+        <button onclick="window.print();" class="noprint" style="position: absolute;left:110px;top:0;" title="Imprimer ou enregistrer en pdf">🖨️ Imprimer</button>
+        <div id="creator-container">
+            <section id="creator-menu" class="noprint hidden">
+                <h3>Paramètres</h3>
+                <b>Orientation</b> 
+                <img class="v-align" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAdhAAAHYQGVw7i2AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAIJJREFUSInt1SsSwkAQRdHDR8A68GF/FAKBQFEo9pE1sAEcVQhWEYnAYJtMMsH1lVNv3u1q0/yZWfDe4lHwf44d3kPFh4LM+pu7YPlrgrEs0OGKY9RVI4AGWzyxn1rQ4YwXblFXuLtC7n2B2hX1koIUpCAFKZiC6B5scBrYtaqcZRwfgYINOdNRm9gAAAAASUVORK5CYII=">
+                <label class="switch">
+                    <input type="checkbox" id="pageOrientation">
+                    <span class="slider round"></span>
+                  </label>
+                  <img class="v-align" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAdhAAAHYQGVw7i2AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAKdJREFUSInt1DEOAUEUh/GftcVGoRO9TqdVStxELVFqXMEVNE7iBBoKpdoVWM2sTKhkR4Tsl0ymeMn/y7yZNzR8m1bYx5jjXDOvhzUOz4IJrtjVFKzQxQZHyCJRWTMc2lhihmEsSEU/hJ+wQJGHQibNCaoWlSjQyaNiCsElrEde6jt4oRG8JfgI8Rz8fot+UxBP8hSDhNkjbKvX0xF+v4TcsE+c+Y/cAaQbHKfk6nlNAAAAAElFTkSuQmCC">
+                  <b>Texte</b> 
+                  <small>A</small><span class="bigger">A</span> <input id="fsize" value="10" title="Taille énoncé toutes colonnes" type="number" size="5" min="8" max="16" step="0.5"> pt
+                 <b>Nombre de grilles</b> <input type="number" min="1" id="nbFiches" size="3"><br>
+                 <b>Hauteur de ligne</b> <input type="checkbox" value="true" id="btnAutoSetLineHeight" checked="checked"> auto ou <input type="number" min="4" value="6" max="60" id="lineHeightValue" size="3">mm
+                <br>
+                <b>Corrigé</b> À la fin <label class="switch">
+                    <input type="checkbox" id="toggleCorriges">
+                    <span class="slider round"></span>
+                  </label> Après chaque ceinture
+                  <input type="checkbox" id="corrigeAuDos" title="Pour placer les corrections au verso des énoncés, en position retournée pour un usage efficace">Corrigés au verso, retourné, <input type="number" min="2" max="8" value="4" id="corrigeAuDosValue"> sujets par page.
+                <br>                
+                <b>Photocopies simplifiée</b>
+                Une ceinture dupliquée par page <label class="switch">
+                    <input type="checkbox" id="copiesByPage" title="Permet d'imprimer plusieurs grilles identiques sur une même page, pratique avec un massicot">
+                    <span class="slider round"></span>
+                  </label>
+                <br>
+                <strong>Champ Réponse</strong>
+                <select id="setAnswerAllPos">
+                    <option value="row">à côté</option>
+                    <option value="column">dessous</option>
+                </select>
+                Couleur <input type="color" id="colorpicker" value="#ECECEC"> Cadre <input type="checkbox" value="true" id="btnChangeBorder"> <input type="color" value="#111111" id="colorpicker2" size="8">
+                Largeur min <input type="number" id="ansWidths" value="20" min="0" max="100" size="3" step="5"> %
+                <span>Hauteur : </span><input id="inputheight" value="8" title="Hauteur en mm" type="number" size="3" min="2" max="30">mm
+                <br>
+                <b>Figures</b> : <button id="btndisplayfig">Toutes on</button>
+                <div class="modele-ceinture">
+                    <div class="ceinture-header evaluation">
+                        <div class="border-black ceinture-titre">
+                            <label for="colorpickertitle">Fond : </label>
+                            <input type="color" id="colorpickertitle" value="#ECECEC">
+                        </div>
+                        <div class="border-black">
+                            NOM :<br>
+                            Classe :
+                        </div>
+                        <div class="border-black evaluation">
+                            □ Validée<br>
+                            □ non Validée
+                        </div>
+                        <div class="border-black is-relative">
+                            <button id="btndisplayeval" title="Montrer/cacher l'espace de validation" data-eval="1"><img src="img/closebutton32.png" width="10"></button>
+                            Clé : xxxxxxx<br>
+                            grille 1
+                        </div>
+                    </div>
+                    <div id="modele-grid" class="ceinture-content grid" style="grid-template-columns: 1fr;"></div>
+                </div>
+                <div class="center">
+                    Espace inter ceintures : <input type="number" name="spacerInput" id="spacerInput" min="0" max="50" value="6"> mm
+                </div>
+                <div class="spacer original" style="margin-top:6mm;"></div>
+            </section>
+            <section id="creator-content">
+            </section>
+            </div>
+    <script src="bridge.js"></script>
+</body>
+</html>
