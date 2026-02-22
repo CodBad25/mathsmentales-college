@@ -1,14 +1,16 @@
 import { createServerSupabaseClient } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
 
-export async function POST(request: Request) {
+export async function POST() {
   const supabase = await createServerSupabaseClient()
   await supabase.auth.signOut()
-  return NextResponse.redirect(new URL('/', request.url))
+  const base = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+  return NextResponse.redirect(`${base}/`)
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   const supabase = await createServerSupabaseClient()
   await supabase.auth.signOut()
-  return NextResponse.redirect(new URL('/', request.url))
+  const base = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+  return NextResponse.redirect(`${base}/`)
 }

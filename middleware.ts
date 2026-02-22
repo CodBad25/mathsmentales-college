@@ -76,14 +76,17 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
+  // Base URL pour les redirections (derrière Nginx, request.url = localhost:3000)
+  const base = process.env.NEXT_PUBLIC_APP_URL || request.url
+
   // Proteger les routes dashboard (exercices sont publics)
   if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
-    return NextResponse.redirect(new URL('/auth/login', request.url))
+    return NextResponse.redirect(new URL('/auth/login', base))
   }
 
   // Rediriger les utilisateurs connectés depuis /auth/login
   if (user && request.nextUrl.pathname === '/auth/login') {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    return NextResponse.redirect(new URL('/dashboard', base))
   }
 
   return response
