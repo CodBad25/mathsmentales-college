@@ -9,7 +9,7 @@ import type { ExerciceJSON } from '@/lib/exercises'
 import { generateQuestion, type Question } from '@/lib/exercises'
 
 interface GameState {
-  status: 'loading' | 'config' | 'ready_to_start' | 'countdown' | 'playing' | 'finished'
+  status: 'loading' | 'config' | 'ready_to_start' | 'countdown' | 'playing' | 'showing_answer' | 'finished'
   exercice: ExerciceJSON | null
   questions: Question[]
   currentIndex: number
@@ -23,17 +23,15 @@ interface GameState {
   questionStartTime: number
 }
 
-/** Render a string that may contain LaTeX (between $$ or inline) */
+/** Render a string that may contain LaTeX */
 function MathDisplay({ text, className = '' }: { text: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     if (!ref.current || !text) return
-    // Check if text contains LaTeX markers
     const hasLatex = text.includes('$$') || text.includes('\\') || text.includes('{')
     if (hasLatex) {
       try {
-        // Remove $$ wrappers if present
         const cleaned = text.replace(/^\$\$|\$\$$/g, '').trim()
         katex.render(cleaned, ref.current, {
           throwOnError: false,
@@ -45,7 +43,13 @@ function MathDisplay({ text, className = '' }: { text: string; className?: strin
         // fallback to text
       }
     }
-    ref.current.textContent = text
+    // Questions may contain simple HTML tags like <b>, <i>, <br>
+    const hasHtml = /<[a-z][\s\S]*>/i.test(text)
+    if (hasHtml) {
+      ref.current.innerHTML = text
+    } else {
+      ref.current.textContent = text
+    }
   }, [text])
 
   return <span ref={ref} className={className} />
@@ -99,7 +103,6 @@ function PlayContent() {
     parsedSubOptions ? Object.keys(parsedSubOptions).map(Number) : []
   )
   const [userAnswer, setUserAnswer] = useState('')
-  const [showFeedback, setShowFeedback] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
@@ -109,35 +112,43 @@ function PlayContent() {
 
   const inputRef = useRef<HTMLInputElement>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const autoSubmitRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Focus input during play
   useEffect(() => {
-    if (state.status === 'playing' && !showFeedback) {
+    if (state.status === 'playing') {
       setTimeout(() => inputRef.current?.focus(), 50)
     }
-  }, [state.status, state.currentIndex, showFeedback])
+  }, [state.status, state.currentIndex])
 
-  // Timer visuel pour chaque question
+  // Timer visuel + auto-submit when timer expires
   useEffect(() => {
-    if (state.status === 'playing' && !showFeedback) {
-      setTimerProgress(100)
-      const startTime = Date.now()
-      const duration = displayDuration * 1000
+    if (state.status !== 'playing') return
 
-      timerRef.current = setInterval(() => {
-        const elapsed = Date.now() - startTime
-        const remaining = Math.max(0, 100 - (elapsed / duration) * 100)
-        setTimerProgress(remaining)
-        if (remaining <= 0) {
-          if (timerRef.current) clearInterval(timerRef.current)
-        }
-      }, 50)
+    setTimerProgress(100)
+    const startTime = Date.now()
+    const duration = displayDuration * 1000
 
-      return () => {
+    timerRef.current = setInterval(() => {
+      const elapsed = Date.now() - startTime
+      const remaining = Math.max(0, 100 - (elapsed / duration) * 100)
+      setTimerProgress(remaining)
+      if (remaining <= 0) {
         if (timerRef.current) clearInterval(timerRef.current)
       }
+    }, 50)
+
+    // Auto-submit when timer expires (empty answer = wrong)
+    autoSubmitRef.current = setTimeout(() => {
+      checkAnswerFromTimer()
+    }, duration)
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+      if (autoSubmitRef.current) clearTimeout(autoSubmitRef.current)
     }
-  }, [state.status, state.currentIndex, showFeedback, displayDuration])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.status, state.currentIndex, displayDuration])
 
   // Countdown animation
   useEffect(() => {
@@ -220,7 +231,7 @@ function PlayContent() {
       }
       try {
         const response = await fetch(`/library/${file}`)
-        if (!response.ok) throw new Error('Impossible de charger l\'exercice')
+        if (!response.ok) throw new Error("Impossible de charger l'exercice")
         const data: ExerciceJSON = await response.json()
         const shouldAutoStart = autostart || !!sessionCode
         setState(prev => ({
@@ -248,11 +259,15 @@ function PlayContent() {
     const optionsToUse = selectedOptions.length > 0 ? selectedOptions :
       (selectedOption !== null ? [selectedOption] : undefined)
 
+    // If we have parsedSubOptions, use them for more precise generation
+    const subOptionKeys = parsedSubOptions ? Object.keys(parsedSubOptions).map(Number) : null
+
     for (let i = 0; i < nbQuestions; i++) {
       try {
         let optionIndex: number | undefined
-        if (optionsToUse && optionsToUse.length > 0) {
-          optionIndex = optionsToUse[Math.floor(Math.random() * optionsToUse.length)]
+        const pool = subOptionKeys || optionsToUse
+        if (pool && pool.length > 0) {
+          optionIndex = pool[Math.floor(Math.random() * pool.length)]
         }
         const q = generateQuestion(state.exercice, optionIndex)
         questions.push(q)
@@ -276,41 +291,56 @@ function PlayContent() {
       startTime: Date.now(),
       questionStartTime: Date.now(),
     }))
-  }, [state.exercice, nbQuestions, selectedOption, selectedOptions])
+  }, [state.exercice, nbQuestions, selectedOption, selectedOptions, parsedSubOptions])
 
-  const checkAnswer = useCallback(() => {
+  const advanceToNext = useCallback(() => {
+    setUserAnswer('')
+    setState(prev => {
+      if (prev.currentIndex + 1 >= prev.questions.length) {
+        return { ...prev, status: 'finished' }
+      }
+      return { ...prev, status: 'playing', currentIndex: prev.currentIndex + 1, questionStartTime: Date.now() }
+    })
+  }, [])
+
+  const processAnswer = useCallback((answer: string) => {
     if (state.status !== 'playing') return
+
+    // Clear timers
     if (timerRef.current) clearInterval(timerRef.current)
+    if (autoSubmitRef.current) clearTimeout(autoSubmitRef.current)
 
     const currentQuestion = state.questions[state.currentIndex]
     const timeSpent = (Date.now() - state.questionStartTime) / 1000
 
-    const normalizedUser = userAnswer.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.')
+    const normalizedUser = answer.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.')
     const normalizedCorrect = currentQuestion.value.trim().toLowerCase().replace(/\s+/g, '').replace(',', '.')
     const correct = normalizedUser === normalizedCorrect
 
     setIsCorrect(correct)
-    setShowFeedback(true)
 
     setState(prev => ({
       ...prev,
-      answers: [...prev.answers, { question: currentQuestion, userAnswer, isCorrect: correct, timeSpent }],
+      status: 'showing_answer',
+      answers: [...prev.answers, { question: currentQuestion, userAnswer: answer, isCorrect: correct, timeSpent }],
     }))
 
-    setTimeout(() => {
-      setShowFeedback(false)
-      setUserAnswer('')
-      setState(prev => {
-        if (prev.currentIndex + 1 >= prev.questions.length) {
-          return { ...prev, status: 'finished' }
-        }
-        return { ...prev, currentIndex: prev.currentIndex + 1, questionStartTime: Date.now() }
-      })
-    }, 1500)
-  }, [state, userAnswer])
+    setTimeout(advanceToNext, 1500)
+  }, [state, advanceToNext])
+
+  const checkAnswer = useCallback(() => {
+    processAnswer(userAnswer)
+  }, [processAnswer, userAnswer])
+
+  // Timer-triggered auto-submit (captures current answer via ref-like approach)
+  const checkAnswerFromTimer = useCallback(() => {
+    // Use the input's current value directly
+    const currentValue = inputRef.current?.value || ''
+    processAnswer(currentValue)
+  }, [processAnswer])
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !showFeedback && userAnswer.trim()) checkAnswer()
+    if (e.key === 'Enter' && state.status === 'playing') checkAnswer()
   }
 
   const score = state.answers.filter(a => a.isCorrect).length
@@ -319,8 +349,8 @@ function PlayContent() {
   // === ERROR ===
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
-        <div className="text-center text-white">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center p-4">
+        <div className="text-center text-white max-w-md">
           <div className="text-6xl mb-4">&#x26A0;</div>
           <p className="text-xl mb-6">{error}</p>
           <Link href="/exercices" className="bg-white/20 hover:bg-white/30 px-6 py-3 rounded-xl font-bold transition-all">
@@ -341,8 +371,12 @@ function PlayContent() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full">
-          <h1 className="text-2xl font-bold mb-2 text-gray-900">{state.exercice.title}</h1>
-          <p className="text-gray-500 mb-6">Configurez votre session</p>
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-2xl mb-3">
+              <span className="text-2xl">🧮</span>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">{state.exercice.title}</h1>
+          </div>
 
           <div className="space-y-6">
             {/* Nombre de questions */}
@@ -369,11 +403,11 @@ function PlayContent() {
             {state.exercice.options.length > 1 && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Type de question</label>
-                <div className="space-y-2">
+                <div className="space-y-2 max-h-48 overflow-y-auto">
                   <button
-                    onClick={() => setSelectedOption(null)}
+                    onClick={() => { setSelectedOption(null); setSelectedOptions([]) }}
                     className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
-                      selectedOption === null
+                      selectedOption === null && selectedOptions.length === 0
                         ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
@@ -384,7 +418,7 @@ function PlayContent() {
                   {state.exercice.options.map((opt, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setSelectedOption(idx)}
+                      onClick={() => { setSelectedOption(idx); setSelectedOptions([idx]) }}
                       className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
                         selectedOption === idx
                           ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
@@ -400,10 +434,17 @@ function PlayContent() {
 
             <button
               onClick={startGame}
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl font-bold text-xl hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-600/30"
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl font-bold text-xl hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-600/30 active:scale-[0.98]"
             >
-              C&apos;est parti !
+              {"C'est parti !"}
             </button>
+
+            <Link
+              href="/exercices"
+              className="block text-center text-sm text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              ← Retour aux exercices
+            </Link>
           </div>
         </div>
       </div>
@@ -415,41 +456,54 @@ function PlayContent() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-white/60 text-xl mb-4">{state.exercice?.title}</div>
-          <div
-            className="text-9xl font-black text-white animate-bounce"
-            style={{ animationDuration: '0.5s' }}
-          >
-            {countdown > 0 ? countdown : ''}
-          </div>
-          {countdown === 0 && (
-            <div className="text-4xl font-bold text-green-400 animate-pulse">GO !</div>
+          <div className="text-white/60 text-xl mb-8">{state.exercice?.title}</div>
+          {countdown > 0 ? (
+            <div
+              key={countdown}
+              className="text-9xl font-black text-white"
+              style={{ animation: 'countdown-pop 0.7s ease-out' }}
+            >
+              {countdown}
+            </div>
+          ) : (
+            <div className="text-6xl font-bold text-green-400 animate-pulse">GO !</div>
           )}
         </div>
+        <style>{`
+          @keyframes countdown-pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+          }
+        `}</style>
       </div>
     )
   }
 
-  // === PLAYING ===
-  if (state.status === 'playing') {
+  // === PLAYING / SHOWING_ANSWER ===
+  if (state.status === 'playing' || state.status === 'showing_answer') {
     const currentQuestion = state.questions[state.currentIndex]
+    const showingAnswer = state.status === 'showing_answer'
     const timerColor = timerProgress > 50 ? 'bg-green-400' : timerProgress > 20 ? 'bg-yellow-400' : 'bg-red-400'
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex flex-col">
         {/* Header compact */}
-        <div className="px-4 pt-4 pb-2">
+        <div className="px-4 pt-3 pb-2">
           <div className="flex justify-between items-center text-white/70 text-sm mb-2">
             <span>Question {state.currentIndex + 1} / {state.questions.length}</span>
             <span className="font-mono text-lg text-white">
-              {score} <span className="text-white/50">/ {state.answers.length}</span>
+              {score} <span className="text-white/40">/ {state.answers.length - (showingAnswer ? 1 : 0)}</span>
             </span>
           </div>
           {/* Timer bar */}
           <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div
-              className={`h-full ${timerColor} transition-all duration-100 ease-linear rounded-full`}
-              style={{ width: `${timerProgress}%` }}
+              className={`h-full ${showingAnswer ? (isCorrect ? 'bg-green-400' : 'bg-red-400') : timerColor} rounded-full`}
+              style={{
+                width: showingAnswer ? '100%' : `${timerProgress}%`,
+                transition: showingAnswer ? 'none' : 'width 100ms linear',
+              }}
             />
           </div>
         </div>
@@ -457,7 +511,7 @@ function PlayContent() {
         {/* Question zone */}
         <main className="flex-1 flex flex-col items-center justify-center px-4 pb-8">
           {/* Question display */}
-          <div className={`mb-8 transition-all duration-300 ${showFeedback ? 'scale-95 opacity-50' : 'scale-100'}`}>
+          <div className={`mb-8 transition-all duration-300 ${showingAnswer ? 'scale-95 opacity-60' : 'scale-100'}`}>
             <div className="text-white text-center">
               <MathDisplay
                 text={currentQuestion.questionLatex || currentQuestion.question}
@@ -475,12 +529,12 @@ function PlayContent() {
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               onKeyDown={handleKeyDown}
-              disabled={showFeedback}
+              disabled={showingAnswer}
               autoFocus
               autoComplete="off"
               placeholder="?"
               className={`w-full text-center text-4xl py-5 px-6 rounded-2xl border-4 outline-none transition-all font-bold ${
-                showFeedback
+                showingAnswer
                   ? isCorrect
                     ? 'border-green-400 bg-green-500/20 text-green-300'
                     : 'border-red-400 bg-red-500/20 text-red-300'
@@ -489,8 +543,8 @@ function PlayContent() {
             />
 
             {/* Feedback */}
-            {showFeedback && (
-              <div className={`mt-4 text-center text-xl font-bold animate-in fade-in ${
+            {showingAnswer && (
+              <div className={`mt-4 text-center text-xl font-bold ${
                 isCorrect ? 'text-green-400' : 'text-red-400'
               }`}>
                 {isCorrect ? (
@@ -504,11 +558,11 @@ function PlayContent() {
             )}
 
             {/* Validate button */}
-            {!showFeedback && (
+            {!showingAnswer && (
               <button
                 onClick={checkAnswer}
                 disabled={!userAnswer.trim()}
-                className="mt-4 w-full bg-white/20 hover:bg-white/30 text-white py-4 rounded-2xl font-bold text-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur"
+                className="mt-4 w-full bg-white/20 hover:bg-white/30 text-white py-4 rounded-2xl font-bold text-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur active:scale-[0.98]"
               >
                 Valider
               </button>
@@ -523,14 +577,17 @@ function PlayContent() {
   if (state.status === 'finished') {
     const percentage = Math.round((score / state.questions.length) * 100)
     const avgTime = totalTime / state.questions.length
+    const bestTime = state.answers.length > 0 ? Math.min(...state.answers.map(a => a.timeSpent)) : 0
     const scoreColor = percentage >= 80 ? 'text-green-400' : percentage >= 50 ? 'text-yellow-400' : 'text-red-400'
     const scoreBg = percentage >= 80 ? 'from-green-500/20' : percentage >= 50 ? 'from-yellow-500/20' : 'from-red-500/20'
+    const scoreEmoji = percentage >= 80 ? '🎉' : percentage >= 50 ? '👍' : '💪'
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 p-4">
-        <div className="max-w-2xl mx-auto pt-8">
+        <div className="max-w-2xl mx-auto pt-6">
           {/* Score principal */}
           <div className={`bg-gradient-to-b ${scoreBg} to-transparent rounded-3xl p-8 text-center mb-6`}>
+            <div className="text-4xl mb-2">{scoreEmoji}</div>
             <p className="text-white/60 text-lg mb-2">{state.exercice?.title}</p>
 
             <div className={`text-8xl font-black ${scoreColor} mb-2`}>
@@ -557,9 +614,7 @@ function PlayContent() {
             </div>
             <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
               <div className="text-white/50 text-xs uppercase tracking-wide">Meilleur</div>
-              <div className="text-white text-2xl font-bold mt-1">
-                {state.answers.length > 0 ? Math.min(...state.answers.map(a => a.timeSpent)).toFixed(1) : 0}s
-              </div>
+              <div className="text-white text-2xl font-bold mt-1">{bestTime.toFixed(1)}s</div>
             </div>
           </div>
 
@@ -604,7 +659,7 @@ function PlayContent() {
                 setSaved(false)
                 startGame()
               }}
-              className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 rounded-xl font-bold text-lg hover:from-indigo-600 hover:to-purple-600 transition-all shadow-lg"
+              className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 rounded-xl font-bold text-lg hover:from-indigo-600 hover:to-purple-600 transition-all shadow-lg active:scale-[0.98]"
             >
               Recommencer
             </button>

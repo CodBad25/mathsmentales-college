@@ -30,6 +30,7 @@ export async function GET(
         exercise_title,
         niveau,
         nb_questions,
+        display_duration,
         status,
         selected_options,
         classes (
@@ -60,6 +61,7 @@ export async function GET(
         exercise_title: session.exercise_title,
         niveau: session.niveau,
         nb_questions: session.nb_questions,
+        display_duration: (session as any).display_duration ?? 8,
         selected_options: session.selected_options,
         class_name: className
       }

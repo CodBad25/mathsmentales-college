@@ -1,6 +1,41 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import katex from 'katex'
+import 'katex/dist/katex.min.css'
 import { type ExerciseDetail, type Exercise, getQuestionVariantCount, getQuestionVariantLabels } from '@/hooks/useExerciseDetail'
+
+/** Renders text with inline LaTeX ($$...$$ delimiters) */
+function InlineMath({ text, className = '' }: { text: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    if (!ref.current || !text) return
+    if (!text.includes('$$')) {
+      ref.current.textContent = text
+      return
+    }
+    // Split by $$ and render LaTeX parts
+    const parts = text.split(/(\$\$[^$]+\$\$)/)
+    ref.current.innerHTML = ''
+    parts.forEach(part => {
+      if (part.startsWith('$$') && part.endsWith('$$')) {
+        const math = part.slice(2, -2)
+        const span = document.createElement('span')
+        try {
+          katex.render(math, span, { throwOnError: false, displayMode: false })
+        } catch {
+          span.textContent = math
+        }
+        ref.current!.appendChild(span)
+      } else if (part) {
+        ref.current!.appendChild(document.createTextNode(part))
+      }
+    })
+  }, [text])
+
+  return <span ref={ref} className={className} />
+}
 
 interface ModalAction {
   label: string
@@ -28,6 +63,7 @@ interface ExerciseModalProps {
   getTotalSelected: () => number
   getMaxVariants: () => number
   actions: ModalAction[]
+  children?: React.ReactNode
 }
 
 const variantColors: Record<ModalAction['variant'], string> = {
@@ -56,6 +92,7 @@ export default function ExerciseModal({
   getTotalSelected,
   getMaxVariants,
   actions,
+  children,
 }: ExerciseModalProps) {
   if (!isOpen) return null
 
@@ -71,7 +108,9 @@ export default function ExerciseModal({
             <div>
               <div className="text-sm text-gray-500">Activité {exerciseDetail?.ID}</div>
               <h2 className="text-xl font-bold text-blue-600">
-                {loadingExercise ? 'Chargement...' : exerciseDetail?.title || selectedExercise?.t}
+                {loadingExercise ? 'Chargement...' : (
+                  <InlineMath text={exerciseDetail?.title || selectedExercise?.t || ''} />
+                )}
               </h2>
             </div>
             <button
@@ -124,7 +163,7 @@ export default function ExerciseModal({
             <>
               <h3 className="font-bold text-lg mb-3">Questions types</h3>
 
-              {/* Contrôles globaux */}
+              {/* Contrôle global */}
               <div className="flex items-center gap-4 mb-4 p-2 bg-gray-50 rounded-lg">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -136,26 +175,7 @@ export default function ExerciseModal({
                   />
                   <span className="font-medium">Tout (dé)sélectionner</span>
                 </label>
-
-                {maxVariants > 1 && (
-                  <div className="flex gap-3 ml-4">
-                    {Array.from({ length: maxVariants }, (_, i) => (
-                      <label key={i} className="flex items-center gap-1 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={exerciseDetail.options.every((_, optIdx) => {
-                            const count = getQuestionVariantCount(exerciseDetail, optIdx)
-                            if (i >= count) return true
-                            return (selectedSubOptions.get(optIdx) || new Set()).has(i)
-                          })}
-                          onChange={() => onToggleAllVariant(i)}
-                          className="w-4 h-4 text-primary-600 rounded"
-                        />
-                        <span className="text-sm">Options {i + 1}</span>
-                      </label>
-                    ))}
-                  </div>
-                )}
+                <span className="text-sm text-gray-400 ml-auto">{totalSelected} sélectionné(s)</span>
               </div>
 
               {/* Liste des options */}
@@ -178,7 +198,7 @@ export default function ExerciseModal({
                           onChange={() => onToggleOption(optIdx)}
                           className="w-4 h-4 text-primary-600 rounded"
                         />
-                        <span className="font-medium">{option.name} :</span>
+                        <InlineMath text={option.name + ' :'} className="font-medium" />
                       </label>
 
                       {variantCount > 1 && (
@@ -191,7 +211,7 @@ export default function ExerciseModal({
                                 onChange={() => onToggleSubOption(optIdx, varIdx)}
                                 className="w-3.5 h-3.5 text-primary-600 rounded"
                               />
-                              <span className="text-gray-600">{label}</span>
+                              <InlineMath text={label} className="text-gray-600" />
                             </label>
                           ))}
                         </div>
@@ -216,27 +236,26 @@ export default function ExerciseModal({
           )}
         </div>
 
+        {/* Children (e.g. QuickSessionCreator) */}
+        {children}
+
         {/* Pied avec actions */}
-        <div className="p-4 border-t bg-gray-50">
-          <div className="flex items-center justify-between mb-3">
-            <div className="text-sm text-gray-500">
-              {totalSelected} type(s) de question(s) sélectionné(s)
+        {actions.length > 0 && (
+          <div className="p-4 border-t bg-gray-50">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {actions.map((action, i) => (
+                <button
+                  key={i}
+                  onClick={action.onClick}
+                  disabled={action.disabled}
+                  className={`px-6 py-3 rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${variantColors[action.variant]}`}
+                >
+                  {action.label}
+                </button>
+              ))}
             </div>
           </div>
-
-          <div className="flex flex-wrap gap-3 justify-center">
-            {actions.map((action, i) => (
-              <button
-                key={i}
-                onClick={action.onClick}
-                disabled={action.disabled}
-                className={`px-6 py-3 rounded-lg font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${variantColors[action.variant]}`}
-              >
-                {action.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   )

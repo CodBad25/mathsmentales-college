@@ -53,6 +53,8 @@ export async function POST(request: Request) {
         exercise_title: exerciseTitle,
         niveau: niveau,
         nb_questions: nbQuestions || 5,
+        display_duration: displayDuration || 8,
+        selected_options: selectedOptions || null,
         code: sessionCode,
         status: 'active'
       })
