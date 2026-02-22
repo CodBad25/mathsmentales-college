@@ -61,12 +61,6 @@ export default async function Home() {
           >
             Essayer les exercices
           </Link>
-          <Link
-            href="/auth/login"
-            className="btn-secondary text-lg px-8 py-4"
-          >
-            Se connecter
-          </Link>
         </div>
       </section>
 
@@ -154,6 +148,9 @@ export default async function Home() {
           </p>
           <p className="text-gray-400 text-sm">
             Plateforme open-source pour l&apos;enseignement des mathématiques
+          </p>
+          <p className="text-gray-500 text-xs mt-4">
+            Adapté par <span className="inline-block animate-pulse text-red-500">&#10084;</span> M.BELHAJ
           </p>
         </div>
       </footer>
