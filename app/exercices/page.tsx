@@ -138,7 +138,32 @@ function ExercicesCatalogueContent() {
     setShowSessionCreator(true)
   }
 
-  const niveauData = selectedNiveau && content ? content[selectedNiveau] : null
+  // Quand on cherche, inclure le niveau sélectionné + les niveaux inférieurs
+  // Ex: 5e → cherche dans 5e + 6e, 4e → 4e + 5e + 6e, 3e → tout
+  const niveauOrder = ['6', '5', '4', '3']
+  const getSearchNiveaux = (niveau: string): string[] => {
+    const idx = niveauOrder.indexOf(niveau)
+    return idx >= 0 ? niveauOrder.slice(0, idx + 1) : [niveau]
+  }
+
+  const niveauData = selectedNiveau && content ? (() => {
+    if (!searchQuery) return content[selectedNiveau]
+    // Fusionner les thèmes de tous les niveaux concernés
+    const niveauxToSearch = getSearchNiveaux(selectedNiveau)
+    const mergedThemes: Record<string, ContentNiveau['themes'][string]> = {}
+    for (const niv of niveauxToSearch) {
+      const data = content[niv]
+      if (!data) continue
+      for (const [themeId, theme] of Object.entries(data.themes)) {
+        const key = `${niv}_${themeId}`
+        mergedThemes[key] = {
+          nom: niveauxToSearch.length > 1 ? `${theme.nom} (${niv}e)` : theme.nom,
+          chapitres: theme.chapitres,
+        }
+      }
+    }
+    return { nom: content[selectedNiveau].nom, themes: mergedThemes } as ContentNiveau
+  })() : null
 
   const modalActions = [
     {

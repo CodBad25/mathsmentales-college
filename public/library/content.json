@@ -615,6 +615,18 @@
                 "u": "N3/3DD2.json",
                 "t": "Vocabulaire image, antécédent",
                 "new": false
+              },
+              {
+                "t": "Différencier fonction affine, linéaire par son expression algébrique",
+                "u": "N3/3DD10.json"
+              },
+              {
+                "t": "Calcul d'image par une fonction affine",
+                "u": "N3/3DD8.json"
+              },
+              {
+                "t": "Calcul d'antécédent par une fonction affine",
+                "u": "N3/3DD9.json"
               }
             ]
           }
@@ -731,7 +743,12 @@
         "chapitres": {
           "3AA": {
             "n": "Ecrire, mettre au point, exécuter un programme",
-            "e": []
+            "e": [
+              {
+                "t": "Déterminer une image ou un antécédent par un algorithme",
+                "u": "N3/3AA1.json"
+              }
+            ]
           }
         }
       }
@@ -1093,6 +1110,22 @@
                 "t": "Écrire la phrase correspondant à l'opération",
                 "new": true,
                 "d": ""
+              },
+              {
+                "t": "Multiplier un décimal par une puissance de 10",
+                "u": "N4/4NC5.json"
+              },
+              {
+                "t": "Enchainements d'opérations avec des carrés",
+                "u": "N4/4NC6.json"
+              },
+              {
+                "t": "Enchainements complexes d'opérations avec des carrés",
+                "u": "N4/4NC7.json"
+              },
+              {
+                "t": "Fractions de quantités",
+                "u": "N4/4NC8.json"
               }
             ]
           },
@@ -1316,12 +1349,29 @@
                 "t": "Périmètre des figures usuelles",
                 "new": false,
                 "d": "Pas encore compatible avec la saisie en ligne"
+              },
+              {
+                "t": "Convertir des grandeurs composées",
+                "u": "N4/4MA1.json"
+              },
+              {
+                "t": "Calculer avec des grandeurs composées",
+                "u": "N4/4MA2.json"
               }
             ]
           },
           "4MB": {
             "n": "Effet des transformations",
-            "e": []
+            "e": [
+              {
+                "t": "Calcul de longueurs dans les agrandissement et réductions",
+                "u": "N4/4MB1.json"
+              },
+              {
+                "t": "Déterminer le coefficient d'un agrandissement ou d'une réduction",
+                "u": "N4/4MB2.json"
+              }
+            ]
           }
         }
       },
@@ -1388,6 +1438,18 @@
                 "t": "Vocabulaire du triangle rectangle",
                 "new": false,
                 "d": "Hypoténuse, côté opposé, côté adjacent"
+              },
+              {
+                "t": "Prouver que des droites sont parallèles (Thalès)",
+                "u": "N4/4GB10.json"
+              },
+              {
+                "t": "Déterminer si un triangle est rectangle",
+                "u": "N4/4GB8.json"
+              },
+              {
+                "t": "Théorème de Thalès (calculer)",
+                "u": "N4/4GB9.json"
               }
             ]
           }
@@ -1563,12 +1625,33 @@
                 "t": "Valeur décimale de fraction simple",
                 "new": false,
                 "d": "Donner l'écriture décimale d'une fraction, donner une fraction égale à une écriture décimale"
+              },
+              {
+                "t": "Comparer des décimaux relatifs avec >, <, =",
+                "u": "N5/5NA4.json"
+              },
+              {
+                "t": "Pourcentage et fractions simples",
+                "u": "N5/5NA5.json"
+              },
+              {
+                "t": "Décomposition de fraction en entier - fraction inférieure à 1",
+                "u": "N5/5NA6.json"
+              },
+              {
+                "t": "Pourcentages et décimaux",
+                "u": "N5/5NA7.json"
               }
             ]
           },
           "5NB": {
             "n": "Comparaison des nombres",
-            "e": []
+            "e": [
+              {
+                "t": "Encadrer une fraction entre deux entiers consécutifs",
+                "u": "N5/5NB1.json"
+              }
+            ]
           },
           "5NC": {
             "n": "Calculer avec les nombres",
@@ -1793,6 +1876,10 @@
                 "t": "Écrire la phrase correspondant à l'opération",
                 "new": true,
                 "d": ""
+              },
+              {
+                "t": "Enchaînements d'opérations en écriture fractionnaire",
+                "u": "N5/5NC12.json"
               }
             ]
           },
@@ -1874,6 +1961,22 @@
                 "t": "Tester une égalité",
                 "new": false,
                 "d": "Tester des égalités de"
+              },
+              {
+                "t": "Calculer une expression à coefficients positifs",
+                "u": "N5/5NE10.json"
+              },
+              {
+                "t": "Réduire un produit de monomes",
+                "u": "N5/5NE11.json"
+              },
+              {
+                "t": "Écrire l'expression littérale correspondante",
+                "u": "N5/5NE8.json"
+              },
+              {
+                "t": "Appliquer un programme de calcul",
+                "u": "N5/5NE9.json"
               }
             ]
           }
@@ -1922,6 +2025,10 @@
                 "t": "Utiliser l'échelle d'une carte, d'un plan, d'un modèle réduit",
                 "new": false,
                 "d": "Ne pas utiliser la saisie en ligne pour le moment."
+              },
+              {
+                "t": "Déterminer si un tableau est de proportionnalité",
+                "u": "N5/5DC4.json"
               }
             ]
           },
@@ -1966,6 +2073,18 @@
                 "t": "Périmètre des figures usuelles",
                 "new": false,
                 "d": "Pas encore compatible avec la saisie en ligne"
+              },
+              {
+                "t": "Volumes de prismes simples",
+                "u": "N5/5MA2.json"
+              },
+              {
+                "t": "Volumes de pyramides et cônes",
+                "u": "N5/5MA3.json"
+              },
+              {
+                "t": "Volumes de solides circulaires",
+                "u": "N5/5MA4.json"
               }
             ]
           },
@@ -1996,6 +2115,14 @@
                 "u": "N5/5GB1.json",
                 "t": "Trouver la mesure d'un 3e angle, en degrés.",
                 "new": false
+              },
+              {
+                "t": "Mesure d'un 3e angle, cas particuliers.",
+                "u": "N5/5GB2.json"
+              },
+              {
+                "t": "Existence d'un triangle.",
+                "u": "N5/5GB3.json"
               }
             ]
           }
@@ -2006,7 +2133,28 @@
         "chapitres": {
           "5AA": {
             "n": "Ecrire, mettre au point, exécuter un programme",
-            "e": []
+            "e": [
+              {
+                "t": "Comprendre une suite d'\"avancer\"",
+                "u": "N5/5AA1.json"
+              },
+              {
+                "t": "Comprendre le si ... alors ... sinon",
+                "u": "N5/5AA2.json"
+              },
+              {
+                "t": "Comprendre la répétition",
+                "u": "N5/5AA3.json"
+              },
+              {
+                "t": "Comprendre des commandes de tracé",
+                "u": "N5/5AA4.json"
+              },
+              {
+                "t": "Utiliser des variables",
+                "u": "N5/5AA5.json"
+              }
+            ]
           }
         }
       },
@@ -2027,6 +2175,10 @@
                 "t": "Leçon : nombres relatifs",
                 "new": true,
                 "d": "12 questions sur Notion, somme, différence, repérage"
+              },
+              {
+                "t": "Leçon : Proportionnalité",
+                "u": "N5/5LN3.json"
               }
             ]
           },
@@ -2036,7 +2188,20 @@
           },
           "5LG": {
             "n": "Espace et Géométrie",
-            "e": []
+            "e": [
+              {
+                "t": "Leçon : symétries",
+                "u": "N5/5LG1.json"
+              },
+              {
+                "t": "Leçon : solides",
+                "u": "N5/5LG2.json"
+              },
+              {
+                "t": "Leçon : triangle",
+                "u": "N5/5LG3.json"
+              }
+            ]
           },
           "5LD": {
             "n": "Organisation et gestion de données",
@@ -2071,6 +2236,10 @@
                 "u": "N6/6NA2.json",
                 "t": "Quel est le chiffre des ... ? (entiers)",
                 "new": false
+              },
+              {
+                "t": "Lecture sur une droite graduée",
+                "u": "N6/6NA4.json"
               }
             ]
           },
@@ -2129,6 +2298,14 @@
                 "t": "Valeur décimale de fraction simple",
                 "new": false,
                 "d": "Donner l'écriture décimale d'une fraction, donner une fraction égale à une écriture décimale"
+              },
+              {
+                "t": "Déterminer si des fractions sont égales",
+                "u": "N6/6NB8.json"
+              },
+              {
+                "t": "Exprimer une proportion",
+                "u": "N6/6NB9.json"
               }
             ]
           },
@@ -2198,6 +2375,10 @@
                 "t": "Utiliser l'échelle d'une carte, d'un plan, d'un modèle réduit",
                 "new": false,
                 "d": "Ne pas utiliser la saisie en ligne pour le moment."
+              },
+              {
+                "t": "Soustraction de décimaux",
+                "u": "N6/6NC11.json"
               }
             ]
           },
@@ -2356,6 +2537,14 @@
                 "t": "Écrire la phrase correspondant à l'opération",
                 "new": true,
                 "d": ""
+              },
+              {
+                "t": "Suites additives, multiplicatives",
+                "u": "N6/6ND24.json"
+              },
+              {
+                "t": "Double, carré, triple, cube d'un entier",
+                "u": "N6/6ND25.json"
               }
             ]
           },
@@ -2458,6 +2647,14 @@
                 "t": "Somme astucieuse avec des décimaux",
                 "new": false,
                 "d": "Ajouter deux décimaux qui se marient bien et un nombre entier"
+              },
+              {
+                "t": "Diviser un décimal (simple) par 10, 100, 1000",
+                "u": "N6/6NE11.json"
+              },
+              {
+                "t": "Multiplier un décimal (simple) par 0,1, 0,01, 0,001",
+                "u": "N6/6NE12.json"
               }
             ]
           },
@@ -2529,6 +2726,22 @@
                 "t": "Conversions classiques",
                 "new": false,
                 "d": "Éviter d'utiliser en mode online, les corrections ne seront pas correctes et le clavier virtuel n'est pas adapté."
+              },
+              {
+                "t": "Conversions entre m², dm² et cm²",
+                "u": "N6/6MC2.json"
+              },
+              {
+                "t": "Passage entre unités d'aire voisines",
+                "u": "N6/6MC3.json"
+              },
+              {
+                "t": "Conversions d’unités à partir d’entiers",
+                "u": "N6/6MC4.json"
+              },
+              {
+                "t": "Conversions d’unités à partir d’une autre",
+                "u": "N6/6MC5.json"
               }
             ]
           },
@@ -2585,6 +2798,26 @@
                 "t": "Reconnaître un objet géométrique",
                 "new": false,
                 "d": "Différencier les lignes géométriques de base"
+              },
+              {
+                "t": "Nommer un angle",
+                "u": "N6/6GC2.json"
+              },
+              {
+                "t": "Nommer une droite",
+                "u": "N6/6GC3.json"
+              },
+              {
+                "t": "Appartient ou n'appartient pas",
+                "u": "N6/6GC4.json"
+              },
+              {
+                "t": "Inégalité triangulaire",
+                "u": "N6/6GC5.json"
+              },
+              {
+                "t": "Reconnaître un objet géométrique (6GC1+)",
+                "u": "N6/6GC6.json"
               }
             ]
           },
@@ -2596,6 +2829,26 @@
                 "t": "Lien entre aire d'un carré et côté",
                 "new": false,
                 "d": "Pas encore compatible avec la saisie en ligne"
+              },
+              {
+                "t": "Reconnaitre des droites parallèles ou perpendiculaires",
+                "u": "N6/6GD2.json"
+              },
+              {
+                "t": "Appartenance au cercle",
+                "u": "N6/6GD3.json"
+              },
+              {
+                "t": "Cercle circonscrit au triangle",
+                "u": "N6/6GD4.json"
+              },
+              {
+                "t": "Cercles tangents ou sécants et distances",
+                "u": "N6/6GD5.json"
+              },
+              {
+                "t": "Reconnaitre une médiatrice",
+                "u": "N6/6GD6.json"
               }
             ]
           }
