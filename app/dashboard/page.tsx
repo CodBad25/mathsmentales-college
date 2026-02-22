@@ -196,9 +196,12 @@ export default async function DashboardPage() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">MathsMentales</Link>
           <div className="flex items-center gap-3">
-            {profile.avatar_url && (
-              <img src={profile.avatar_url} alt="" className="w-9 h-9 rounded-full ring-2 ring-white/30" referrerPolicy="no-referrer" />
-            )}
+            <img
+              src={profile.email === 'badribelhaj@chaissacschool.com' ? '/avatar-badri.gif' : (profile.avatar_url || '')}
+              alt=""
+              className="w-9 h-9 rounded-full ring-2 ring-white/30 object-cover"
+              referrerPolicy="no-referrer"
+            />
             <span className="text-sm text-white/80 hidden sm:block">{profile.full_name}</span>
             <form action="/auth/logout" method="post">
               <button className="text-sm text-white/60 hover:text-white transition-colors">
