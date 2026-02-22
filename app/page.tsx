@@ -54,14 +54,6 @@ export default async function Home() {
           Connexion avec Google Classroom pour professeurs et élèves.
         </p>
 
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-          <Link
-            href="/play"
-            className="btn-primary text-lg px-8 py-4"
-          >
-            Essayer les exercices
-          </Link>
-        </div>
       </section>
 
       {/* Features Section */}
