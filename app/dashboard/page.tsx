@@ -197,7 +197,7 @@ export default async function DashboardPage() {
           <Link href="/" className="text-2xl font-bold">MathsMentales</Link>
           <div className="flex items-center gap-3">
             {profile.avatar_url && (
-              <img src={profile.avatar_url} alt="" className="w-9 h-9 rounded-full ring-2 ring-white/30" />
+              <img src={profile.avatar_url} alt="" className="w-9 h-9 rounded-full ring-2 ring-white/30" referrerPolicy="no-referrer" />
             )}
             <span className="text-sm text-white/80 hidden sm:block">{profile.full_name}</span>
             <form action="/auth/logout" method="post">

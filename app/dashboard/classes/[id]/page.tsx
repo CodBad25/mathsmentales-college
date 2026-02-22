@@ -488,7 +488,7 @@ export default function ClassDetailPage() {
                     {/* En-tête : avatar + nom */}
                     <div className="flex items-center gap-3 mb-3">
                       {student.avatar_url ? (
-                        <img src={student.avatar_url} alt="" className="w-10 h-10 rounded-full object-cover" />
+                        <img src={student.avatar_url} alt="" className="w-10 h-10 rounded-full object-cover" referrerPolicy="no-referrer" />
                       ) : (
                         <div className={`w-10 h-10 rounded-full ${genderBg} ${genderText} flex items-center justify-center font-bold text-sm`}>
                           {initials}

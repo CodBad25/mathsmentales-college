@@ -186,7 +186,7 @@ export default function StudentDetailPage() {
         <div className="container mx-auto px-4 pb-6 pt-2">
           <div className="flex items-center gap-4 mb-4">
             {student.avatar_url ? (
-              <img src={student.avatar_url} alt="" className="w-16 h-16 rounded-full object-cover border-2 border-white/30" />
+              <img src={student.avatar_url} alt="" className="w-16 h-16 rounded-full object-cover border-2 border-white/30" referrerPolicy="no-referrer" />
             ) : (
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center font-bold text-2xl">
                 {initials}
