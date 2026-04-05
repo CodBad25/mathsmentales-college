@@ -50,7 +50,8 @@ function PlayContent() {
   const sessionCode = searchParams.get('session')
   const mode = searchParams.get('mode') || 'index'
   // Déterminer si c'est un lien partagé (a des params d'exercice)
-  const hasExerciseParams = searchParams.has('c') || searchParams.has('u') || searchParams.has('n')
+  // Format classique : c=, u=, n= | Format tilde : a=, p=
+  const hasExerciseParams = searchParams.has('c') || searchParams.has('u') || searchParams.has('n') || searchParams.has('a') || searchParams.has('p')
   const isSharedLink = hasExerciseParams && mode !== 'index'
 
   const [sessionCtx, setSessionCtx] = useState<SessionContext | null>(null)
@@ -62,22 +63,34 @@ function PlayContent() {
   const [copied, setCopied] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
 
-  // Vérifier l'authentification au chargement
+  // Vérifier l'authentification au chargement (avec timeout 3s)
   useEffect(() => {
+    let done = false
     const checkAuth = async () => {
       try {
         const { data: { user: u } } = await supabase.auth.getUser()
+        if (done) return
         setUser(u)
-        // Si lien partagé et pas connecté → auth prompt
         if (isSharedLink && !u) {
           setShowAuthPrompt(true)
         }
       } catch {
+        if (done) return
         if (isSharedLink) setShowAuthPrompt(true)
       }
+      done = true
       setAuthChecked(true)
     }
     checkAuth()
+    // Timeout : ne pas bloquer l'accès si Supabase ne répond pas
+    const timer = setTimeout(() => {
+      if (!done) {
+        done = true
+        setAuthChecked(true)
+      }
+    }, 3000)
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Charger le contexte de session si présent
@@ -99,6 +112,7 @@ function PlayContent() {
       } catch { /* continue sans contexte */ }
     }
     loadSession()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionCode])
 
   // Sauvegarder les résultats
@@ -144,6 +158,7 @@ function PlayContent() {
     } catch (err) {
       console.error('Erreur sauvegarde résultat:', err)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionCtx, resultSaved, mode])
 
   // Écouter les postMessage du bridge.js
@@ -174,6 +189,8 @@ function PlayContent() {
   }, [saveResult])
 
   // Construire l'URL de l'iframe avec les params d'exercice
+  // IMPORTANT : on utilise la query string brute (window.location.search) au lieu de
+  // URLSearchParams pour préserver le format tilde de MathsMentales (a=,fs=... & p=0~t=...~_i=...)
   const getIframeUrl = () => {
     const validModes = [
       'index', 'diaporama', 'exercices', 'ceinture', 'wall',
@@ -182,15 +199,19 @@ function PlayContent() {
     ]
     const page = validModes.includes(mode) ? mode : 'index'
 
-    // Transmettre les paramètres d'exercice à l'iframe
-    const exerciseParams = new URLSearchParams()
-    searchParams.forEach((value, key) => {
-      if (key !== 'mode' && key !== 'session') {
-        exerciseParams.set(key, value)
-      }
+    // Utiliser la query string brute pour éviter le re-encodage par URLSearchParams
+    const rawSearch = typeof window !== 'undefined' ? window.location.search : ''
+    if (!rawSearch) return `/mathsmentales/${page}.html`
+
+    // Retirer mode= et session= de la query string brute
+    const raw = rawSearch.startsWith('?') ? rawSearch.slice(1) : rawSearch
+    const parts = raw.split('&')
+    const filtered = parts.filter(part => {
+      const key = part.split('=')[0]
+      return key !== 'mode' && key !== 'session'
     })
 
-    const queryString = exerciseParams.toString()
+    const queryString = filtered.join('&')
     return `/mathsmentales/${page}.html${queryString ? '?' + queryString : ''}`
   }
 

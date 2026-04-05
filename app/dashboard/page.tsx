@@ -245,7 +245,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
           {isTeacher ? (
             <>
-              <Link href="/exercices" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+              <Link href="/" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
                 <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-indigo-200 transition-colors">
                   <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                 </div>
@@ -276,7 +276,7 @@ export default async function DashboardPage() {
             </>
           ) : (
             <>
-              <Link href="/exercices" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
+              <Link href="/" className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all group border border-gray-100">
                 <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-indigo-200 transition-colors">
                   <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                 </div>

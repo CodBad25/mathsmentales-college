@@ -25,10 +25,10 @@ interface ContentNiveau {
 }
 
 const niveaux = [
-  { id: '6', nom: '6eme' },
-  { id: '5', nom: '5eme' },
-  { id: '4', nom: '4eme' },
-  { id: '3', nom: '3eme' },
+  { id: '6', nom: '6ème' },
+  { id: '5', nom: '5ème' },
+  { id: '4', nom: '4ème' },
+  { id: '3', nom: '3ème' },
 ]
 
 function NewSessionContent() {
@@ -47,7 +47,6 @@ function NewSessionContent() {
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedThemes, setExpandedThemes] = useState<Set<string>>(new Set())
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set())
-  const [classFromUrl, setClassFromUrl] = useState(false)
 
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -67,12 +66,11 @@ function NewSessionContent() {
       const classExists = classes.find(c => c.id === classId)
       if (classExists) {
         setSelectedClass(classId)
-        setClassFromUrl(true)
       }
     }
   }, [searchParams, classes])
 
-  // Charger config pre-remplie depuis /exercices
+  // Charger config pré-remplie depuis /exercices
   useEffect(() => {
     if (searchParams.get('prefill') === 'true') {
       const configStr = sessionStorage.getItem('exerciseConfig')
@@ -165,14 +163,14 @@ function NewSessionContent() {
 
       const data = await response.json()
       if (!response.ok) {
-        setError(data.error || 'Erreur lors de la creation')
+        setError(data.error || 'Erreur lors de la création')
         return
       }
 
-      setSuccess(data.message || 'Session creee avec succes!')
+      setSuccess(data.message || 'Session créée avec succès !')
       setTimeout(() => router.push('/dashboard'), 2000)
     } catch {
-      setError('Erreur lors de la creation')
+      setError('Erreur lors de la création')
     } finally {
       setSubmitting(false)
     }
@@ -180,9 +178,30 @@ function NewSessionContent() {
 
   const niveauData = selectedNiveau && content ? content[selectedNiveau] : null
 
+  // Recherche cross-niveau : quand on tape une recherche, chercher dans TOUS les niveaux
+  const crossNiveauResults: { niveau: string; niveauNom: string; exercise: Exercise }[] = []
+  if (searchQuery.length >= 2 && content) {
+    for (const [niv, nivData] of Object.entries(content)) {
+      if (selectedNiveau && niv === selectedNiveau) continue
+      const nivLabel = niveaux.find(n => n.id === niv)?.nom || `${niv}ème`
+      for (const theme of Object.values(nivData.themes)) {
+        for (const chap of Object.values(theme.chapitres)) {
+          for (const ex of chap.e) {
+            if (
+              ex.t.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              (ex.d && ex.d.toLowerCase().includes(searchQuery.toLowerCase()))
+            ) {
+              crossNiveauResults.push({ niveau: niv, niveauNom: nivLabel, exercise: ex })
+            }
+          }
+        }
+      }
+    }
+  }
+
   const modalActions = [
     { label: 'Annuler', onClick: () => setShowModal(false), variant: 'gray' as const },
-    { label: "C'est parti !", onClick: confirmExercise, variant: 'green' as const, disabled: getTotalSelected() === 0 },
+    { label: 'Confirmer', onClick: confirmExercise, variant: 'green' as const, disabled: getTotalSelected() === 0 },
   ]
 
   if (loading) {
@@ -225,31 +244,26 @@ function NewSessionContent() {
                 <p className="text-gray-500">
                   Aucune classe. <Link href="/dashboard/classroom" className="text-primary-600 hover:underline">Importez une classe</Link> d&apos;abord.
                 </p>
-              ) : classFromUrl ? (
-                <div className="flex items-center gap-3">
-                  <div className="flex-1 py-3 px-4 bg-primary-50 border-2 border-primary-200 rounded-xl">
-                    <span className="font-medium text-primary-700">
-                      {classes.find(c => c.id === selectedClass)?.name}
-                    </span>
-                  </div>
-                  <button type="button" onClick={() => setClassFromUrl(false)} className="text-sm text-gray-500 hover:text-gray-700">
-                    Changer
-                  </button>
-                </div>
               ) : (
-                <select
-                  value={selectedClass}
-                  onChange={(e) => setSelectedClass(e.target.value)}
-                  className="w-full py-3 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none"
-                  required
-                >
-                  <option value="">Sélectionnez une classe</option>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {classes.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name} {c.google_classroom_id && '(Google Classroom)'}
-                    </option>
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => setSelectedClass(c.id)}
+                      className={`text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                        selectedClass === c.id
+                          ? 'border-primary-500 bg-primary-50 text-primary-700'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <div className="font-medium">{c.name}</div>
+                      {c.google_classroom_id && (
+                        <div className="text-xs text-gray-400 mt-0.5">Google Classroom</div>
+                      )}
+                    </button>
                   ))}
-                </select>
+                </div>
               )}
             </div>
 
@@ -273,34 +287,86 @@ function NewSessionContent() {
             </div>
 
             {/* Exercice */}
-            {niveauData && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Exercice *</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Exercice *</label>
 
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Rechercher un exercice..."
-                    className="w-full py-2 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none"
-                  />
-                </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Rechercher un exercice dans tous les niveaux..."
+                  className="w-full py-2 px-4 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none"
+                />
+              </div>
 
-                {selectedExercise && (
-                  <div className="mb-3 p-3 bg-primary-50 border-2 border-primary-500 rounded-xl">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium text-primary-700">{selectedExercise.t}</div>
-                        {selectedExercise.d && <div className="text-sm text-primary-600">{selectedExercise.d}</div>}
-                      </div>
+              {selectedExercise && (
+                <div className="mb-3 p-3 bg-primary-50 border-2 border-primary-500 rounded-xl">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium text-primary-700">{selectedExercise.t}</div>
+                      {selectedExercise.d && <div className="text-sm text-primary-600">{selectedExercise.d}</div>}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => openExerciseModal(selectedExercise)}
+                        className="text-sm text-primary-600 hover:text-primary-800 underline"
+                      >
+                        Configurer
+                      </button>
                       <button type="button" onClick={() => setSelectedExercise(null)} className="text-primary-600 hover:text-primary-800">
                         ✕
                       </button>
                     </div>
                   </div>
-                )}
+                </div>
+              )}
 
+              {/* Résultats cross-niveau (autres niveaux que celui sélectionné) */}
+              {crossNiveauResults.length > 0 && (
+                <div className="mb-3 border-2 border-amber-200 rounded-xl overflow-hidden">
+                  <div className="bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800">
+                    Résultats dans d&apos;autres niveaux
+                  </div>
+                  <div className="max-h-48 overflow-y-auto">
+                    {crossNiveauResults.map((r, idx) => (
+                      <button
+                        key={`cross-${r.exercise.u}-${idx}`}
+                        type="button"
+                        onClick={() => {
+                          setSelectedNiveau(r.niveau)
+                          openExerciseModal(r.exercise)
+                        }}
+                        className={`w-full text-left px-3 py-2 hover:bg-gray-50 transition-all border-t first:border-t-0 ${
+                          selectedExercise?.u === r.exercise.u ? 'bg-primary-50' : ''
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="px-1.5 py-0.5 bg-gray-200 text-gray-600 text-xs rounded font-medium">{r.niveauNom}</span>
+                          <span className="font-medium text-sm">{r.exercise.t}</span>
+                        </div>
+                        {r.exercise.d && <div className="text-xs text-gray-500 mt-0.5 ml-14">{r.exercise.d}</div>}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Recherche sans niveau sélectionné : montrer tous les résultats */}
+              {!niveauData && searchQuery.length >= 2 && crossNiveauResults.length === 0 && (
+                <div className="text-sm text-gray-500 text-center py-4">
+                  Aucun exercice trouvé pour &quot;{searchQuery}&quot;
+                </div>
+              )}
+
+              {!niveauData && !searchQuery && (
+                <div className="text-sm text-gray-500 text-center py-4">
+                  Sélectionnez un niveau ou tapez pour rechercher dans tous les niveaux
+                </div>
+              )}
+
+              {niveauData && (
                 <div className="max-h-96 overflow-y-auto border rounded-xl">
                   {Object.entries(niveauData.themes).map(([themeId, theme]) => {
                     const themeExercises = Object.entries(theme.chapitres).flatMap(([, chap]) =>
@@ -397,8 +463,8 @@ function NewSessionContent() {
                     )
                   })}
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
             {/* Titre */}
             <div>
@@ -423,7 +489,7 @@ function NewSessionContent() {
                   className="w-5 h-5 text-primary-600 rounded"
                 />
                 <label htmlFor="publishClassroom" className="text-gray-700">
-                  Publier dans Google Classroom (les eleves verront le lien)
+                  Publier dans Google Classroom (les élèves verront le lien)
                 </label>
               </div>
             )}

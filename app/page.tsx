@@ -1,151 +1,221 @@
+'use client'
+
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { createServerSupabaseClient } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase-browser'
+import QuickSessionCreator from '@/components/QuickSessionCreator'
 
-export default async function Home() {
-  let user = null
+interface SessionCreatorData {
+  exerciseFile: string
+  exerciseTitle: string
+  niveau: string | null
+  nbQuestions: number
+  displayDuration: number
+  selectedOptions: Record<string, number[]>
+}
 
-  // Vérifier si Supabase est configuré
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  if (supabaseUrl && !supabaseUrl.includes('placeholder')) {
-    const supabase = await createServerSupabaseClient()
-    const { data } = await supabase.auth.getUser()
-    user = data.user
-  }
+export default function Home() {
+  const [user, setUser] = useState<any>(null)
+  const [authChecked, setAuthChecked] = useState(false)
+  const [sessionCreator, setSessionCreator] = useState<SessionCreatorData | null>(null)
+  const supabase = createClient()
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }: { data: { user: any } }) => {
+      setUser(data.user)
+      setAuthChecked(true)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Sauvegarder un résultat d'exercice
+  const saveResult = useCallback(async (data: {
+    score: number
+    total: number
+    exerciseUrl: string
+    exerciseTitle: string
+  }) => {
+    try {
+      const { data: { user: u } } = await supabase.auth.getUser()
+      if (!u) return
+
+      await fetch('/api/results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          exerciceId: 'mm-' + extractActivityId(data.exerciseUrl),
+          exerciceTitle: data.exerciseTitle || 'MathsMentales',
+          niveau: '',
+          score: data.score,
+          totalQuestions: data.total,
+          timeSpent: 0,
+          answers: [],
+        }),
+      })
+    } catch (err) {
+      console.error('Erreur sauvegarde résultat:', err)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Écouter les postMessage de bridge.js (via fenêtres ouvertes par window.open)
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data
+      if (!data || typeof data !== 'object') return
+
+      if (data.type === 'mathsmentales-result') {
+        const score = data.score ?? 0
+        const total = data.total ?? 0
+        if (total > 0) {
+          saveResult({
+            score,
+            total,
+            exerciseUrl: data.exerciseUrl || '',
+            exerciseTitle: data.exerciseTitle || '',
+          })
+        }
+      }
+
+      if (data.type === 'mm-create-session') {
+        const parsed = parseExerciseUrl(data.exerciseUrl || '')
+        setSessionCreator({
+          exerciseFile: parsed.exerciseFile,
+          exerciseTitle: data.exerciseTitle || 'Exercice MathsMentales',
+          niveau: parsed.niveau,
+          nbQuestions: parsed.nbQuestions,
+          displayDuration: parsed.displayDuration,
+          selectedOptions: parsed.selectedOptions,
+        })
+      }
+    }
+
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [saveResult])
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-100">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <div className="text-3xl font-bold text-primary-600">
-            MathsMentales
-          </div>
-          <span className="bg-primary-600 text-white px-2 py-1 rounded text-xs font-semibold">
+    <div className="h-screen flex flex-col">
+      {/* Barre de navigation Next.js */}
+      <nav className="h-12 min-h-[48px] flex items-center justify-between px-4 bg-slate-800 text-white z-[100]">
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-bold">MathsMentales</span>
+          <span className="bg-blue-500 text-white px-1.5 py-0.5 rounded text-[10px] font-semibold">
             COLLEGE
           </span>
         </div>
-        <div>
-          {user ? (
-            <Link
-              href="/dashboard"
-              className="btn-primary"
-            >
-              Mon espace
-            </Link>
-          ) : (
-            <Link
-              href="/auth/login"
-              className="btn-primary"
-            >
-              Se connecter
-            </Link>
+        <div className="flex items-center gap-3">
+          {authChecked && (
+            user ? (
+              <Link
+                href="/dashboard"
+                className="bg-blue-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold no-underline hover:bg-blue-600 transition-colors"
+              >
+                Mon espace
+              </Link>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="bg-blue-500 text-white px-4 py-1.5 rounded-lg text-sm font-semibold no-underline hover:bg-blue-600 transition-colors"
+              >
+                Se connecter
+              </Link>
+            )
           )}
         </div>
-      </header>
+      </nav>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-          Calcul mental pour
-          <span className="text-primary-600"> collégiens</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
-          Plateforme d&apos;exercices interactifs avec suivi personnalisé.
-          Connexion avec Google Classroom pour professeurs et élèves.
-        </p>
+      {/* Site MathsMentales original en iframe */}
+      <iframe
+        src="/mathsmentales/index.html"
+        className="flex-1 border-none w-full"
+        allow="fullscreen"
+        title="MathsMentales"
+      />
 
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-20">
-        <h2 className="text-4xl font-bold text-center mb-16">
-          Fonctionnalités
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Pour les professeurs */}
-          <div className="card">
-            <div className="text-4xl mb-4">👨‍🏫</div>
-            <h3 className="text-2xl font-bold mb-3">Pour les professeurs</h3>
-            <ul className="space-y-2 text-gray-600">
-              <li>✓ Créez des sessions personnalisées</li>
-              <li>✓ Suivez les progrès de vos élèves</li>
-              <li>✓ Intégration Google Classroom</li>
-              <li>✓ Statistiques détaillées</li>
-              <li>✓ Export des résultats</li>
-            </ul>
-          </div>
-
-          {/* Pour les élèves */}
-          <div className="card">
-            <div className="text-4xl mb-4">🎓</div>
-            <h3 className="text-2xl font-bold mb-3">Pour les élèves</h3>
-            <ul className="space-y-2 text-gray-600">
-              <li>✓ Exercices adaptés au niveau</li>
-              <li>✓ Historique personnel</li>
-              <li>✓ Connexion Google simple</li>
-              <li>✓ Progression visualisée</li>
-              <li>✓ Interface intuitive</li>
-            </ul>
-          </div>
-
-          {/* Contenu pédagogique */}
-          <div className="card">
-            <div className="text-4xl mb-4">📚</div>
-            <h3 className="text-2xl font-bold mb-3">Contenu adapté</h3>
-            <ul className="space-y-2 text-gray-600">
-              <li>✓ Programme de la 6ème à la 3ème</li>
-              <li>✓ Calcul mental et automatismes</li>
-              <li>✓ Exercices variés</li>
-              <li>✓ Diaporamas interactifs</li>
-              <li>✓ Open source et gratuit</li>
-            </ul>
+      {/* Modale de création de session */}
+      {sessionCreator && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[200] p-5">
+          <div className="bg-white rounded-2xl p-6 max-w-[480px] w-full shadow-2xl">
+            <h2 className="text-lg font-bold mb-1">
+              Créer une session
+            </h2>
+            <p className="text-sm text-gray-500 mb-4">
+              {sessionCreator.exerciseTitle}
+            </p>
+            <QuickSessionCreator
+              exerciseFile={sessionCreator.exerciseFile}
+              exerciseTitle={sessionCreator.exerciseTitle}
+              niveau={sessionCreator.niveau}
+              nbQuestions={sessionCreator.nbQuestions}
+              displayDuration={sessionCreator.displayDuration}
+              selectedOptions={sessionCreator.selectedOptions}
+              onClose={() => setSessionCreator(null)}
+            />
           </div>
         </div>
-      </section>
-
-      {/* Niveaux */}
-      <section className="container mx-auto px-4 py-20">
-        <h2 className="text-4xl font-bold text-center mb-16">
-          Niveaux disponibles
-        </h2>
-
-        <div className="grid md:grid-cols-4 gap-6">
-          {['6eme', '5eme', '4eme', '3eme'].map((niveau) => (
-            <div key={niveau} className="card text-center">
-              <div className="text-5xl font-bold text-primary-600 mb-2">
-                {niveau}
-              </div>
-              <p className="text-gray-600">
-                Exercices adaptés au programme
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-20">
-        <div className="container mx-auto px-4 text-center">
-          <p className="mb-2">
-            Basé sur{' '}
-            <a
-              href="https://mathsmentales.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary-400 hover:underline"
-            >
-              MathsMentales.net
-            </a>
-          </p>
-          <p className="text-gray-400 text-sm">
-            Plateforme open-source pour l&apos;enseignement des mathématiques
-          </p>
-          <p className="text-gray-500 text-xs mt-4">
-            Adapté par <span className="inline-block animate-pulse text-red-500">&#10084;</span> M.BELHAJ
-          </p>
-        </div>
-      </footer>
-    </main>
+      )}
+    </div>
   )
+}
+
+/** Extraire l'ID d'activité depuis une URL MathsMentales */
+function extractActivityId(url: string): string {
+  try {
+    const match = url.match(/_i=(\w+)~/) || url.match(/i=(\w+)~/)
+    if (match) return match[1]
+    const jsonMatch = url.match(/(\w+)\.json/)
+    if (jsonMatch) return jsonMatch[1]
+    return 'unknown'
+  } catch {
+    return 'unknown'
+  }
+}
+
+/** Parser une URL MathsMentales pour extraire les paramètres d'exercice */
+function parseExerciseUrl(url: string): {
+  exerciseFile: string
+  niveau: string | null
+  nbQuestions: number
+  displayDuration: number
+  selectedOptions: Record<string, number[]>
+} {
+  const defaults = {
+    exerciseFile: '',
+    niveau: null as string | null,
+    nbQuestions: 5,
+    displayDuration: 8,
+    selectedOptions: {} as Record<string, number[]>,
+  }
+
+  try {
+    const idMatch = url.match(/_i=(\w+)~/) || url.match(/[&?]i=(\w+)/)
+    if (!idMatch) return defaults
+
+    const activityId = idMatch[1]
+    const niveauMatch = activityId.match(/^(\d)/)
+    const niveau = niveauMatch ? niveauMatch[1] : null
+    const exerciseFile = `N${niveau}/${activityId}.json`
+
+    // Extraire nb questions (~n=5)
+    const nbMatch = url.match(/~n=(\d+)/)
+    const nbQuestions = nbMatch ? parseInt(nbMatch[1]) : 5
+
+    // Extraire durée (~t=8)
+    const tMatch = url.match(/~t=(\d+)/)
+    const displayDuration = tMatch ? parseInt(tMatch[1]) : 8
+
+    // Extraire options (~o=0,1,2)
+    const oMatch = url.match(/_i=\w+~o=([^~]*)/)
+    const selectedOptions: Record<string, number[]> = {}
+    if (oMatch && oMatch[1]) {
+      oMatch[1].split(',').forEach((v, i) => {
+        if (v !== '') selectedOptions[String(i)] = [parseInt(v)]
+      })
+    }
+
+    return { exerciseFile, niveau, nbQuestions, displayDuration, selectedOptions }
+  } catch {
+    return defaults
+  }
 }

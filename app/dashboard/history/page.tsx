@@ -102,7 +102,7 @@ export default async function HistoryPage() {
           <div className="bg-white rounded-xl shadow p-8 text-center">
             <div className="text-6xl mb-4">📜</div>
             <p className="text-gray-600 mb-4">Vous n&apos;avez pas encore fait d&apos;exercices</p>
-            <Link href="/exercices" className="btn-primary inline-block">
+            <Link href="/" className="btn-primary inline-block">
               Commencer un exercice
             </Link>
           </div>

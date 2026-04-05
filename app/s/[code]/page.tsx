@@ -4,6 +4,39 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-browser'
 
+/**
+ * Construit l'URL /play avec les paramètres au format tilde MathsMentales.
+ * Format attendu par diaporama.html :
+ * ?a=,fs=sansSerif,...&p=0~t=Title~c=0~o=true~d=normal~at=10_i=6GC5~o=0,1~q=~p=~t=8~n=5
+ */
+function buildMathsMentalesPlayUrl(session: SessionData, sessionCode: string | null): string {
+  const activityId = session.exercise_file.replace(/^N\d\//, '').replace('.json', '')
+  const title = encodeURIComponent(session.title || session.exercise_title)
+  const tempo = session.display_duration || 8
+  const nbQ = session.nb_questions || 5
+  const options = session.selected_options
+    ? Object.keys(session.selected_options).join(',')
+    : ''
+  // Format q : "optIdx.subOpt1,subOpt2-optIdx.subOpt" (ex: "0.0,1,2-1.0-2.0,1")
+  const q = session.selected_options
+    ? Object.entries(session.selected_options)
+        .map(([k, v]) => `${k}.${(v as number[]).join(',')}`)
+        .join('-')
+    : ''
+
+  // Paramètres globaux (séparés par des virgules)
+  const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
+  // Paramètres du cart (séparés par des tildes), activité attachée avec underscore
+  const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
+  const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
+
+  let url = `/play?mode=diaporama&${globalParams}&${cartParams}_${activityParams}`
+  if (sessionCode) {
+    url += `&session=${sessionCode}`
+  }
+  return url
+}
+
 interface SessionData {
   id: string
   title: string
@@ -11,6 +44,8 @@ interface SessionData {
   exercise_title: string
   niveau: string
   nb_questions: number
+  display_duration: number
+  selected_options: Record<string, number[]> | null
   class_name: string
 }
 
@@ -26,6 +61,7 @@ export default function SessionPage() {
 
   useEffect(() => {
     loadSession()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
   const loadSession = async () => {
@@ -46,17 +82,10 @@ export default function SessionPage() {
       setSession(data.session)
       setIsStudent(!!user)
 
-      // Si l'utilisateur est connecte, rediriger vers l'exercice avec le contexte de session
+      // Si l'utilisateur est connecté, rediriger vers l'interface MathsMentales originale
       if (user && data.session) {
-        // Stocker le contexte de session pour sauvegarder les resultats
-        sessionStorage.setItem('mathsmentales_session', JSON.stringify({
-          sessionId: data.session.id,
-          sessionCode: code,
-          studentId: user.id
-        }))
-
-        // Rediriger vers le player (iframe original)
-        router.push(`/play?session=${code}`)
+        const url = buildMathsMentalesPlayUrl(data.session, code)
+        window.location.href = url
       }
 
       setLoading(false)
@@ -76,7 +105,8 @@ export default function SessionPage() {
 
   const handlePlayAsGuest = () => {
     if (session) {
-      router.push(`/play`)
+      const url = buildMathsMentalesPlayUrl(session, null)
+      window.location.href = url
     }
   }
 

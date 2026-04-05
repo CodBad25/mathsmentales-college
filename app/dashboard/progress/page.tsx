@@ -114,8 +114,8 @@ export default async function ProgressPage() {
 
         {/* Bouton pour continuer */}
         <div className="text-center">
-          <Link href="/exercices" className="btn-primary inline-block text-lg px-8 py-4">
-            Continuer a progresser
+          <Link href="/" className="btn-primary inline-block text-lg px-8 py-4">
+            Continuer à progresser
           </Link>
         </div>
       </main>

@@ -96,27 +96,54 @@ function ExercicesCatalogueContent() {
     if (detail) initializeSelection(detail)
   }, [loadExerciseDetail, initializeSelection])
 
-  const buildPlayUrl = useCallback(() => {
-    if (!selectedExercise) return ''
-    const params = new URLSearchParams()
-    params.set('file', selectedExercise.u)
-    params.set('n', String(nbQuestions))
-    params.set('d', String(displayDuration))
-    if (selectedNiveau) params.set('niveau', selectedNiveau)
-
+  // Encoder les options au format MathsMentales : o=0,1,2 et q=0.0,1,2-1.0-2.0,1
+  const buildMmParams = useCallback(() => {
     const opts = getSelectedOptionsObject()
-    if (Object.keys(opts).length > 0) {
-      params.set('opts', JSON.stringify(opts))
-    }
-    return `/exercices/play?${params.toString()}`
-  }, [selectedExercise, nbQuestions, displayDuration, selectedNiveau, getSelectedOptionsObject])
+    const options = Object.keys(opts).join(',')
+    // Format q : "optIdx.subOpt1,subOpt2-optIdx.subOpt1" (ex: "0.0,1,2-1.0-2.0,1")
+    const q = Object.entries(opts)
+      .map(([k, v]) => `${k}.${v.join(',')}`)
+      .join('-')
+    return { options, q }
+  }, [getSelectedOptionsObject])
+
+  const buildDiaporamaUrl = useCallback(() => {
+    if (!selectedExercise) return ''
+    const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
+    const title = encodeURIComponent(selectedExercise.t)
+    const tempo = displayDuration
+    const nbQ = nbQuestions
+    const { options, q } = buildMmParams()
+
+    const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
+    const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
+    const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
+
+    return `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
+  }, [selectedExercise, nbQuestions, displayDuration, buildMmParams])
+
+  const buildShareUrl = useCallback(() => {
+    if (!selectedExercise) return ''
+    const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
+    const title = encodeURIComponent(selectedExercise.t)
+    const tempo = displayDuration
+    const nbQ = nbQuestions
+    const { options, q } = buildMmParams()
+    const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
+    const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
+    const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
+    return `/play?mode=diaporama&${globalParams}&${cartParams}_${activityParams}`
+  }, [selectedExercise, nbQuestions, displayDuration, buildMmParams])
 
   const handlePlay = () => {
-    router.push(buildPlayUrl())
+    // Naviguer directement vers le diaporama (pas via iframe /play)
+    // Le diaporama ne démarre pas automatiquement dans une iframe (window.opener === null)
+    window.location.href = buildDiaporamaUrl()
   }
 
   const handleCopyLink = async () => {
-    const url = `${window.location.origin}${buildPlayUrl()}`
+    // Le lien partageable passe par /play pour l'auth prompt + tracking Supabase
+    const url = `${window.location.origin}${buildShareUrl()}`
     try {
       await navigator.clipboard.writeText(url)
       setCopied(true)

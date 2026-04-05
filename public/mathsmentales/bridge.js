@@ -103,17 +103,72 @@
 
     document.body.appendChild(btn);
 
-    // Envoyer aussi un postMessage si en iframe
+    // Bouton "Créer une session" — masqué en iframe (les élèves y accèdent via /play)
+    if (!IS_IFRAME) {
+      var sessionBtn = document.createElement('button');
+      sessionBtn.id = 'mm-session-btn';
+      sessionBtn.innerHTML = '&#x1F4CB; Créer une session';
+      sessionBtn.title = 'Assigner cet exercice à une classe';
+      sessionBtn.style.cssText = 'position:fixed;bottom:20px;right:180px;z-index:99999;'
+        + 'padding:12px 20px;font-size:15px;font-weight:600;'
+        + 'background:#22c55e;color:white;border:none;border-radius:12px;'
+        + 'cursor:pointer;box-shadow:0 4px 12px rgba(34,197,94,0.4);'
+        + 'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;'
+        + 'transition:transform 0.2s,box-shadow 0.2s;';
+      sessionBtn.onmouseenter = function () {
+        sessionBtn.style.transform = 'scale(1.05)';
+      };
+      sessionBtn.onmouseleave = function () {
+        sessionBtn.style.transform = 'scale(1)';
+      };
+      sessionBtn.onclick = function () {
+        var data = {
+          type: 'mm-create-session',
+          exerciseUrl: window.location.href,
+          exerciseTitle: getExerciseTitle()
+        };
+        var origin = window.location.origin;
+        if (window.opener) {
+          try {
+            var t = window.opener.parent || window.opener;
+            t.postMessage(data, origin);
+          } catch (e) {
+            try { window.opener.postMessage(data, origin); } catch (e2) { /* ignore */ }
+          }
+        } else {
+          // Navigation directe → ouvrir la page de création
+          var url = '/dashboard/sessions/new?exerciseUrl=' + encodeURIComponent(data.exerciseUrl)
+            + '&exerciseTitle=' + encodeURIComponent(data.exerciseTitle);
+          window.location.href = url;
+        }
+      };
+      document.body.appendChild(sessionBtn);
+    }
+
+    // Envoyer un postMessage avec les résultats
+    var scoreData = findScoreInDOM();
+    var resultData = {
+      type: 'mathsmentales-result',
+      score: scoreData ? scoreData.score : 0,
+      total: scoreData ? scoreData.total : 0,
+      exerciseUrl: window.location.href,
+      exerciseTitle: getExerciseTitle(),
+      source: 'bridge-activity-end'
+    };
+
     if (IS_IFRAME) {
-      var scoreData = findScoreInDOM();
-      window.parent.postMessage({
-        type: 'mathsmentales-result',
-        score: scoreData ? scoreData.score : 0,
-        total: scoreData ? scoreData.total : 0,
-        exerciseUrl: window.location.href,
-        exerciseTitle: getExerciseTitle(),
-        source: 'bridge-activity-end'
-      }, PARENT_ORIGIN);
+      window.parent.postMessage(resultData, PARENT_ORIGIN);
+    }
+
+    // Si ouvert par window.open (depuis l'iframe de la page d'accueil)
+    if (window.opener) {
+      var origin = window.location.origin;
+      try {
+        var target = window.opener.parent || window.opener;
+        target.postMessage(resultData, origin);
+      } catch (e) {
+        try { window.opener.postMessage(resultData, origin); } catch (e2) { /* ignore */ }
+      }
     }
   }
 
