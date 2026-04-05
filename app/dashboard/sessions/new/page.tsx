@@ -39,6 +39,7 @@ function NewSessionContent() {
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
+  const [prefilledExerciseUrl, setPrefilledExerciseUrl] = useState<string | null>(null)
   const [publishToClassroom, setPublishToClassroom] = useState(true)
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -70,7 +71,23 @@ function NewSessionContent() {
     }
   }, [searchParams, classes])
 
-  // Charger config pré-remplie depuis /exercices
+  // Charger config depuis l'URL (bridge.js envoie exerciseUrl + exerciseTitle)
+  useEffect(() => {
+    const urlParam = searchParams.get('exerciseUrl')
+    const titleParam = searchParams.get('exerciseTitle')
+    if (urlParam) {
+      setPrefilledExerciseUrl(urlParam)
+      // Extraire l'ID d'activité depuis l'URL MathsMentales
+      const idMatch = urlParam.match(/_i=(\w+)~/) || urlParam.match(/[&?]i=(\w+)/)
+      const activityId = idMatch ? idMatch[1] : 'unknown'
+      const niveauMatch = activityId.match(/^(\d)/)
+      if (niveauMatch) setSelectedNiveau(niveauMatch[1])
+      setSelectedExercise({ u: `N${niveauMatch?.[1] || '6'}/${activityId}.json`, t: titleParam || 'Exercice MathsMentales' })
+      setTitle(titleParam || '')
+    }
+  }, [searchParams])
+
+  // Charger config pré-remplie depuis /exercices (sessionStorage)
   useEffect(() => {
     if (searchParams.get('prefill') === 'true') {
       const configStr = sessionStorage.getItem('exerciseConfig')
@@ -145,18 +162,23 @@ function NewSessionContent() {
     setError(null)
 
     try {
-      // Construire l'URL complète de l'exercice MathsMentales pour la stocker
-      const opts = getSelectedOptionsObject()
-      const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
-      const exerciseTitle2 = encodeURIComponent(title || selectedExercise.t)
-      const options = Object.keys(opts).join(',')
-      const q = Object.entries(opts)
-        .map(([k, v]) => `${k}.${v.join(',')}`)
-        .join('-')
-      const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
-      const cartParams = `p=0~t=${exerciseTitle2}~c=0~o=true~d=normal~at=${displayDuration}`
-      const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${displayDuration}~n=${nbQuestions}`
-      const exerciseUrl = `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
+      // Utiliser l'URL pré-remplie (depuis bridge.js) ou la construire depuis les options
+      let exerciseUrl: string
+      if (prefilledExerciseUrl) {
+        exerciseUrl = prefilledExerciseUrl
+      } else {
+        const opts = getSelectedOptionsObject()
+        const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
+        const exerciseTitle2 = encodeURIComponent(title || selectedExercise.t)
+        const options = Object.keys(opts).join(',')
+        const q = Object.entries(opts)
+          .map(([k, v]) => `${k}.${v.join(',')}`)
+          .join('-')
+        const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
+        const cartParams = `p=0~t=${exerciseTitle2}~c=0~o=true~d=normal~at=${displayDuration}`
+        const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${displayDuration}~n=${nbQuestions}`
+        exerciseUrl = `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
+      }
 
       const response = await fetch('/api/sessions', {
         method: 'POST',
@@ -170,7 +192,7 @@ function NewSessionContent() {
           nbQuestions,
           displayDuration,
           publishToClassroom,
-          selectedOptions: opts,
+          selectedOptions: prefilledExerciseUrl ? {} : getSelectedOptionsObject(),
           exerciseUrl,
         })
       })

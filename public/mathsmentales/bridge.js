@@ -121,35 +121,13 @@
       sessionBtn.style.transform = 'scale(1)';
     };
     sessionBtn.onclick = function () {
-      var data = {
-        type: 'mm-create-session',
-        exerciseUrl: window.location.href,
-        exerciseTitle: getExerciseTitle()
-      };
-      if (IS_IFRAME) {
-        // Envoyer au parent Next.js (page d'accueil) — '*' pour compatibilité Nginx proxy
-        try {
-          window.parent.postMessage(data, '*');
-          sessionBtn.innerHTML = '&#x2713; Envoyé !';
-          sessionBtn.style.background = '#16a34a';
-        } catch (e) {
-          // Fallback : ouvrir directement la page de création
-          window.top.location.href = '/dashboard/sessions/new?exerciseUrl=' + encodeURIComponent(data.exerciseUrl)
-            + '&exerciseTitle=' + encodeURIComponent(data.exerciseTitle);
-        }
-      } else if (window.opener) {
-        try {
-          var t = window.opener.parent || window.opener;
-          t.postMessage(data, '*');
-        } catch (e) {
-          try { window.opener.postMessage(data, '*'); } catch (e2) { /* ignore */ }
-        }
-      } else {
-        // Navigation directe → ouvrir la page de création
-        var url = '/dashboard/sessions/new?exerciseUrl=' + encodeURIComponent(data.exerciseUrl)
-          + '&exerciseTitle=' + encodeURIComponent(data.exerciseTitle);
-        window.location.href = url;
-      }
+      var exerciseUrl = window.location.href;
+      var exerciseTitle = getExerciseTitle();
+      // Toujours naviguer vers la page de création (fiable, pas de postMessage)
+      var url = '/dashboard/sessions/new?exerciseUrl=' + encodeURIComponent(exerciseUrl)
+        + '&exerciseTitle=' + encodeURIComponent(exerciseTitle);
+      // Naviguer la fenêtre principale (top), même depuis une iframe
+      try { window.top.location.href = url; } catch (e) { window.location.href = url; }
     };
     document.body.appendChild(sessionBtn);
 
