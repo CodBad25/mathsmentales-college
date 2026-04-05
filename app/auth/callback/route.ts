@@ -34,6 +34,8 @@ export async function GET(request: Request) {
       // Recuperer les tokens Google pour l'API Classroom
       const providerToken = data.session.provider_token
       const providerRefreshToken = data.session.provider_refresh_token
+      console.log('[AUTH CALLBACK] provider_token:', providerToken ? 'OUI' : 'ABSENT')
+      console.log('[AUTH CALLBACK] provider_refresh_token:', providerRefreshToken ? 'OUI' : 'ABSENT')
 
       // Verifier si le profil existe deja
       const { data: profile } = await supabase
