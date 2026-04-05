@@ -62,6 +62,7 @@ function PlayContent() {
   const [result, setResult] = useState<ExerciseResult | null>(null)
   const [copied, setCopied] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
+  const [isTeacher, setIsTeacher] = useState(false)
 
   // Vérifier l'authentification au chargement (avec timeout 3s)
   useEffect(() => {
@@ -71,6 +72,11 @@ function PlayContent() {
         const { data: { user: u } } = await supabase.auth.getUser()
         if (done) return
         setUser(u)
+        // Vérifier le rôle pour adapter l'affichage (overlay prof vs élève)
+        if (u) {
+          const { data: profile } = await supabase.from('profiles').select('role').eq('id', u.id).single()
+          if (profile?.role === 'teacher') setIsTeacher(true)
+        }
         if (isSharedLink && !u) {
           setShowAuthPrompt(true)
         }
@@ -211,7 +217,11 @@ function PlayContent() {
       return key !== 'mode' && key !== 'session'
     })
 
-    const queryString = filtered.join('&')
+    let queryString = filtered.join('&')
+    // Forcer le mode interactif (o=yes) pour les sessions — nécessaire pour capturer le score
+    if (sessionCode && queryString) {
+      queryString = queryString.replace(/,o=no,/, ',o=yes,')
+    }
     return `/mathsmentales/${page}.html${queryString ? '?' + queryString : ''}`
   }
 
@@ -363,43 +373,44 @@ function PlayContent() {
               )}
             </div>
 
-            {/* Lien de partage */}
-            <div style={{
-              background: '#f8f9fa', borderRadius: 12, padding: 16, marginBottom: 16
-            }}>
-              <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 8 }}>
-                Lien pour refaire cet exercice :
-              </p>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <input
-                  readOnly
-                  value={shareUrl}
-                  style={{
-                    flex: 1, padding: '10px 12px', fontSize: 13, border: '1px solid #ddd',
-                    borderRadius: 8, background: 'white', color: '#374151',
-                    overflow: 'hidden', textOverflow: 'ellipsis'
-                  }}
-                  onClick={(e) => (e.target as HTMLInputElement).select()}
-                />
-                <button
-                  onClick={handleCopy}
-                  style={{
-                    padding: '10px 16px', fontSize: 13, fontWeight: 600,
-                    background: copied ? '#22c55e' : '#4f46e5', color: 'white',
-                    border: 'none', borderRadius: 8, cursor: 'pointer',
-                    whiteSpace: 'nowrap', transition: 'background 0.2s'
-                  }}
-                >
-                  {copied ? '✓ Copié !' : 'Copier'}
-                </button>
-              </div>
-            </div>
-
-            {/* Info pour le prof */}
-            <p style={{ fontSize: 12, color: '#999', textAlign: 'center', marginBottom: 20, lineHeight: 1.4 }}>
-              Collez ce lien dans Pronote, Google Classroom ou votre cahier de texte.
-              Les élèves devront se connecter avec Google pour que leurs résultats soient suivis.
-            </p>
+            {/* Lien de partage — visible uniquement pour les profs */}
+            {isTeacher && (
+              <>
+                <div style={{
+                  background: '#f8f9fa', borderRadius: 12, padding: 16, marginBottom: 16
+                }}>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 8 }}>
+                    Lien pour refaire cet exercice :
+                  </p>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <input
+                      readOnly
+                      value={shareUrl}
+                      style={{
+                        flex: 1, padding: '10px 12px', fontSize: 13, border: '1px solid #ddd',
+                        borderRadius: 8, background: 'white', color: '#374151',
+                        overflow: 'hidden', textOverflow: 'ellipsis'
+                      }}
+                      onClick={(e) => (e.target as HTMLInputElement).select()}
+                    />
+                    <button
+                      onClick={handleCopy}
+                      style={{
+                        padding: '10px 16px', fontSize: 13, fontWeight: 600,
+                        background: copied ? '#22c55e' : '#4f46e5', color: 'white',
+                        border: 'none', borderRadius: 8, cursor: 'pointer',
+                        whiteSpace: 'nowrap', transition: 'background 0.2s'
+                      }}
+                    >
+                      {copied ? '✓ Copié !' : 'Copier'}
+                    </button>
+                  </div>
+                </div>
+                <p style={{ fontSize: 12, color: '#999', textAlign: 'center', marginBottom: 20, lineHeight: 1.4 }}>
+                  Collez ce lien dans Pronote, Google Classroom ou votre cahier de texte.
+                </p>
+              </>
+            )}
 
             {/* Bouton fermer */}
             <button
