@@ -1,6 +1,12 @@
 import { createServerSupabaseClient } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
 
 export default async function HistoryPage() {
   const supabase = await createServerSupabaseClient()
@@ -12,7 +18,7 @@ export default async function HistoryPage() {
   }
 
   // Récupérer les résultats des sessions assignées
-  const { data: sessionResults } = await supabase
+  const { data: sessionResults } = await supabaseAdmin
     .from('session_results')
     .select(`
       id, score, total_questions, time_spent, completed_at,
@@ -26,7 +32,7 @@ export default async function HistoryPage() {
     .limit(50)
 
   // Récupérer les résultats des exercices libres
-  const { data: freeResults } = await supabase
+  const { data: freeResults } = await supabaseAdmin
     .from('student_results')
     .select('*')
     .eq('student_id', user.id)

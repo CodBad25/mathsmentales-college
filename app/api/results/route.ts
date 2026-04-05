@@ -1,5 +1,11 @@
+import { createClient } from '@supabase/supabase-js'
 import { createServerSupabaseClient } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
 
 export async function POST(request: Request) {
   try {
@@ -36,7 +42,7 @@ export async function POST(request: Request) {
     }
 
     // Enregistrer le resultat
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('student_results')
       .insert({
         student_id: user.id,
@@ -84,7 +90,7 @@ export async function GET(request: Request) {
     }
 
     // Recuperer les resultats de l'utilisateur
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('student_results')
       .select('*')
       .eq('student_id', user.id)

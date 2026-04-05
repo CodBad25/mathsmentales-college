@@ -1,6 +1,12 @@
 import { createServerSupabaseClient } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
 
 export default async function ProgressPage() {
   const supabase = await createServerSupabaseClient()
@@ -12,7 +18,7 @@ export default async function ProgressPage() {
   }
 
   // Recuperer les statistiques de l'utilisateur
-  const { data: results } = await supabase
+  const { data: results } = await supabaseAdmin
     .from('student_results')
     .select('*')
     .eq('student_id', user.id)

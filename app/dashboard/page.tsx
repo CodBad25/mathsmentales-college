@@ -127,7 +127,7 @@ export default async function DashboardPage() {
     classes = data || []
 
     // Sessions actives
-    const { count: sessionsCount } = await supabase
+    const { count: sessionsCount } = await supabaseAdmin
       .from('sessions')
       .select('*', { count: 'exact', head: true })
       .eq('teacher_id', user.id)
@@ -135,14 +135,14 @@ export default async function DashboardPage() {
     activeSessions = sessionsCount || 0
 
     // Total élèves (dans toutes les classes)
-    const { data: studentsData } = await supabase
+    const { data: studentsData } = await supabaseAdmin
       .from('class_students')
       .select('student_id, classes!inner(teacher_id)')
       .eq('classes.teacher_id', user.id)
     totalStudents = studentsData?.length || 0
 
     // Sessions récentes avec résultats
-    const { data: sessionsData } = await supabase
+    const { data: sessionsData } = await supabaseAdmin
       .from('sessions')
       .select(`
         id, title, code, status, created_at, nb_questions,
@@ -155,7 +155,7 @@ export default async function DashboardPage() {
     recentSessions = sessionsData || []
   } else {
     // Classes de l'élève
-    const { data } = await supabase
+    const { data } = await supabaseAdmin
       .from('class_students')
       .select('*, classes(*)')
       .eq('student_id', user.id)
@@ -164,7 +164,7 @@ export default async function DashboardPage() {
     // Sessions disponibles pour l'élève (de ses classes)
     const classIds = classes.map((c: any) => c.id)
     if (classIds.length > 0) {
-      const { count: sessionsCount } = await supabase
+      const { count: sessionsCount } = await supabaseAdmin
         .from('sessions')
         .select('*', { count: 'exact', head: true })
         .in('class_id', classIds)
@@ -173,7 +173,7 @@ export default async function DashboardPage() {
     }
 
     // Statistiques de l'élève
-    const { data: resultsData } = await supabase
+    const { data: resultsData } = await supabaseAdmin
       .from('session_results')
       .select('score, total_questions')
       .eq('student_id', user.id)
