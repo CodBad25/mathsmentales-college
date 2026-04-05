@@ -126,16 +126,23 @@
         exerciseUrl: window.location.href,
         exerciseTitle: getExerciseTitle()
       };
-      var origin = window.location.origin;
       if (IS_IFRAME) {
-        // Envoyer au parent Next.js (page d'accueil)
-        window.parent.postMessage(data, origin);
+        // Envoyer au parent Next.js (page d'accueil) — '*' pour compatibilité Nginx proxy
+        try {
+          window.parent.postMessage(data, '*');
+          sessionBtn.innerHTML = '&#x2713; Envoyé !';
+          sessionBtn.style.background = '#16a34a';
+        } catch (e) {
+          // Fallback : ouvrir directement la page de création
+          window.top.location.href = '/dashboard/sessions/new?exerciseUrl=' + encodeURIComponent(data.exerciseUrl)
+            + '&exerciseTitle=' + encodeURIComponent(data.exerciseTitle);
+        }
       } else if (window.opener) {
         try {
           var t = window.opener.parent || window.opener;
-          t.postMessage(data, origin);
+          t.postMessage(data, '*');
         } catch (e) {
-          try { window.opener.postMessage(data, origin); } catch (e2) { /* ignore */ }
+          try { window.opener.postMessage(data, '*'); } catch (e2) { /* ignore */ }
         }
       } else {
         // Navigation directe → ouvrir la page de création
