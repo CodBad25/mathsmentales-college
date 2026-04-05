@@ -122,8 +122,8 @@ function NewSessionContent() {
   }
 
   const confirmExercise = () => {
-    if (selectedExercise && exerciseDetail) {
-      if (!title) setTitle(exerciseDetail.title)
+    if (selectedExercise) {
+      if (!title) setTitle(exerciseDetail?.title || selectedExercise.t)
       setShowModal(false)
     }
   }
@@ -238,7 +238,7 @@ function NewSessionContent() {
 
   const modalActions = [
     { label: 'Annuler', onClick: () => setShowModal(false), variant: 'gray' as const },
-    { label: 'Confirmer', onClick: confirmExercise, variant: 'green' as const, disabled: getTotalSelected() === 0 },
+    { label: 'Confirmer', onClick: confirmExercise, variant: 'green' as const, disabled: exerciseDetail !== null && exerciseDetail.options.length > 0 && getTotalSelected() === 0 },
   ]
 
   if (loading) {
