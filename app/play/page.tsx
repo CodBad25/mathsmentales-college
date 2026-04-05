@@ -66,6 +66,7 @@ function PlayContent() {
   const [copied, setCopied] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
   const [isTeacher, setIsTeacher] = useState(false)
+  const [paperModeEnded, setPaperModeEnded] = useState(false)
 
   // Vérifier l'authentification au chargement (avec timeout 3s)
   useEffect(() => {
@@ -189,6 +190,9 @@ function PlayContent() {
           const url = makeShareableUrl(exerciseUrl)
           setShareUrl(url)
           setResult({ score, total, exerciseUrl, exerciseTitle })
+        } else if (data.source === 'bridge-activity-end') {
+          // Mode papier terminé (pas de score capturé)
+          setPaperModeEnded(true)
         }
       }
     }
@@ -337,31 +341,50 @@ function PlayContent() {
         title="MathsMentales"
       />
 
-      {/* Bandeau mode papier — visible pour les élèves en mode non-interactif */}
-      {isNonInteractive && !isTeacher && sessionCode && (
+      {/* Overlay mode papier — l'élève a fait l'exercice sans mode interactif */}
+      {paperModeEnded && !result && !isTeacher && (
         <div style={{
-          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999,
-          background: '#fef3c7', borderTop: '2px solid #f59e0b',
-          padding: '12px 20px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16,
-          flexWrap: 'wrap',
+          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+          background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 10000, padding: 20
         }}>
-          <p style={{ margin: 0, fontSize: 14, color: '#92400e', textAlign: 'center' }}>
-            Tu es en mode papier — ton résultat ne sera <strong>pas enregistré</strong> et ton professeur ne pourra pas voir ton score.
-          </p>
-          <button
-            onClick={() => {
-              const newUrl = window.location.href.replace(',o=no,', ',o=yes,')
-              window.location.href = newUrl
-            }}
-            style={{
-              padding: '8px 20px', fontSize: 14, fontWeight: 600,
-              background: '#4f46e5', color: 'white', border: 'none', borderRadius: 8,
-              cursor: 'pointer', whiteSpace: 'nowrap',
-            }}
-          >
-            Refaire en mode interactif
-          </button>
+          <div style={{
+            maxWidth: 440, width: '100%', background: 'white', borderRadius: 20,
+            padding: 32, boxShadow: '0 20px 60px rgba(0,0,0,0.3)', textAlign: 'center'
+          }}>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>📝</div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1a1a2e', margin: '0 0 12px 0' }}>
+              Exercice terminé
+            </h2>
+            <p style={{ color: '#666', lineHeight: 1.6, marginBottom: 24 }}>
+              Tu as fait cet exercice en mode diaporama (sur papier).<br />
+              <strong>Ton résultat n&apos;a pas été enregistré</strong> et ton professeur ne pourra pas voir ton score.
+            </p>
+            <button
+              onClick={() => {
+                const newUrl = window.location.href.replace(',o=no,', ',o=yes,')
+                window.location.href = newUrl
+              }}
+              style={{
+                width: '100%', padding: '14px 24px', fontSize: 16, fontWeight: 600,
+                background: '#4f46e5', color: 'white', border: 'none', borderRadius: 12,
+                cursor: 'pointer', marginBottom: 12
+              }}
+            >
+              Refaire en mode interactif
+            </button>
+            <button
+              onClick={() => setPaperModeEnded(false)}
+              style={{
+                width: '100%', padding: '12px 24px', fontSize: 14, fontWeight: 500,
+                background: 'transparent', color: '#888', border: '1px solid #ddd',
+                borderRadius: 12, cursor: 'pointer'
+              }}
+            >
+              Fermer
+            </button>
+          </div>
         </div>
       )}
 
