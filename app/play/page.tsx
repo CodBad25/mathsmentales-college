@@ -53,6 +53,9 @@ function PlayContent() {
   // Format classique : c=, u=, n= | Format tilde : a=, p=
   const hasExerciseParams = searchParams.has('c') || searchParams.has('u') || searchParams.has('n') || searchParams.has('a') || searchParams.has('p')
   const isSharedLink = hasExerciseParams && mode !== 'index'
+  // Détecter si l'exercice est en mode non-interactif (papier)
+  const rawSearch = typeof window !== 'undefined' ? window.location.search : ''
+  const isNonInteractive = rawSearch.includes(',o=no,') || rawSearch.includes('&o=no&')
 
   const [sessionCtx, setSessionCtx] = useState<SessionContext | null>(null)
   const [resultSaved, setResultSaved] = useState(false)
@@ -217,11 +220,7 @@ function PlayContent() {
       return key !== 'mode' && key !== 'session'
     })
 
-    let queryString = filtered.join('&')
-    // Forcer le mode interactif (o=yes) pour les sessions — nécessaire pour capturer le score
-    if (sessionCode && queryString) {
-      queryString = queryString.replace(/,o=no,/, ',o=yes,')
-    }
+    const queryString = filtered.join('&')
     return `/mathsmentales/${page}.html${queryString ? '?' + queryString : ''}`
   }
 
@@ -337,6 +336,34 @@ function PlayContent() {
         allow="fullscreen"
         title="MathsMentales"
       />
+
+      {/* Bandeau mode papier — visible pour les élèves en mode non-interactif */}
+      {isNonInteractive && !isTeacher && sessionCode && (
+        <div style={{
+          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999,
+          background: '#fef3c7', borderTop: '2px solid #f59e0b',
+          padding: '12px 20px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16,
+          flexWrap: 'wrap',
+        }}>
+          <p style={{ margin: 0, fontSize: 14, color: '#92400e', textAlign: 'center' }}>
+            Tu es en mode papier — ton résultat ne sera <strong>pas enregistré</strong> et ton professeur ne pourra pas voir ton score.
+          </p>
+          <button
+            onClick={() => {
+              const newUrl = window.location.href.replace(',o=no,', ',o=yes,')
+              window.location.href = newUrl
+            }}
+            style={{
+              padding: '8px 20px', fontSize: 14, fontWeight: 600,
+              background: '#4f46e5', color: 'white', border: 'none', borderRadius: 8,
+              cursor: 'pointer', whiteSpace: 'nowrap',
+            }}
+          >
+            Refaire en mode interactif
+          </button>
+        </div>
+      )}
 
       {/* Overlay de résultat avec lien de partage */}
       {result && (
