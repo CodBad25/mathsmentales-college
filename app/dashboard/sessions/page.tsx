@@ -25,6 +25,7 @@ export default function SessionsPage() {
   const [deleting, setDeleting] = useState<string | null>(null)
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [bulkDeleting, setBulkDeleting] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState<{ ids: string[]; label: string } | null>(null)
 
   useEffect(() => {
     loadSessions()
@@ -62,14 +63,18 @@ export default function SessionsPage() {
     setDeleting(null)
   }
 
-  const deleteBulk = async () => {
-    if (!confirm(`Supprimer ${selected.size} session(s) et tous leurs résultats ?`)) return
-    setBulkDeleting(true)
-    for (const id of selected) {
-      await deleteSession(id)
+  const executeDeletion = async (ids: string[]) => {
+    setConfirmDelete(null)
+    if (ids.length === 1) {
+      await deleteSession(ids[0])
+    } else {
+      setBulkDeleting(true)
+      for (const id of ids) {
+        await deleteSession(id)
+      }
+      setSelected(new Set())
+      setBulkDeleting(false)
     }
-    setSelected(new Set())
-    setBulkDeleting(false)
   }
 
   if (loading) {
@@ -98,7 +103,10 @@ export default function SessionsPage() {
             <h1 className="text-2xl font-bold">Mes sessions</h1>
             {selected.size > 0 && (
               <button
-                onClick={deleteBulk}
+                onClick={() => setConfirmDelete({
+                  ids: Array.from(selected),
+                  label: `${selected.size} session(s)`
+                })}
                 disabled={bulkDeleting}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-600 transition-all disabled:opacity-50"
               >
@@ -182,9 +190,10 @@ export default function SessionsPage() {
                         </p>
                       </div>
                       <button
-                        onClick={() => {
-                          if (confirm(`Supprimer "${session.title}" et ses résultats ?`)) deleteSession(session.id)
-                        }}
+                        onClick={() => setConfirmDelete({
+                          ids: [session.id],
+                          label: session.title
+                        })}
                         disabled={deleting === session.id}
                         className="text-gray-300 hover:text-red-500 transition-colors p-1"
                         title="Supprimer"
@@ -199,6 +208,33 @@ export default function SessionsPage() {
           </>
         )}
       </main>
+
+      {/* Modale de confirmation de suppression */}
+      {confirmDelete && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
+            <div className="text-5xl mb-4">🗑️</div>
+            <h2 className="text-xl font-bold text-gray-900 mb-2">Supprimer ?</h2>
+            <p className="text-gray-600 mb-6">
+              <strong>{confirmDelete.label}</strong> et tous les résultats associés seront supprimés définitivement.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setConfirmDelete(null)}
+                className="flex-1 px-6 py-3 rounded-xl font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 transition-all"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={() => executeDeletion(confirmDelete.ids)}
+                className="flex-1 px-6 py-3 rounded-xl font-medium text-white bg-red-500 hover:bg-red-600 transition-all"
+              >
+                Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
