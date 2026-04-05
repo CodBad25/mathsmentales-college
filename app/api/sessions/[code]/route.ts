@@ -33,6 +33,7 @@ export async function GET(
         display_duration,
         status,
         selected_options,
+        exercise_url,
         classes (
           id,
           name
@@ -63,6 +64,7 @@ export async function GET(
         nb_questions: session.nb_questions,
         display_duration: (session as any).display_duration ?? 8,
         selected_options: session.selected_options,
+        exercise_url: (session as any).exercise_url || null,
         class_name: className
       }
     })

@@ -15,6 +15,7 @@ interface QuickSessionCreatorProps {
   nbQuestions: number
   displayDuration: number
   selectedOptions: Record<string, number[]>
+  exerciseUrl?: string
   onClose: () => void
 }
 
@@ -25,6 +26,7 @@ export default function QuickSessionCreator({
   nbQuestions,
   displayDuration,
   selectedOptions,
+  exerciseUrl,
   onClose,
 }: QuickSessionCreatorProps) {
   const [classes, setClasses] = useState<ClassInfo[]>([])
@@ -79,6 +81,7 @@ export default function QuickSessionCreator({
           displayDuration,
           selectedOptions,
           publishToClassroom: publishToClassroom && hasClassroom,
+          exerciseUrl: exerciseUrl || null,
         }),
       })
 

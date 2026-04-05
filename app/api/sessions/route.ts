@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { classId, title, exerciseFile, exerciseTitle, niveau, nbQuestions, displayDuration, publishToClassroom, selectedOptions } = body
+    const { classId, title, exerciseFile, exerciseTitle, niveau, nbQuestions, displayDuration, publishToClassroom, selectedOptions, exerciseUrl: rawExerciseUrl } = body
 
     if (!classId || !exerciseFile) {
       return NextResponse.json({ error: 'Donnees manquantes' }, { status: 400 })
@@ -55,6 +55,7 @@ export async function POST(request: Request) {
         nb_questions: nbQuestions || 5,
         display_duration: displayDuration || 8,
         selected_options: selectedOptions || null,
+        exercise_url: rawExerciseUrl || null,
         code: sessionCode,
         status: 'active'
       })

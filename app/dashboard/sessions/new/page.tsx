@@ -145,6 +145,19 @@ function NewSessionContent() {
     setError(null)
 
     try {
+      // Construire l'URL complète de l'exercice MathsMentales pour la stocker
+      const opts = getSelectedOptionsObject()
+      const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
+      const exerciseTitle2 = encodeURIComponent(title || selectedExercise.t)
+      const options = Object.keys(opts).join(',')
+      const q = Object.entries(opts)
+        .map(([k, v]) => `${k}.${v.join(',')}`)
+        .join('-')
+      const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
+      const cartParams = `p=0~t=${exerciseTitle2}~c=0~o=true~d=normal~at=${displayDuration}`
+      const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${displayDuration}~n=${nbQuestions}`
+      const exerciseUrl = `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
+
       const response = await fetch('/api/sessions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -157,7 +170,8 @@ function NewSessionContent() {
           nbQuestions,
           displayDuration,
           publishToClassroom,
-          selectedOptions: getSelectedOptionsObject()
+          selectedOptions: opts,
+          exerciseUrl,
         })
       })
 

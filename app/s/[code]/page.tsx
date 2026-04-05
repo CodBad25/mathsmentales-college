@@ -5,11 +5,31 @@ import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-browser'
 
 /**
- * Construit l'URL /play avec les paramètres au format tilde MathsMentales.
- * Format attendu par diaporama.html :
- * ?a=,fs=sansSerif,...&p=0~t=Title~c=0~o=true~d=normal~at=10_i=6GC5~o=0,1~q=~p=~t=8~n=5
+ * Convertit une URL interne MathsMentales en URL /play pour le wrapper auth + tracking.
+ * Ex: /mathsmentales/diaporama.html?a=,...  →  /play?mode=diaporama&a=,...
+ * Ex: https://domain/mathsmentales/diaporama.html?...  →  /play?mode=diaporama&...
  */
-function buildMathsMentalesPlayUrl(session: SessionData, sessionCode: string | null): string {
+function toPlayUrl(exerciseUrl: string, sessionCode: string | null): string {
+  try {
+    const url = new URL(exerciseUrl, 'http://localhost')
+    const match = url.pathname.match(/\/mathsmentales\/(\w+)\.html/)
+    if (!match) return exerciseUrl
+
+    const mode = match[1]
+    const params = url.search ? url.search.slice(1) : ''
+    let playUrl = `/play?mode=${mode}${params ? '&' + params : ''}`
+    if (sessionCode) playUrl += `&session=${sessionCode}`
+    return playUrl
+  } catch {
+    return exerciseUrl
+  }
+}
+
+/**
+ * Fallback : construit l'URL /play depuis les champs individuels de la session.
+ * Utilisé uniquement pour les anciennes sessions qui n'ont pas exercise_url.
+ */
+function buildFallbackPlayUrl(session: SessionData, sessionCode: string | null): string {
   const activityId = session.exercise_file.replace(/^N\d\//, '').replace('.json', '')
   const title = encodeURIComponent(session.title || session.exercise_title)
   const tempo = session.display_duration || 8
@@ -17,23 +37,18 @@ function buildMathsMentalesPlayUrl(session: SessionData, sessionCode: string | n
   const options = session.selected_options
     ? Object.keys(session.selected_options).join(',')
     : ''
-  // Format q : "optIdx.subOpt1,subOpt2-optIdx.subOpt" (ex: "0.0,1,2-1.0-2.0,1")
   const q = session.selected_options
     ? Object.entries(session.selected_options)
         .map(([k, v]) => `${k}.${(v as number[]).join(',')}`)
         .join('-')
     : ''
 
-  // Paramètres globaux (séparés par des virgules)
   const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
-  // Paramètres du cart (séparés par des tildes), activité attachée avec underscore
   const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
   const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
 
   let url = `/play?mode=diaporama&${globalParams}&${cartParams}_${activityParams}`
-  if (sessionCode) {
-    url += `&session=${sessionCode}`
-  }
+  if (sessionCode) url += `&session=${sessionCode}`
   return url
 }
 
@@ -46,6 +61,7 @@ interface SessionData {
   nb_questions: number
   display_duration: number
   selected_options: Record<string, number[]> | null
+  exercise_url: string | null
   class_name: string
 }
 
@@ -64,17 +80,22 @@ export default function SessionPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
+  const getPlayUrl = (s: SessionData, sessionCode: string | null): string => {
+    if (s.exercise_url) {
+      return toPlayUrl(s.exercise_url, sessionCode)
+    }
+    return buildFallbackPlayUrl(s, sessionCode)
+  }
+
   const loadSession = async () => {
     try {
-      // Verifier si l'utilisateur est connecte
       const { data: { user } } = await supabase.auth.getUser()
 
-      // Charger la session par code
       const res = await fetch(`/api/sessions/${code}`)
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.error || 'Session non trouvee')
+        setError(data.error || 'Session non trouvée')
         setLoading(false)
         return
       }
@@ -82,30 +103,27 @@ export default function SessionPage() {
       setSession(data.session)
       setIsStudent(!!user)
 
-      // Si l'utilisateur est connecté, rediriger vers l'interface MathsMentales originale
+      // Si l'utilisateur est connecté, rediriger vers l'exercice
       if (user && data.session) {
-        const url = buildMathsMentalesPlayUrl(data.session, code)
+        const url = getPlayUrl(data.session, code)
         window.location.href = url
       }
 
       setLoading(false)
-    } catch (err) {
+    } catch {
       setError('Erreur lors du chargement')
       setLoading(false)
     }
   }
 
   const handleLoginAndPlay = async () => {
-    // Stocker le code de session pour apres la connexion
     sessionStorage.setItem('mathsmentales_redirect', `/s/${code}`)
-
-    // Rediriger vers la connexion
     router.push('/auth/login')
   }
 
   const handlePlayAsGuest = () => {
     if (session) {
-      const url = buildMathsMentalesPlayUrl(session, null)
+      const url = getPlayUrl(session, null)
       window.location.href = url
     }
   }
@@ -132,7 +150,7 @@ export default function SessionPage() {
             href="/"
             className="inline-block bg-primary-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-primary-700 transition-all"
           >
-            Retour a l&apos;accueil
+            Retour à l&apos;accueil
           </a>
         </div>
       </div>
@@ -160,7 +178,7 @@ export default function SessionPage() {
           </p>
           {session?.class_name && (
             <p className="text-sm text-gray-500">
-              Classe: {session.class_name}
+              Classe : {session.class_name}
             </p>
           )}
         </div>

@@ -12,6 +12,7 @@ interface SessionCreatorData {
   nbQuestions: number
   displayDuration: number
   selectedOptions: Record<string, number[]>
+  exerciseUrl: string
 }
 
 export default function Home() {
@@ -78,7 +79,8 @@ export default function Home() {
       }
 
       if (data.type === 'mm-create-session') {
-        const parsed = parseExerciseUrl(data.exerciseUrl || '')
+        const rawUrl = data.exerciseUrl || ''
+        const parsed = parseExerciseUrl(rawUrl)
         setSessionCreator({
           exerciseFile: parsed.exerciseFile,
           exerciseTitle: data.exerciseTitle || 'Exercice MathsMentales',
@@ -86,6 +88,7 @@ export default function Home() {
           nbQuestions: parsed.nbQuestions,
           displayDuration: parsed.displayDuration,
           selectedOptions: parsed.selectedOptions,
+          exerciseUrl: rawUrl,
         })
       }
     }
@@ -150,6 +153,7 @@ export default function Home() {
               nbQuestions={sessionCreator.nbQuestions}
               displayDuration={sessionCreator.displayDuration}
               selectedOptions={sessionCreator.selectedOptions}
+              exerciseUrl={sessionCreator.exerciseUrl}
               onClose={() => setSessionCreator(null)}
             />
           </div>
