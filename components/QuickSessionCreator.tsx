@@ -81,7 +81,8 @@ export default function QuickSessionCreator({
           displayDuration,
           selectedOptions,
           publishToClassroom: publishToClassroom && hasClassroom,
-          exerciseUrl: exerciseUrl || null,
+          // Mode simple (s=1) par défaut pour les devoirs maison
+          exerciseUrl: exerciseUrl ? exerciseUrl.replace(/,s=\d,/, ',s=1,') : null,
         }),
       })
 

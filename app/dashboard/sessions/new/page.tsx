@@ -163,9 +163,10 @@ function NewSessionContent() {
 
     try {
       // Utiliser l'URL pré-remplie (depuis bridge.js) ou la construire depuis les options
+      // Par défaut : mode simple (s=1) pour les devoirs maison
       let exerciseUrl: string
       if (prefilledExerciseUrl) {
-        exerciseUrl = prefilledExerciseUrl
+        exerciseUrl = prefilledExerciseUrl.replace(/,s=\d,/, ',s=1,')
       } else {
         const opts = getSelectedOptionsObject()
         const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
