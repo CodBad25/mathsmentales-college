@@ -22,6 +22,9 @@ export default function SessionsPage() {
   const [sessions, setSessions] = useState<Session[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
+  const [selected, setSelected] = useState<Set<string>>(new Set())
+  const [bulkDeleting, setBulkDeleting] = useState(false)
 
   useEffect(() => {
     loadSessions()
@@ -31,18 +34,42 @@ export default function SessionsPage() {
     try {
       const res = await fetch('/api/sessions')
       const data = await res.json()
-
       if (!res.ok) {
         setError(data.error || 'Erreur lors du chargement')
         return
       }
-
       setSessions(data.sessions || [])
-    } catch (err) {
+    } catch {
       setError('Erreur lors du chargement')
     } finally {
       setLoading(false)
     }
+  }
+
+  const deleteSession = async (id: string) => {
+    setDeleting(id)
+    try {
+      const res = await fetch('/api/sessions', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: id }),
+      })
+      if (res.ok) {
+        setSessions(prev => prev.filter(s => s.id !== id))
+        setSelected(prev => { const next = new Set(prev); next.delete(id); return next })
+      }
+    } catch { /* ignore */ }
+    setDeleting(null)
+  }
+
+  const deleteBulk = async () => {
+    if (!confirm(`Supprimer ${selected.size} session(s) et tous leurs résultats ?`)) return
+    setBulkDeleting(true)
+    for (const id of selected) {
+      await deleteSession(id)
+    }
+    setSelected(new Set())
+    setBulkDeleting(false)
   }
 
   if (loading) {
@@ -60,18 +87,25 @@ export default function SessionsPage() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/dashboard" className="text-2xl font-bold text-primary-600">
-            MathsMentales
-          </Link>
-          <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">
-            Retour au tableau de bord
-          </Link>
+          <Link href="/dashboard" className="text-2xl font-bold text-primary-600">MathsMentales</Link>
+          <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">Retour au tableau de bord</Link>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Mes sessions</h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-bold">Mes sessions</h1>
+            {selected.size > 0 && (
+              <button
+                onClick={deleteBulk}
+                disabled={bulkDeleting}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-600 transition-all disabled:opacity-50"
+              >
+                {bulkDeleting ? 'Suppression...' : `Supprimer (${selected.size})`}
+              </button>
+            )}
+          </div>
           <Link
             href="/dashboard/sessions/new"
             className="bg-primary-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-primary-700 transition-all"
@@ -81,18 +115,14 @@ export default function SessionsPage() {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-            {error}
-          </div>
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">{error}</div>
         )}
 
         {sessions.length === 0 ? (
           <div className="bg-white rounded-xl shadow-lg p-12 text-center">
             <div className="text-6xl mb-4">📋</div>
             <h2 className="text-xl font-bold mb-2">Aucune session</h2>
-            <p className="text-gray-600 mb-6">
-              Créez votre première session pour commencer à évaluer vos élèves.
-            </p>
+            <p className="text-gray-600 mb-6">Créez votre première session pour commencer à évaluer vos élèves.</p>
             <Link
               href="/dashboard/sessions/new"
               className="inline-block bg-primary-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-primary-700 transition-all"
@@ -101,39 +131,72 @@ export default function SessionsPage() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-4">
-            {sessions.map((session) => (
-              <Link
-                key={session.id}
-                href={`/dashboard/sessions/${session.id}`}
-                className="block bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all"
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h2 className="text-lg font-bold mb-1">{session.title}</h2>
-                    <p className="text-gray-600 text-sm mb-2">
-                      {session.classes?.name} - {session.niveau}eme
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {session.nb_questions} questions
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <div className="inline-block bg-primary-100 text-primary-800 px-3 py-1 rounded-lg font-mono">
-                      {session.code}
+          <>
+            {sessions.length > 1 && (
+              <label className="flex items-center gap-2 mb-3 cursor-pointer text-sm text-gray-500">
+                <input
+                  type="checkbox"
+                  checked={selected.size === sessions.length}
+                  onChange={(e) => {
+                    if (e.target.checked) setSelected(new Set(sessions.map(s => s.id)))
+                    else setSelected(new Set())
+                  }}
+                  className="w-4 h-4 text-primary-600 rounded"
+                />
+                Tout sélectionner
+              </label>
+            )}
+            <div className="space-y-4">
+              {sessions.map((session) => (
+                <div
+                  key={session.id}
+                  className={`bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all ${selected.has(session.id) ? 'ring-2 ring-primary-500' : ''}`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="flex items-start gap-3 flex-1">
+                      <input
+                        type="checkbox"
+                        checked={selected.has(session.id)}
+                        onChange={(e) => {
+                          const next = new Set(selected)
+                          if (e.target.checked) next.add(session.id)
+                          else next.delete(session.id)
+                          setSelected(next)
+                        }}
+                        className="w-4 h-4 text-primary-600 rounded mt-1"
+                      />
+                      <Link href={`/dashboard/sessions/${session.id}`} className="flex-1">
+                        <h2 className="text-lg font-bold mb-1">{session.title}</h2>
+                        <p className="text-gray-600 text-sm">
+                          {session.classes?.name} · {session.nb_questions} questions
+                        </p>
+                      </Link>
                     </div>
-                    <p className="text-sm text-gray-500 mt-2">
-                      {new Date(session.created_at).toLocaleDateString('fr-FR', {
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric'
-                      })}
-                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="text-right">
+                        <div className="inline-block bg-primary-100 text-primary-800 px-3 py-1 rounded-lg font-mono text-sm">
+                          {session.code}
+                        </div>
+                        <p className="text-xs text-gray-400 mt-1">
+                          {new Date(session.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          if (confirm(`Supprimer "${session.title}" et ses résultats ?`)) deleteSession(session.id)
+                        }}
+                        disabled={deleting === session.id}
+                        className="text-gray-300 hover:text-red-500 transition-colors p-1"
+                        title="Supprimer"
+                      >
+                        {deleting === session.id ? '...' : '✕'}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
+              ))}
+            </div>
+          </>
         )}
       </main>
     </div>

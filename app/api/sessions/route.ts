@@ -136,6 +136,42 @@ function generateSessionCode(): string {
   return code
 }
 
+export async function DELETE(request: Request) {
+  try {
+    const supabase = await createServerSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Non authentifié' }, { status: 401 })
+    }
+
+    const { sessionId } = await request.json()
+    if (!sessionId) {
+      return NextResponse.json({ error: 'ID manquant' }, { status: 400 })
+    }
+
+    // Vérifier que la session appartient au prof
+    const { data: session } = await supabaseAdmin
+      .from('sessions')
+      .select('id, teacher_id')
+      .eq('id', sessionId)
+      .single()
+
+    if (!session || session.teacher_id !== user.id) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 403 })
+    }
+
+    // Supprimer les résultats puis la session
+    await supabaseAdmin.from('session_results').delete().eq('session_id', sessionId)
+    await supabaseAdmin.from('sessions').delete().eq('id', sessionId)
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Erreur suppression session:', error)
+    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
+  }
+}
+
 export async function GET() {
   try {
     const supabase = await createServerSupabaseClient()
