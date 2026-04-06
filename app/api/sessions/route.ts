@@ -23,6 +23,8 @@ export async function POST(request: Request) {
 
     const body = await request.json()
     const { classId, title, exerciseFile, exerciseTitle, niveau, nbQuestions, displayDuration, publishToClassroom, selectedOptions, exerciseUrl: rawExerciseUrl } = body
+    console.log('[SESSION CREATE] exerciseUrl reçu:', rawExerciseUrl ? rawExerciseUrl.substring(0, 80) + '...' : 'ABSENT')
+    console.log('[SESSION CREATE] contient sansSerif?', rawExerciseUrl?.includes('sansSerif'), '| contient serif?', rawExerciseUrl?.includes(',fs=serif,'))
 
     if (!classId || !exerciseFile) {
       return NextResponse.json({ error: 'Donnees manquantes' }, { status: 400 })
