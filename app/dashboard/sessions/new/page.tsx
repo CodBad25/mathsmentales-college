@@ -177,7 +177,7 @@ function NewSessionContent() {
         const q = Object.entries(opts)
           .map(([k, v]) => `${k}.${v.join(',')}`)
           .join('-')
-        const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
+        const globalParams = 'a=,fs=sansSerif,i=321,e=correction,o=no,s=1,so=h,f=n,colors=,snd=null'
         const cartParams = `p=0~t=${exerciseTitle2}~c=0~o=true~d=normal~at=${displayDuration}`
         const activityParams = `i=${activityId}~o=${options}~q=${q || '0.0'}~p=~t=${displayDuration}~n=${nbQuestions}`
         exerciseUrl = `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
