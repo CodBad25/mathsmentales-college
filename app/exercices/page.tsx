@@ -115,8 +115,8 @@ function ExercicesCatalogueContent() {
     const nbQ = nbQuestions
     const { options, q } = buildMmParams()
 
-    const globalParams = 'a=,fs=sansSerif,i=321,e=correction,o=no,s=1,so=h,f=n,colors=,snd=null'
-    const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
+    const globalParams = 'a=,fs=serif,i=321,e=correction,o=no,s=1,so=h,f=n,colors=,snd=null'
+    const cartParams = `p=0~t=${title}~c=1~o=true~d=normal~at=${tempo}`
     const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
 
     return `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
@@ -129,8 +129,8 @@ function ExercicesCatalogueContent() {
     const tempo = displayDuration
     const nbQ = nbQuestions
     const { options, q } = buildMmParams()
-    const globalParams = 'a=,fs=sansSerif,i=321,e=correction,o=no,s=1,so=h,f=n,colors=,snd=null'
-    const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
+    const globalParams = 'a=,fs=serif,i=321,e=correction,o=no,s=1,so=h,f=n,colors=,snd=null'
+    const cartParams = `p=0~t=${title}~c=1~o=true~d=normal~at=${tempo}`
     const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
     return `/play?mode=diaporama&${globalParams}&${cartParams}_${activityParams}`
   }, [selectedExercise, nbQuestions, displayDuration, buildMmParams])
