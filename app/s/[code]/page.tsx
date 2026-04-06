@@ -16,7 +16,9 @@ function toPlayUrl(exerciseUrl: string, sessionCode: string | null): string {
     if (!match) return exerciseUrl
 
     const mode = match[1]
-    const params = url.search ? url.search.slice(1) : ''
+    let params = url.search ? url.search.slice(1) : ''
+    // Si q= est vide, mettre une valeur par défaut pour éviter les slides vides
+    params = params.replace(/~q=~/g, '~q=0.0~')
     let playUrl = `/play?mode=${mode}${params ? '&' + params : ''}`
     if (sessionCode) playUrl += `&session=${sessionCode}`
     return playUrl
@@ -45,7 +47,7 @@ function buildFallbackPlayUrl(session: SessionData, sessionCode: string | null):
 
   const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
   const cartParams = `p=0~t=${title}~c=0~o=true~d=normal~at=${tempo}`
-  const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${tempo}~n=${nbQ}`
+  const activityParams = `i=${activityId}~o=${options}~q=${q || '0.0'}~p=~t=${tempo}~n=${nbQ}`
 
   let url = `/play?mode=diaporama&${globalParams}&${cartParams}_${activityParams}`
   if (sessionCode) url += `&session=${sessionCode}`

@@ -166,7 +166,9 @@ function NewSessionContent() {
       // Par défaut : mode simple (s=1) pour les devoirs maison
       let exerciseUrl: string
       if (prefilledExerciseUrl) {
-        exerciseUrl = prefilledExerciseUrl.replace(/,s=\d,/, ',s=1,')
+        exerciseUrl = prefilledExerciseUrl
+          .replace(/,s=\d,/, ',s=1,')
+          .replace(/~q=~/g, '~q=0.0~')
       } else {
         const opts = getSelectedOptionsObject()
         const activityId = selectedExercise.u.replace(/^N\d+\//, '').replace('.json', '')
@@ -177,7 +179,7 @@ function NewSessionContent() {
           .join('-')
         const globalParams = 'a=,fs=sansSerif,i=nothing,e=nothing,o=no,s=1,so=horizontal,f=false,snd=0'
         const cartParams = `p=0~t=${exerciseTitle2}~c=0~o=true~d=normal~at=${displayDuration}`
-        const activityParams = `i=${activityId}~o=${options}~q=${q}~p=~t=${displayDuration}~n=${nbQuestions}`
+        const activityParams = `i=${activityId}~o=${options}~q=${q || '0.0'}~p=~t=${displayDuration}~n=${nbQuestions}`
         exerciseUrl = `/mathsmentales/diaporama.html?${globalParams}&${cartParams}_${activityParams}`
       }
 
