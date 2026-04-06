@@ -181,14 +181,9 @@ export default function SessionsPage() {
                       </Link>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="text-right">
-                        <div className="inline-block bg-primary-100 text-primary-800 px-3 py-1 rounded-lg font-mono text-sm">
-                          {session.code}
-                        </div>
-                        <p className="text-xs text-gray-400 mt-1">
-                          {new Date(session.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
-                        </p>
-                      </div>
+                      <p className="text-xs text-gray-400">
+                        {new Date(session.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                      </p>
                       <button
                         onClick={() => setConfirmDelete({
                           ids: [session.id],
